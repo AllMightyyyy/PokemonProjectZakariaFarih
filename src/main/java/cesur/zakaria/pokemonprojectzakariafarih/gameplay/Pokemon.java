@@ -243,4 +243,4 @@ public class Pokemon {
         }
     }
 }
-
+//pokemon Class
