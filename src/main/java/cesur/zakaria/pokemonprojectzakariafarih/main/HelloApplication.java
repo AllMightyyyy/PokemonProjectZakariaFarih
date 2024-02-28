@@ -1,4 +1,4 @@
-package cesur.zakaria.pokemonprojectzakariafarih;
+package cesur.zakaria.pokemonprojectzakariafarih.main;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
