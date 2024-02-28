@@ -2,7 +2,7 @@ package cesur.zakaria.pokemonprojectzakariafarih.gameplay;
 
 public class Move {
     private String nombre;
-    private Tipo tipo;
+    private Type type;
     private Integer potencia; // Optional, hence Integer to allow null for non-attack moves
     private Integer precision; // Optional
     private int usosMaximos;
@@ -13,9 +13,9 @@ public class Move {
     private Integer duracionMejora; // Optional
 
     // Constructor
-    public Move(String nombre, Tipo tipo, Integer potencia, Integer precision, int usosMaximos, State state, Integer duracionEstado, Enhancement enhancement, Integer duracionMejora) {
+    public Move(String nombre, Type type, Integer potencia, Integer precision, int usosMaximos, State state, Integer duracionEstado, Enhancement enhancement, Integer duracionMejora) {
         this.nombre = nombre;
-        this.tipo = tipo;
+        this.type = type;
         this.potencia = potencia;
         this.precision = precision;
         this.usosMaximos = usosMaximos;
@@ -43,12 +43,12 @@ public class Move {
         this.nombre = nombre;
     }
 
-    public Tipo getTipo() {
-        return tipo;
+    public Type getTipo() {
+        return type;
     }
 
-    public void setTipo(Tipo tipo) {
-        this.tipo = tipo;
+    public void setTipo(Type tipo) {
+        this.type = tipo;
     }
 
     public Integer getPotencia() {
