@@ -95,3 +95,4 @@ public class Trainer {
         this.items = items;
     }
 }
+//trainer class
