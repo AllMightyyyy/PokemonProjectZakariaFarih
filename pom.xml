@@ -83,8 +83,18 @@
       <artifactId>swing-glasspane-popup</artifactId>
       <version>1.4.0</version>
       <scope>system</scope>
-      <systemPath>${project.basedir}/libs/swing-glasspane-popup-1.4.0.jar</systemPath>
+      <systemPath>${project.basedir}/src/libs/swing-glasspane-popup-1.4.0.jar</systemPath>
     </dependency>
+    <dependency>
+      <groupId>local</groupId>
+      <artifactId>swing-toast-notifications</artifactId>
+      <version>1.0.0</version> <!-- Adjust version as necessary -->
+      <scope>system</scope>
+      <systemPath>${project.basedir}/src/libs/swing-toast-notifications-1.0.1.jar</systemPath> <!-- Adjust filename as necessary -->
+    </dependency>
+
+
+
 
   </dependencies>
 
@@ -108,7 +118,7 @@
             <!-- Default configuration for running with: mvn clean javafx:run -->
             <id>default-cli</id>
             <configuration>
-              <mainClass>cesur.zakaria.pokemonprojectzakariafarih/cesur.zakaria.pokemonprojectzakariafarih.main.HelloApplication</mainClass>
+              <mainClass>cesur.zakaria.pokemonprojectzakariafarih/cesur.zakaria.pokemonprojectzakariafarih.main.Main</mainClass>
               <launcher>app</launcher>
               <jlinkZipName>app</jlinkZipName>
               <jlinkImageName>app</jlinkImageName>
