@@ -1,5 +1,6 @@
 package cesur.zakaria.pokemonprojectzakariafarih.ui.menus.forms;
 
+import cesur.zakaria.pokemonprojectzakariafarih.ui.menus.manager.FormsManager;
 import uk.co.caprica.vlcj.factory.MediaPlayerFactory;
 import uk.co.caprica.vlcj.player.base.MediaPlayer;
 import uk.co.caprica.vlcj.player.base.MediaPlayerEventAdapter;
@@ -39,6 +40,10 @@ public class Home extends JPanel {
         });
         setLayout(new BorderLayout());
         add(canvas);
+        JFrame mainFrame = new JFrame("Main Application");
+// configure mainFrame...
+        FormsManager.getInstance().setMainFrame(mainFrame);
+
 
     }
 

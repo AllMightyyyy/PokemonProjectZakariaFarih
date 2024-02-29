@@ -2,6 +2,7 @@ package cesur.zakaria.pokemonprojectzakariafarih.ui.menus.forms;
 
 import cesur.zakaria.pokemonprojectzakariafarih.ui.menus.components.EventHomeOverlay;
 import cesur.zakaria.pokemonprojectzakariafarih.ui.menus.components.HeaderButton;
+import cesur.zakaria.pokemonprojectzakariafarih.ui.menus.manager.FormsManager;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.util.Animator;
 import com.formdev.flatlaf.util.CubicBezierEasing;
@@ -104,6 +105,20 @@ public class HomeOverlay extends JWindow {
             panel.add(textTitle);
             panel.add(textDescription);
             panel.add(cmdReadMore);
+            cmdReadMore.addActionListener(new ActionListener() {
+                                              @Override
+                                              public void actionPerformed(ActionEvent e) {
+                                                  if (Desktop.isDesktopSupported()) {
+                                                      try {
+                                                          File htmlFile = new File("src/main/resources/cesur/zakaria/pokemonprojectzakariafarih/ui/menus/forms/assets/portofolio/readMorePage/assets/index.html");
+                                                          Desktop.getDesktop().browse(htmlFile.toURI());
+                                                      } catch (Exception ex) {
+                                                          throw new RuntimeException(ex);
+                                                      }
+                                                  }
+                                              }
+                                          }
+            );
             add(panel, "width 50%!");
             addMouseListener(new MouseAdapter() {
                 @Override
@@ -166,7 +181,17 @@ public class HomeOverlay extends JWindow {
             signUp.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    signUp.addActionListener(event -> SwingToJavaFXBridge.showSignUpWindow());
+                    Register registerPanel = new Register();
+
+                    // Create the window and set it up here, but do not show it yet
+                    JFrame signUpWindow = new JFrame("Register");
+                    signUpWindow.setContentPane(registerPanel);
+                    signUpWindow.setSize(new Dimension(600, 600));
+                    // Set the parent window of the Register panel
+                    registerPanel.setParentWindow(signUpWindow);
+
+                    // Now that everything is set up, show the window
+                    signUpWindow.setVisible(true);
                 }
             });
 
@@ -193,7 +218,7 @@ public class HomeOverlay extends JWindow {
                                         public void actionPerformed(ActionEvent e) {
                                             if (Desktop.isDesktopSupported()) {
                                                 try {
-                                                    File htmlFile = new File("src/main/resources/cesur/zakaria/pokemonprojectzakariafarih/ui/menus/forms/assets/portofolio/index.html");
+                                                    File htmlFile = new File("src/main/resources/cesur/zakaria/pokemonprojectzakariafarih/ui/menus/forms/assets/portofolio/aboutMePage/assets/index.html");
                                                     Desktop.getDesktop().browse(htmlFile.toURI());
                                                 } catch (Exception ex) {
                                                     throw new RuntimeException(ex);

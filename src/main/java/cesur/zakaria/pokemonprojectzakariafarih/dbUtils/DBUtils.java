@@ -1,68 +1,99 @@
 package cesur.zakaria.pokemonprojectzakariafarih.dbUtils;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import java.sql.*;
 
 public class DBUtils {
-    public static boolean login (String username, String password) {
+    private static BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+    public static boolean login(String username, String plaintextPassword) {
         Connection connection = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            //establish the connection
+            // Establish the connection
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/pokemondb", "root", "27122000@ziko");
-            //prepare statement to execute sql query
-            String sql = "SELECT * FROM pokemonplayer WHERE username = ? AND hashed_password = ?";
+            // Prepare statement to execute SQL query
+            String sql = "SELECT hashed_password FROM pokemonplayeruser WHERE username = ?";
             ps = connection.prepareStatement(sql);
             ps.setString(1, username);
-            ps.setString(2, password);
-            //execute query
+            // Execute query
             rs = ps.executeQuery();
-            //check if we got any results
-            return rs.next();
+            // Check if we got any results
+            if (rs.next()) {
+                String storedHashedPassword = rs.getString("hashed_password");
+                // Log the plaintext and hashed passwords
+                System.out.println("Logging in: plaintext password = " + plaintextPassword + ", stored hashed password = " + storedHashedPassword);
+                System.out.println(encoder.matches(plaintextPassword, storedHashedPassword));
+                // Use BCryptPasswordEncoder to check the password
+                return encoder.matches(plaintextPassword, storedHashedPassword);
+            }
+            return false;
         } catch (SQLException e) {
-            System.out.println("Error : " + e.getMessage());
+            System.out.println("Error: " + e.getMessage());
             return false;
         } finally {
+            // Close resources
             try {
                 if (rs != null) rs.close();
                 if (ps != null) ps.close();
                 if (connection != null) connection.close();
             } catch (SQLException e) {
-                System.err.println("Error closing connection: " + e.getMessage());
+                System.err.println("Error closing resources: " + e.getMessage());
             }
         }
     }
-    public static boolean registerUser(String username, String password) {
-        //validation rules
+    public static boolean registerUser(String username, String password, String firstName, String lastName, String gender) {
+        // Validation (Make sure to validate input according to your requirements)
+        /*
         if (!validateUsername(username) || !validatePassword(password)) {
             return false;
         }
+
+         */
+
         Connection connection = null;
         PreparedStatement ps = null;
         PreparedStatement psCheckUserExists = null;
         ResultSet rs = null;
+
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/pokemondb", "zakaria", "27122000@ziko");
-            //check if user exists
-            psCheckUserExists = connection.prepareStatement("SELECT * FROM pokemonplayer WHERE username = ?");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/pokemondb", "root", "27122000@ziko");
+
+            // Check if the user already exists
+            psCheckUserExists = connection.prepareStatement("SELECT * FROM pokemonplayeruser WHERE username = ?");
             psCheckUserExists.setString(1, username);
             rs = psCheckUserExists.executeQuery();
-            if(rs.next()) {
-                //user already exists
+
+            if (rs.next()) {
+                // User already exists
                 return false;
             } else {
-                String sqlInsert = "INSERT INTO pokemonplayer (username, hashed_password) VALUES (?, ?)";
-                ps = connection .prepareStatement(sqlInsert);
-                ps.setString(1, username);
-                ps.setString(2, password);
+                // Hash the password
+                BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+                // Hash the password
+                String hashedPassword = encoder.encode(password);
+                System.out.println("Registering: plaintext password = " + password + ", hashed password = " + hashedPassword);
+
+
+                // Insert the new user
+                String sqlInsert = "INSERT INTO pokemonplayeruser (first_name, last_name, username, hashed_password, gender) VALUES (?, ?, ?, ?, ?)";
+                ps = connection.prepareStatement(sqlInsert);
+                ps.setString(1, firstName);
+                ps.setString(2, lastName);
+                ps.setString(3, username);
+                ps.setString(4, hashedPassword);
+                ps.setString(5, gender);
+
                 int result = ps.executeUpdate();
-                //if insert is success, result should be 1
                 return result == 1;
             }
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
             return false;
         } finally {
+            // Close resources
             try {
                 if (rs != null) rs.close();
                 if (psCheckUserExists != null) psCheckUserExists.close();

@@ -10,6 +10,9 @@ module cesur.zakaria.pokemonprojectzakariafarih {
     requires com.miglayout.swing;
     requires com.formdev.flatlaf.fonts.roboto;
     requires javafx.swing;
+    requires com.github.weisj.jsvg;
+    requires com.formdev.flatlaf.extras;
+    requires spring.security.crypto;
 
 
     opens cesur.zakaria.pokemonprojectzakariafarih to javafx.fxml;

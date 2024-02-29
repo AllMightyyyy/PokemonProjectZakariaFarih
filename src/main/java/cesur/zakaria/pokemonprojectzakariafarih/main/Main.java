@@ -23,7 +23,7 @@ public class Main extends JFrame {
 
     private void init() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setUndecorated(true);
+        //setUndecorated(true);
         setSize(UIScale.scale(new Dimension(1365, 768)));
         setLocationRelativeTo(null);
         home = new Home();
