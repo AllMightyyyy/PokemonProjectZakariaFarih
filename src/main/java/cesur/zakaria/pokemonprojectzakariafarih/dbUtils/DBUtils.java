@@ -23,9 +23,6 @@ public class DBUtils {
             // Check if we got any results
             if (rs.next()) {
                 String storedHashedPassword = rs.getString("hashed_password");
-                // Log the plaintext and hashed passwords
-                System.out.println("Logging in: plaintext password = " + plaintextPassword + ", stored hashed password = " + storedHashedPassword);
-                System.out.println(encoder.matches(plaintextPassword, storedHashedPassword));
                 // Use BCryptPasswordEncoder to check the password
                 return encoder.matches(plaintextPassword, storedHashedPassword);
             }

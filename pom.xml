@@ -78,11 +78,14 @@
       <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
-      <dependency>
-          <groupId>cesur.zakaria</groupId>
-          <artifactId>PokemonProjectZakariaFarih</artifactId>
-          <version>1.0-SNAPSHOT</version>
-      </dependency>
+    <dependency>
+      <groupId>local</groupId>
+      <artifactId>swing-glasspane-popup</artifactId>
+      <version>1.4.0</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/libs/swing-glasspane-popup-1.4.0.jar</systemPath>
+    </dependency>
+
   </dependencies>
 
   <build>

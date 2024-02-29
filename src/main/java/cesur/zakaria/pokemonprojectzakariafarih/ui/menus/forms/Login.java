@@ -13,6 +13,8 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.geom.RoundRectangle2D;
 
+import static cesur.zakaria.pokemonprojectzakariafarih.ui.menus.transparentSplash.pokemonSplash.switchToPokSplash;
+
 //import static zakaria.menus.transparentSplash.pokemonSplash.switchToPokSplash;
 
 public class Login extends JPanel {
@@ -66,7 +68,6 @@ public class Login extends JPanel {
 
             boolean loginSuccess = DBUtils.login(username, password);
             if(loginSuccess) {
-                System.out.println("LOGIN PASSED");
                 Notifications.getInstance().show(Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "LOGGIN PASSED");
                 new Timer(2000, ev -> {
                     disposeMainFrame();
@@ -103,7 +104,7 @@ public class Login extends JPanel {
         Platform.startup(() -> {
             // Setup and show your JavaFX stage
             Stage stage = new Stage();
-            //switchToPokSplash(stage);
+            switchToPokSplash(stage);
         });
     }
 

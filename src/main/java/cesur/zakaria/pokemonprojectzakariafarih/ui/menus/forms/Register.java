@@ -5,7 +5,6 @@ import com.formdev.flatlaf.FlatClientProperties;
 import net.miginfocom.swing.MigLayout;
 import cesur.zakaria.pokemonprojectzakariafarih.ui.menus.components.PasswordStrengthStatus;
 import raven.toast.Notifications;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.swing.*;
 import java.awt.*;
