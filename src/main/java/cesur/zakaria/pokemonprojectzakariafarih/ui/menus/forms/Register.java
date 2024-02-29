@@ -40,10 +40,6 @@ public class Register extends JPanel {
                 // Determine the gender
                 String gender = jrMale.isSelected() ? "Male" : "Female";
 
-                // Ensure this plainPassword is the actual plaintext password
-                System.out.println("Registering with plaintext password: " + plainPassword);
-
-
                 boolean registrationSuccess = DBUtils.registerUser(username, plainPassword, firstName, lastName, gender);
 
                 if (registrationSuccess) {

@@ -72,7 +72,6 @@ public class DBUtils {
                 BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
                 // Hash the password
                 String hashedPassword = encoder.encode(password);
-                System.out.println("Registering: plaintext password = " + password + ", hashed password = " + hashedPassword);
 
 
                 // Insert the new user

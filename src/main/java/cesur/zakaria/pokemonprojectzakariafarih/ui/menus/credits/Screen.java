@@ -5,6 +5,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.net.URL;
 
@@ -13,14 +15,24 @@ public class Screen extends JPanel implements ActionListener {
     Timer creditTimer = new Timer(20, this);
     String text;
     int textY = 600;
+    private Clip clip;
     public Screen() {
-        playMusic("cesur/zakaria/pokemonprojectzakariafarih/ui/menus/credits/wemadeit.wav", 0.05f);
+        playMusic("wemadeit.wav", 0.05f);
         JFrame window = new JFrame("Credit Roll");
         window.setSize(800, 600);
         window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         window.setLocationRelativeTo(null);
         window.setResizable(false);
         window.add(this);
+        window.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                if (clip != null) {
+                    clip.stop(); // Stop the clip
+                    clip.close(); // Close the clip to release resources
+                }
+            }
+        });
         window.setVisible(true);
         this.setBackground(Color.BLACK);
 
@@ -51,13 +63,13 @@ public class Screen extends JPanel implements ActionListener {
     }
     public void playMusic(String filePath, float volume) {
         try {
-            URL url = this.getClass().getClassLoader().getResource(filePath);
+            URL url = this.getClass().getResource(filePath);
             if (url == null) {
                 System.out.println("Resource not found: " + filePath);
                 return;
             }
             AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
-            Clip clip = AudioSystem.getClip();
+            clip = AudioSystem.getClip();
             clip.open(audioIn);
             if (volume != 1f) { // 1f is default volume (no change). Check if volume change is needed.
                 FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
