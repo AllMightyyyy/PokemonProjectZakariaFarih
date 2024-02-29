@@ -27,6 +27,7 @@ public class DBUtils {
                 return encoder.matches(plaintextPassword, storedHashedPassword);
             }
             return false;
+            //f
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
             return false;
