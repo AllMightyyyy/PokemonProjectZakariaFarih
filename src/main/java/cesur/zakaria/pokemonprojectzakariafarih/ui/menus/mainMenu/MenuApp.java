@@ -43,6 +43,7 @@ public class MenuApp {
             new Pair<String, Runnable>("Capture", () -> {}),
             new Pair<String, Runnable>("Pokemon Center", () -> {}),
             new Pair<String, Runnable>("Upgrade", () -> {}),
+            new Pair<String, Runnable>("Pokédex", MenuApp::launchPokedex),
             new Pair<String, Runnable>("Credits", MenuApp::launchCreditsScreen),
             new Pair<String, Runnable>("Exit to Desktop", Platform::exit)
     );
@@ -138,6 +139,12 @@ public class MenuApp {
     }
     private static void launchCreditsScreen() {
         SwingUtilities.invokeLater(cesur.zakaria.pokemonprojectzakariafarih.ui.menus.credits.Screen::new);
+    }
+    private static void launchPokedex() {
+        SwingUtilities.invokeLater(() -> {
+            cesur.zakaria.pokemonprojectzakariafarih.pokedex.view.Dashboard dashboard = new cesur.zakaria.pokemonprojectzakariafarih.pokedex.view.Dashboard();
+            dashboard.setVisible(true);
+        });
     }
 
 }

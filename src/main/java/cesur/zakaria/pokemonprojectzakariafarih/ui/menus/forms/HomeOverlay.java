@@ -2,7 +2,6 @@ package cesur.zakaria.pokemonprojectzakariafarih.ui.menus.forms;
 
 import cesur.zakaria.pokemonprojectzakariafarih.ui.menus.components.EventHomeOverlay;
 import cesur.zakaria.pokemonprojectzakariafarih.ui.menus.components.HeaderButton;
-import cesur.zakaria.pokemonprojectzakariafarih.ui.menus.manager.FormsManager;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.util.Animator;
 import com.formdev.flatlaf.util.CubicBezierEasing;
