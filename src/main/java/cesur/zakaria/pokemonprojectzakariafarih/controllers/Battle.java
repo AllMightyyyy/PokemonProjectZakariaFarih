@@ -1,121 +1,131 @@
 package cesur.zakaria.pokemonprojectzakariafarih.controllers;
 
-import java.util.ArrayList;
+import cesur.zakaria.pokemonprojectzakariafarih.model.card.EnergyCard;
+import cesur.zakaria.pokemonprojectzakariafarih.model.card.PokemonCard;
+
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Battle {
-    private Trainer winner;
-    private Trainer player;
-    private Trainer opponent;
-    private int turnNumber = 1;
-    private int playerPokemonKnockedOutCount = 0;
-    private int opponentPokemonKnockedOutCount = 0;
-    private List<Turn> turns;
+    // Method to execute an attack from one Pokémon to another
+    public void executeAttack(PokemonCard attacker, PokemonCard defender, Attack attack) {
+        // Check if the attacker has enough Energy to perform the attack
+        if (hasEnoughEnergy(attacker, attack)) {
+            // Apply damage to the defending Pokémon
+            defender.setHp(defender.getHp() - attack.getDamage());
 
-    // Constructor
-    public Battle(Trainer player, Trainer opponent) {
-        this.player = player;
-        this.opponent = opponent;
-        // Initialize turns list
-        this.turns = new ArrayList<>();
+            // Apply status condition if the attack specifies one
+            if (!attack.getEffect().isEmpty()) {
+                applyEffect(defender, attack.getEffect());
+            }
+
+            // Check for knockout
+            if (defender.getHp() <= 0) {
+                // Remove the knocked out Pokémon from the field
+                field.removePokemon(defender);
+                System.out.println(defender.getName() + " was knocked out!");
+            }
+        } else {
+            System.out.println(attacker.getName() + " doesn't have enough Energy to perform " + attack.getName() + "!");
+        }
     }
 
-    // Methods
-    public void startBattle() {
-        // Initialize the battle, setting up initial conditions
+    // Method to check if the attacker has enough Energy attached to perform the attack
+    private boolean hasEnoughEnergy(PokemonCard attacker, Attack attack) {
+        List<EnergyCard> attachedEnergies = field.getActivePokemon().get(attacker);
+        if (attachedEnergies != null) {
+            Map<String, Long> energyCount = attachedEnergies.stream()
+                    .collect(Collectors.groupingBy(EnergyCard::getType, Collectors.counting()));
+
+            for (String requiredEnergy : attack.getCost()) {
+                long count = energyCount.getOrDefault(requiredEnergy, 0L);
+                if (count <= 0) {
+                    return false; // Not enough energy of this type attached
+                }
+            }
+            return true; // All required energies are available
+        }
+        return false; // No energies attached to the Pokémon
     }
 
-    public void executeTurn() {
-        // Executes actions of a single turn
+    private void applyEffect(PokemonCard defender, String effect) {
+        switch (effect.toLowerCase()) {
+            case "paralyzed":
+                defender.setStatus(StatusCondition.PARALYZED);
+                break;
+            case "asleep":
+                defender.setStatus(StatusCondition.ASLEEP);
+                break;
+            case "poisoned":
+                defender.setStatus(StatusCondition.POISONED);
+                break;
+            case "heal":
+                healPokemon(defender);
+                break;
+            case "switch":
+                switchPokemon(); // Implement logic for switching active Pokémon
+                break;
+            case "discard":
+                discardEnergy(defender); // Assuming discarding energy from the defending Pokémon
+                break;
+            default:
+                // Handle other effects or ignore if not recognized
+                break;
+        }
     }
 
-    public void endBattle() {
-        // Ends the battle, determining the winner
+    // Placeholder method for healing the defending Pokémon
+    private void healPokemon(PokemonCard defender) {
+        // Implement healing logic here, such as restoring HP or removing status conditions
+        defender.setHp(defender.getHp() + 20);
     }
 
-    public void forfeit(Trainer trainer) {
-        // Allows a trainer to forfeit the battle
+    // Placeholder method for switching active Pokémon
+    private void switchPokemon() {
+        // Implement logic for switching active Pokémon
     }
 
-    public void calculateWinner() {
-        // Determines the winner of the battle
+    // Placeholder method for discarding energy cards
+    private void discardEnergy(PokemonCard defender) {
+        // Implement logic for discarding energy cards from the defending Pokémon
+        List<EnergyCard> attachedEnergies = field.getActivePokemon().get(defender);
+        if (attachedEnergies != null) {
+            // Remove all attached energy cards
+            attachedEnergies.clear();
+            // Additional logic if needed, such as updating UI or triggering effects
+        }
     }
 
-    public void calculateExperience() {
-        // Calculates experience gained by participating Pokémon
+    public void startTurn(PokemonCard activePokemon) {
+        switch (activePokemon.getStatus()) {
+            case PARALYZED:
+                // Handle paralysis, e.g., skip turn or have a chance to recover
+                break;
+            case ASLEEP:
+                // Handle sleep, e.g., skip turn or have a chance to wake up
+                break;
+            // Handle other status conditions similarly
+            default:
+                // Proceed with normal turn if no debilitating condition
+                break;
+        }
+        /*
+        //TODO
+         */
+    }
+    private void knockoutPokemon(PokemonCard pokemon) {
+        field.removePokemon(pokemon);
     }
 
-    public void transferPokeDollars() {
-        // Transfers PokéDollars from the losing trainer to the winner
-    }
 
-    public void generateOpponentPokemon() {
-        // Generates the opponent's Pokémon team
-    }
+    // Field reference or parameter might be needed to access attached energies
+    private Field field;
 
-    public void checkWhoGoesFirst() {
-        // Determines which Pokémon goes first in the battle
-    }
-
-    public void exportTurnsToFile() {
-        // Optionally exports the details of each turn to a file
-    }
-
-    public Trainer getWinner() {
-        return winner;
-    }
-
-    public void setWinner(Trainer winner) {
-        this.winner = winner;
-    }
-
-    public Trainer getPlayer() {
-        return player;
-    }
-
-    public void setPlayer(Trainer player) {
-        this.player = player;
-    }
-
-    public Trainer getOpponent() {
-        return opponent;
-    }
-
-    public void setOpponent(Trainer opponent) {
-        this.opponent = opponent;
-    }
-
-    public int getTurnNumber() {
-        return turnNumber;
-    }
-
-    public void setTurnNumber(int turnNumber) {
-        this.turnNumber = turnNumber;
-    }
-
-    public int getPlayerPokemonKnockedOutCount() {
-        return playerPokemonKnockedOutCount;
-    }
-
-    public void setPlayerPokemonKnockedOutCount(int playerPokemonKnockedOutCount) {
-        this.playerPokemonKnockedOutCount = playerPokemonKnockedOutCount;
-    }
-
-    public int getOpponentPokemonKnockedOutCount() {
-        return opponentPokemonKnockedOutCount;
-    }
-
-    public void setOpponentPokemonKnockedOutCount(int opponentPokemonKnockedOutCount) {
-        this.opponentPokemonKnockedOutCount = opponentPokemonKnockedOutCount;
-    }
-
-    public List<Turn> getTurns() {
-        return turns;
-    }
-
-    public void setTurns(List<Turn> turns) {
-        this.turns = turns;
+    // Constructor or setter to initialize the field reference
+    public Battle(Field field) {
+        this.field = field;
     }
 }
-//Battle Class
 

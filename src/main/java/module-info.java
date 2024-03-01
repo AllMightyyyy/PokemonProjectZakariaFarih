@@ -5,6 +5,7 @@ module cesur.zakaria.pokemonprojectzakariafarih {
     requires java.desktop;
     requires swing.glasspane.popup;
     requires com.formdev.flatlaf;
+    requires java.net.http;
     requires swing.toast.notifications;
     requires uk.co.caprica.vlcj;
     requires com.miglayout.swing;
@@ -16,8 +17,9 @@ module cesur.zakaria.pokemonprojectzakariafarih {
 
     opens cesur.zakaria.pokemonprojectzakariafarih to javafx.fxml;
     exports cesur.zakaria.pokemonprojectzakariafarih.controllers to javafx.fxml;
-    exports cesur.zakaria.pokemonprojectzakariafarih;
     exports cesur.zakaria.pokemonprojectzakariafarih.main;
     opens cesur.zakaria.pokemonprojectzakariafarih.main to javafx.fxml;
     opens cesur.zakaria.pokemonprojectzakariafarih.controllers to javafx.fxml;
+    exports cesur.zakaria.pokemonprojectzakariafarih.model to javafx.fxml;
+    opens cesur.zakaria.pokemonprojectzakariafarih.model to javafx.fxml;
 }
