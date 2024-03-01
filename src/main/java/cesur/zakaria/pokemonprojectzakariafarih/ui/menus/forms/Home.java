@@ -51,15 +51,15 @@ public class Home extends JPanel {
         locations = new ArrayList<>();
         locations.add(new ModelLocation("About \nMe",
                 "Hello! My name is Zakaria Farih, and I am currently immersed in the fascinating world of digital creation as a student of DAM (Multiplatform Application Development). With a robust foundation in CSS, HTML, JavaScript, Java, Python, and some knowledge of Go, I am on a thrilling journey towards mastering full-stack development. My ultimate aspiration is to evolve into an accomplished engineer. Programming is not just a profession for me; it's a passion that drives my curiosity and innovation. Every line of code is a step closer to realizing my dream of contributing significantly to the tech world.",
-                "C:\\Users\\ALLMIGHTY\\Desktop\\projkt\\src\\main\\resources\\vids\\video 1.mp4"));
+                "C:\\Users\\ALLMIGHTY\\Desktop\\projects to look at\\PokemonProjectZakariaFarih\\src\\main\\resources\\cesur\\zakaria\\pokemonprojectzakariafarih\\vids\\video 1.mp4"));
 
         locations.add(new ModelLocation("App Dev \nProcess",
                 "In this game project, I showcase my development skills by tackling complex challenges and implementing a range of technologies. Using Java, JavaFX, and Swing, I've built a game that mirrors the engaging experience of the Pokemon TCG. The project demonstrates my ability to integrate multiple libraries, manipulate databases with JDBC, and design intricate game logic and layouts. I chose Java for its versatility and as a core part of my academic learning, aiming to leverage it fully as the backend of my application. Facing challenges like library imports and layout designs in JavaFX and Swing tested my problem-solving skills. This game is a testament to my dedication to going above and beyond, ensuring a rich application that reflects my programming philosophy.",
-                "C:\\Users\\ALLMIGHTY\\Desktop\\projkt\\src\\main\\resources\\vids\\video 2.mp4"));
+                "C:\\Users\\ALLMIGHTY\\Desktop\\projects to look at\\PokemonProjectZakariaFarih\\src\\main\\resources\\cesur\\zakaria\\pokemonprojectzakariafarih\\vids\\video 2.mp4"));
 
         locations.add(new ModelLocation("For Curious\nSouls",
                 "This game project, inspired by the Pokemon TCG, exemplifies my problem-solving skills and creativity. It challenged me to integrate diverse technologies, manage databases, and craft engaging gameplay within a complex programming framework. Overcoming hurdles such as library imports and designing with JavaFX and Swing not only tested my abilities but also highlighted my commitment to excellence. Through this endeavor, I've demonstrated my refusal to settle for the minimum, showcasing a passion for programming that pushes the boundaries of what's possible, reflecting a deep-seated desire to innovate and excel in the tech world.",
-                "C:\\Users\\ALLMIGHTY\\Desktop\\projkt\\src\\main\\resources\\vids\\video 3.mp4"));
+                "C:\\Users\\ALLMIGHTY\\Desktop\\projects to look at\\PokemonProjectZakariaFarih\\src\\main\\resources\\cesur\\zakaria\\pokemonprojectzakariafarih\\vids\\video 3.mp4"));
     }
 
     public void initOverlay(JFrame frame) {
