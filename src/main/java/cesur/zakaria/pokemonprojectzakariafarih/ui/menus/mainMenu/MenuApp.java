@@ -41,12 +41,13 @@ public class MenuApp {
             new Pair<String, Runnable>("Training", () -> {}),
             new Pair<String, Runnable>("Team", () -> {}),
             new Pair<String, Runnable>("Capture", () -> {}),
-            new Pair<String, Runnable>("Pokemon Center", () -> {}),
+            new Pair<String, Runnable>("Pokemon Center", MenuApp::launchPokemonCenter),
             new Pair<String, Runnable>("Upgrade", () -> {}),
             new Pair<String, Runnable>("Pokédex", MenuApp::launchPokedex),
             new Pair<String, Runnable>("Credits", MenuApp::launchCreditsScreen),
             new Pair<String, Runnable>("Exit to Desktop", Platform::exit)
     );
+
     private static Pane root = new Pane();
     private static VBox menuBox = new VBox(-5);
     private static Line line;
@@ -147,4 +148,18 @@ public class MenuApp {
         });
     }
 
+    private static void launchPokemonCenter() {
+        try {
+            // Load the FXML file for the Pokémon Center
+            FXMLLoader loader = new FXMLLoader(MenuApp.class.getResource("TeamPlanner.fxml"));
+            Parent root = loader.load();
+
+            // Set the scene and stage
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+            primaryStage.setTitle("Pokémon Center");
+        } catch (IOException e) {
+            e.printStackTrace(); // Handle the exception appropriately
+        }
+    }
 }
