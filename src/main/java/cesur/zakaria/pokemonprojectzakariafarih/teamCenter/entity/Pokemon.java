@@ -70,6 +70,7 @@ public class Pokemon {
     private String imagePath;
     private String shapeImagePath;
     private List<String> typeImagePaths;
+    private List<String> pokemonTypes;
 
 
     // Constructors, getters, and setters
@@ -229,6 +230,14 @@ public class Pokemon {
         this.typeImagePaths = typeImagePaths;
     }
 
+    public List<String> getPokemonTypes() {
+        return pokemonTypes;
+    }
+
+    public void setPokemonTypes(List<String> pokemonTypes) {
+        this.pokemonTypes = pokemonTypes;
+    }
+
     @Override
     public String toString() {
         return "Pokemon{" +
@@ -269,7 +278,7 @@ public class Pokemon {
     public List<String> generateTypeImagePaths() {
         List<String> paths = new ArrayList<>();
         for (String type : this.pokemonType) {
-            paths.add("path/to/types/" + type.toLowerCase() + ".svg"); // Replace with the actual path
+            paths.add("/cesur/zakaria/pokemonprojectzakariafarih/images/types/" + type.toLowerCase() + ".png"); // Replace with the actual path
         }
         return paths;
     }

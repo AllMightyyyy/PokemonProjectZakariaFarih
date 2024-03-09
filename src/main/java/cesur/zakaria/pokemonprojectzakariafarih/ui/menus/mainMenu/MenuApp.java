@@ -19,6 +19,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import javafx.util.Pair;
 
@@ -37,12 +38,17 @@ public class MenuApp {
     }
 
     private static List<Pair<String, Runnable>> menuData = Arrays.asList(
-            new Pair<String, Runnable>("Combat", () -> {}),
-            new Pair<String, Runnable>("Training", () -> {}),
-            new Pair<String, Runnable>("Team", () -> {}),
-            new Pair<String, Runnable>("Capture", () -> {}),
+            new Pair<String, Runnable>("Combat", () -> {
+            }),
+            new Pair<String, Runnable>("Training", () -> {
+            }),
+            new Pair<String, Runnable>("Team", () -> {
+            }),
+            new Pair<String, Runnable>("Capture", () -> {
+            }),
             new Pair<String, Runnable>("Pokemon Center", MenuApp::launchPokemonCenter),
-            new Pair<String, Runnable>("Upgrade", () -> {}),
+            new Pair<String, Runnable>("Upgrade", () -> {
+            }),
             new Pair<String, Runnable>("Pokédex", MenuApp::launchPokedex),
             new Pair<String, Runnable>("Credits", MenuApp::launchCreditsScreen),
             new Pair<String, Runnable>("Exit to Desktop", Platform::exit)
@@ -128,6 +134,7 @@ public class MenuApp {
 
         root.getChildren().add(menuBox);
     }
+
     public static void switchToMainmenu(Stage stage) {
         MenuApp menuApp = new MenuApp(stage); // Create an instance passing the stage
         Scene scene = new Scene(menuApp.createContent(), WIDTH, HEIGHT);
@@ -138,9 +145,11 @@ public class MenuApp {
         stage.setY((screenBounds.getHeight() - HEIGHT) / 2);
         stage.show();
     }
+
     private static void launchCreditsScreen() {
         SwingUtilities.invokeLater(cesur.zakaria.pokemonprojectzakariafarih.ui.menus.credits.Screen::new);
     }
+
     private static void launchPokedex() {
         SwingUtilities.invokeLater(() -> {
             cesur.zakaria.pokemonprojectzakariafarih.pokedex.view.Dashboard dashboard = new cesur.zakaria.pokemonprojectzakariafarih.pokedex.view.Dashboard();
@@ -154,12 +163,31 @@ public class MenuApp {
             FXMLLoader loader = new FXMLLoader(MenuApp.class.getResource("TeamPlanner.fxml"));
             Parent root = loader.load();
 
-            // Set the scene and stage
+            // Create a new stage for the Pokémon Center
+            Stage stage = new Stage();
+            stage.setWidth(1100);
+            stage.setHeight(1000);
+            stage.initModality(Modality.APPLICATION_MODAL); // Makes the window modal if desired
+
+            // Add custom drag handling here if you want to make the window draggable
+
             Scene scene = new Scene(root);
-            primaryStage.setScene(scene);
-            primaryStage.setTitle("Pokémon Center");
+            stage.setScene(scene);
+            stage.setTitle("Pokémon Center");
+
+            // Handle closing the window
+            stage.setOnCloseRequest(event -> {
+                // Optionally switch back to the main menu or do other cleanup
+                primaryStage.show(); // Show the main menu again if it was hidden
+            });
+
+            // Show the Pokémon Center window
+            stage.show();
+
+            // Optionally hide the main menu
+            primaryStage.hide();
         } catch (IOException e) {
-            e.printStackTrace(); // Handle the exception appropriately
+            e.printStackTrace(); // Properly handle the exception
         }
     }
 }
