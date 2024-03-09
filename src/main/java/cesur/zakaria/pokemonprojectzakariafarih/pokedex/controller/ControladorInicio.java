@@ -130,7 +130,6 @@ public class ControladorInicio {
                     pintarComponente(paneInicio.lblCheck);
                     paneInicio.lblCheck.setIcon(new FlatSVGIcon("app/pokemon/imagen/circle-check.svg", 0.03f));
                 }
-                System.out.println("listo");
             }
         };
 
