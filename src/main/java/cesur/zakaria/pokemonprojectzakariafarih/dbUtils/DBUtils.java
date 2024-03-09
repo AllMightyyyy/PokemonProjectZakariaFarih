@@ -5,7 +5,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import java.sql.*;
 
 public class DBUtils {
-    private static BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+    private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     public static boolean login(String username, String plaintextPassword) {
         Connection connection = null;
@@ -43,14 +43,6 @@ public class DBUtils {
         }
     }
     public static boolean registerUser(String username, String password, String firstName, String lastName, String gender) {
-        // Validation (Make sure to validate input according to your requirements)
-        /*
-        if (!validateUsername(username) || !validatePassword(password)) {
-            return false;
-        }
-
-         */
-
         Connection connection = null;
         PreparedStatement ps = null;
         PreparedStatement psCheckUserExists = null;
@@ -100,13 +92,5 @@ public class DBUtils {
                 System.err.println("Error closing resources: " + e.getMessage());
             }
         }
-    }
-    private static boolean validateUsername(String username) {
-        // rule: username must be between 5 and 20 characters and can only contain letters, numbers, and underscores
-        return username.matches("^[a-zA-Z0-9_]{5,20}$");
-    }
-    private static boolean validatePassword(String password) {
-        // rules: password must be at least 8 characters, must contain at least one letter, one number, and one special character
-        return password.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$");
     }
 }

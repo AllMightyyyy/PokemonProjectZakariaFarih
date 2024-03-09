@@ -11,6 +11,8 @@ import javafx.scene.shape.Polygon;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
+import java.util.Objects;
+
 public class MenuItem extends Pane {
     private Text text;
 
@@ -37,7 +39,7 @@ public class MenuItem extends Pane {
         text = new Text(name);
         text.setTranslateX(5);
         text.setTranslateY(20);
-        text.setFont(Font.loadFont(MenuApp.class.getResource("res/Penumbra-HalfSerif-Std_35114.ttf").toExternalForm(), 14));
+        text.setFont(Font.loadFont(Objects.requireNonNull(MenuApp.class.getResource("res/Penumbra-HalfSerif-Std_35114.ttf")).toExternalForm(), 20));
         text.setFill(Color.WHITE);
 
         text.effectProperty().bind(
