@@ -18,8 +18,9 @@ public class DataLoader {
     private static final String IMAGE_BASE_PATH = "src/main/resources/cesur/zakaria/pokemonprojectzakariafarih/images/pokemon/";
     private static final String SHAPE_IMAGE_BASE_PATH = "src/main/resources/cesur/zakaria/pokemonprojectzakariafarih/images/shape/";
 
-    public static Map<String, Pokemon> loadPokemonData(String jsonFilePath) throws IOException {
+    public static Map<String, Pokemon> loadPokemonData() throws IOException {
         ObjectMapper mapper = new ObjectMapper();
+        String jsonFilePath = "src/main/resources/cesur/zakaria/pokemonprojectzakariafarih/teamCenter/utility/jsonData/pokemon.json";
         Map<String, Pokemon> pokemonMap = mapper.readValue(new File(jsonFilePath), new TypeReference<Map<String, Pokemon>>() {});
         TypeData typeData = loadTypeData("src/main/resources/cesur/zakaria/pokemonprojectzakariafarih/teamCenter/utility/jsonData/types.json");
 
@@ -63,7 +64,8 @@ public class DataLoader {
     }
 
     private static String constructTypeImagePath(String type) {
-        return "src/main/resources/cesur/zakaria/pokemonprojectzakariafarih/images/types/" + type + ".png";
-
+        return "/cesur/zakaria/pokemonprojectzakariafarih/images/types/" + type.toLowerCase() + ".png";
     }
+
+
 }
