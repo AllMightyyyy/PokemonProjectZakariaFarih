@@ -448,7 +448,7 @@ public class TeamPlannerController {
                     effectiveness = "1/2X"; // Weak to
                 } else if (resistsArray != null && isInArray(resistsArray, typeName)) {
                     if (effectiveness.isEmpty()) {
-                        effectiveness = "1/2X"; // Resists
+                        effectiveness = "X2"; // Resists
                     }
                 }
             }
@@ -479,20 +479,19 @@ public class TeamPlannerController {
         return imageView;
     }
 
-    private int calculateTotalWeakForType(String typeName) {
+    private int calculateTotalWeakForType(String typeName) throws JSONException {
         int totalWeak = 0;
-        JSONObject typeDataObject = typeData.optJSONObject("type_data");
 
-        if (typeDataObject != null) {
-            JSONArray typesArray = typeDataObject.names();
+        for (Pokemon pokemon : selectedPokemons) {
+            List<String> pokemonTypes = pokemon.getPokemonType();
 
-            if (typesArray != null) {
-                for (int i = 0; i < typesArray.length(); i++) {
-                    String type = typesArray.optString(i);
-                    JSONObject typeObject = typeDataObject.optJSONObject(type);
-                    JSONArray weak2Array = typeObject.optJSONArray("weak2");
+            for (String type : pokemonTypes) {
+                JSONObject typeDataObject = typeData.getJSONObject("type_data").getJSONObject(type);
 
-                    if (isInArray(weak2Array, typeName)) {
+                if (typeDataObject != null) {
+                    JSONArray weakToArray = typeDataObject.optJSONArray("weak2");
+
+                    if (isInArray(weakToArray, typeName)) {
                         totalWeak++;
                     }
                 }
@@ -502,18 +501,17 @@ public class TeamPlannerController {
         return totalWeak;
     }
 
-    private int calculateTotalResistForType(String typeName) {
+    private int calculateTotalResistForType(String typeName) throws JSONException {
         int totalResist = 0;
-        JSONObject typeDataObject = typeData.optJSONObject("type_data");
 
-        if (typeDataObject != null) {
-            JSONArray typesArray = typeDataObject.names();
+        for (Pokemon pokemon : selectedPokemons) {
+            List<String> pokemonTypes = pokemon.getPokemonType();
 
-            if (typesArray != null) {
-                for (int i = 0; i < typesArray.length(); i++) {
-                    String type = typesArray.optString(i);
-                    JSONObject typeObject = typeDataObject.optJSONObject(type);
-                    JSONArray resistsArray = typeObject.optJSONArray("resists");
+            for (String type : pokemonTypes) {
+                JSONObject typeDataObject = typeData.getJSONObject("type_data").getJSONObject(type);
+
+                if (typeDataObject != null) {
+                    JSONArray resistsArray = typeDataObject.optJSONArray("resists");
 
                     if (isInArray(resistsArray, typeName)) {
                         totalResist++;
