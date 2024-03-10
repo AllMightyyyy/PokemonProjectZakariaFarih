@@ -1,5 +1,8 @@
 package cesur.zakaria.pokemonprojectzakariafarih.ui.menus.mainMenu;
 
+import cesur.zakaria.pokemonprojectzakariafarih.libGDXgame.LibGdxGame;
+import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
+import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
@@ -19,7 +22,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import javafx.util.Pair;
 
@@ -38,17 +40,10 @@ public class MenuApp {
     }
 
     private static List<Pair<String, Runnable>> menuData = Arrays.asList(
-            new Pair<String, Runnable>("Combat", () -> {
-            }),
-            new Pair<String, Runnable>("Training", () -> {
-            }),
+            new Pair<String, Runnable>("Enter World", MenuApp::launchEnterWorld),
             new Pair<String, Runnable>("Team", () -> {
             }),
-            new Pair<String, Runnable>("Capture", () -> {
-            }),
             new Pair<String, Runnable>("Pokemon Center", MenuApp::launchPokemonCenter),
-            new Pair<String, Runnable>("Upgrade", () -> {
-            }),
             new Pair<String, Runnable>("Pokédex", MenuApp::launchPokedex),
             new Pair<String, Runnable>("Credits", MenuApp::launchCreditsScreen),
             new Pair<String, Runnable>("Exit to Desktop", Platform::exit)
@@ -189,5 +184,21 @@ public class MenuApp {
         } catch (IOException e) {
             e.printStackTrace(); // Properly handle the exception
         }
+    }
+
+    private static void launchEnterWorld() {
+        new Thread(() -> {
+            LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+            //Set your configurations options
+            config.width = 608;
+            config.height = 480;
+            config.title = "Zakaria Farih's Pokemon Game";
+            config.resizable = false;
+
+            new LwjglApplication(new LibGdxGame(), config);
+        }).start();
+
+        //Optionally hide or close the JavaFX window
+        Platform.runLater(() -> primaryStage.hide());
     }
 }

@@ -145,6 +145,29 @@
           <artifactId>android-json</artifactId>
           <version>0.0.20131108.vaadin1</version>
       </dependency>
+      <!-- https://mvnrepository.com/artifact/com.badlogicgames.gdx/gdx -->
+      <dependency>
+          <groupId>com.badlogicgames.gdx</groupId>
+          <artifactId>gdx</artifactId>
+          <version>1.12.1</version>
+      </dependency>
+      <dependency>
+          <groupId>com.badlogicgames.gdx</groupId>
+          <artifactId>gdx-backend-lwjgl</artifactId>
+          <version>1.12.1</version>
+      </dependency>
+      <!-- https://mvnrepository.com/artifact/com.badlogicgames.gdx/gdx-platform -->
+      <dependency>
+          <groupId>com.badlogicgames.gdx</groupId>
+          <artifactId>gdx-platform</artifactId>
+          <version>1.12.1</version>
+          <classifier>natives-desktop</classifier>
+      </dependency>
+      <dependency>
+          <groupId>com.badlogicgames.gdx</groupId>
+          <artifactId>gdx-box2d</artifactId>
+          <version>1.12.1</version>
+      </dependency>
 
 
   </dependencies>
@@ -180,6 +203,26 @@
           </execution>
         </executions>
       </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <version>3.1.2</version>
+            <executions>
+                <execution>
+                    <id>unpack</id>
+                    <phase>prepare-package</phase>
+                    <goals>
+                        <goal>unpack-dependencies</goal>
+                    </goals>
+                    <configuration>
+                        <includeGroupIds>com.badlogicgames.gdx</includeGroupIds>
+                        <includeArtifactIds>gdx-platform</includeArtifactIds>
+                        <classifier>natives-desktop</classifier>
+                        <outputDirectory>${project.build.directory}/natives</outputDirectory>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
     </plugins>
   </build>
 </project>
