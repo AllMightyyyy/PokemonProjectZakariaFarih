@@ -552,7 +552,7 @@ public class TeamPlannerController {
                 break;
             default:
                 // Default to an empty image or a placeholder image
-                imagePath = ""; // Or provide a path to a placeholder image
+                imagePath = "/cesur/zakaria/pokemonprojectzakariafarih/images/efficacy/Empty.png"; // Or provide a path to a placeholder image
                 break;
         }
         Image image = new Image(getClass().getResourceAsStream(imagePath));
