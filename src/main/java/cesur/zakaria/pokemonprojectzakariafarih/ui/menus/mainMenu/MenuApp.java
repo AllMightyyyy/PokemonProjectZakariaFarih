@@ -1,6 +1,8 @@
 package cesur.zakaria.pokemonprojectzakariafarih.ui.menus.mainMenu;
 
 import cesur.zakaria.pokemonprojectzakariafarih.libGDXgame.LibGdxGame;
+import cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons.PokemonType;
+import cesur.zakaria.pokemonprojectzakariafarih.vue.Main;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import javafx.animation.ScaleTransition;
@@ -41,8 +43,7 @@ public class MenuApp {
 
     private static List<Pair<String, Runnable>> menuData = Arrays.asList(
             new Pair<String, Runnable>("Enter World", MenuApp::launchEnterWorld),
-            new Pair<String, Runnable>("Team", () -> {
-            }),
+            new Pair<String, Runnable>("Fight", MenuApp::launchEnterFight),
             new Pair<String, Runnable>("Pokemon Center", MenuApp::launchPokemonCenter),
             new Pair<String, Runnable>("Pokédex", MenuApp::launchPokedex),
             new Pair<String, Runnable>("Credits", MenuApp::launchCreditsScreen),
@@ -143,6 +144,22 @@ public class MenuApp {
 
     private static void launchCreditsScreen() {
         SwingUtilities.invokeLater(cesur.zakaria.pokemonprojectzakariafarih.ui.menus.credits.Screen::new);
+    }
+    private static void launchEnterFight() {
+        // Close the current menu window
+        primaryStage.hide();
+
+        // Launch the JavaFX game
+        Platform.runLater(() -> {
+            try {
+                PokemonType.generatePokemonType();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            Stage gameStage = new Stage();
+            Main mainApp = new Main();
+            mainApp.start(gameStage);
+        });
     }
 
     private static void launchPokedex() {
