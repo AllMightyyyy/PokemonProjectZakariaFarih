@@ -55,11 +55,30 @@ public class MainGameScreen implements Screen {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        characterSprite.update(delta); // Update the character position first
+
+        // Center the camera on the character
+        float characterCenterX = characterSprite.getX() + characterSprite.getWidth() / 2;
+        float characterCenterY = characterSprite.getY() + characterSprite.getHeight() / 2;
+
+        // Clamp the camera position to ensure it doesn't go outside the map bounds
+        float cameraHalfWidth = camera.viewportWidth * 0.5f;
+        float cameraHalfHeight = camera.viewportHeight * 0.5f;
+
+        float cameraLeft = Math.max(characterCenterX - cameraHalfWidth, 0);
+        float cameraBottom = Math.max(characterCenterY - cameraHalfHeight, 0);
+
+        float mapPixelWidth = 200 * 16; // 200 tiles * 16 pixels/tile
+        float mapPixelHeight = 200 * 16;
+
+        float cameraRight = Math.min(cameraLeft + camera.viewportWidth, mapPixelWidth);
+        float cameraTop = Math.min(cameraBottom + camera.viewportHeight, mapPixelHeight);
+
+        camera.position.set((cameraRight + cameraLeft) / 2, (cameraTop + cameraBottom) / 2, 0);
+
         camera.update();
         renderer.setView(camera);
         renderer.render();
-
-        characterSprite.update(delta); // Update the character
 
         batch.setProjectionMatrix(camera.combined);
         batch.begin();

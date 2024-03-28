@@ -30,8 +30,8 @@ public class CharacterSprite implements Disposable {
     public CharacterSprite(TiledMap map) {
         this.map = map;
         loadAnimations();
-        x = 3.6351416f; // Set initial X position
-        y = 229.91962f; // Set initial Y position
+        x = 73.74389f; // Set initial X position
+        y = 526.78986f; // Set initial Y position
         stateTime = 0f;
         // Initially set the currentFrame to the down rest frame
     }
@@ -87,6 +87,7 @@ public class CharacterSprite implements Disposable {
             lastDirection = "RIGHT";
         }
 
+
         // Update current animation frame based on movement
         if (movingUp || movingDown || movingLeft || movingRight) {
             switch (lastDirection) {
@@ -127,26 +128,35 @@ public class CharacterSprite implements Disposable {
     }
 
     public boolean handleKeyDown(int keyCode) {
+        boolean keyProcessed = false;
         switch (keyCode) {
             case Input.Keys.UP:
                 movingUp = true;
+                keyProcessed = true;
                 break;
             case Input.Keys.DOWN:
                 movingDown = true;
+                keyProcessed = true;
                 break;
             case Input.Keys.LEFT:
                 movingLeft = true;
+                keyProcessed = true;
                 break;
             case Input.Keys.RIGHT:
                 movingRight = true;
+                keyProcessed = true;
                 break;
         }
-        return true; // Indicate that the key press was handled
+        if (keyProcessed) {
+            // Log only when a movement key is processed
+            System.out.println("Starting movement - Character position - X: " + x + ", Y: " + y);
+        }
+        return keyProcessed; // Indicate that the key press was handled
     }
     private boolean isWalkable(float x, float y) {
         int tileX = (int) (x / TILE_WIDTH); // Define or replace TILE_WIDTH with appropriate value
         int tileY = (int) (y / TILE_HEIGHT); // Define or replace TILE_HEIGHT with appropriate value
-        TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get("bottomGroundGrass"); // Use the layer named "bottomGroundGrass"
+        TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get("ground"); // Use the layer named "bottomGroundGrass"
         if (layer != null) {
             TiledMapTileLayer.Cell cell = layer.getCell(tileX, tileY);
             if (cell != null) {
@@ -161,26 +171,56 @@ public class CharacterSprite implements Disposable {
 
 
     public boolean handleKeyUp(int keyCode) {
+        boolean keyProcessed = false;
         switch (keyCode) {
             case Input.Keys.UP:
                 movingUp = false;
+                keyProcessed = true;
                 break;
             case Input.Keys.DOWN:
                 movingDown = false;
+                keyProcessed = true;
                 break;
             case Input.Keys.LEFT:
                 movingLeft = false;
+                keyProcessed = true;
                 break;
             case Input.Keys.RIGHT:
                 movingRight = false;
+                keyProcessed = true;
                 break;
         }
-        return true; // Indicate that the key release was handled
+        if (keyProcessed) {
+            // Log only when a movement key is released
+            System.out.println("Stopping movement - Character position - X: " + x + ", Y: " + y);
+        }
+        return keyProcessed; // Indicate that the key release was handled
     }
 
     public void render(SpriteBatch batch) {
         float spriteScale = 16 / (float) currentFrame.getRegionWidth(); //16x16 pixels
         batch.draw(currentFrame, x, y, currentFrame.getRegionWidth() * spriteScale, currentFrame.getRegionHeight() * spriteScale);
+    }
+
+    public float getX() {
+        return x;
+    }
+
+    // Method to get the Y coordinate of the character
+    public float getY() {
+        return y;
+    }
+
+    // Method to get the width of the character's current frame
+    public float getWidth() {
+        // Assuming the width is consistent across all frames, or you can adjust if not
+        return currentFrame.getRegionWidth();
+    }
+
+    // Method to get the height of the character's current frame
+    public float getHeight() {
+        // Assuming the height is consistent across all frames, or you can adjust if not
+        return currentFrame.getRegionHeight();
     }
 
     @Override
