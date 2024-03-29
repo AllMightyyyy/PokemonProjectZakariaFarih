@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.util.Objects;
 
 public class LeagueController {
 
@@ -50,10 +51,10 @@ public class LeagueController {
     /**
      * Launches the league view, creating a new league if it does not already exist
      *
-     * @param event the event that triggered this method
+     * @param ignoredEvent the event that triggered this method
      */
     @FXML
-    void lauchLeague(ActionEvent event) {
+    void lauchLeague(ActionEvent ignoredEvent) {
         if (!GameControllerStatic.getGameControllerStatic().isLeagueison()) {
             try {
                 league = League.createDefaultLeague();
@@ -91,7 +92,7 @@ public class LeagueController {
     /**
      * The event handler for when a bot button is clicked
      */
-    private EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
+    private final EventHandler<ActionEvent> event = new EventHandler<>() {
 
         @Override
         public void handle(ActionEvent e) {
@@ -108,10 +109,10 @@ public class LeagueController {
     /**
      * Creates a new personal league
      *
-     * @param event the event that triggered this method
+     * @param ignoredEvent the event that triggered this method
      */
     @FXML
-    void createPersonnalLeague(ActionEvent event) {
+    void createPersonnalLeague(ActionEvent ignoredEvent) {
         try {
             MainView.changeScene((Stage) root.getScene().getWindow(), "PersonalLeague.fxml");
         } catch (IOException ex) {
@@ -122,30 +123,27 @@ public class LeagueController {
     /**
      * Launches the personal league view, showing a list of available leagues
      *
-     * @param event the event that triggered this method
+     * @param ignoredEvent the event that triggered this method
      */
     @FXML
-    void lauchPersonnalLeague(ActionEvent event) {
+    void lauchPersonnalLeague(ActionEvent ignoredEvent) {
 
         HBox hBox = new HBox();
         String repertoire = "League";
         File dir = new File("League");
         if (dir.isDirectory()) {
             String[] s = dir.list();
-            for (int i = 0; i < s.length; i++) {
+            for (int i = 0; i < Objects.requireNonNull(s).length; i++) {
 
                 File f = new File(repertoire + s[i]);
-                if (f!= null) {
-                    String filename = f.getName();
-                    int j = filename.lastIndexOf('.');
-                    if (i > 0 && i < filename.length() - 1) {
-                        if (filename.substring(j + 1).toLowerCase().equals("league")) {
-                            LeagueButton button = new LeagueButton(s[i]);
-                            button.setOnAction(eventUnsave);
-                            hBox.getChildren().add(button);
-                        }
+                String filename = f.getName();
+                int j = filename.lastIndexOf('.');
+                if (i > 0 && i < filename.length() - 1) {
+                    if (filename.substring(j + 1).equalsIgnoreCase("league")) {
+                        LeagueButton button = new LeagueButton(s[i]);
+                        button.setOnAction(eventUnsave);
+                        hBox.getChildren().add(button);
                     }
-
                 }
 
             }
@@ -156,7 +154,7 @@ public class LeagueController {
     /**
      * The event handler for when a league button is clicked
      */
-    private EventHandler<ActionEvent> eventUnsave = new EventHandler<ActionEvent>() {
+    private final EventHandler<ActionEvent> eventUnsave = new EventHandler<>() {
 
         @Override
         public void handle(ActionEvent event) {
@@ -168,10 +166,8 @@ public class LeagueController {
                 GameControllerStatic.getGameControllerStatic().setLeague((League) ois.readObject());
                 System.out.println(league);
                 ois.close();
-            } catch (IOException e) {
+            } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
-            } catch (ClassNotFoundException e2) {
-                e2.printStackTrace();
             }
 
             GameControllerStatic.getGameControllerStatic().setLeagueison(true);
@@ -182,10 +178,10 @@ public class LeagueController {
     /**
      * Shows the main menu view
      *
-     * @param event the event that triggered this method
+     * @param ignoredEvent the event that triggered this method
      */
     @FXML
-    void Menu(ActionEvent event) {
+    void Menu(ActionEvent ignoredEvent) {
         GameControllerStatic.getGameControllerStatic().setLeagueison(false);
         try {
             if (mainMenu) {

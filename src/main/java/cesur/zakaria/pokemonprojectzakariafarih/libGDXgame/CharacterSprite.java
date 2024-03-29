@@ -29,7 +29,7 @@ public class CharacterSprite implements Disposable {
     private boolean movingDown = false;
     private boolean movingLeft = false;
     private boolean movingRight = false;
-    private TiledMap map;
+    private final TiledMap map;
 
     /**
      * Creates a new CharacterSprite with the specified TiledMap.
@@ -60,22 +60,21 @@ public class CharacterSprite implements Disposable {
         texturesToDispose.addAll(restLeftFrame.getTexture(), restRightFrame.getTexture(), restUpFrame.getTexture(), restDownFrame.getTexture());
 
         // Load animations
-        leftAnimation = loadAnimation("emerald_left", 3);
-        rightAnimation = loadAnimation("emerald_right", 3);
-        upAnimation = loadAnimation("emerald_up", 3);
-        downAnimation = loadAnimation("emerald_down", 3);
+        leftAnimation = loadAnimation("emerald_left");
+        rightAnimation = loadAnimation("emerald_right");
+        upAnimation = loadAnimation("emerald_up");
+        downAnimation = loadAnimation("emerald_down");
     }
 
     /**
      * Loads an animation from texture files.
      *
      * @param baseName The base name of the animation texture files.
-     * @param count    The number of frames in the animation.
      * @return The loaded animation.
      */
-    private Animation<TextureRegion> loadAnimation(String baseName, int count) {
+    private Animation<TextureRegion> loadAnimation(String baseName) {
         Array<TextureRegion> frames = new Array<>();
-        for (int i = 1; i < count; i++) { // Exclude the rest frame for animation
+        for (int i = 1; i < 3; i++) { // Exclude the rest frame for animation
             Texture texture = new Texture(Gdx.files.internal("characterSprites/" + baseName + "_" + i + ".png"));
             texturesToDispose.add(texture);
             frames.add(new TextureRegion(texture));
@@ -159,25 +158,25 @@ public class CharacterSprite implements Disposable {
      * @return True if the key press was handled, false otherwise.
      */
     public boolean handleKeyDown(int keyCode) {
-        boolean keyProcessed = false;
-        switch (keyCode) {
-            case Input.Keys.UP:
+        boolean keyProcessed = switch (keyCode) {
+            case Input.Keys.UP -> {
                 movingUp = true;
-                keyProcessed = true;
-                break;
-            case Input.Keys.DOWN:
+                yield true;
+            }
+            case Input.Keys.DOWN -> {
                 movingDown = true;
-                keyProcessed = true;
-                break;
-            case Input.Keys.LEFT:
+                yield true;
+            }
+            case Input.Keys.LEFT -> {
                 movingLeft = true;
-                keyProcessed = true;
-                break;
-            case Input.Keys.RIGHT:
+                yield true;
+            }
+            case Input.Keys.RIGHT -> {
                 movingRight = true;
-                keyProcessed = true;
-                break;
-        }
+                yield true;
+            }
+            default -> false;
+        };
         if (keyProcessed) {
             System.out.println("Starting movement - Character position - X: " + x + ", Y: " + y);
         }
@@ -191,25 +190,25 @@ public class CharacterSprite implements Disposable {
      * @return True if the key release was handled, false otherwise.
      */
     public boolean handleKeyUp(int keyCode) {
-        boolean keyProcessed = false;
-        switch (keyCode) {
-            case Input.Keys.UP:
+        boolean keyProcessed = switch (keyCode) {
+            case Input.Keys.UP -> {
                 movingUp = false;
-                keyProcessed = true;
-                break;
-            case Input.Keys.DOWN:
+                yield true;
+            }
+            case Input.Keys.DOWN -> {
                 movingDown = false;
-                keyProcessed = true;
-                break;
-            case Input.Keys.LEFT:
+                yield true;
+            }
+            case Input.Keys.LEFT -> {
                 movingLeft = false;
-                keyProcessed = true;
-                break;
-            case Input.Keys.RIGHT:
+                yield true;
+            }
+            case Input.Keys.RIGHT -> {
                 movingRight = false;
-                keyProcessed = true;
-                break;
-        }
+                yield true;
+            }
+            default -> false;
+        };
         if (keyProcessed) {
             System.out.println("Stopping movement - Character position - X: " + x + ", Y: " + y);
         }

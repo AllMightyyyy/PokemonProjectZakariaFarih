@@ -24,9 +24,6 @@ public class Main extends Application {
             // Create a scene with the loaded interface
             Scene scene = new Scene(root);
 
-            // Set the icon for the primary stage
-            primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/Pictures/pokeball.png")));
-
             // Set the scene for the primary stage
             primaryStage.setScene(scene);
 

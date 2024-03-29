@@ -16,9 +16,8 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
  * Implements LibGDX's Screen interface to manage screen transitions and rendering.
  */
 public class MainGameScreen implements Screen {
-    private Game game; // Reference to our Game class to switch screens
     private CharacterSprite characterSprite; // Represents the main character sprite
-    private SpriteBatch batch; // SpriteBatch for rendering sprites
+    private final SpriteBatch batch; // SpriteBatch for rendering sprites
     private TiledMap map; // TiledMap representing the game world
     private OrthogonalTiledMapRenderer renderer; // Renderer for the TiledMap
     private OrthographicCamera camera; // Orthographic camera for viewing the game world
@@ -27,10 +26,10 @@ public class MainGameScreen implements Screen {
      * Constructs a new MainGameScreen with a reference to the Game class.
      * Initializes the SpriteBatch.
      *
-     * @param game The Game instance to manage screen transitions.
+     * @param ignoredGame The Game instance to manage screen transitions.
      */
-    public MainGameScreen(Game game) {
-        this.game = game;
+    public MainGameScreen(Game ignoredGame) {
+        // Reference to our Game class to switch screens
         this.batch = new SpriteBatch();
     }
 

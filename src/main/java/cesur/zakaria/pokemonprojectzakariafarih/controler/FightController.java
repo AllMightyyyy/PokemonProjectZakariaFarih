@@ -1,5 +1,12 @@
 package cesur.zakaria.pokemonprojectzakariafarih.controler;
 
+import cesur.zakaria.pokemonprojectzakariafarih.model.fight.Bot;
+import cesur.zakaria.pokemonprojectzakariafarih.model.fight.Fight;
+import cesur.zakaria.pokemonprojectzakariafarih.model.fight.League;
+import cesur.zakaria.pokemonprojectzakariafarih.model.fight.Trainer;
+import cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons.Capacity;
+import cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons.Pokemon;
+import cesur.zakaria.pokemonprojectzakariafarih.vue.MainView;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -13,21 +20,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.media.AudioClip;
-import javafx.scene.media.Media;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import cesur.zakaria.pokemonprojectzakariafarih.model.fight.Bot;
-import cesur.zakaria.pokemonprojectzakariafarih.model.fight.Fight;
-import cesur.zakaria.pokemonprojectzakariafarih.model.fight.League;
-import cesur.zakaria.pokemonprojectzakariafarih.model.fight.Trainer;
-import cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons.Capacity;
-import cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons.Pokemon;
-import cesur.zakaria.pokemonprojectzakariafarih.vue.MainView;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -136,9 +134,7 @@ public class FightController {
 
 	/**
 	 * Initialize the fight and its display. It is called automatically at the launch of the controller.
-	 * @param
-	 * @return void
-	 */
+     */
 	public void initialize() throws IOException{
 		
     	System.out.println("Launching the combat");
@@ -150,7 +146,7 @@ public class FightController {
     	mainFooter.setBackground(new Background(fightMenu));
 		GameControllerStatic.UnSave();
 		Pokemon[] pokemons= new Pokemon[6];
-		if(GameControllerStatic.getGameControllerStatic().isMultiPlayer()==false && !GameControllerStatic.getGameControllerStatic().isLeagueison()) {
+		if(!GameControllerStatic.getGameControllerStatic().isMultiPlayer() && !GameControllerStatic.getGameControllerStatic().isLeagueison()) {
 			for (int i = 0; i < pokemons.length; i++) {
 				pokemons[i]=League.pokemonRandom();
 			}
@@ -183,7 +179,7 @@ public class FightController {
 		else {
 			pokeballsBox=pokeballs2;
 		}
-		int i=0;
+		int i;
     	for (i = 0; i < trainer.teamSize(); i++) {
     		if(trainer.getPokemon(i)!=null) {
     			if(i>=trainer.teamSize()) {
@@ -191,8 +187,8 @@ public class FightController {
     			}
     			else {
     				if(!trainer.isPokemonAlive(i)) {
-    					pokeballsBox.getChildren().get(i).setOpacity(0.5);;
-    				}
+    					pokeballsBox.getChildren().get(i).setOpacity(0.5);
+                    }
     			}
     		}
     		else{
@@ -243,7 +239,7 @@ public class FightController {
 	 */
 	@FXML
     void attack(ActionEvent event) throws FileNotFoundException {
-		if(GameControllerStatic.getGameControllerStatic().isMultiPlayer()==false && fight.getCurrentTrainer() instanceof Bot) {
+		if(!GameControllerStatic.getGameControllerStatic().isMultiPlayer() && fight.getCurrentTrainer() instanceof Bot) {
 			//IF BOT PLAY
 			Bot pokemonBot = (Bot) fight.getTrainer2();
 			capUsed=pokemonBot.fight();
@@ -291,12 +287,9 @@ public class FightController {
     	        	    	        	mainDialog.setVisible(false);
 	    								imageToAnimate.setImage(null);
 	    								playAnimation(imageToAnimate, 0.2, 1, 300 * -direction, 0);
-	    								if(GameControllerStatic.getGameControllerStatic().isMultiPlayer()==false && fight.getNonCurrentTrainer() instanceof Bot) {
+	    								if(!GameControllerStatic.getGameControllerStatic().isMultiPlayer() && fight.getNonCurrentTrainer() instanceof Bot) {
 	    									try {
 												selectPokemon(new ActionEvent());
-											} catch (FileNotFoundException e) {
-												// TODO Auto-generated catch block
-												e.printStackTrace();
 											} catch (IOException e) {
 												// TODO Auto-generated catch block
 												e.printStackTrace();
@@ -330,12 +323,12 @@ public class FightController {
     }
 
 	/**
-	 * Handles the next turn in the fight. If the game is being played in multiplayer mode and the current trainer is a bot, the bot is asked to play the next turn. If the current trainer only has one pokemon alive or if the current pokemon has no more fight moves, the buttons for selecting a different pokemon or for fighting are disabled. Otherwise, the buttons are enabled. The visibility of the capacity and action footer regions is also toggled, and the main dialog and main footer regions are hidden or shown as appropriate.
+	 * Handles the next turn in the fight. If the game is being played in multiplayer mode and the current trainer is a bot, the bot is asked to play the next turn. If the current trainer only has one Pokémon alive or if the current Pokémon has no more fight moves, the buttons for selecting a different pokemon or for fighting are disabled. Otherwise, the buttons are enabled. The visibility of the capacity and action footer regions is also toggled, and the main dialog and main footer regions are hidden or shown as appropriate.
 	 *
 	 * @throws IOException if there is an error loading the media files
 	 */
 	private void nextTurn() throws IOException {
-		if(GameControllerStatic.getGameControllerStatic().isMultiPlayer()==false) {
+		if(!GameControllerStatic.getGameControllerStatic().isMultiPlayer()) {
 			if(fight.getCurrentTrainer() instanceof Bot) {
 				botPlay();
 			}
@@ -343,11 +336,7 @@ public class FightController {
 				if(fight.getCurrentTrainer().onlyOnePokemonAlive()) {
 					pokemonButton.setDisable(true);
 				}
-				if(fight.getCurrentTrainer().getPokemon().noMoreFight()) {
-					fightButton.setDisable(true);
-				}else {
-					fightButton.setDisable(false);
-				}
+                fightButton.setDisable(fight.getCurrentTrainer().getPokemon().noMoreFight());
 				capacityFooterRight.setVisible(false);
 	        	actionFooterRight.setVisible(true);  
 				mainDialog.setVisible(false);
@@ -360,11 +349,11 @@ public class FightController {
 	/**
 	 * This method changes the currently selected pokemon for the trainer.
 	 *
-	 * @param event the action event that triggered the method call
+	 * @param ignoredEvent the action event that triggered the method call
 	 * @throws FileNotFoundException if there is an error loading the media files
 	 */
 	@FXML
-	void changePokemon(ActionEvent event) throws FileNotFoundException {
+	void changePokemon(ActionEvent ignoredEvent) throws FileNotFoundException {
 		// Hides the action footer and capacity footer, and shows the pokemon footer.
 		actionFooterRight.setVisible(false);
 		capacityFooterRight.setVisible(false);
@@ -387,11 +376,7 @@ public class FightController {
 		for (Map.Entry<Button, Pokemon> entry : map.entrySet()) {
 			if (entry.getValue()!= null) {
 				entry.getKey().setText(entry.getValue().getNickName().toUpperCase());
-				if (!entry.getValue().isAlive() || entry.getValue().equals(fight.getCurrentTrainer().getPokemon())) {
-					entry.getKey().setDisable(true);
-				} else {
-					entry.getKey().setDisable(false);
-				}
+                entry.getKey().setDisable(!entry.getValue().isAlive() || entry.getValue().equals(fight.getCurrentTrainer().getPokemon()));
 			}
 		}
 	}
@@ -399,10 +384,10 @@ public class FightController {
 	/**
 	 * This method changes the currently selected pokemon for the trainer.
 	 *
-	 * @param event the action event that triggered the method call
+	 * @param ignoredEvent the action event that triggered the method call
 	 */
 	@FXML
-	void fight(ActionEvent event) {
+	void fight(ActionEvent ignoredEvent) {
 		// Hides the action footer and capacity footer, and shows the pokemon footer.
 		actionFooterRight.setVisible(false);
 		capacityFooterRight.setVisible(true);
@@ -417,16 +402,12 @@ public class FightController {
 		// Loops through the map, setting the text of each button to the capacity's name and disabling the button if the capacity is not usable.
 		for (Map.Entry<Button, Capacity> entry : map.entrySet()) {
 			entry.getKey().setText(entry.getValue().getName().toUpperCase() + "\n" + entry.getValue().getPowerPoint() + "/" + entry.getValue().getMaxPowerPoint());
-			if (!entry.getValue().isUsable()) {
-				entry.getKey().setDisable(true);
-			} else {
-				entry.getKey().setDisable(false);
-			}
+            entry.getKey().setDisable(!entry.getValue().isUsable());
 		}
 	}
 
     @FXML
-    void run(ActionEvent event) throws IOException {
+    void run(ActionEvent ignoredEvent) {
     	//SET DISPLAY
     	mainFooter.setVisible(false);
     	mainDialog.setText(fight.getCurrentTrainer().getName()+" runs the fight");
@@ -473,10 +454,9 @@ public class FightController {
 	@FXML
 	void selectPokemon(ActionEvent event) throws IOException {
 		// Checks if the event source is a button. If it is, the method handles the user selecting a pokemon. If it is not, the method handles the bot selecting a pokemon.
-		if (event.getSource() instanceof Button) {
+		if (event.getSource() instanceof Button button) {
 			// IF USER PLAY
-			Button button = (Button) event.getSource();
-			Trainer trainer = (Trainer) fight.getTrainer1();
+            Trainer trainer = fight.getTrainer1();
 			// Changes the currently selected pokemon for the trainer.
 			trainer.changePokemon(Integer.parseInt(button.getId().subSequence(button.getId().length() - 1, button.getId().length()).toString()) - 1);
 			// Prints the new pokemon to the user interface.
@@ -543,9 +523,7 @@ public class FightController {
 					// Quits the game.
 					Timeline timeline2 = new Timeline(new KeyFrame(
 							Duration.millis(3000),
-							ae2 -> {
-								quit();
-							}));
+							ae2 -> quit()));
 					timeline2.play();
 				}));
 		timeline1.play();
@@ -591,4 +569,15 @@ public class FightController {
 		mainDialog.setVisible(true);
 	}
 
+	public void setMusic(AudioClip music) {
+		this.music = music;
+	}
+
+	public Label getDialogLeft() {
+		return dialogLeft;
+	}
+
+	public void setDialogLeft(Label dialogLeft) {
+		this.dialogLeft = dialogLeft;
+	}
 }

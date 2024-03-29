@@ -14,7 +14,7 @@ public class GameControllerStatic {
 
     private static GameControllerStatic gameControllerStatic;
 
-    private boolean multiPlayer;
+    private final boolean multiPlayer;
     private Trainer trainer;
     private Bot bot;
     private League league;
@@ -153,10 +153,8 @@ public class GameControllerStatic {
             ois = new ObjectInputStream(new FileInputStream("SaveTrainer1"));
             getGameControllerStatic().setTrainer((Trainer)ois.readObject());
             ois.close();
-        } catch (IOException e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
-        }catch (ClassNotFoundException  e2) {
-            e2.printStackTrace();
         }
     }
 }

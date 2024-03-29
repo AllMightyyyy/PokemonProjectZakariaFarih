@@ -32,15 +32,15 @@ public class PersonnalLeagueController {
     private TextField label;
 
 
-    private static ArrayList<Bot> trainers=new ArrayList<Bot>();
+    private static final ArrayList<Bot> trainers= new ArrayList<>();
+    private ActionEvent event;
 
     /**
      * This method initializes the controller.
      * If the create league mode is on, it adds the current bot to the list of trainers.
      * Then, it creates a VBox containing the labels of the trainers, and sets it as the center of the root.
-     * @throws FileNotFoundException if the file containing the trainers cannot be found.
      */
-    public void initialize() throws FileNotFoundException {
+    public void initialize() {
 
         if(!GameControllerStatic.getGameControllerStatic().isCreateLeagueOn()){
 
@@ -68,12 +68,12 @@ public class PersonnalLeagueController {
     /**
      * This method saves the list of trainers in a file with the given name.
      * The file is saved in the "League" directory.
-     * @param event the action event
+     * @param ignoredEvent the action event
      * @throws FileNotFoundException if the file cannot be found.
      * @throws IOException if an I/O error occurs.
      */
     @FXML
-    void Save(ActionEvent event) throws FileNotFoundException, IOException {
+    void Save(ActionEvent ignoredEvent) throws FileNotFoundException, IOException {
         ObjectOutputStream oos =  new ObjectOutputStream(new FileOutputStream("League/"+label.getText()+".league")) ;
         oos.writeObject(new League(PersonnalLeagueController.trainers));
         oos.close();
@@ -81,21 +81,22 @@ public class PersonnalLeagueController {
 
     /**
      * This method switches to the Pokedex scene.
-     * @param event the action event
+     * @param ignoredEvent the action event
      * @throws IOException if an I/O error occurs.
      */
     @FXML
-    void Add(ActionEvent event) throws IOException {
+    void Add(ActionEvent ignoredEvent) throws IOException {
+        this.event = ignoredEvent;
         MainView.changeScene((Stage)root.getScene().getWindow(), "Pokedex.fxml");
     }
 
     /**
      * This method switches to the League scene.
-     * @param event the action event
+     * @param ignoredEvent the action event
      * @throws IOException if an I/O error occurs.
      */
     @FXML
-    void Menu(ActionEvent event) throws IOException {
+    void Menu(ActionEvent ignoredEvent) throws IOException {
         GameControllerStatic.getGameControllerStatic().setCreateLeagueOn(false);
         MainView.changeScene((Stage)root.getScene().getWindow(), "League.fxml");
     }
