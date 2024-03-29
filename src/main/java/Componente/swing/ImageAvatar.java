@@ -6,48 +6,101 @@ import java.awt.geom.Area;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 
+/**
+ * The type Image avatar.
+ */
 public class ImageAvatar extends JComponent {
 
+    /**
+     * Gets image.
+     *
+     * @return the image
+     */
     public Icon getImage() {
         return image;
     }
 
+    /**
+     * Sets image.
+     *
+     * @param image the image
+     */
     public void setImage(Icon image) {
         this.image = image;
         repaint();
     }
 
+    /**
+     * Gets border size.
+     *
+     * @return the border size
+     */
     public int getBorderSize() {
         return borderSize;
     }
 
+    /**
+     * Sets border size.
+     *
+     * @param borderSize the border size
+     */
     public void setBorderSize(int borderSize) {
         this.borderSize = borderSize;
         repaint();
     }
 
+    /**
+     * Gets border space.
+     *
+     * @return the border space
+     */
     public int getBorderSpace() {
         return borderSpace;
     }
 
+    /**
+     * Sets border space.
+     *
+     * @param borderSpace the border space
+     */
     public void setBorderSpace(int borderSpace) {
         this.borderSpace = borderSpace;
         repaint();
     }
 
+    /**
+     * Gets gradient color 1.
+     *
+     * @return the gradient color 1
+     */
     public Color getGradientColor1() {
         return gradientColor1;
     }
 
+    /**
+     * Sets gradient color 1.
+     *
+     * @param gradientColor1 the gradient color 1
+     */
     public void setGradientColor1(Color gradientColor1) {
         this.gradientColor1 = gradientColor1;
         repaint();
     }
 
+    /**
+     * Gets gradient color 2.
+     *
+     * @return the gradient color 2
+     */
     public Color getGradientColor2() {
         return gradientColor2;
     }
 
+    /**
+     * Sets gradient color 2.
+     *
+     * @param gradientColor2 the gradient color 2
+     */
     public void setGradientColor2(Color gradientColor2) {
         this.gradientColor2 = gradientColor2;
         repaint();

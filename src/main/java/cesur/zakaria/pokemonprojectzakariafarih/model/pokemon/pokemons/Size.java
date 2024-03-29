@@ -10,31 +10,31 @@ public record Size(double height, double weight) implements Serializable {
 	@Serial
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Constructs a Size object with the specified height and weight.
-	 *
-	 * @param height The height of the Pokémon.
-	 * @param weight The weight of the Pokémon.
-	 */
-	public Size {
+    /**
+     * Constructs a Size object with the specified height and weight.
+     *
+     * @param height The height of the Pokémon.
+     * @param weight The weight of the Pokémon.
+     */
+    public Size {
 	}
 
-	/**
-	 * Retrieves the height of the Pokémon.
-	 *
-	 * @return The height of the Pokémon.
-	 */
-	@Override
+    /**
+     * Retrieves the height of the Pokémon.
+     *
+     * @return The height of the Pokémon.
+     */
+    @Override
 	public double height() {
 		return height;
 	}
 
-	/**
-	 * Retrieves the weight of the Pokémon.
-	 *
-	 * @return The weight of the Pokémon.
-	 */
-	@Override
+    /**
+     * Retrieves the weight of the Pokémon.
+     *
+     * @return The weight of the Pokémon.
+     */
+    @Override
 	public double weight() {
 		return weight;
 	}

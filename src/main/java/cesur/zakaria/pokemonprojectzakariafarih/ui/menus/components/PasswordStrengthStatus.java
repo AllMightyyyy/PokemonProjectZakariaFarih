@@ -1,10 +1,10 @@
 package cesur.zakaria.pokemonprojectzakariafarih.ui.menus.components;
 
+import cesur.zakaria.pokemonprojectzakariafarih.ui.menus.utils.MethodUtil;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.ui.FlatUIUtils;
 import com.formdev.flatlaf.util.UIScale;
-import cesur.zakaria.pokemonprojectzakariafarih.ui.menus.utils.MethodUtil;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;

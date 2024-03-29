@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.image.VolatileImage;
 
 /**
+ * The type Window snapshots.
  *
  * @author Raven
  */
@@ -15,10 +16,18 @@ public class WindowSnapshots {
     private JComponent snapshotLayer;
     private boolean inShowSnapshot;
 
+    /**
+     * Instantiates a new Window snapshots.
+     *
+     * @param frame the frame
+     */
     public WindowSnapshots(JFrame frame) {
         this.frame = frame;
     }
 
+    /**
+     * Create snapshot.
+     */
     public void createSnapshot() {
         if (inShowSnapshot) {
             return;
@@ -50,6 +59,9 @@ public class WindowSnapshots {
         }
     }
 
+    /**
+     * Remove snapshot.
+     */
     public void removeSnapshot() {
         frame.getLayeredPane().remove(snapshotLayer);
         inShowSnapshot = false;

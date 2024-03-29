@@ -1,12 +1,7 @@
 package cesur.zakaria.pokemonprojectzakariafarih.pokedex.util;
 
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Insets;
-import javax.swing.JScrollPane;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * The WrapLayout class is a layout manager that lays out components in a flow, wrapping to the next row or column

@@ -12,23 +12,23 @@ import java.util.Random;
  */
 public class Bot extends Trainer {
 
-	/**
-	 * Constructs a new Bot with the given name and Pokemon team.
-	 *
-	 * @param name     The name of the bot.
-	 * @param pokemons An array of Pokemon representing the bot's team.
-	 */
-	public Bot(String name, Pokemon[] pokemons) {
+    /**
+     * Constructs a new Bot with the given name and Pokemon team.
+     *
+     * @param name     The name of the bot.
+     * @param pokemons An array of Pokemon representing the bot's team.
+     */
+    public Bot(String name, Pokemon[] pokemons) {
 		super(name, pokemons);
 	}
 
-	/**
-	 * Simulates a fight action by the bot.
-	 * The bot randomly selects one of its usable capacities and returns it.
-	 *
-	 * @return A Capacity representing the capacity chosen by the bot for the fight action.
-	 */
-	public Capacity fight() {
+    /**
+     * Simulates a fight action by the bot.
+     * The bot randomly selects one of its usable capacities and returns it.
+     *
+     * @return A Capacity representing the capacity chosen by the bot for the fight action.
+     */
+    public Capacity fight() {
 		ArrayList<Capacity> usableCapacities = new ArrayList<>();
 		for (Capacity capacity : getPokemon().getCapacities()) {
 			if (capacity != null && capacity.isUsable()) {

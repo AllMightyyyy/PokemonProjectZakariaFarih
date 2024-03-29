@@ -1,6 +1,7 @@
 package cesur.zakaria.pokemonprojectzakariafarih.teamCenter.type;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
 /**
@@ -15,7 +16,10 @@ public class TypeEffectiveness {
     @JsonProperty("weak2")
     private List<String> weak;
 
-    // Default constructor
+    /**
+     * Instantiates a new Type effectiveness.
+     */
+// Default constructor
     public TypeEffectiveness() {
     }
 
@@ -31,9 +35,9 @@ public class TypeEffectiveness {
     /**
      * Constructor with all effectiveness types.
      *
-     * @param immune   the list of immune types.
-     * @param resists  the list of types resisted.
-     * @param weak     the list of weak types.
+     * @param immune  the list of immune types.
+     * @param resists the list of types resisted.
+     * @param weak    the list of weak types.
      */
     public TypeEffectiveness(List<String> immune, List<String> resists, List<String> weak) {
         this.immune = immune;

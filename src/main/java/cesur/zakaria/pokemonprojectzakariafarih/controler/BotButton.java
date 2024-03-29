@@ -1,13 +1,12 @@
 package cesur.zakaria.pokemonprojectzakariafarih.controler;
 
-import javafx.scene.control.Button;
 import cesur.zakaria.pokemonprojectzakariafarih.model.fight.Bot;
+import javafx.scene.control.Button;
 
 /**
  * A custom button that represents a bot in the game.
  *
  * @author Zakaria
- *
  */
 public class BotButton extends Button {
 

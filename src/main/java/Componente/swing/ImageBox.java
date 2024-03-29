@@ -3,10 +3,18 @@ package Componente.swing;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * The type Image box.
+ */
 public class ImageBox extends JLayeredPane {
 
     private Image imagen;
 
+    /**
+     * Sets imagen.
+     *
+     * @param imagen the imagen
+     */
     public void setImagen(Image imagen) {
         this.imagen = imagen;
         repaint();
@@ -37,7 +45,10 @@ public class ImageBox extends JLayeredPane {
 
     }
 
-    // Método para establecer un cursor personalizado
+    /**
+     * Sets custom cursor.
+     */
+// Método para establecer un cursor personalizado
     public void setCustomCursor() {
         Cursor customCursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR); // Ejemplo de cursor personalizado
         setCursor(customCursor);

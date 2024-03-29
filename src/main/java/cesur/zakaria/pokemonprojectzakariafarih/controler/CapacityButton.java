@@ -1,13 +1,12 @@
 package cesur.zakaria.pokemonprojectzakariafarih.controler;
 
-import javafx.scene.layout.BorderPane;
 import cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons.Capacity;
+import javafx.scene.layout.BorderPane;
 
 /**
  * A class that represents a button for a specific {@link Capacity}.
  *
  * @author Zakaria
- *
  */
 public class CapacityButton extends BorderPane {
 

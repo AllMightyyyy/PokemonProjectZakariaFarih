@@ -1,16 +1,16 @@
 package Componente.cardSwing;
 
 
-import cesur.zakaria.pokemonprojectzakariafarih.pokedex.model.PokemonColor;
+import Componente.glasspanepopup.DefaultOption;
+import Componente.glasspanepopup.GlassPanePopup;
+import Componente.glasspanepopup.Option;
 import cesur.zakaria.pokemonprojectzakariafarih.pokedex.controller.ControladorDashboard;
+import cesur.zakaria.pokemonprojectzakariafarih.pokedex.model.PokemonColor;
 import cesur.zakaria.pokemonprojectzakariafarih.pokedex.view.PaneDetalles;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.github.oscar0812.pokeapi.models.pokemon.Pokemon;
 import com.github.oscar0812.pokeapi.models.pokemon.PokemonType;
 import com.github.oscar0812.pokeapi.models.pokemon.Type;
-import Componente.glasspanepopup.DefaultOption;
-import Componente.glasspanepopup.GlassPanePopup;
-import Componente.glasspanepopup.Option;
 import raven.crazypanel.CrazyPanel;
 import raven.crazypanel.MigLayoutConstraints;
 
@@ -26,6 +26,9 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * The type Pn card.
+ */
 public class PnCard extends JPanel {
 
     private final Pokemon pokemon;
@@ -33,18 +36,39 @@ public class PnCard extends JPanel {
 
     private Color rgbFondo;
 
+    /**
+     * Gets descripcion.
+     *
+     * @return the descripcion
+     */
     public String getDescripcion() {
         return descripcion;
     }
 
+    /**
+     * Gets rgb fondo.
+     *
+     * @return the rgb fondo
+     */
     public Color getRgbFondo() {
         return rgbFondo;
     }
 
+    /**
+     * Sets rgb fondo.
+     *
+     * @param rgbFondo the rgb fondo
+     */
     public void setRgbFondo(Color rgbFondo) {
         this.rgbFondo = rgbFondo;
     }
 
+    /**
+     * Instantiates a new Pn card.
+     *
+     * @param pokemon     the pokemon
+     * @param descripcion the descripcion
+     */
     public PnCard(Pokemon pokemon, String descripcion) {
         initComponents();
         setOpaque(false);
@@ -61,7 +85,7 @@ public class PnCard extends JPanel {
             imgBox.setImagen(img);
             imgBox.setCustomCursor();
             imgBox.addMouseListener(new PanelMouseListener());
-            labeId.setText(String.valueOf("N° 0" + pokemon.getId()));
+            labeId.setText("N° 0" + pokemon.getId());
             labeNombre.setText(pokemon.getName());
             ArrayList<PokemonType> pokemons = pokemon.getTypes();
             String primerTipo = pokemons.get(0).getType().getName();
@@ -72,8 +96,8 @@ public class PnCard extends JPanel {
                 Type tipoInfo = tipos.getType();
                 contenedorTipos.add(crearPanelTipo(tipoInfo.getName()));
             }
-            labeAltura.setText(String.valueOf(pokemon.getHeight() + "M"));
-            labePeso.setText(String.valueOf(pokemon.getWeight() + "Kg"));
+            labeAltura.setText(pokemon.getHeight() + "M");
+            labePeso.setText(pokemon.getWeight() + "Kg");
         } catch (IOException ex) {
             Logger.getLogger(PnCard.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -85,11 +109,9 @@ public class PnCard extends JPanel {
         CrazyPanel contenedor = new CrazyPanel();
         contenedor.setMigLayoutConstraints(constraints);
         JLabel labelTipo = new JLabel();
-        labelTipo.putClientProperty(FlatClientProperties.STYLE, ""
-                + "font:plain -4"
+        labelTipo.putClientProperty(FlatClientProperties.STYLE, "font:plain -4"
         );
-        contenedor.putClientProperty(FlatClientProperties.STYLE, ""
-                + "arc:10"
+        contenedor.putClientProperty(FlatClientProperties.STYLE, "arc:10"
         );
         contenedor.setBackground(obtenerColorTipo(pokemonTipo, 220));
         labelTipo.setText(pokemonTipo);

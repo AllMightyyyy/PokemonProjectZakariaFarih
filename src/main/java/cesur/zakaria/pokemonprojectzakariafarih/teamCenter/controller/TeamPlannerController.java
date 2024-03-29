@@ -29,6 +29,9 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * The type Team planner controller.
+ */
 public class TeamPlannerController {
 
     // FXML elements

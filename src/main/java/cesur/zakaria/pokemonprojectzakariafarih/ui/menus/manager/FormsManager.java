@@ -20,6 +20,7 @@ public class FormsManager {
 
     /**
      * Retrieves the singleton instance of FormsManager.
+     *
      * @return The singleton instance of FormsManager.
      */
     public static FormsManager getInstance() {
@@ -31,6 +32,7 @@ public class FormsManager {
 
     /**
      * Sets the main frame of the application.
+     *
      * @param frame The main frame of the application.
      */
     public void setMainFrame(JFrame frame) {
@@ -39,6 +41,7 @@ public class FormsManager {
 
     /**
      * Shows the specified form in the main frame.
+     *
      * @param form The form to be displayed.
      */
     public void showForm(JComponent form) {
@@ -57,9 +60,10 @@ public class FormsManager {
 
     /**
      * Shows the specified form in a new window.
-     * @param form The form to be displayed.
+     *
+     * @param form  The form to be displayed.
      * @param title The title of the new window.
-     * @param size The size of the new window.
+     * @param size  The size of the new window.
      */
     public void showFormInNewWindow(JComponent form, String title, Dimension size) {
         EventQueue.invokeLater(() -> {

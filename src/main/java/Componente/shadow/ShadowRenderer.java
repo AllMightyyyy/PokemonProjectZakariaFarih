@@ -3,6 +3,9 @@ package Componente.shadow;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/**
+ * The type Shadow renderer.
+ */
 public class ShadowRenderer {
 
     // size of the shadow in pixels (defines the fuzziness)
@@ -14,28 +17,59 @@ public class ShadowRenderer {
     // color of the shadow
     private Color color = Color.BLACK;
 
+    /**
+     * Instantiates a new Shadow renderer.
+     */
     public ShadowRenderer() {
         this(5, 0.5f, Color.BLACK);
     }
 
+    /**
+     * Instantiates a new Shadow renderer.
+     *
+     * @param size    the size
+     * @param opacity the opacity
+     * @param color   the color
+     */
     public ShadowRenderer(final int size, final float opacity, final Color color) {
         this.size = size;
         this.opacity = opacity;
         this.color = color;
     }
 
+    /**
+     * Gets color.
+     *
+     * @return the color
+     */
     public Color getColor() {
         return color;
     }
 
+    /**
+     * Gets opacity.
+     *
+     * @return the opacity
+     */
     public float getOpacity() {
         return opacity;
     }
 
+    /**
+     * Gets size.
+     *
+     * @return the size
+     */
     public int getSize() {
         return size;
     }
 
+    /**
+     * Create shadow buffered image.
+     *
+     * @param image the image
+     * @return the buffered image
+     */
     public BufferedImage createShadow(final BufferedImage image) {
         // Written by Sesbastien Petrucci
         int shadowSize = size * 2;

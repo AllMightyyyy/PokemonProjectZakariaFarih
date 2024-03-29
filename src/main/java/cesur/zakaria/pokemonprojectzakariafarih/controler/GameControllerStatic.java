@@ -37,6 +37,7 @@ public class GameControllerStatic {
     /**
      * Returns the single instance of the GameControllerStatic class.
      * If the instance does not exist, it is created.
+     *
      * @return the single instance of the GameControllerStatic class
      */
     public static GameControllerStatic getGameControllerStatic(){
@@ -47,6 +48,7 @@ public class GameControllerStatic {
 
     /**
      * Returns true if the game is being played in multiplayer mode, false otherwise.
+     *
      * @return true if the game is being played in multiplayer mode, false otherwise
      */
     public boolean isMultiPlayer() {
@@ -55,6 +57,7 @@ public class GameControllerStatic {
 
     /**
      * Returns the player's Trainer object.
+     *
      * @return the player's Trainer object
      */
     public Trainer getTrainer() {
@@ -63,6 +66,7 @@ public class GameControllerStatic {
 
     /**
      * Returns the computer's Bot object.
+     *
      * @return the computer's Bot object
      */
     public Bot getBot() {
@@ -71,6 +75,7 @@ public class GameControllerStatic {
 
     /**
      * Returns the League object.
+     *
      * @return the League object
      */
     public League getLeague() {
@@ -79,6 +84,7 @@ public class GameControllerStatic {
 
     /**
      * Returns true if the League is active, false otherwise.
+     *
      * @return true if the League is active, false otherwise
      */
     public boolean isLeagueison() {
@@ -87,6 +93,7 @@ public class GameControllerStatic {
 
     /**
      * Returns true if a new League is to be created when the game starts, false otherwise.
+     *
      * @return true if a new League is to be created when the game starts, false otherwise
      */
     public boolean isCreateLeagueOn() {
@@ -95,6 +102,7 @@ public class GameControllerStatic {
 
     /**
      * Sets the League object.
+     *
      * @param league the League object
      */
     public void setLeague(League league) {
@@ -103,6 +111,7 @@ public class GameControllerStatic {
 
     /**
      * Sets whether the League is active or not.
+     *
      * @param leagueison true if the League is active, false otherwise
      */
     public void setLeagueison(boolean leagueison) {
@@ -111,6 +120,7 @@ public class GameControllerStatic {
 
     /**
      * Sets the player's Trainer object.
+     *
      * @param trainer the player's Trainer object
      */
     public void setTrainer(Trainer trainer) {
@@ -119,6 +129,7 @@ public class GameControllerStatic {
 
     /**
      * Sets the computer's Bot object.
+     *
      * @param bot the computer's Bot object
      */
     public void setBot(Bot bot) {
@@ -127,6 +138,7 @@ public class GameControllerStatic {
 
     /**
      * Sets whether a new League is to be created when the game starts or not.
+     *
      * @param createLeagueOn true if a new League is to be created, false otherwise
      */
     public void setCreateLeagueOn(boolean createLeagueOn) {
@@ -135,8 +147,9 @@ public class GameControllerStatic {
 
     /**
      * Saves the player's Trainer object to a file.
+     *
      * @throws FileNotFoundException if the file cannot be found
-     * @throws IOException if there is an error while saving the file
+     * @throws IOException           if there is an error while saving the file
      */
     public static void Save() throws FileNotFoundException, IOException {
         ObjectOutputStream oos =  new ObjectOutputStream(new FileOutputStream("SaveTrainer1")) ;

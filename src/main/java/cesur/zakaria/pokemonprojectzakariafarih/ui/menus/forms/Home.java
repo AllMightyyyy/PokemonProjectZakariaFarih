@@ -73,6 +73,7 @@ public class Home extends JPanel {
 
     /**
      * Initializes the overlay for the home screen.
+     *
      * @param frame The JFrame to which the overlay is added.
      */
     public void initOverlay(JFrame frame) {
@@ -86,6 +87,7 @@ public class Home extends JPanel {
 
     /**
      * Plays the video at the specified index.
+     *
      * @param index The index of the video to play.
      */
     public void play(int index) {

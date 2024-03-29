@@ -42,14 +42,15 @@ public class MenuApp {
 
     /**
      * Constructs a new MenuApp with the specified primary stage.
+     *
      * @param primaryStage The primary stage of the application.
      */
     public MenuApp(Stage primaryStage) {
-        this.primaryStage = primaryStage;
+        MenuApp.primaryStage = primaryStage;
     }
 
     // Menu data
-    private static List<Pair<String, Runnable>> menuData = Arrays.asList(
+    private static final List<Pair<String, Runnable>> menuData = Arrays.asList(
             new Pair<String, Runnable>("Enter World", MenuApp::launchEnterWorld),
             new Pair<String, Runnable>("Fight", MenuApp::launchEnterFight),
             new Pair<String, Runnable>("Pokemon Center", MenuApp::launchPokemonCenter),
@@ -58,8 +59,8 @@ public class MenuApp {
             new Pair<String, Runnable>("Exit to Desktop", Platform::exit)
     );
 
-    private static Pane root = new Pane();
-    private static VBox menuBox = new VBox(-5);
+    private static final Pane root = new Pane();
+    private static final VBox menuBox = new VBox(-5);
     private static Line line;
 
     /**
@@ -145,11 +146,12 @@ public class MenuApp {
 
     /**
      * Switches to the main menu.
+     *
      * @param stage The primary stage of the application.
      */
     public static void switchToMainmenu(Stage stage) {
         MenuApp menuApp = new MenuApp(stage); // Create an instance passing the stage
-        Scene scene = new Scene(menuApp.createContent(), WIDTH, HEIGHT);
+        Scene scene = new Scene(createContent(), WIDTH, HEIGHT);
         stage.setScene(scene);
         stage.setTitle("Pokemon App - Made by Zakaria Farih");
         Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();

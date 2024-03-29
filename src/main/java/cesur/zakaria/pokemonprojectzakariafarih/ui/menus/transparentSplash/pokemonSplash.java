@@ -32,8 +32,10 @@ public class pokemonSplash {
 
         return root;
     }
+
     /**
      * Switches to the Pokemon splash screen.
+     *
      * @param stage The stage to display the splash screen on.
      */
     public static void switchToPokSplash(Stage stage) {

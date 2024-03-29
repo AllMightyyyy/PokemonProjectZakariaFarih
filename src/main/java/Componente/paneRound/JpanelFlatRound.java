@@ -7,8 +7,14 @@ import com.formdev.flatlaf.util.UIScale;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * The type Jpanel flat round.
+ */
 public class JpanelFlatRound extends JPanel {
 
+    /**
+     * Instantiates a new Jpanel flat round.
+     */
     public JpanelFlatRound() {
         init();
     }
@@ -17,8 +23,7 @@ public class JpanelFlatRound extends JPanel {
         setOpaque(false);
         //setLayout(new BorderLayout());
         //+ "border:5,5,5,5;"
-        putClientProperty(FlatClientProperties.STYLE, ""
-                + "background:lighten(@background,3%);"
+        putClientProperty(FlatClientProperties.STYLE, "background:lighten(@background,3%);"
                 + "[light]border:0,0,0,0,shade(@background,15%),,20;"
                 + "[dark]border:0,0,0,0,tint(@background,15%),,20");
     }

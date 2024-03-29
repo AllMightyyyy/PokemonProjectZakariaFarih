@@ -5,29 +5,57 @@ import java.awt.*;
 import java.awt.geom.Point2D;
 import java.awt.geom.RoundRectangle2D;
 
+/**
+ * The type Image box radial.
+ */
 public class ImageBoxRadial extends JLayeredPane {
 
     private Image imagen;
     private Color colorRadial;
 
+    /**
+     * Sets imagen.
+     *
+     * @param imagen the imagen
+     */
     public void setImagen(Image imagen) {
         this.imagen = imagen;
         repaint();
     }
 
+    /**
+     * Gets color radial.
+     *
+     * @return the color radial
+     */
     public Color getColorRadial() {
         return colorRadial;
     }
 
+    /**
+     * Sets color radial.
+     *
+     * @param colorRadial the color radial
+     */
     public void setColorRadial(Color colorRadial) {
         this.colorRadial = colorRadial;
         repaint();
     }
 
+    /**
+     * Is selected boolean.
+     *
+     * @return the boolean
+     */
     public boolean isSelected() {
         return selected;
     }
 
+    /**
+     * Sets selected.
+     *
+     * @param selected the selected
+     */
     public void setSelected(boolean selected) {
         this.selected = selected;
         repaint();
@@ -95,7 +123,10 @@ public class ImageBoxRadial extends JLayeredPane {
         return new RadialGradient(colors, dist, center, radius);
     }
 
-    // Método para establecer un cursor personalizado
+    /**
+     * Sets custom cursor.
+     */
+// Método para establecer un cursor personalizado
     public void setCustomCursor() {
         Cursor customCursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR); // Ejemplo de cursor personalizado
         setCursor(customCursor);
@@ -108,6 +139,14 @@ public class ImageBoxRadial extends JLayeredPane {
         private final Point2D center;
         private final float radius;
 
+        /**
+         * Instantiates a new Radial gradient.
+         *
+         * @param colors the colors
+         * @param dist   the dist
+         * @param center the center
+         * @param radius the radius
+         */
         public RadialGradient(Color[] colors, float[] dist, Point2D center, float radius) {
             this.colors = colors;
             this.dist = dist;
@@ -115,6 +154,11 @@ public class ImageBoxRadial extends JLayeredPane {
             this.radius = radius;
         }
 
+        /**
+         * Gets gradient paint.
+         *
+         * @return the gradient paint
+         */
         public RadialGradientPaint getGradientPaint() {
             return new RadialGradientPaint(center, radius, dist, colors);
         }

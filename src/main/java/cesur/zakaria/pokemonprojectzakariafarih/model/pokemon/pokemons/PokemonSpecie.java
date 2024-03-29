@@ -16,17 +16,17 @@ public class PokemonSpecie implements Serializable {
 	private final Size size;
 	private final String imagePath;
 
-	/**
-	 * Constructs a new PokemonSpecie with the specified attributes.
-	 *
-	 * @param nbPokemon    The number of the Pokemon species.
-	 * @param namePokemon  The name of the Pokemon species.
-	 * @param enumPokemonTypes The types of the Pokemon species.
-	 * @param height       The height of the Pokemon species.
-	 * @param weight       The weight of the Pokemon species.
-	 * @param imagePath    The path to the image of the Pokemon species.
-	 */
-	public PokemonSpecie(int nbPokemon, String namePokemon, PokemonType enumPokemonTypes, double height, double weight,
+    /**
+     * Constructs a new PokemonSpecie with the specified attributes.
+     *
+     * @param nbPokemon        The number of the Pokemon species.
+     * @param namePokemon      The name of the Pokemon species.
+     * @param enumPokemonTypes The types of the Pokemon species.
+     * @param height           The height of the Pokemon species.
+     * @param weight           The weight of the Pokemon species.
+     * @param imagePath        The path to the image of the Pokemon species.
+     */
+    public PokemonSpecie(int nbPokemon, String namePokemon, PokemonType enumPokemonTypes, double height, double weight,
 						 String imagePath) {
 		this.nbPokemon = nbPokemon;
 		this.namePokemon = Objects.requireNonNull(namePokemon);
@@ -35,48 +35,48 @@ public class PokemonSpecie implements Serializable {
 		this.imagePath = Objects.requireNonNull(imagePath);
 	}
 
-	/**
-	 * Retrieves the number of the Pokemon species.
-	 *
-	 * @return The number of the Pokemon species.
-	 */
-	public int getNbPokemon() {
+    /**
+     * Retrieves the number of the Pokemon species.
+     *
+     * @return The number of the Pokemon species.
+     */
+    public int getNbPokemon() {
 		return nbPokemon;
 	}
 
-	/**
-	 * Retrieves the name of the Pokemon species.
-	 *
-	 * @return The name of the Pokemon species.
-	 */
-	public String getNamePokemon() {
+    /**
+     * Retrieves the name of the Pokemon species.
+     *
+     * @return The name of the Pokemon species.
+     */
+    public String getNamePokemon() {
 		return namePokemon;
 	}
 
-	/**
-	 * Retrieves the types of the Pokemon species.
-	 *
-	 * @return The types of the Pokemon species.
-	 */
-	public PokemonType getTypes() {
+    /**
+     * Retrieves the types of the Pokemon species.
+     *
+     * @return The types of the Pokemon species.
+     */
+    public PokemonType getTypes() {
 		return types;
 	}
 
-	/**
-	 * Retrieves the path to the image of the Pokemon species.
-	 *
-	 * @return The path to the image of the Pokemon species.
-	 */
-	public String getImagePath() {
+    /**
+     * Retrieves the path to the image of the Pokemon species.
+     *
+     * @return The path to the image of the Pokemon species.
+     */
+    public String getImagePath() {
 		return imagePath;
 	}
 
-	/**
-	 * Retrieves the size of the Pokemon species.
-	 *
-	 * @return The size of the Pokemon species.
-	 */
-	public Size getSize() {
+    /**
+     * Retrieves the size of the Pokemon species.
+     *
+     * @return The size of the Pokemon species.
+     */
+    public Size getSize() {
 		return size;
 	}
 

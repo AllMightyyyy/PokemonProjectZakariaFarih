@@ -5,10 +5,13 @@ import cesur.zakaria.pokemonprojectzakariafarih.pokedex.util.Validaciones;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.github.oscar0812.pokeapi.models.pokemon.Pokemon;
 import com.github.oscar0812.pokeapi.models.pokemon.PokemonStat;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
+import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -16,12 +19,6 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.imageio.ImageIO;
-import javax.swing.JLabel;
-import javax.swing.JProgressBar;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.StyledDocument;
 
 /**
  * The PaneDetalles class represents a panel containing details about a Pokemon.
@@ -34,9 +31,10 @@ public class PaneDetalles extends javax.swing.JPanel {
 
     /**
      * Creates new form PaneDetalles.
-     * @param pokemon The Pokemon object.
+     *
+     * @param pokemon     The Pokemon object.
      * @param descripcion The description of the Pokemon.
-     * @param rgbFondo The background color.
+     * @param rgbFondo    The background color.
      */
     public PaneDetalles(Pokemon pokemon, String descripcion, Color rgbFondo) {
         initComponents();

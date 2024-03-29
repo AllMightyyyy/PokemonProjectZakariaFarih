@@ -17,13 +17,14 @@ import java.util.Objects;
  * Represents a menu item in the main menu.
  */
 public class MenuItem extends Pane {
-    private Text text;
+    private final Text text;
 
-    private Effect shadow = new DropShadow(5, Color.BLACK);
-    private Effect blur = new BoxBlur(1, 1, 3);
+    private final Effect shadow = new DropShadow(5, Color.BLACK);
+    private final Effect blur = new BoxBlur(1, 1, 3);
 
     /**
      * Constructs a MenuItem with the specified name.
+     *
      * @param name The name of the menu item.
      */
     public MenuItem(String name) {
@@ -60,6 +61,7 @@ public class MenuItem extends Pane {
 
     /**
      * Sets the action to be performed when the menu item is clicked.
+     *
      * @param action The action to be performed.
      */
     public void setOnAction(Runnable action) {

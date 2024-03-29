@@ -7,11 +7,9 @@ public class MethodUtil {
 
     /**
      * Checks the strength of a password.
+     *
      * @param password The password to check.
-     * @return An integer representing the password strength:
-     *         - 1: Weak
-     *         - 2: Moderate
-     *         - 3: Strong
+     * @return An integer representing the password strength:         - 1: Weak         - 2: Moderate         - 3: Strong
      */
     public static int checkPasswordStrength(String password) {
         int score = 0;

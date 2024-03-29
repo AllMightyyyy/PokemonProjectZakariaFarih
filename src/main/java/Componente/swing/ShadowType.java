@@ -1,5 +1,35 @@
 package Componente.swing;
 
+/**
+ * The enum Shadow type.
+ */
 public enum ShadowType {
-    CENTER, TOP_RIGHT, TOP_LEFT, BOT_RIGHT, BOT_LEFT, BOT, TOP
+    /**
+     * Center shadow type.
+     */
+    CENTER,
+    /**
+     * Top right shadow type.
+     */
+    TOP_RIGHT,
+    /**
+     * Top left shadow type.
+     */
+    TOP_LEFT,
+    /**
+     * Bot right shadow type.
+     */
+    BOT_RIGHT,
+    /**
+     * Bot left shadow type.
+     */
+    BOT_LEFT,
+    /**
+     * Bot shadow type.
+     */
+    BOT,
+    /**
+     * Top shadow type.
+     */
+    TOP
 }

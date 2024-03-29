@@ -46,45 +46,45 @@ public class Capacity implements Serializable {
 		maxPowerPoint = powerPoint;
 	}
 
-	/**
-	 * Retrieves the type of the capacity.
-	 *
-	 * @return The type of the capacity.
-	 */
-	public EnumPokemonType getType() {
+    /**
+     * Retrieves the type of the capacity.
+     *
+     * @return The type of the capacity.
+     */
+    public EnumPokemonType getType() {
 		return type;
 	}
 
-	/**
-	 * Retrieves the power of the capacity.
-	 *
-	 * @return The power of the capacity.
-	 */
-	public int getPower() {
+    /**
+     * Retrieves the power of the capacity.
+     *
+     * @return The power of the capacity.
+     */
+    public int getPower() {
 		return power;
 	}
 
-	/**
-	 * Retrieves the name of the capacity.
-	 *
-	 * @return The name of the capacity.
-	 */
-	public String getName() {
+    /**
+     * Retrieves the name of the capacity.
+     *
+     * @return The name of the capacity.
+     */
+    public String getName() {
 		return name;
 	}
 
-	/**
-	 * Creates a new instance of Capacity with the specified attributes and adds it to the name map.
-	 *
-	 * @param name             The name of the capacity.
-	 * @param power            The power of the capacity.
-	 * @param powerPoint       The current power points of the capacity.
-	 * @param accuracy         The accuracy of the capacity.
-	 * @param categoryCapacity The category of the capacity.
-	 * @param type             The type of the capacity.
-	 * @return The created Capacity instance.
-	 */
-	public static Capacity instance(String name, int power, int powerPoint, int accuracy, CategoryCapacity categoryCapacity, EnumPokemonType type) {
+    /**
+     * Creates a new instance of Capacity with the specified attributes and adds it to the name map.
+     *
+     * @param name             The name of the capacity.
+     * @param power            The power of the capacity.
+     * @param powerPoint       The current power points of the capacity.
+     * @param accuracy         The accuracy of the capacity.
+     * @param categoryCapacity The category of the capacity.
+     * @param type             The type of the capacity.
+     * @return The created Capacity instance.
+     */
+    public static Capacity instance(String name, int power, int powerPoint, int accuracy, CategoryCapacity categoryCapacity, EnumPokemonType type) {
 		if (nameMap.containsKey(name)) {
 			throw new IllegalArgumentException("The capacity name is already taken.");
 		}
@@ -93,37 +93,37 @@ public class Capacity implements Serializable {
 		return capacity;
 	}
 
-	/**
-	 * Indicates whether the capacity is usable (has remaining power points).
-	 *
-	 * @return true if the capacity is usable; false otherwise.
-	 */
-	public boolean isUsable() {
+    /**
+     * Indicates whether the capacity is usable (has remaining power points).
+     *
+     * @return true if the capacity is usable; false otherwise.
+     */
+    public boolean isUsable() {
 		return powerPoint > 0;
 	}
 
-	/**
-	 * Retrieves the current power points of the capacity.
-	 *
-	 * @return The current power points of the capacity.
-	 */
-	public int getPowerPoint() {
+    /**
+     * Retrieves the current power points of the capacity.
+     *
+     * @return The current power points of the capacity.
+     */
+    public int getPowerPoint() {
 		return powerPoint;
 	}
 
-	/**
-	 * Retrieves the maximum power points of the capacity.
-	 *
-	 * @return The maximum power points of the capacity.
-	 */
-	public int getMaxPowerPoint() {
+    /**
+     * Retrieves the maximum power points of the capacity.
+     *
+     * @return The maximum power points of the capacity.
+     */
+    public int getMaxPowerPoint() {
 		return maxPowerPoint;
 	}
 
-	/**
-	 * Subtracts one PowerPoint from the capacity.
-	 */
-	public void subtractPP() {
+    /**
+     * Subtracts one PowerPoint from the capacity.
+     */
+    public void subtractPP() {
 		if (powerPoint > 0) {
 			powerPoint--;
 		}

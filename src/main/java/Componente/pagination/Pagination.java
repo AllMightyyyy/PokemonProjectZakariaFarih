@@ -5,12 +5,25 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Pagination.
+ */
 public class Pagination extends JPanel {
 
+    /**
+     * Gets pagination item render.
+     *
+     * @return the pagination item render
+     */
     public PaginationItemRender getPaginationItemRender() {
         return paginationItemRender;
     }
 
+    /**
+     * Sets pagination item render.
+     *
+     * @param paginationItemRender the pagination item render
+     */
     public void setPaginationItemRender(PaginationItemRender paginationItemRender) {
         this.paginationItemRender = paginationItemRender;
         changePage(page.getCurrent(), page.getTotalPage());
@@ -20,6 +33,9 @@ public class Pagination extends JPanel {
     private final List<EventPagination> events = new ArrayList<>();
     private Page page;
 
+    /**
+     * Instantiates a new Pagination.
+     */
     public Pagination() {
         init();
     }
@@ -41,10 +57,21 @@ public class Pagination extends JPanel {
         return (item instanceof Page.BreakLabel || Integer.valueOf(item.toString()) != page.getCurrent());
     }
 
+    /**
+     * Add event pagination.
+     *
+     * @param event the event
+     */
     public void addEventPagination(EventPagination event) {
         events.add(event);
     }
 
+    /**
+     * Sets pagegination.
+     *
+     * @param current   the current
+     * @param totalPage the total page
+     */
     public void setPagegination(int current, int totalPage) {
         if (current > totalPage) {
             current = totalPage;
@@ -75,8 +102,7 @@ public class Pagination extends JPanel {
             }
             cmd.addActionListener((ActionEvent e) -> {
                 if (!cmd.isSelected() && item != null) {
-                    if (item instanceof Page.BreakLabel) {
-                        Page.BreakLabel pb = (Page.BreakLabel) item;
+                    if (item instanceof Page.BreakLabel pb) {
                         setPagegination(pb.getPage(), totalPage);
                     } else {
                         setPagegination(Integer.valueOf(item.toString()), totalPage);

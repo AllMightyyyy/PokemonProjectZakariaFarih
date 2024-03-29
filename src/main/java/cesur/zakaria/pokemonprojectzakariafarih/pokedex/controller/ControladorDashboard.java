@@ -1,8 +1,9 @@
 package cesur.zakaria.pokemonprojectzakariafarih.pokedex.controller;
 
-import cesur.zakaria.pokemonprojectzakariafarih.pokedex.view.PaneInicio;
 import cesur.zakaria.pokemonprojectzakariafarih.pokedex.view.Dashboard;
-import java.awt.Component;
+import cesur.zakaria.pokemonprojectzakariafarih.pokedex.view.PaneInicio;
+
+import java.awt.*;
 
 /**
  * The ControladorDashboard class controls the Dashboard view.

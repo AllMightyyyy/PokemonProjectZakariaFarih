@@ -118,12 +118,30 @@ public class PaneInicio extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    /**
+     * The Bar datos.
+     */
+// Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JProgressBar barDatos;
+    /**
+     * The Box item.
+     */
     public javax.swing.JComboBox<String> boxItem;
+    /**
+     * The Contendor paginable.
+     */
     public raven.crazypanel.CrazyPanel contendorPaginable;
+    /**
+     * The Lbl check.
+     */
     public javax.swing.JLabel lblCheck;
+    /**
+     * The Pagination 1.
+     */
     public Componente.pagination.Pagination pagination1;
+    /**
+     * The Pn contenedor.
+     */
     public javax.swing.JPanel pnContenedor;
     // End of variables declaration//GEN-END:variables
 }
