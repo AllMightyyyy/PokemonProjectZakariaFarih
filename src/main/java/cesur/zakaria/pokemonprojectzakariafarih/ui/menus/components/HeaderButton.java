@@ -44,6 +44,6 @@ public class HeaderButton extends JButton {
     public void paint(Graphics g) {
         super.paint(g);
         int arc = UIScale.scale(20); // Scale the corner arc size
-        rippleEffect.reder(g, new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), arc, arc));
+        rippleEffect.render(g, new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), arc, arc));
     }
 }

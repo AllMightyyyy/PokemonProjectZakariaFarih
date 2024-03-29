@@ -1,3 +1,5 @@
+package cesur.zakaria.pokemonprojectzakariafarih.model.pokedex;
+
 import cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons.EnumPokemonType;
 import cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons.EnumSetPokemonType;
 import cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons.PokemonSpecie;

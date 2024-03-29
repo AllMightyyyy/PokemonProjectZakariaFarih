@@ -259,7 +259,7 @@ public class FightController {
     	        Duration.millis(1500),
     	        ae ->  {
     	        	mainDialog.setText("");
-    	        	capUsed.substractPP();
+    	        	capUsed.subtractPP();
     	        	boolean dead=fight.getNonCurrentTrainer().getPokemon().takeDmgCap(capUsed);
     	        	try {
 						printPokemon(fight.getNonCurrentTrainer().getPokemon(),fight.getFightPlan());

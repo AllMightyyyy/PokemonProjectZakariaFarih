@@ -1,3 +1,5 @@
+package cesur.zakaria.pokemonprojectzakariafarih.model.fight;
+
 import cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons.Pokemon;
 
 import java.io.Serializable;
