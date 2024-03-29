@@ -1,5 +1,6 @@
 package cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Random;
 
@@ -8,6 +9,7 @@ import java.util.Random;
  * including damage, defense, special damage, special defense, experience level, and hit points.
  */
 public class StatistiquePokemon implements Serializable {
+	@Serial
 	private static final long serialVersionUID = 1L;
 	private final int dmg;
 	private final int def;
@@ -105,10 +107,8 @@ public class StatistiquePokemon implements Serializable {
 			return false;
 		if (pvMax != other.pvMax)
 			return false;
-		if (xpLevel != other.xpLevel)
-			return false;
-		return true;
-	}
+        return xpLevel == other.xpLevel;
+    }
 
 	/**
 	 * Checks if the Pokémon has no hit points (HP).

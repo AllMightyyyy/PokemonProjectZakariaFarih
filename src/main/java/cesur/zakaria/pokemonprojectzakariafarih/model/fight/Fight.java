@@ -90,15 +90,12 @@ public class Fight {
 
 	/**
 	 * Switches the fight plan.
-	 *
-	 * @return The new fight plan.
 	 */
-	public int switchPlan() {
+	public void switchPlan() {
 		if (fightPlan == 0) {
 			fightPlan = 1;
-			return fightPlan;
+			return;
 		}
 		fightPlan = 0;
-		return fightPlan;
 	}
 }

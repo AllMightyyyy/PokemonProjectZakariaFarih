@@ -81,22 +81,6 @@ public class Pokemon {
     public Pokemon() {
     }
 
-    public int getBaseId() {
-        return baseId;
-    }
-
-    public void setBaseId(int baseId) {
-        this.baseId = baseId;
-    }
-
-    public int getFormId() {
-        return formId;
-    }
-
-    public void setFormId(int formId) {
-        this.formId = formId;
-    }
-
     public String getName() {
         return name;
     }
@@ -287,4 +271,11 @@ public class Pokemon {
     }
 
 
+    public void setBaseId(int baseId) {
+        this.baseId = baseId;
+    }
+
+    public void setFormId(int formId) {
+        this.formId = formId;
+    }
 }

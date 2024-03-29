@@ -5,7 +5,6 @@ import cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons.EnumSetPo
 import cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons.PokemonSpecie;
 import cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons.PokemonType;
 
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
@@ -17,7 +16,7 @@ import java.util.HashMap;
 public class Pokedex {
 
 	private static Pokedex pokedex;
-	private static final HashMap<Integer, PokemonSpecie> pokedexMap= new HashMap<Integer, PokemonSpecie>();
+	private static final HashMap<Integer, PokemonSpecie> pokedexMap= new HashMap<>();
 
 	/**
 	 * Retrieves the singleton instance of the Pokedex.
@@ -37,7 +36,7 @@ public class Pokedex {
 		}
 		pokedex = new Pokedex();
 
-		FileReader fReader = new FileReader(new File("CSV/pokedex.csv"));
+		FileReader fReader = new FileReader("CSV/pokedex.csv");
 
 		int i;
 		int nbLine=0;
@@ -64,15 +63,13 @@ public class Pokedex {
 						pokedexMap.put(specie.getNbPokemon(), specie);
 					}
 
-					lineBuilder=new StringBuilder();
-				}else {
+                }else {
 					nbLine++;
-					lineBuilder=new StringBuilder();
-				}
+                }
+                lineBuilder=new StringBuilder();
 
 
-
-			}
+            }
 			else {
 				lineBuilder.append(c);
 			}
@@ -95,7 +92,7 @@ public class Pokedex {
 		StringBuilder builder=new StringBuilder();
 		builder.append("Pokedex:\n");
 		for (PokemonSpecie pokemonSpecie : pokedexMap.values()) {
-			builder.append(pokemonSpecie+"\n");
+			builder.append(pokemonSpecie).append("\n");
 		}
 		return builder.toString();
 	}

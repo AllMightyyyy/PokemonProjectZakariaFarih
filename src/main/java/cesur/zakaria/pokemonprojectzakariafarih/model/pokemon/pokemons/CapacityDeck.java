@@ -1,5 +1,6 @@
 package cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -9,6 +10,7 @@ import java.util.Set;
  * The CapacityDeck class represents a deck of capacities categorized by Pokemon types.
  */
 public class CapacityDeck implements Serializable {
+	@Serial
 	private static final long serialVersionUID = 1L;
 	private final HashMap<EnumPokemonType, Set<Capacity>> hashMap = new HashMap<>();
 
@@ -38,12 +40,11 @@ public class CapacityDeck implements Serializable {
 	 *
 	 * @param key   The Pokemon type key.
 	 * @param value The capacity value.
-	 * @return The set of capacities associated with the key.
 	 */
-	public Set<Capacity> put(EnumPokemonType key, Capacity value) {
+	public void put(EnumPokemonType key, Capacity value) {
 		var x = new HashSet<Capacity>();
 		x.add(value);
-		return hashMap.put(key, x);
+		hashMap.put(key, x);
 	}
 
 	/**

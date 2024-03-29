@@ -1,6 +1,7 @@
 package cesur.zakaria.pokemonprojectzakariafarih.pokedex.controller;
 
-import Componente.pagination.PaginationItemRender;
+import Componente.cardSwing.PnCard;
+import Componente.pagination.style.PaginationItemRenderStyle1;
 import cesur.zakaria.pokemonprojectzakariafarih.pokedex.util.Validaciones;
 import cesur.zakaria.pokemonprojectzakariafarih.pokedex.util.WrapLayout;
 import cesur.zakaria.pokemonprojectzakariafarih.pokedex.view.PaneInicio;
@@ -10,15 +11,12 @@ import com.github.oscar0812.pokeapi.models.pokemon.PokemonSpecies;
 import com.github.oscar0812.pokeapi.models.resources.NamedAPIResourceList;
 import com.github.oscar0812.pokeapi.models.utility.FlavorText;
 import com.github.oscar0812.pokeapi.models.utility.NamedAPIResource;
-import java.awt.Component;
-import java.awt.FlowLayout;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-import javax.swing.SwingUtilities;
-import javax.swing.SwingWorker;
-import Componente.pagination.style.PaginationItemRenderStyle1;
-import Componente.cardSwing.PnCard;
 
 /**
  * The ControladorInicio class controls the starting pane of the Pokedex.
@@ -47,10 +45,8 @@ public class ControladorInicio {
     }
 
     private void pagina() {
-        paneInicio.pagination1.setPaginationItemRender((PaginationItemRender) new PaginationItemRenderStyle1());
-        paneInicio.pagination1.addEventPagination((int page) -> {
-            cargarDatosPagina(page);
-        });
+        paneInicio.pagination1.setPaginationItemRender(new PaginationItemRenderStyle1());
+        paneInicio.pagination1.addEventPagination(this::cargarDatosPagina);
     }
 
     private class BoxCantidadDatosListener implements ActionListener {
@@ -102,11 +98,11 @@ public class ControladorInicio {
     private void listarPokemonSpecies(int limitDatos, int pagina) {
         paneInicio.pnContenedor.setLayout(new WrapLayout(FlowLayout.LEFT, 8, 8));
 
-        SwingWorker<Void, PnCard> worker = new SwingWorker<Void, PnCard>() {
+        SwingWorker<Void, PnCard> worker = new SwingWorker<>() {
             int totalCartas = 0;
 
             @Override
-            protected Void doInBackground() throws Exception {
+            protected Void doInBackground() {
 
                 paneInicio.pnContenedor.removeAll();
                 NamedAPIResourceList pokemonSpecies = Pokemon.getList(limitDatos, ((pagina - 1) * limitDatos));
@@ -123,9 +119,7 @@ public class ControladorInicio {
             @Override
             protected void process(List<PnCard> chunks) {
                 for (PnCard card : chunks) {
-                    SwingUtilities.invokeLater(() -> {
-                        paneInicio.pnContenedor.add(card);
-                    });
+                    SwingUtilities.invokeLater(() -> paneInicio.pnContenedor.add(card));
                     ++totalCartas;
                 }
                 paneInicio.barDatos.setValue(totalCartas);

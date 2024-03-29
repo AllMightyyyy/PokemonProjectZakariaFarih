@@ -1,19 +1,17 @@
 package cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Serializable;
+import java.io.*;
 import java.util.*;
 
 /**
  * The PokemonType class represents the types of a Pokemon.
  */
 public class PokemonType implements Iterator<EnumPokemonType>, Serializable {
+	@Serial
 	private static final long serialVersionUID = 1L;
-	private EnumSetPokemonType enumPokemonTypes = null;
-	private Map<EnumPokemonType, Double> typeRatio = new EnumMap<>(EnumPokemonType.class);
-	private static Map<EnumSetPokemonType, PokemonType> arrayToType = new HashMap<>();
+	private final EnumSetPokemonType enumPokemonTypes;
+	private final Map<EnumPokemonType, Double> typeRatio = new EnumMap<>(EnumPokemonType.class);
+	private static final Map<EnumSetPokemonType, PokemonType> arrayToType = new HashMap<>();
 
 	/**
 	 * Constructs a new PokemonType with the specified EnumSetPokemonType.
@@ -41,7 +39,7 @@ public class PokemonType implements Iterator<EnumPokemonType>, Serializable {
 	 */
 	public static void generatePokemonType() throws IOException {
 		ArrayList<EnumPokemonType> enumPokemonTypesList = new ArrayList<>();
-		FileReader fReader = new FileReader(new File("CSV/grid_types.csv"));
+		FileReader fReader = new FileReader("CSV/grid_types.csv");
 		int i;
 		String line;
 		StringBuilder lineBuilder = new StringBuilder();
@@ -98,7 +96,7 @@ public class PokemonType implements Iterator<EnumPokemonType>, Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((enumPokemonTypes == null) ? 0 : enumPokemonTypes.hashCode());
-		result = prime * result + ((typeRatio == null) ? 0 : typeRatio.hashCode());
+		result = prime * result + typeRatio.hashCode();
 		return result;
 	}
 
@@ -122,13 +120,8 @@ public class PokemonType implements Iterator<EnumPokemonType>, Serializable {
 				return false;
 		} else if (!enumPokemonTypes.equals(other.enumPokemonTypes))
 			return false;
-		if (typeRatio == null) {
-			if (other.typeRatio != null)
-				return false;
-		} else if (!typeRatio.equals(other.typeRatio))
-			return false;
-		return true;
-	}
+        return typeRatio.equals(other.typeRatio);
+    }
 
 	/**
 	 * Checks if there is a next EnumPokemonType.

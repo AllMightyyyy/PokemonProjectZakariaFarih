@@ -1,11 +1,5 @@
 package cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-
-
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -36,7 +30,7 @@ public class CapacitiesHelper {
         }
         capacityDeck = new CapacityDeck();
 
-        FileReader fReader = new FileReader(new File("CSV/moves.csv"));
+        FileReader fReader = new FileReader("CSV/moves.csv");
         int i;
         String line;
         StringBuilder lineBuilder= new StringBuilder();
@@ -51,13 +45,13 @@ public class CapacitiesHelper {
                 try {
                     type= EnumPokemonType.fromString(tab[2]);
 
-                    cap=Capacity.instance(tab[1], !tab[3].equals("")?Integer.parseInt(tab[3]):0, !tab[4].equals("")?Integer.parseInt(tab[4]):0, !tab[5].equals("")?Integer.parseInt(tab[5]):0, CategoryCapacity.fromString(tab[6]),type);
+                    cap=Capacity.instance(tab[1], !tab[3].isEmpty() ?Integer.parseInt(tab[3]):0, !tab[4].isEmpty() ?Integer.parseInt(tab[4]):0, !tab[5].isEmpty() ?Integer.parseInt(tab[5]):0, CategoryCapacity.fromString(tab[6]),type);
                     if(capacityDeck.containsKey(type)) {
                         capacityDeck.add(type,cap);
                     }else {
                         capacityDeck.put(type, cap);
                     }
-                } catch (Exception e) {
+                } catch (Exception ignored) {
 
                 }
 

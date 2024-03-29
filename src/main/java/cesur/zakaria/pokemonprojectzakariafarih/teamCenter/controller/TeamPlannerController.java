@@ -25,10 +25,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -37,15 +34,13 @@ public class TeamPlannerController {
     // FXML elements
     @FXML private TilePane pokemonTilePane;
     @FXML private HBox teamRow1, teamRow2;
-    @FXML private Button randomizeTeamButton;
-    @FXML private Button showTeamAnalysis;
     @FXML private ChoiceBox<String> typeFilterChoiceBox;
     @FXML private ChoiceBox<String> generationFilterChoiceBox;
     @FXML private TextField searchTextField;
     @FXML private Button reset;
 
     // Other class fields
-    private List<AnchorPane> teamSlots = new ArrayList<>();
+    private final List<AnchorPane> teamSlots = new ArrayList<>();
     private static final String TYPES_COVERAGE_PATH = "/cesur/zakaria/pokemonprojectzakariafarih/images/typesCoverage/";
     private List<Pokemon> selectedPokemons = new ArrayList<>();
     private JSONObject typeData;
@@ -55,7 +50,7 @@ public class TeamPlannerController {
      * Loads Pokémon data, initializes filters, and sets up event handlers.
      */
     public void initialize() {
-        generateTeamPlaceholders(6);
+        generateTeamPlaceholders();
         try {
             loadTypeData();
             loadPokemonsIntoTilePane();
@@ -112,15 +107,15 @@ public class TeamPlannerController {
 
     /**
      * Generates placeholders for team slots in the UI.
-     * @param numberOfSlots Number of team slots to generate.
      */
-    private void generateTeamPlaceholders(int numberOfSlots) {
+    private void generateTeamPlaceholders() {
         // Default image URLs
         URL defaultPokemonImageUrl = getClass().getResource("/cesur/zakaria/pokemonprojectzakariafarih/images/pokemon/0000_000_uk_n.png");
         URL defaultTypeImageUrl = getClass().getResource("/cesur/zakaria/pokemonprojectzakariafarih/images/types/normal.png");
 
-        for (int i = 0; i < numberOfSlots; i++) {
+        for (int i = 0; i < 6; i++) {
             // Create ImageView for Pokémon image
+            assert defaultPokemonImageUrl != null;
             ImageView pokemonImageView = new ImageView(new Image(defaultPokemonImageUrl.toExternalForm()));
             pokemonImageView.setFitHeight(150);
             pokemonImageView.setFitWidth(150);
@@ -134,6 +129,7 @@ public class TeamPlannerController {
             typeImagesBox.setLayoutY(pokemonImageView.getLayoutY() - 30);
 
             // Add default type image to typeImagesBox
+            assert defaultTypeImageUrl != null;
             ImageView defaultTypeImageView = new ImageView(new Image(defaultTypeImageUrl.toExternalForm()));
             defaultTypeImageView.setFitHeight(15);
             defaultTypeImageView.setFitWidth(15);
@@ -187,14 +183,13 @@ public class TeamPlannerController {
      */
     private void handleAddPokemon(Pokemon selectedPokemon) {
         if (selectedPokemons.size() >= 6) {
-            showAlert("Team Full", "Your team is full. Cannot add more Pokémon.");
+            showAlert();
             return;
         }
 
         boolean slotFound = false;
 
-        for (int i = 0; i < teamSlots.size(); i++) {
-            AnchorPane slot = teamSlots.get(i);
+        for (AnchorPane slot : teamSlots) {
             Label pokemonLabel = (Label) slot.getChildren().get(2);
 
             // Check if slot is empty
@@ -212,21 +207,19 @@ public class TeamPlannerController {
                 copyPokemonData(teamSlots.get(i + 1), teamSlots.get(i));
             }
             // Add new Pokémon to last slot
-            updateSlotWithPokemon(teamSlots.get(teamSlots.size() - 1), selectedPokemon);
+            updateSlotWithPokemon(teamSlots.getLast(), selectedPokemon);
             selectedPokemons.add(selectedPokemon);
         }
     }
 
     /**
      * Displays an alert dialog with the specified title and message.
-     * @param title The title of the alert dialog.
-     * @param message The message to display in the alert dialog.
      */
-    private void showAlert(String title, String message) {
+    private void showAlert() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
+        alert.setTitle("Team Full");
         alert.setHeaderText(null);
-        alert.setContentText(message);
+        alert.setContentText("Your team is full. Cannot add more Pokémon.");
         alert.showAndWait();
     }
 
@@ -296,7 +289,7 @@ public class TeamPlannerController {
         teamSlots.forEach(slot -> {
             Label label = (Label) slot.getChildren().get(2);
             if (pokemonToDelete.getName().equals(label.getText())) {
-                ImageView imageView = (ImageView) slot.getChildren().get(0);
+                ImageView imageView = (ImageView) slot.getChildren().getFirst();
                 imageView.setImage(null); // Clear image
                 label.setText("EMPTY SLOT"); // Reset label
 
@@ -491,11 +484,11 @@ public class TeamPlannerController {
                 JSONArray weakToArray = typeDataObject.optJSONArray("weak2");
                 JSONArray resistsArray = typeDataObject.optJSONArray("resists");
 
-                if (immuneToArray != null && isInArray(immuneToArray, typeName)) {
+                if (isInArray(immuneToArray, typeName)) {
                     return "0X"; // Immune
-                } else if (weakToArray != null && isInArray(weakToArray, typeName)) {
+                } else if (isInArray(weakToArray, typeName)) {
                     effectiveness = "1/2X"; // Weak to
-                } else if (resistsArray != null && isInArray(resistsArray, typeName)) {
+                } else if (isInArray(resistsArray, typeName)) {
                     if (effectiveness.isEmpty()) {
                         effectiveness = "X2"; // Resists
                     }
@@ -523,9 +516,8 @@ public class TeamPlannerController {
     }
     private ImageView createTypeImageView(String type) {
         String imagePath = TYPES_COVERAGE_PATH + type + ".png";
-        Image image = new Image(getClass().getResourceAsStream(imagePath));
-        ImageView imageView = new ImageView(image);
-        return imageView;
+        Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream(imagePath)));
+        return new ImageView(image);
     }
 
     /**
@@ -599,38 +591,17 @@ public class TeamPlannerController {
         return selectedPokemons;
     }
 
-    /**
-     * Loads type data from the specified file path.
-     * @param filePath The file path from which to load type data.
-     * @return The JSON object containing type data.
-     * @throws IOException If an I/O error occurs.
-     * @throws JSONException If there is an error parsing JSON data.
-     */
-    private JSONObject loadTypeDataFromFile(String filePath) throws IOException, JSONException {
-        String jsonData = new String(Files.readAllBytes(Paths.get(filePath)));
-        return new JSONObject(jsonData);
-    }
-
     private ImageView createEffectivenessImageView(String effectiveness) {
-        String imagePath;
-        switch (effectiveness) {
-            case "0X":
-                imagePath = "/cesur/zakaria/pokemonprojectzakariafarih/images/efficacy/X0.png";
-                break;
-            case "1/2X":
-                imagePath = "/cesur/zakaria/pokemonprojectzakariafarih/images/efficacy/1-2.png";
-                break;
-            case "X2":
-                imagePath = "/cesur/zakaria/pokemonprojectzakariafarih/images/efficacy/X2.png";
-                break;
-            default:
+        String imagePath = switch (effectiveness) {
+            case "0X" -> "/cesur/zakaria/pokemonprojectzakariafarih/images/efficacy/X0.png";
+            case "1/2X" -> "/cesur/zakaria/pokemonprojectzakariafarih/images/efficacy/1-2.png";
+            case "X2" -> "/cesur/zakaria/pokemonprojectzakariafarih/images/efficacy/X2.png";
+            default ->
                 // Default to an empty image or a placeholder image
-                imagePath = "/cesur/zakaria/pokemonprojectzakariafarih/images/efficacy/Empty.png"; // Or provide a path to a placeholder image
-                break;
-        }
-        Image image = new Image(getClass().getResourceAsStream(imagePath));
-        ImageView imageView = new ImageView(image);
-        return imageView;
+                    "/cesur/zakaria/pokemonprojectzakariafarih/images/efficacy/Empty.png"; // Or provide a path to a placeholder image
+        };
+        Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream(imagePath)));
+        return new ImageView(image);
     }
 
     /**
@@ -709,7 +680,7 @@ public class TeamPlannerController {
 
         List<Pokemon> filteredPokemons = filteredStream.collect(Collectors.toList());
 
-        // Update TilePane with filtered Pokemons
+        // Update TilePane with filtered Pokémon
         updatePokemonTilePane(filteredPokemons);
     }
 

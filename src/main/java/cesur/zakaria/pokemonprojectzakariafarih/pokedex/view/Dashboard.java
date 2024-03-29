@@ -7,14 +7,12 @@ import cesur.zakaria.pokemonprojectzakariafarih.pokedex.controller.ControladorDa
  */
 public class Dashboard extends javax.swing.JFrame {
 
-    private final ControladorDashboard controladorDashboard;
-
     /**
      * Creates new form Dashboard.
      */
     public Dashboard() {
         initComponents();
-        controladorDashboard = new ControladorDashboard(this);
+        ControladorDashboard controladorDashboard = new ControladorDashboard(this);
         controladorDashboard.iniciar();
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
@@ -22,11 +20,10 @@ public class Dashboard extends javax.swing.JFrame {
     /**
      * Initializes the components of the dashboard frame.
      */
-    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jpanelRound1 = new Componente.paneRound.JpanelRound();
+        Componente.paneRound.JpanelRound jpanelRound1 = new Componente.paneRound.JpanelRound();
         body = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -69,6 +66,5 @@ public class Dashboard extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JPanel body;
-    private Componente.paneRound.JpanelRound jpanelRound1;
     // End of variables declaration//GEN-END:variables
 }

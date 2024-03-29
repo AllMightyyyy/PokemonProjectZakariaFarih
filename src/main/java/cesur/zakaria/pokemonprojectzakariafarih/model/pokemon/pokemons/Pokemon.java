@@ -1,12 +1,14 @@
 package cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Arrays;
 
 /**
- * The Pokemon class represents a Pokémon entity.
+ * The Pokemon class represents a Pokemon entity.
  */
 public class Pokemon implements Serializable {
+	@Serial
 	private static final long serialVersionUID = 1L;
 	private final PokemonSpecie specie;
 	private final Capacity[] capacities;
@@ -174,10 +176,7 @@ public class Pokemon implements Serializable {
 		} else if (!specie.equals(other.specie))
 			return false;
 		if (stat == null) {
-			if (other.stat != null)
-				return false;
-		} else if (!stat.equals(other.stat))
-			return false;
-		return true;
-	}
+            return other.stat == null;
+		} else return stat.equals(other.stat);
+    }
 }

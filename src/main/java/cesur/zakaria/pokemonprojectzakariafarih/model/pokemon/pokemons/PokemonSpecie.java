@@ -1,5 +1,6 @@
 package cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -7,6 +8,7 @@ import java.util.Objects;
  * The PokemonSpecie class represents a species of Pokemon.
  */
 public class PokemonSpecie implements Serializable {
+	@Serial
 	private static final long serialVersionUID = 1L;
 	private final int nbPokemon;
 	private final String namePokemon;
@@ -98,11 +100,11 @@ public class PokemonSpecie implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((imagePath == null) ? 0 : imagePath.hashCode());
-		result = prime * result + ((namePokemon == null) ? 0 : namePokemon.hashCode());
+		result = prime * result + imagePath.hashCode();
+		result = prime * result + namePokemon.hashCode();
 		result = prime * result + nbPokemon;
-		result = prime * result + ((size == null) ? 0 : size.hashCode());
-		result = prime * result + ((types == null) ? 0 : types.hashCode());
+		result = prime * result + size.hashCode();
+		result = prime * result + types.hashCode();
 		return result;
 	}
 
@@ -121,28 +123,14 @@ public class PokemonSpecie implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		PokemonSpecie other = (PokemonSpecie) obj;
-		if (imagePath == null) {
-			if (other.imagePath != null)
-				return false;
-		} else if (!imagePath.equals(other.imagePath))
-			return false;
-		if (namePokemon == null) {
-			if (other.namePokemon != null)
-				return false;
-		} else if (!namePokemon.equals(other.namePokemon))
-			return false;
+        if (!imagePath.equals(other.imagePath))
+            return false;
+        if (!namePokemon.equals(other.namePokemon))
+            return false;
 		if (nbPokemon != other.nbPokemon)
 			return false;
-		if (size == null) {
-			if (other.size != null)
-				return false;
-		} else if (!size.equals(other.size))
-			return false;
-		if (types == null) {
-			if (other.types != null)
-				return false;
-		} else if (!types.equals(other.types))
-			return false;
-		return true;
-	}
+        if (!size.equals(other.size))
+            return false;
+        return types.equals(other.types);
+    }
 }

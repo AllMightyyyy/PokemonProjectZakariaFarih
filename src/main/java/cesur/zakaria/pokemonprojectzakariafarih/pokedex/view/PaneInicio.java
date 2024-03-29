@@ -7,21 +7,18 @@ import cesur.zakaria.pokemonprojectzakariafarih.pokedex.controller.ControladorIn
  */
 public class PaneInicio extends javax.swing.JPanel {
 
-    private final ControladorInicio controladorInicio;
-
     /**
      * Creates new form PaneInicio.
      */
     public PaneInicio() {
         initComponents();
-        controladorInicio = new ControladorInicio(this);
+        ControladorInicio controladorInicio = new ControladorInicio(this);
         controladorInicio.iniciar();
     }
 
     /**
      * Initializes the components of the panel.
      */
-    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -29,10 +26,10 @@ public class PaneInicio extends javax.swing.JPanel {
         pagination1 = new Componente.pagination.Pagination();
         barDatos = new javax.swing.JProgressBar();
         lblCheck = new javax.swing.JLabel();
-        contenedorCartas = new raven.crazypanel.CrazyPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        raven.crazypanel.CrazyPanel contenedorCartas = new raven.crazypanel.CrazyPanel();
+        javax.swing.JScrollPane jScrollPane1 = new javax.swing.JScrollPane();
         pnContenedor = new javax.swing.JPanel();
-        contenedorControl = new raven.crazypanel.CrazyPanel();
+        raven.crazypanel.CrazyPanel contenedorControl = new raven.crazypanel.CrazyPanel();
         boxItem = new javax.swing.JComboBox<>();
 
         contendorPaginable.setFlatLafStyleComponent(new raven.crazypanel.FlatLafStyleComponent(
@@ -125,9 +122,6 @@ public class PaneInicio extends javax.swing.JPanel {
     public javax.swing.JProgressBar barDatos;
     public javax.swing.JComboBox<String> boxItem;
     public raven.crazypanel.CrazyPanel contendorPaginable;
-    private raven.crazypanel.CrazyPanel contenedorCartas;
-    private raven.crazypanel.CrazyPanel contenedorControl;
-    private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JLabel lblCheck;
     public Componente.pagination.Pagination pagination1;
     public javax.swing.JPanel pnContenedor;

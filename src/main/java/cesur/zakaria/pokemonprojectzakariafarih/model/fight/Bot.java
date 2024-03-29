@@ -29,14 +29,14 @@ public class Bot extends Trainer {
 	 * @return A Capacity representing the capacity chosen by the bot for the fight action.
 	 */
 	public Capacity fight() {
-		ArrayList<Capacity> usableCapacities = new ArrayList<Capacity>();
+		ArrayList<Capacity> usableCapacities = new ArrayList<>();
 		for (Capacity capacity : getPokemon().getCapacities()) {
 			if (capacity != null && capacity.isUsable()) {
 				usableCapacities.add(capacity);
 			}
 		}
 
-		if (usableCapacities.size() == 0) {
+		if (usableCapacities.isEmpty()) {
 			return null;
 		}
 
@@ -45,15 +45,15 @@ public class Bot extends Trainer {
 	}
 
 	@Override
-	/**
-	 * Chooses a Pokemon from the bot's team for switching during battle.
-	 * The bot selects a random usable Pokemon from its team and returns it.
-	 *
-	 * @param i The index of the current active Pokemon in the bot's team.
+	/*
+	  Chooses a Pokemon from the bot's team for switching during battle.
+	  The bot selects a random usable Pokemon from its team and returns it.
+
+	  @param i The index of the current active Pokemon in the bot's team.
 	 * @return A Pokemon representing the bot's choice for the new active Pokemon.
 	 */
 	public Pokemon changePokemon(int i) {
-		ArrayList<Integer> usablePokemons = new ArrayList<Integer>();
+		ArrayList<Integer> usablePokemons = new ArrayList<>();
 		for (int j = 0; j < teamSize(); j++) {
 			if (isPokemonAlive(j)) {
 				usablePokemons.add(j);

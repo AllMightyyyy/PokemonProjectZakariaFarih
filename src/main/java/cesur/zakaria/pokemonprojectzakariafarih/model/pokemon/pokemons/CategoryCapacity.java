@@ -15,16 +15,12 @@ public enum CategoryCapacity {
 	 * @return The corresponding CategoryCapacity enum value, or null if no match is found.
 	 */
 	public static CategoryCapacity fromString(String s) {
-		switch (s.trim().toLowerCase()) {
-			case "physical":
-				return PHYSICAL;
-			case "statut":
-				return STATUT;
-			case "special":
-				return SPECIAL;
-			default:
-				return null;
-		}
+        return switch (s.trim().toLowerCase()) {
+            case "physical" -> PHYSICAL;
+            case "statut" -> STATUT;
+            case "special" -> SPECIAL;
+            default -> null;
+        };
 	}
 }
 

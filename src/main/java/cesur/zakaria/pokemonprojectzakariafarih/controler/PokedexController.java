@@ -214,8 +214,8 @@ public class PokedexController {
 			VBox vBox = new VBox();
 			vBox.setPrefHeight(69);
 			vBox.setPrefWidth(250);
-			Label label2 = new Label("Height : " + pokemonSpecie.getSize().getHeight() + "Inch");
-			Label label3 = new Label("Weight : " + pokemonSpecie.getSize().getWeight() + ".lbs.");
+			Label label2 = new Label("Height : " + pokemonSpecie.getSize().height() + "Inch");
+			Label label3 = new Label("Weight : " + pokemonSpecie.getSize().weight() + ".lbs.");
 			label2.setFont(new Font(20));
 			label3.setFont(new Font(20));
 			vBox.getChildren().addAll(label2, label3);

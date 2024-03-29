@@ -1,5 +1,6 @@
 package cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Objects;
@@ -8,6 +9,7 @@ import java.util.Objects;
  * The Capacity class represents a Pokemon's capacity.
  */
 public class Capacity implements Serializable {
+	@Serial
 	private static final long serialVersionUID = 1L;
 	private static final HashMap<String, Capacity> nameMap = new HashMap<>();
 	private final String name;
@@ -119,7 +121,7 @@ public class Capacity implements Serializable {
 	}
 
 	/**
-	 * Subtracts one power point from the capacity.
+	 * Subtracts one PowerPoint from the capacity.
 	 */
 	public void subtractPP() {
 		if (powerPoint > 0) {
@@ -137,8 +139,8 @@ public class Capacity implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((categoryCapacity == null) ? 0 : categoryCapacity.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + categoryCapacity.hashCode();
+		result = prime * result + name.hashCode();
 		result = prime * result + power;
 		result = prime * result + accuracy;
 		return result;
@@ -155,15 +157,10 @@ public class Capacity implements Serializable {
 		Capacity other = (Capacity) obj;
 		if (categoryCapacity != other.categoryCapacity)
 			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
+        if (!name.equals(other.name))
+            return false;
 		if (power != other.power)
 			return false;
-		if (accuracy != other.accuracy)
-			return false;
-		return true;
-	}
+        return accuracy == other.accuracy;
+    }
 }

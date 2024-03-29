@@ -139,38 +139,37 @@ public class PaneDetalles extends javax.swing.JPanel {
         return statsMap;
     }
 
-    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelShadow1 = new Componente.swing.PanelShadow();
-        crContenedorImg = new raven.crazypanel.CrazyPanel();
+        Componente.swing.PanelShadow panelShadow1 = new Componente.swing.PanelShadow();
+        raven.crazypanel.CrazyPanel crContenedorImg = new raven.crazypanel.CrazyPanel();
         imageBoxRadial1 = new Componente.swing.ImageBoxRadial();
-        crazyPanel1 = new raven.crazypanel.CrazyPanel();
-        crazyPanel2 = new raven.crazypanel.CrazyPanel();
+        raven.crazypanel.CrazyPanel crazyPanel1 = new raven.crazypanel.CrazyPanel();
+        raven.crazypanel.CrazyPanel crazyPanel2 = new raven.crazypanel.CrazyPanel();
         lblNombre = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        javax.swing.JSeparator jSeparator1 = new javax.swing.JSeparator();
+        javax.swing.JScrollPane jScrollPane2 = new javax.swing.JScrollPane();
         txt = new javax.swing.JTextPane();
-        crazyPanel3 = new raven.crazypanel.CrazyPanel();
-        jLabel1 = new javax.swing.JLabel();
-        crazyPanel4 = new raven.crazypanel.CrazyPanel();
-        jLabel2 = new javax.swing.JLabel();
+        raven.crazypanel.CrazyPanel crazyPanel3 = new raven.crazypanel.CrazyPanel();
+        JLabel jLabel1 = new JLabel();
+        raven.crazypanel.CrazyPanel crazyPanel4 = new raven.crazypanel.CrazyPanel();
+        JLabel jLabel2 = new JLabel();
         lblHp = new javax.swing.JLabel();
         barHp = new javax.swing.JProgressBar();
-        jLabel3 = new javax.swing.JLabel();
+        JLabel jLabel3 = new JLabel();
         lblAtaque = new javax.swing.JLabel();
         barAtaque = new javax.swing.JProgressBar();
-        jLabel4 = new javax.swing.JLabel();
+        JLabel jLabel4 = new JLabel();
         lblDefensa = new javax.swing.JLabel();
         barDefensa = new javax.swing.JProgressBar();
-        jLabel5 = new javax.swing.JLabel();
+        JLabel jLabel5 = new JLabel();
         lblAspecial = new javax.swing.JLabel();
         barAspecial = new javax.swing.JProgressBar();
-        jLabel6 = new javax.swing.JLabel();
+        JLabel jLabel6 = new JLabel();
         lblDspecial = new javax.swing.JLabel();
         barDspecial = new javax.swing.JProgressBar();
-        jLabel7 = new javax.swing.JLabel();
+        JLabel jLabel7 = new JLabel();
         lblVelocidad = new javax.swing.JLabel();
         barVelocidad = new javax.swing.JProgressBar();
 
@@ -390,21 +389,7 @@ public class PaneDetalles extends javax.swing.JPanel {
     private javax.swing.JProgressBar barDspecial;
     private javax.swing.JProgressBar barHp;
     private javax.swing.JProgressBar barVelocidad;
-    private raven.crazypanel.CrazyPanel crContenedorImg;
-    private raven.crazypanel.CrazyPanel crazyPanel1;
-    private raven.crazypanel.CrazyPanel crazyPanel2;
-    private raven.crazypanel.CrazyPanel crazyPanel3;
-    private raven.crazypanel.CrazyPanel crazyPanel4;
     private Componente.swing.ImageBoxRadial imageBoxRadial1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblAspecial;
     private javax.swing.JLabel lblAtaque;
     private javax.swing.JLabel lblDefensa;
@@ -412,7 +397,6 @@ public class PaneDetalles extends javax.swing.JPanel {
     private javax.swing.JLabel lblHp;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblVelocidad;
-    private Componente.swing.PanelShadow panelShadow1;
     private javax.swing.JTextPane txt;
     // End of variables declaration//GEN-END:variables
 }

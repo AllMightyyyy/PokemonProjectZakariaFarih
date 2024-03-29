@@ -1,14 +1,14 @@
 package cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
  * The Size class represents the size of a Pokémon with its height and weight.
  */
-public class Size implements Serializable {
+public record Size(double height, double weight) implements Serializable {
+	@Serial
 	private static final long serialVersionUID = 1L;
-	private final double weight;
-	private final double height;
 
 	/**
 	 * Constructs a Size object with the specified height and weight.
@@ -16,10 +16,7 @@ public class Size implements Serializable {
 	 * @param height The height of the Pokémon.
 	 * @param weight The weight of the Pokémon.
 	 */
-	public Size(double height, double weight) {
-		super();
-		this.weight = weight;
-		this.height = height;
+	public Size {
 	}
 
 	/**
@@ -27,7 +24,8 @@ public class Size implements Serializable {
 	 *
 	 * @return The height of the Pokémon.
 	 */
-	public double getHeight() {
+	@Override
+	public double height() {
 		return height;
 	}
 
@@ -36,7 +34,8 @@ public class Size implements Serializable {
 	 *
 	 * @return The weight of the Pokémon.
 	 */
-	public double getWeight() {
+	@Override
+	public double weight() {
 		return weight;
 	}
 
@@ -84,8 +83,6 @@ public class Size implements Serializable {
 		Size other = (Size) obj;
 		if (Double.doubleToLongBits(height) != Double.doubleToLongBits(other.height))
 			return false;
-		if (Double.doubleToLongBits(weight) != Double.doubleToLongBits(other.weight))
-			return false;
-		return true;
+		return Double.doubleToLongBits(weight) == Double.doubleToLongBits(other.weight);
 	}
 }

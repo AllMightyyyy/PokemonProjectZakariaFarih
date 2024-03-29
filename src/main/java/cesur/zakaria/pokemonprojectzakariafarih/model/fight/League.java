@@ -4,6 +4,7 @@ import cesur.zakaria.pokemonprojectzakariafarih.model.pokedex.Pokedex;
 import cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons.*;
 
 import java.io.IOException;
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,8 +16,9 @@ import java.util.Random;
  */
 public class League implements Serializable{
 
+	@Serial
 	private static final long serialVersionUID = 1L;
-	private ArrayList<Bot> Bots;
+	private final ArrayList<Bot> Bots;
 
 	/**
 	 * Constructs a League object with the given list of bots.
@@ -82,12 +84,12 @@ public class League implements Serializable{
 	}
 
 	private static int randomValide(int maxSize, int[] random, int j) {
-		for (int i = 0; i < random.length; i++) {
-			if (j == random[i]) {
-				j = randomValide(maxSize, random, (new Random()).nextInt(maxSize));
-				break;
-			}
-		}
+        for (int k : random) {
+            if (j == k) {
+                j = randomValide(maxSize, random, (new Random()).nextInt(maxSize));
+                break;
+            }
+        }
 		return j;
 	}
 
@@ -98,7 +100,7 @@ public class League implements Serializable{
 	 * @throws IOException if an I/O error occurs while generating Pokemon data.
 	 */
 	public static League createDefaultLeague() throws IOException {
-		ArrayList<Bot> Bots = new ArrayList<Bot>();
+		ArrayList<Bot> Bots = new ArrayList<>();
 		for (int i = 0; i < 4; i++) {
 			Pokemon[] pokemons = new Pokemon[5];
 			for (int j = 0; j < pokemons.length; j++) {

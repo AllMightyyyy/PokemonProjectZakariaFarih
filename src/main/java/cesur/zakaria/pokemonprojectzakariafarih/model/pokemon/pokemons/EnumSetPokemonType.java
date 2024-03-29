@@ -1,5 +1,6 @@
 package cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Iterator;
 
@@ -7,9 +8,10 @@ import java.util.Iterator;
  * The EnumSetPokemonType class represents a set of Pokemon types.
  */
 public class EnumSetPokemonType implements Iterator<EnumPokemonType>, Serializable {
+	@Serial
 	private static final long serialVersionUID = 1L;
-	private EnumPokemonType enumPokemonType1 = null;
-	private EnumPokemonType enumPokemonType2 = null;
+	private EnumPokemonType enumPokemonType1;
+	private EnumPokemonType enumPokemonType2;
 	private int actualPosition = 0;
 
 	/**

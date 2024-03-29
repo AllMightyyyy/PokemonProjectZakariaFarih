@@ -2,6 +2,7 @@ package cesur.zakaria.pokemonprojectzakariafarih.model.fight;
 
 import cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons.Pokemon;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Arrays;
 
@@ -11,6 +12,7 @@ import java.util.Arrays;
  */
 public class Trainer implements Serializable{
 
+	@Serial
 	private static final long serialVersionUID = 1L;
 	private final Pokemon[] pokemons;
 	private int currentPokemon;
@@ -21,7 +23,7 @@ public class Trainer implements Serializable{
 	 *
 	 * @param name The name of the trainer.
 	 * @param pokemons The array of Pokemon representing the trainer's team.
-	 * @throws IllegalArgumentException if the number of pokemons exceeds 6.
+	 * @throws IllegalArgumentException if the number of Pokémon exceeds 6.
 	 */
 	public Trainer(String name, Pokemon[] pokemons) {
 		this.name = name;
@@ -163,8 +165,6 @@ public class Trainer implements Serializable{
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (!Arrays.equals(pokemons, other.pokemons))
-			return false;
-		return true;
-	}
+        return Arrays.equals(pokemons, other.pokemons);
+    }
 }

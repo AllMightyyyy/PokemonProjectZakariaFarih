@@ -27,47 +27,49 @@ public enum EnumPokemonType {
 	DARK,
 	FLYING;
 
-	private static final HashMap<EnumPokemonType, String> TypeToString = new HashMap<EnumPokemonType, String>() {{
-		put(EnumPokemonType.POISON, "poison");
-		put(EnumPokemonType.FLYING, "flying");
-		put(EnumPokemonType.GROUND, "ground");
-		put(EnumPokemonType.FAIRY, "fairy");
-		put(EnumPokemonType.GRASS, "grass");
-		put(EnumPokemonType.FIGHTHING, "fighting");
-		put(EnumPokemonType.PSYCHIC, "psychic");
-		put(EnumPokemonType.ACIER, "steel");
-		put(EnumPokemonType.ICE, "ice");
-		put(EnumPokemonType.ROCK, "rock");
-		put(EnumPokemonType.WATER, "water");
-		put(EnumPokemonType.ELECTRIC, "electric");
-		put(EnumPokemonType.DRAGON, "dragon");
-		put(EnumPokemonType.DARK, "dark");
-		put(EnumPokemonType.GHOST, "ghost");
-		put(EnumPokemonType.BUG, "bug");
-		put(EnumPokemonType.FIRE, "fire");
-		put(EnumPokemonType.NORMAL, "Normal");
-	}};
+    static {
+        new HashMap<EnumPokemonType, String>() {{
+            put(EnumPokemonType.POISON, "poison");
+            put(EnumPokemonType.FLYING, "flying");
+            put(EnumPokemonType.GROUND, "ground");
+            put(EnumPokemonType.FAIRY, "fairy");
+            put(EnumPokemonType.GRASS, "grass");
+            put(EnumPokemonType.FIGHTHING, "fighting");
+            put(EnumPokemonType.PSYCHIC, "psychic");
+            put(EnumPokemonType.ACIER, "steel");
+            put(EnumPokemonType.ICE, "ice");
+            put(EnumPokemonType.ROCK, "rock");
+            put(EnumPokemonType.WATER, "water");
+            put(EnumPokemonType.ELECTRIC, "electric");
+            put(EnumPokemonType.DRAGON, "dragon");
+            put(EnumPokemonType.DARK, "dark");
+            put(EnumPokemonType.GHOST, "ghost");
+            put(EnumPokemonType.BUG, "bug");
+            put(EnumPokemonType.FIRE, "fire");
+            put(EnumPokemonType.NORMAL, "Normal");
+        }};
+    }
 
-	private static final HashMap<String, EnumPokemonType> stringToType = new HashMap<String, EnumPokemonType>() {{
-		put("poison", EnumPokemonType.POISON);
-		put("flying", EnumPokemonType.FLYING);
-		put("ground", EnumPokemonType.GROUND);
-		put("fairy", EnumPokemonType.FAIRY);
-		put("grass", EnumPokemonType.GRASS);
-		put("fighting", EnumPokemonType.FIGHTHING);
-		put("psychic", EnumPokemonType.PSYCHIC);
-		put("steel", EnumPokemonType.ACIER);
-		put("ice", EnumPokemonType.ICE);
-		put("rock", EnumPokemonType.ROCK);
-		put("water", EnumPokemonType.WATER);
-		put("electric", EnumPokemonType.ELECTRIC);
-		put("dragon", EnumPokemonType.DRAGON);
-		put("dark", EnumPokemonType.DARK);
-		put("ghost", EnumPokemonType.GHOST);
-		put("bug", EnumPokemonType.BUG);
-		put("fire", EnumPokemonType.FIRE);
-		put("normal", EnumPokemonType.NORMAL);
-	}};
+    private static final HashMap<String, EnumPokemonType> stringToType = new HashMap<>() {{
+        put("poison", EnumPokemonType.POISON);
+        put("flying", EnumPokemonType.FLYING);
+        put("ground", EnumPokemonType.GROUND);
+        put("fairy", EnumPokemonType.FAIRY);
+        put("grass", EnumPokemonType.GRASS);
+        put("fighting", EnumPokemonType.FIGHTHING);
+        put("psychic", EnumPokemonType.PSYCHIC);
+        put("steel", EnumPokemonType.ACIER);
+        put("ice", EnumPokemonType.ICE);
+        put("rock", EnumPokemonType.ROCK);
+        put("water", EnumPokemonType.WATER);
+        put("electric", EnumPokemonType.ELECTRIC);
+        put("dragon", EnumPokemonType.DRAGON);
+        put("dark", EnumPokemonType.DARK);
+        put("ghost", EnumPokemonType.GHOST);
+        put("bug", EnumPokemonType.BUG);
+        put("fire", EnumPokemonType.FIRE);
+        put("normal", EnumPokemonType.NORMAL);
+    }};
 
 	/**
 	 * Converts a string to the corresponding EnumPokemonType enum value.

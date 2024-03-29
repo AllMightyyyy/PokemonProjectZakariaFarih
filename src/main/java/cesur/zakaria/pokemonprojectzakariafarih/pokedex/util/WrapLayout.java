@@ -15,22 +15,6 @@ import javax.swing.SwingUtilities;
 public class WrapLayout extends FlowLayout {
 
     /**
-     * Constructs a new WrapLayout with a default alignment and a default horizontal and vertical gap of 5 pixels.
-     */
-    public WrapLayout() {
-        super();
-    }
-
-    /**
-     * Constructs a new WrapLayout with the specified alignment and a default horizontal and vertical gap of 5 pixels.
-     *
-     * @param align the alignment value
-     */
-    public WrapLayout(int align) {
-        super(align);
-    }
-
-    /**
      * Constructs a new WrapLayout with the specified alignment and gap between components.
      *
      * @param align the alignment value
