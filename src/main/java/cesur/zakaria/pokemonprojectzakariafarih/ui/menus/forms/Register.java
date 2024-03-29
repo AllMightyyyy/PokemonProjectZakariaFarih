@@ -73,7 +73,7 @@ public class Register extends JPanel {
 
         txtFirstName.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "First name");
         txtLastName.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Last name");
-        txtUsername.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Enter your username or email");
+        txtUsername.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Enter your username");
         txtPassword.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Enter your password");
         txtConfirmPassword.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Re-enter your password");
 
