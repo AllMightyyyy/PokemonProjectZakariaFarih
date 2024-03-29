@@ -1,6 +1,9 @@
 package cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons;
 
-import java.io.*;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.*;
 
 /**

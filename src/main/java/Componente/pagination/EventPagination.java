@@ -1,6 +1,14 @@
 package Componente.pagination;
 
+/**
+ * The interface Event pagination.
+ */
 public interface EventPagination {
 
-    public void pageChanged(int page);
+    /**
+     * Page changed.
+     *
+     * @param page the page
+     */
+    void pageChanged(int page);
 }

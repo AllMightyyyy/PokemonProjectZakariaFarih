@@ -1,8 +1,11 @@
 package cesur.zakaria.pokemonprojectzakariafarih.controler;
 
-import javafx.scene.layout.BorderPane;
 import cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons.PokemonSpecie;
+import javafx.scene.layout.BorderPane;
 
+/**
+ * The type Pokemon button.
+ */
 public class PokemonButton extends BorderPane {
 	private final PokemonSpecie pokemonSpecie;
 

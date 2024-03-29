@@ -8,7 +8,6 @@ import com.formdev.flatlaf.util.CubicBezierEasing;
 import net.miginfocom.swing.MigLayout;
 import raven.popup.GlassPanePopup;
 
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -28,6 +27,7 @@ public class HomeOverlay extends JWindow {
 
     /**
      * Retrieves the overlay panel.
+     *
      * @return The overlay panel.
      */
     public PanelOverlay getOverlay() {
@@ -35,11 +35,12 @@ public class HomeOverlay extends JWindow {
     }
 
     private PanelOverlay overlay;
-    private List<ModelLocation> locations;
+    private final List<ModelLocation> locations;
 
     /**
      * Constructs a new HomeOverlay.
-     * @param frame The parent JFrame.
+     *
+     * @param frame     The parent JFrame.
      * @param locations The list of locations.
      */
     public HomeOverlay(JFrame frame, List<ModelLocation> locations) {
@@ -67,6 +68,7 @@ public class HomeOverlay extends JWindow {
 
         /**
          * Sets the event handler for home overlay.
+         *
          * @param eventHomeOverlay The event handler.
          */
         public void setEventHomeOverlay(EventHomeOverlay eventHomeOverlay) {
@@ -84,6 +86,7 @@ public class HomeOverlay extends JWindow {
 
         /**
          * Sets the index of the current location.
+         *
          * @param index The index of the location.
          */
         public void setIndex(int index) {
@@ -119,17 +122,14 @@ public class HomeOverlay extends JWindow {
             cmdReadMore = new JButton("Read More");
             textTitle.setOpaque(false);
             textTitle.setEditable(false);
-            textTitle.putClientProperty(FlatClientProperties.STYLE, "" +
-                    "font:bold +40;" +
+            textTitle.putClientProperty(FlatClientProperties.STYLE, "font:bold +40;" +
                     "border:0,0,0,0");
 
             textDescription.setOpaque(false);
             textDescription.setEditable(false);
-            textDescription.putClientProperty(FlatClientProperties.STYLE, "" +
-                    "font:bold +2;" +
+            textDescription.putClientProperty(FlatClientProperties.STYLE, "font:bold +2;" +
                     "border:0,0,0,0");
-            cmdReadMore.putClientProperty(FlatClientProperties.STYLE, "" +
-                    "background:$Component.accentColor;" +
+            cmdReadMore.putClientProperty(FlatClientProperties.STYLE, "background:$Component.accentColor;" +
                     "borderWidth:0;" +
                     "margin:5,15,5,15;" +
                     "focusWidth:0;" +
@@ -204,8 +204,7 @@ public class HomeOverlay extends JWindow {
             header = new JPanel(new MigLayout("fill", "[]push[][]"));
             header.setOpaque(false);
             JLabel title = new JLabel("Pokemon Game");
-            title.putClientProperty(FlatClientProperties.STYLE, "" +
-                    "font:bold +10");
+            title.putClientProperty(FlatClientProperties.STYLE, "font:bold +10");
             HeaderButton about = new HeaderButton("About");
             HeaderButton githubLink = new HeaderButton("Github Link");
             HeaderButton login = new HeaderButton("Login");
@@ -279,8 +278,7 @@ public class HomeOverlay extends JWindow {
             panel.setOpaque(false);
             for (int i = 0; i < locations.size(); i++) {
                 JButton cmd = new JButton("");
-                cmd.putClientProperty(FlatClientProperties.STYLE, "" +
-                        "margin:5,5,5,5;" +
+                cmd.putClientProperty(FlatClientProperties.STYLE, "margin:5,5,5,5;" +
                         "arc:999;" +
                         "borderWidth:0;" +
                         "focusWidth:0;" +
@@ -311,11 +309,7 @@ public class HomeOverlay extends JWindow {
             int count = panel.getComponentCount();
             for (int i = 0; i < count; i++) {
                 JButton cmd = (JButton) panel.getComponent(i);
-                if (i == index) {
-                    cmd.setSelected(true);
-                } else {
-                    cmd.setSelected(false);
-                }
+                cmd.setSelected(i == index);
             }
         }
 
@@ -402,6 +396,17 @@ public class HomeOverlay extends JWindow {
      * Enumerates the types of animations for the panel overlay.
      */
     public enum AnimationType {
-        CLOSE_VIDEO, SHOW_VIDEO, NONE
+        /**
+         * Close video animation type.
+         */
+        CLOSE_VIDEO,
+        /**
+         * Show video animation type.
+         */
+        SHOW_VIDEO,
+        /**
+         * None animation type.
+         */
+        NONE
     }
 }

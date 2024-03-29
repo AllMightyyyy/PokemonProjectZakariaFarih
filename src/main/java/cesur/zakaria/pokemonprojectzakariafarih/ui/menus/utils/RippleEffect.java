@@ -23,6 +23,7 @@ public class RippleEffect {
 
     /**
      * Constructs a new RippleEffect for the specified component.
+     *
      * @param component The Swing component to which the ripple effect will be added.
      */
     public RippleEffect(Component component) {
@@ -44,6 +45,7 @@ public class RippleEffect {
 
     /**
      * Adds a ripple effect at the specified location.
+     *
      * @param location The location where the ripple effect will be added.
      */
     public void addEffect(Point location) {
@@ -52,7 +54,8 @@ public class RippleEffect {
 
     /**
      * Renders the ripple effects.
-     * @param g The Graphics object used for rendering.
+     *
+     * @param g       The Graphics object used for rendering.
      * @param contain The shape containing the ripple effect.
      */
     public void render(Graphics g, Shape contain) {
@@ -76,6 +79,12 @@ public class RippleEffect {
         private Animator animator;
         private float animate;
 
+        /**
+         * Instantiates a new Effect.
+         *
+         * @param component the component
+         * @param location  the location
+         */
         public Effect(Component component, Point location) {
             this.component = component;
             this.location = location;
@@ -98,6 +107,12 @@ public class RippleEffect {
             animator.start();
         }
 
+        /**
+         * Render.
+         *
+         * @param g2      the g 2
+         * @param contain the contain
+         */
         public void render(Graphics2D g2, Shape contain) {
             Area area = new Area(contain);
             area.intersect(new Area(getShape(getSize(contain.getBounds2D()))));
@@ -140,6 +155,7 @@ public class RippleEffect {
 
     /**
      * Sets the color of the ripple effect.
+     *
      * @param rippleColor The color of the ripple effect.
      */
     public void setRippleColor(Color rippleColor) {
@@ -148,6 +164,7 @@ public class RippleEffect {
 
     /**
      * Gets the color of the ripple effect.
+     *
      * @return The color of the ripple effect.
      */
     public Color getRippleColor() {

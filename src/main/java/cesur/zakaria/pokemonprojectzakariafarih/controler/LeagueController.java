@@ -1,13 +1,13 @@
 package cesur.zakaria.pokemonprojectzakariafarih.controler;
 
+import cesur.zakaria.pokemonprojectzakariafarih.model.fight.League;
+import cesur.zakaria.pokemonprojectzakariafarih.vue.MainView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import cesur.zakaria.pokemonprojectzakariafarih.model.fight.League;
-import cesur.zakaria.pokemonprojectzakariafarih.vue.MainView;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,6 +15,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.Objects;
 
+/**
+ * The type League controller.
+ */
 public class LeagueController {
 
     /**

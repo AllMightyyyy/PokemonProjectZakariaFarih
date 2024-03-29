@@ -1,8 +1,8 @@
 package cesur.zakaria.pokemonprojectzakariafarih.teamCenter.type;
 
-import cesur.zakaria.pokemonprojectzakariafarih.teamCenter.type.TypeEffectiveness;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Map;
 
 /**
@@ -15,7 +15,10 @@ public class TypeData {
     // Renamed to match the JSON structure
     private Map<String, TypeEffectiveness> typeData;
 
-    // Default constructor
+    /**
+     * Instantiates a new Type data.
+     */
+// Default constructor
     public TypeData() {
     }
 

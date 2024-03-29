@@ -15,8 +15,8 @@ import java.net.URL;
  */
 public class Screen extends JPanel implements ActionListener {
 
-    private Timer creditTimer = new Timer(20, this);
-    private String text;
+    private final Timer creditTimer = new Timer(20, this);
+    private final String text;
     private int textY = 600;
     private Clip clip;
 

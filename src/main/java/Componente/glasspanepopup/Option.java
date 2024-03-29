@@ -3,28 +3,81 @@ package Componente.glasspanepopup;
 import java.awt.*;
 
 /**
+ * The interface Option.
  *
  * @author Raven
  */
 public interface Option {
 
-    public String getLayout(Component parent, float animate);
+    /**
+     * Gets layout.
+     *
+     * @param parent  the parent
+     * @param animate the animate
+     * @return the layout
+     */
+    String getLayout(Component parent, float animate);
 
-    public boolean useSnapshot();
-    
-    public boolean closeWhenPressedEsc();
+    /**
+     * Use snapshot boolean.
+     *
+     * @return the boolean
+     */
+    boolean useSnapshot();
 
-    public boolean closeWhenClickOutside();
+    /**
+     * Close when pressed esc boolean.
+     *
+     * @return the boolean
+     */
+    boolean closeWhenPressedEsc();
 
-    public boolean blockBackground();
+    /**
+     * Close when click outside boolean.
+     *
+     * @return the boolean
+     */
+    boolean closeWhenClickOutside();
 
-    public Color background();
+    /**
+     * Block background boolean.
+     *
+     * @return the boolean
+     */
+    boolean blockBackground();
 
-    public float opacity();
+    /**
+     * Background color.
+     *
+     * @return the color
+     */
+    Color background();
 
-    public int duration();
+    /**
+     * Opacity float.
+     *
+     * @return the float
+     */
+    float opacity();
 
-    public float getAnimate();
+    /**
+     * Duration int.
+     *
+     * @return the int
+     */
+    int duration();
 
+    /**
+     * Gets animate.
+     *
+     * @return the animate
+     */
+    float getAnimate();
+
+    /**
+     * Sets animate.
+     *
+     * @param animate the animate
+     */
     void setAnimate(float animate);
 }

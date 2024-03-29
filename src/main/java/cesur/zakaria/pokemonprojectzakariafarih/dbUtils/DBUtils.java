@@ -14,7 +14,7 @@ public class DBUtils {
     /**
      * Attempts to authenticate a user based on the provided username and password.
      *
-     * @param username         The username of the user.
+     * @param username          The username of the user.
      * @param plaintextPassword The plaintext password entered by the user.
      * @return True if the authentication succeeds, false otherwise.
      */

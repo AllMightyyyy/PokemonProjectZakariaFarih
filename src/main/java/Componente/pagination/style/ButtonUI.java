@@ -7,6 +7,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.geom.RoundRectangle2D;
 
+/**
+ * The type Button ui.
+ */
 public class ButtonUI extends BasicButtonUI {
 
     private boolean hover;

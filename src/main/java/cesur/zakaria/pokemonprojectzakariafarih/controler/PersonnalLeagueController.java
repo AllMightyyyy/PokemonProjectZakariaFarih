@@ -1,5 +1,8 @@
 package cesur.zakaria.pokemonprojectzakariafarih.controler;
 
+import cesur.zakaria.pokemonprojectzakariafarih.model.fight.Bot;
+import cesur.zakaria.pokemonprojectzakariafarih.model.fight.League;
+import cesur.zakaria.pokemonprojectzakariafarih.vue.MainView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -9,9 +12,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import cesur.zakaria.pokemonprojectzakariafarih.model.fight.Bot;
-import cesur.zakaria.pokemonprojectzakariafarih.model.fight.League;
-import cesur.zakaria.pokemonprojectzakariafarih.vue.MainView;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -68,9 +68,10 @@ public class PersonnalLeagueController {
     /**
      * This method saves the list of trainers in a file with the given name.
      * The file is saved in the "League" directory.
+     *
      * @param ignoredEvent the action event
      * @throws FileNotFoundException if the file cannot be found.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException           if an I/O error occurs.
      */
     @FXML
     void Save(ActionEvent ignoredEvent) throws FileNotFoundException, IOException {
@@ -81,6 +82,7 @@ public class PersonnalLeagueController {
 
     /**
      * This method switches to the Pokedex scene.
+     *
      * @param ignoredEvent the action event
      * @throws IOException if an I/O error occurs.
      */
@@ -92,6 +94,7 @@ public class PersonnalLeagueController {
 
     /**
      * This method switches to the League scene.
+     *
      * @param ignoredEvent the action event
      * @throws IOException if an I/O error occurs.
      */

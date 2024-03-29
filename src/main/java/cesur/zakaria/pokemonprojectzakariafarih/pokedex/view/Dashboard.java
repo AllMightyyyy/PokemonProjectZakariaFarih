@@ -64,7 +64,10 @@ public class Dashboard extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    /**
+     * The Body.
+     */
+// Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JPanel body;
     // End of variables declaration//GEN-END:variables
 }

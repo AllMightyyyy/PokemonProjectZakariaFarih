@@ -1,9 +1,9 @@
 package cesur.zakaria.pokemonprojectzakariafarih.ui.menus.forms;
 
 import cesur.zakaria.pokemonprojectzakariafarih.dbUtils.DBUtils;
+import cesur.zakaria.pokemonprojectzakariafarih.ui.menus.components.PasswordStrengthStatus;
 import com.formdev.flatlaf.FlatClientProperties;
 import net.miginfocom.swing.MigLayout;
-import cesur.zakaria.pokemonprojectzakariafarih.ui.menus.components.PasswordStrengthStatus;
 import raven.toast.Notifications;
 
 import javax.swing.*;
@@ -25,6 +25,7 @@ public class Register extends JPanel {
 
     /**
      * Sets the parent window.
+     *
      * @param parentWindow The parent window to set.
      */
     public void setParentWindow(Window parentWindow) {
@@ -115,6 +116,7 @@ public class Register extends JPanel {
 
     /**
      * Checks if the passwords match.
+     *
      * @return True if the passwords match, false otherwise.
      */
     public boolean isMatchPassword() {

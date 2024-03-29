@@ -8,17 +8,28 @@ import net.miginfocom.layout.UnitValue;
 import java.awt.*;
 
 /**
+ * The type Default layout call back.
  *
  * @author Raven
  */
 public class DefaultLayoutCallBack extends LayoutCallback {
 
+    /**
+     * Gets parent.
+     *
+     * @return the parent
+     */
     public Component getParent() {
         return parent;
     }
 
     private final Component parent;
 
+    /**
+     * Instantiates a new Default layout call back.
+     *
+     * @param parent the parent
+     */
     public DefaultLayoutCallBack(Component parent) {
         this.parent = parent;
     }

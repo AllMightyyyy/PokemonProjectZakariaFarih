@@ -19,28 +19,28 @@ public class StatistiquePokemon implements Serializable {
 	private int pv;
 	private final int pvMax;
 
-	/**
-	 * Generates random statistics for a Pokémon.
-	 *
-	 * @return A StatistiquePokemon object with randomly generated statistics.
-	 */
-	public static StatistiquePokemon RandomStat() {
+    /**
+     * Generates random statistics for a Pokémon.
+     *
+     * @return A StatistiquePokemon object with randomly generated statistics.
+     */
+    public static StatistiquePokemon RandomStat() {
 		Random rand = new Random();
 		return new StatistiquePokemon(5 + rand.nextInt(185), 5 + rand.nextInt(245), 10 + rand.nextInt(184),
 				20 + rand.nextInt(230), 5 + rand.nextInt(175), 25 + rand.nextInt(200));
 	}
 
-	/**
-	 * Constructs a StatistiquePokemon object with the specified statistics.
-	 *
-	 * @param dmg      The damage stat of the Pokémon.
-	 * @param def      The defense stat of the Pokémon.
-	 * @param dmgspe   The special damage stat of the Pokémon.
-	 * @param defspe   The special defense stat of the Pokémon.
-	 * @param xpLevel  The experience level of the Pokémon.
-	 * @param pv       The hit points (HP) of the Pokémon.
-	 */
-	public StatistiquePokemon(int dmg, int def, int dmgspe, int defspe, int xpLevel, int pv) {
+    /**
+     * Constructs a StatistiquePokemon object with the specified statistics.
+     *
+     * @param dmg     The damage stat of the Pokémon.
+     * @param def     The defense stat of the Pokémon.
+     * @param dmgspe  The special damage stat of the Pokémon.
+     * @param defspe  The special defense stat of the Pokémon.
+     * @param xpLevel The experience level of the Pokémon.
+     * @param pv      The hit points (HP) of the Pokémon.
+     */
+    public StatistiquePokemon(int dmg, int def, int dmgspe, int defspe, int xpLevel, int pv) {
 		this.dmg = dmg;
 		this.def = def;
 		this.dmgspe = dmgspe;
@@ -110,40 +110,40 @@ public class StatistiquePokemon implements Serializable {
         return xpLevel == other.xpLevel;
     }
 
-	/**
-	 * Checks if the Pokémon has no hit points (HP).
-	 *
-	 * @return true if the Pokémon has no hit points; false otherwise.
-	 */
-	public boolean noPv() {
+    /**
+     * Checks if the Pokémon has no hit points (HP).
+     *
+     * @return true if the Pokémon has no hit points; false otherwise.
+     */
+    public boolean noPv() {
 		return pv == 0;
 	}
 
-	/**
-	 * Returns the hit points (HP) of the Pokémon as a string in the format "currentHP/maxHP".
-	 *
-	 * @return The hit points (HP) of the Pokémon.
-	 */
-	public String pvOnPvMax() {
+    /**
+     * Returns the hit points (HP) of the Pokémon as a string in the format "currentHP/maxHP".
+     *
+     * @return The hit points (HP) of the Pokémon.
+     */
+    public String pvOnPvMax() {
 		return pv + "/" + pvMax;
 	}
 
-	/**
-	 * Calculates the ratio of current hit points (HP) to maximum hit points (HP).
-	 *
-	 * @return The ratio of current HP to max HP.
-	 */
-	public double pvRatio() {
+    /**
+     * Calculates the ratio of current hit points (HP) to maximum hit points (HP).
+     *
+     * @return The ratio of current HP to max HP.
+     */
+    public double pvRatio() {
 		return (double) pv / pvMax;
 	}
 
-	/**
-	 * Subtracts damage from the Pokémon's hit points (HP).
-	 *
-	 * @param i The amount of damage to subtract.
-	 * @return true if the Pokémon's hit points reach zero or less after subtraction; false otherwise.
-	 */
-	public boolean substractDamage(int i) {
+    /**
+     * Subtracts damage from the Pokémon's hit points (HP).
+     *
+     * @param i The amount of damage to subtract.
+     * @return true if the Pokémon's hit points reach zero or less after subtraction; false otherwise.
+     */
+    public boolean substractDamage(int i) {
 		pv -= i;
 		if (pv <= 0) {
 			pv = 0;
@@ -152,19 +152,19 @@ public class StatistiquePokemon implements Serializable {
 		return false;
 	}
 
-	/**
-	 * Restores the Pokémon's hit points (HP) to its maximum value.
-	 */
-	public void restorePv() {
+    /**
+     * Restores the Pokémon's hit points (HP) to its maximum value.
+     */
+    public void restorePv() {
 		pv = pvMax;
 	}
 
-	/**
-	 * Retrieves the experience level of the Pokémon.
-	 *
-	 * @return The experience level of the Pokémon.
-	 */
-	public int getXpLevel() {
+    /**
+     * Retrieves the experience level of the Pokémon.
+     *
+     * @return The experience level of the Pokémon.
+     */
+    public int getXpLevel() {
 		return xpLevel;
 	}
 }

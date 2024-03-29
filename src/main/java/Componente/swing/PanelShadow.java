@@ -1,40 +1,84 @@
 package Componente.swing;
 
 import Componente.shadow.ShadowRenderer;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/**
+ * The type Panel shadow.
+ */
 public class PanelShadow extends JPanel {
 
+    /**
+     * Gets shadow type.
+     *
+     * @return the shadow type
+     */
     public ShadowType getShadowType() {
         return shadowType;
     }
 
+    /**
+     * Sets shadow type.
+     *
+     * @param shadowType the shadow type
+     */
     public void setShadowType(ShadowType shadowType) {
         this.shadowType = shadowType;
     }
 
+    /**
+     * Gets shadow size.
+     *
+     * @return the shadow size
+     */
     public int getShadowSize() {
         return shadowSize;
     }
 
+    /**
+     * Sets shadow size.
+     *
+     * @param shadowSize the shadow size
+     */
     public void setShadowSize(int shadowSize) {
         this.shadowSize = shadowSize;
     }
 
+    /**
+     * Gets shadow opacity.
+     *
+     * @return the shadow opacity
+     */
     public float getShadowOpacity() {
         return shadowOpacity;
     }
 
+    /**
+     * Sets shadow opacity.
+     *
+     * @param shadowOpacity the shadow opacity
+     */
     public void setShadowOpacity(float shadowOpacity) {
         this.shadowOpacity = shadowOpacity;
     }
 
+    /**
+     * Gets shadow color.
+     *
+     * @return the shadow color
+     */
     public Color getShadowColor() {
         return shadowColor;
     }
 
+    /**
+     * Sets shadow color.
+     *
+     * @param shadowColor the shadow color
+     */
     public void setShadowColor(Color shadowColor) {
         this.shadowColor = shadowColor;
     }
@@ -44,6 +88,9 @@ public class PanelShadow extends JPanel {
     private float shadowOpacity = 0.5f;
     private Color shadowColor = Color.BLACK;
 
+    /**
+     * Instantiates a new Panel shadow.
+     */
     public PanelShadow() {
         setOpaque(false);
     }

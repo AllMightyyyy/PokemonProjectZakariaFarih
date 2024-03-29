@@ -9,6 +9,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Pokemon.
+ */
 /*
     "bulbasaur": {
         "base_id": 1,
@@ -78,149 +81,332 @@ public class Pokemon {
 
     // Constructors, getters, and setters
 
+    /**
+     * Instantiates a new Pokemon.
+     */
     public Pokemon() {
     }
 
+    /**
+     * Gets name.
+     *
+     * @return the name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Sets name.
+     *
+     * @param name the name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Gets pokemon type.
+     *
+     * @return the pokemon type
+     */
     public List<String> getPokemonType() {
         return pokemonType;
     }
 
+    /**
+     * Sets pokemon type.
+     *
+     * @param pokemonType the pokemon type
+     */
     public void setPokemonType(List<String> pokemonType) {
         this.pokemonType = pokemonType;
     }
 
+    /**
+     * Sets shape image path.
+     *
+     * @param shapeImagePath the shape image path
+     */
     public void setShapeImagePath(String shapeImagePath) {
         this.shapeImagePath = shapeImagePath;
     }
 
+    /**
+     * Gets egg group.
+     *
+     * @return the egg group
+     */
     public List<String> getEggGroup() {
         return eggGroup;
     }
 
+    /**
+     * Sets egg group.
+     *
+     * @param eggGroup the egg group
+     */
     public void setEggGroup(List<String> eggGroup) {
         this.eggGroup = eggGroup;
     }
 
+    /**
+     * Gets gender.
+     *
+     * @return the gender
+     */
     public List<String> getGender() {
         return gender;
     }
 
+    /**
+     * Sets gender.
+     *
+     * @param gender the gender
+     */
     public void setGender(List<String> gender) {
         this.gender = gender;
     }
 
+    /**
+     * Gets gender ratio.
+     *
+     * @return the gender ratio
+     */
     public int getGenderRatio() {
         return genderRatio;
     }
 
+    /**
+     * Sets gender ratio.
+     *
+     * @param genderRatio the gender ratio
+     */
     public void setGenderRatio(int genderRatio) {
         this.genderRatio = genderRatio;
     }
 
+    /**
+     * Gets shape image path.
+     *
+     * @return the shape image path
+     */
     public String getShapeImagePath() {
         return shapeImagePath;
     }
 
+    /**
+     * Gets shape.
+     *
+     * @return the shape
+     */
     public int getShape() {
         return shape;
     }
 
+    /**
+     * Sets shape.
+     *
+     * @param shape the shape
+     */
     public void setShape(int shape) {
         this.shape = shape;
     }
 
+    /**
+     * Gets color.
+     *
+     * @return the color
+     */
     public String getColor() {
         return color;
     }
 
+    /**
+     * Sets color.
+     *
+     * @param color the color
+     */
     public void setColor(String color) {
         this.color = color;
     }
 
+    /**
+     * Gets experience group.
+     *
+     * @return the experience group
+     */
     public String getExperienceGroup() {
         return experienceGroup;
     }
 
+    /**
+     * Sets experience group.
+     *
+     * @param experienceGroup the experience group
+     */
     public void setExperienceGroup(String experienceGroup) {
         this.experienceGroup = experienceGroup;
     }
 
+    /**
+     * Gets generation.
+     *
+     * @return the generation
+     */
     public int getGeneration() {
         return generation;
     }
 
+    /**
+     * Sets generation.
+     *
+     * @param generation the generation
+     */
     public void setGeneration(int generation) {
         this.generation = generation;
     }
 
+    /**
+     * Gets evolution ids.
+     *
+     * @return the evolution ids
+     */
     public List<List<Integer>> getEvolutionIds() {
         return evolutionIds;
     }
 
+    /**
+     * Sets evolution ids.
+     *
+     * @param evolutionIds the evolution ids
+     */
     public void setEvolutionIds(List<List<Integer>> evolutionIds) {
         this.evolutionIds = evolutionIds;
     }
 
+    /**
+     * Gets image path.
+     *
+     * @return the image path
+     */
     public String getImagePath() {
         return imagePath;
     }
 
+    /**
+     * Sets image path.
+     *
+     * @param imagePath the image path
+     */
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
     }
 
+    /**
+     * Is has gigantamax boolean.
+     *
+     * @return the boolean
+     */
     public boolean isHasGigantamax() {
         return hasGigantamax;
     }
 
+    /**
+     * Sets has gigantamax.
+     *
+     * @param hasGigantamax the has gigantamax
+     */
     public void setHasGigantamax(boolean hasGigantamax) {
         this.hasGigantamax = hasGigantamax;
     }
 
+    /**
+     * Gets resistances.
+     *
+     * @return the resistances
+     */
     public List<String> getResistances() {
         return resistances;
     }
 
+    /**
+     * Sets resistances.
+     *
+     * @param resistances the resistances
+     */
     public void setResistances(List<String> resistances) {
         this.resistances = resistances;
     }
 
+    /**
+     * Gets weaknesses.
+     *
+     * @return the weaknesses
+     */
     public List<String> getWeaknesses() {
         return weaknesses;
     }
 
+    /**
+     * Sets weaknesses.
+     *
+     * @param weaknesses the weaknesses
+     */
     public void setWeaknesses(List<String> weaknesses) {
         this.weaknesses = weaknesses;
     }
 
+    /**
+     * Gets immunities.
+     *
+     * @return the immunities
+     */
     public List<String> getImmunities() {
         return immunities;
     }
 
+    /**
+     * Sets immunities.
+     *
+     * @param immunities the immunities
+     */
     public void setImmunities(List<String> immunities) {
         this.immunities = immunities;
     }
 
+    /**
+     * Gets type image paths.
+     *
+     * @return the type image paths
+     */
     public List<String> getTypeImagePaths() {
         return typeImagePaths;
     }
 
+    /**
+     * Sets type image paths.
+     *
+     * @param typeImagePaths the type image paths
+     */
     public void setTypeImagePaths(List<String> typeImagePaths) {
         this.typeImagePaths = typeImagePaths;
     }
 
+    /**
+     * Gets pokemon types.
+     *
+     * @return the pokemon types
+     */
     public List<String> getPokemonTypes() {
         return pokemonTypes;
     }
 
+    /**
+     * Sets pokemon types.
+     *
+     * @param pokemonTypes the pokemon types
+     */
     public void setPokemonTypes(List<String> pokemonTypes) {
         this.pokemonTypes = pokemonTypes;
     }
@@ -271,10 +457,20 @@ public class Pokemon {
     }
 
 
+    /**
+     * Sets base id.
+     *
+     * @param baseId the base id
+     */
     public void setBaseId(int baseId) {
         this.baseId = baseId;
     }
 
+    /**
+     * Sets form id.
+     *
+     * @param formId the form id
+     */
     public void setFormId(int formId) {
         this.formId = formId;
     }

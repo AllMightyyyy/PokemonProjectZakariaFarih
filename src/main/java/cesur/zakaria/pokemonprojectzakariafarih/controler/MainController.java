@@ -35,6 +35,7 @@ public class MainController {
     /**
      * This method is called when the launchFightButton is clicked.
      * It changes the scene to the fight scene.
+     *
      * @param ignoredEvent the action event
      * @throws IOException if there is an error while changing the scene
      */
@@ -46,6 +47,7 @@ public class MainController {
     /**
      * This method is called when the launchPokedexButton is clicked.
      * It changes the scene to the pokedex scene.
+     *
      * @param ignoredEvent the action event
      * @throws IOException if there is an error while changing the scene
      */
@@ -54,10 +56,20 @@ public class MainController {
         MainView.changeScene((Stage)launchFightButton.getScene().getWindow(), "Pokedex.fxml");
     }
 
+    /**
+     * Gets music.
+     *
+     * @return the music
+     */
     public AudioClip getMusic() {
         return music;
     }
 
+    /**
+     * Sets music.
+     *
+     * @param music the music
+     */
     public void setMusic(AudioClip music) {
         this.music = music;
     }

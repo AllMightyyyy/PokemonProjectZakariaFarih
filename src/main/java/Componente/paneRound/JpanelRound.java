@@ -6,39 +6,82 @@ import java.awt.geom.Area;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.RoundRectangle2D;
 
+/**
+ * The type Jpanel round.
+ */
 public class JpanelRound extends JPanel {
 
+    /**
+     * Gets round top left.
+     *
+     * @return the round top left
+     */
     public int getRoundTopLeft() {
         return roundTopLeft;
     }
 
+    /**
+     * Sets round top left.
+     *
+     * @param roundTopLeft the round top left
+     */
     public void setRoundTopLeft(int roundTopLeft) {
         this.roundTopLeft = roundTopLeft;
         repaint();
     }
 
+    /**
+     * Gets round top right.
+     *
+     * @return the round top right
+     */
     public int getRoundTopRight() {
         return roundTopRight;
     }
 
+    /**
+     * Sets round top right.
+     *
+     * @param roundTopRight the round top right
+     */
     public void setRoundTopRight(int roundTopRight) {
         this.roundTopRight = roundTopRight;
         repaint();
     }
 
+    /**
+     * Gets round bottom left.
+     *
+     * @return the round bottom left
+     */
     public int getRoundBottomLeft() {
         return roundBottomLeft;
     }
 
+    /**
+     * Sets round bottom left.
+     *
+     * @param roundBottomLeft the round bottom left
+     */
     public void setRoundBottomLeft(int roundBottomLeft) {
         this.roundBottomLeft = roundBottomLeft;
         repaint();
     }
 
+    /**
+     * Gets round bottom right.
+     *
+     * @return the round bottom right
+     */
     public int getRoundBottomRight() {
         return roundBottomRight;
     }
 
+    /**
+     * Sets round bottom right.
+     *
+     * @param roundBottomRight the round bottom right
+     */
     public void setRoundBottomRight(int roundBottomRight) {
         this.roundBottomRight = roundBottomRight;
         repaint();
@@ -49,6 +92,9 @@ public class JpanelRound extends JPanel {
     private int roundBottomLeft = 0;
     private int roundBottomRight = 0;
 
+    /**
+     * Instantiates a new Jpanel round.
+     */
     public JpanelRound() {
         setOpaque(false);
     }

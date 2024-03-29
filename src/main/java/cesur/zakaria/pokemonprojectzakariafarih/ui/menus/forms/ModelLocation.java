@@ -11,9 +11,10 @@ public class ModelLocation {
 
     /**
      * Constructs a ModelLocation with the specified title, description, and video path.
-     * @param title The title of the location.
+     *
+     * @param title       The title of the location.
      * @param description The description of the location.
-     * @param videoPath The path to the video associated with the location.
+     * @param videoPath   The path to the video associated with the location.
      */
     public ModelLocation(String title, String description, String videoPath) {
         this.title = title;
@@ -23,6 +24,7 @@ public class ModelLocation {
 
     /**
      * Gets the title of the location.
+     *
      * @return The title of the location.
      */
     public String getTitle() {
@@ -31,6 +33,7 @@ public class ModelLocation {
 
     /**
      * Sets the title of the location.
+     *
      * @param title The title of the location.
      */
     public void setTitle(String title) {
@@ -39,6 +42,7 @@ public class ModelLocation {
 
     /**
      * Gets the description of the location.
+     *
      * @return The description of the location.
      */
     public String getDescription() {
@@ -47,6 +51,7 @@ public class ModelLocation {
 
     /**
      * Sets the description of the location.
+     *
      * @param description The description of the location.
      */
     public void setDescription(String description) {
@@ -55,6 +60,7 @@ public class ModelLocation {
 
     /**
      * Gets the path to the video associated with the location.
+     *
      * @return The path to the video.
      */
     public String getVideoPath() {
@@ -63,6 +69,7 @@ public class ModelLocation {
 
     /**
      * Sets the path to the video associated with the location.
+     *
      * @param videoPath The path to the video.
      */
     public void setVideoPath(String videoPath) {

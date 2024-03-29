@@ -10,10 +10,11 @@ import javafx.scene.text.Text;
  * Represents the title displayed in the main menu.
  */
 public class MenuTitle extends Pane {
-    private Text text;
+    private final Text text;
 
     /**
      * Constructs a MenuTitle with the specified name.
+     *
      * @param name The name to be displayed as the title.
      */
     public MenuTitle(String name) {
@@ -32,6 +33,7 @@ public class MenuTitle extends Pane {
 
     /**
      * Gets the width of the title.
+     *
      * @return The width of the title.
      */
     public double getTitleWidth() {
@@ -40,6 +42,7 @@ public class MenuTitle extends Pane {
 
     /**
      * Gets the height of the title.
+     *
      * @return The height of the title.
      */
     public double getTitleHeight() {

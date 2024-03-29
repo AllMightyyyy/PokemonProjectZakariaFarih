@@ -11,6 +11,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
 
+/**
+ * The type Popup.
+ */
 public class Popup extends JComponent {
 
     private final GlassPanePopup parent;
@@ -22,6 +25,13 @@ public class Popup extends JComponent {
     private boolean show;
     private boolean mouseHover;
 
+    /**
+     * Instantiates a new Popup.
+     *
+     * @param parent    the parent
+     * @param component the component
+     * @param option    the option
+     */
     public Popup(GlassPanePopup parent, Component component, Option option) {
         this.parent = parent;
         this.component = component;
@@ -109,6 +119,11 @@ public class Popup extends JComponent {
         animator.setResolution(5);
     }
 
+    /**
+     * Sets show popup.
+     *
+     * @param show the show
+     */
     public void setShowPopup(boolean show) {
         if (this.show != show) {
             if (animator.isRunning()) {

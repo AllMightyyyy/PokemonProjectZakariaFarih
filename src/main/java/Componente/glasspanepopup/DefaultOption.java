@@ -3,6 +3,7 @@ package Componente.glasspanepopup;
 import java.awt.*;
 
 /**
+ * The type Default option.
  *
  * @author Raven
  */

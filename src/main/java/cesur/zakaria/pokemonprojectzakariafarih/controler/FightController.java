@@ -134,7 +134,9 @@ public class FightController {
 
 	/**
 	 * Initialize the fight and its display. It is called automatically at the launch of the controller.
-     */
+	 *
+	 * @throws IOException the io exception
+	 */
 	public void initialize() throws IOException{
 		
     	System.out.println("Launching the combat");
@@ -406,7 +408,12 @@ public class FightController {
 		}
 	}
 
-    @FXML
+	/**
+	 * Run.
+	 *
+	 * @param ignoredEvent the ignored event
+	 */
+	@FXML
     void run(ActionEvent ignoredEvent) {
     	//SET DISPLAY
     	mainFooter.setVisible(false);
@@ -569,14 +576,29 @@ public class FightController {
 		mainDialog.setVisible(true);
 	}
 
+	/**
+	 * Sets music.
+	 *
+	 * @param music the music
+	 */
 	public void setMusic(AudioClip music) {
 		this.music = music;
 	}
 
+	/**
+	 * Gets dialog left.
+	 *
+	 * @return the dialog left
+	 */
 	public Label getDialogLeft() {
 		return dialogLeft;
 	}
 
+	/**
+	 * Sets dialog left.
+	 *
+	 * @param dialogLeft the dialog left
+	 */
 	public void setDialogLeft(Label dialogLeft) {
 		this.dialogLeft = dialogLeft;
 	}

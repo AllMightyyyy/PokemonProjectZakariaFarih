@@ -4,6 +4,11 @@
  */
 package cesur.zakaria.pokemonprojectzakariafarih.controler;
 
+import cesur.zakaria.pokemonprojectzakariafarih.model.fight.Bot;
+import cesur.zakaria.pokemonprojectzakariafarih.model.fight.Trainer;
+import cesur.zakaria.pokemonprojectzakariafarih.model.pokedex.Pokedex;
+import cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons.*;
+import cesur.zakaria.pokemonprojectzakariafarih.vue.MainView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -20,16 +25,14 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import cesur.zakaria.pokemonprojectzakariafarih.model.fight.Bot;
-import cesur.zakaria.pokemonprojectzakariafarih.model.fight.Trainer;
-import cesur.zakaria.pokemonprojectzakariafarih.model.pokedex.Pokedex;
-import cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons.*;
-import cesur.zakaria.pokemonprojectzakariafarih.vue.MainView;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+/**
+ * The type Pokedex controller.
+ */
 public class PokedexController {
 
 	@FXML
@@ -58,6 +61,7 @@ public class PokedexController {
 
 	/**
 	 * Initializes the Pokedex view with existing Pokemon data.
+	 *
 	 * @throws FileNotFoundException If a required file is not found.
 	 */
 	public void initialize() throws FileNotFoundException {
@@ -132,9 +136,8 @@ public class PokedexController {
 		 */
 		public void handle(MouseEvent e) {
 			var x = e.getSource();
-			if (x instanceof PokemonButton) {
-				PokemonButton pokemonButton = (PokemonButton) x;
-				this.pokemonButton = pokemonButton;
+			if (x instanceof PokemonButton pokemonButton) {
+                this.pokemonButton = pokemonButton;
 				pokemonSpecie = pokemonButton.getPokemonSpecie();
 
 				/*

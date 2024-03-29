@@ -14,32 +14,32 @@ public class EnumSetPokemonType implements Iterator<EnumPokemonType>, Serializab
 	private EnumPokemonType enumPokemonType2;
 	private int actualPosition = 0;
 
-	/**
-	 * Constructs a new EnumSetPokemonType object with two specified Pokemon types.
-	 *
-	 * @param enumPokemonType1 The first Pokemon type.
-	 * @param enumPokemonType2 The second Pokemon type.
-	 */
-	public EnumSetPokemonType(EnumPokemonType enumPokemonType1, EnumPokemonType enumPokemonType2) {
+    /**
+     * Constructs a new EnumSetPokemonType object with two specified Pokemon types.
+     *
+     * @param enumPokemonType1 The first Pokemon type.
+     * @param enumPokemonType2 The second Pokemon type.
+     */
+    public EnumSetPokemonType(EnumPokemonType enumPokemonType1, EnumPokemonType enumPokemonType2) {
 		this.enumPokemonType1 = enumPokemonType1;
 		this.enumPokemonType2 = enumPokemonType2;
 	}
 
-	/**
-	 * Constructs a new EnumSetPokemonType object with a single specified Pokemon type.
-	 *
-	 * @param enumPokemonType1 The Pokemon type.
-	 */
-	public EnumSetPokemonType(EnumPokemonType enumPokemonType1) {
+    /**
+     * Constructs a new EnumSetPokemonType object with a single specified Pokemon type.
+     *
+     * @param enumPokemonType1 The Pokemon type.
+     */
+    public EnumSetPokemonType(EnumPokemonType enumPokemonType1) {
 		this(enumPokemonType1, null);
 	}
 
-	/**
-	 * Adds a new Pokemon type to the set.
-	 *
-	 * @param enumPokemonType The Pokemon type to add.
-	 */
-	public void add(EnumPokemonType enumPokemonType) {
+    /**
+     * Adds a new Pokemon type to the set.
+     *
+     * @param enumPokemonType The Pokemon type to add.
+     */
+    public void add(EnumPokemonType enumPokemonType) {
 		if (enumPokemonType1 == null) {
 			enumPokemonType1 = enumPokemonType;
 		} else if (enumPokemonType2 == null) {
@@ -74,29 +74,29 @@ public class EnumSetPokemonType implements Iterator<EnumPokemonType>, Serializab
 		return null;
 	}
 
-	/**
-	 * Gets the size of the set.
-	 *
-	 * @return The size of the set.
-	 */
-	public int size() {
+    /**
+     * Gets the size of the set.
+     *
+     * @return The size of the set.
+     */
+    public int size() {
 		return enumPokemonType1 == null ? 0 : enumPokemonType2 == null ? 1 : 2;
 	}
 
-	/**
-	 * Gets the Pokemon type at the specified index in the set.
-	 *
-	 * @param index The index of the Pokemon type.
-	 * @return The Pokemon type at the specified index, or null if the index is invalid.
-	 */
-	public EnumPokemonType get(int index) {
+    /**
+     * Gets the Pokemon type at the specified index in the set.
+     *
+     * @param index The index of the Pokemon type.
+     * @return The Pokemon type at the specified index, or null if the index is invalid.
+     */
+    public EnumPokemonType get(int index) {
 		return index == 0 ? enumPokemonType1 : index == 1 ? enumPokemonType2 : null;
 	}
 
-	/**
-	 * Resets the iterator position to the beginning of the set.
-	 */
-	public void resetIterator() {
+    /**
+     * Resets the iterator position to the beginning of the set.
+     */
+    public void resetIterator() {
 		actualPosition = 0;
 	}
 

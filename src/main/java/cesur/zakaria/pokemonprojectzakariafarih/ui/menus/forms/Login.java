@@ -1,12 +1,11 @@
 package cesur.zakaria.pokemonprojectzakariafarih.ui.menus.forms;
 
-import com.formdev.flatlaf.FlatClientProperties;
+import cesur.zakaria.pokemonprojectzakariafarih.dbUtils.DBUtils;
 import com.formdev.flatlaf.util.UIScale;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 import net.miginfocom.swing.MigLayout;
 import raven.toast.Notifications;
-import cesur.zakaria.pokemonprojectzakariafarih.dbUtils.DBUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,10 +18,11 @@ import static cesur.zakaria.pokemonprojectzakariafarih.ui.menus.transparentSplas
  * Represents the login panel.
  */
 public class Login extends JPanel {
-    private JFrame mainFrame;
+    private final JFrame mainFrame;
 
     /**
      * Constructs a new Login panel with the specified main frame.
+     *
      * @param mainFrame The main frame of the application.
      */
     public Login(JFrame mainFrame) {

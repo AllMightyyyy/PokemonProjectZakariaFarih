@@ -2,6 +2,9 @@ package Componente.pagination;
 
 import javax.swing.*;
 
+/**
+ * The type Default pagination item render.
+ */
 public class DefaultPaginationItemRender implements PaginationItemRender {
 
     @Override

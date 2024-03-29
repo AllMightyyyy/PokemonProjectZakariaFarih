@@ -18,14 +18,14 @@ public class Trainer implements Serializable{
 	private int currentPokemon;
 	private final String name;
 
-	/**
-	 * Constructs a Trainer object with the given name and Pokemon team.
-	 *
-	 * @param name The name of the trainer.
-	 * @param pokemons The array of Pokemon representing the trainer's team.
-	 * @throws IllegalArgumentException if the number of Pokémon exceeds 6.
-	 */
-	public Trainer(String name, Pokemon[] pokemons) {
+    /**
+     * Constructs a Trainer object with the given name and Pokemon team.
+     *
+     * @param name     The name of the trainer.
+     * @param pokemons The array of Pokemon representing the trainer's team.
+     * @throws IllegalArgumentException if the number of Pokémon exceeds 6.
+     */
+    public Trainer(String name, Pokemon[] pokemons) {
 		this.name = name;
 
 		if (pokemons.length > 6) {
@@ -35,62 +35,62 @@ public class Trainer implements Serializable{
 		currentPokemon = 0;
 	}
 
-	/**
-	 * Retrieves the current active Pokemon of the trainer.
-	 *
-	 * @return The current active Pokemon.
-	 */
-	public Pokemon getPokemon() {
+    /**
+     * Retrieves the current active Pokemon of the trainer.
+     *
+     * @return The current active Pokemon.
+     */
+    public Pokemon getPokemon() {
 		return pokemons[currentPokemon];
 	}
 
-	/**
-	 * Retrieves the Pokemon at the specified index in the trainer's team.
-	 *
-	 * @param i The index of the Pokemon.
-	 * @return The Pokemon at the specified index.
-	 */
-	public Pokemon getPokemon(int i) {
+    /**
+     * Retrieves the Pokemon at the specified index in the trainer's team.
+     *
+     * @param i The index of the Pokemon.
+     * @return The Pokemon at the specified index.
+     */
+    public Pokemon getPokemon(int i) {
 		return pokemons[i];
 	}
 
-	/**
-	 * Gets the size of the trainer's team.
-	 *
-	 * @return The size of the team.
-	 */
-	public int teamSize() {
+    /**
+     * Gets the size of the trainer's team.
+     *
+     * @return The size of the team.
+     */
+    public int teamSize() {
 		return pokemons.length;
 	}
 
-	/**
-	 * Checks if the Pokemon at the specified index in the trainer's team is alive.
-	 *
-	 * @param i The index of the Pokemon.
-	 * @return true if the Pokemon is alive, false otherwise.
-	 */
-	public boolean isPokemonAlive(int i) {
+    /**
+     * Checks if the Pokemon at the specified index in the trainer's team is alive.
+     *
+     * @param i The index of the Pokemon.
+     * @return true if the Pokemon is alive, false otherwise.
+     */
+    public boolean isPokemonAlive(int i) {
 		if (pokemons[i] != null) {
 			return pokemons[i].isAlive();
 		}
 		return false;
 	}
 
-	/**
-	 * Switches the current active Pokemon of the trainer to the one at the specified index.
-	 *
-	 * @param i The index of the Pokemon to switch to.
-	 * @return The newly active Pokemon.
-	 */
-	public Pokemon changePokemon(int i) {
+    /**
+     * Switches the current active Pokemon of the trainer to the one at the specified index.
+     *
+     * @param i The index of the Pokemon to switch to.
+     * @return The newly active Pokemon.
+     */
+    public Pokemon changePokemon(int i) {
 		currentPokemon = i;
 		return pokemons[currentPokemon];
 	}
 
-	/**
-	 * Restores all Pokemon in the trainer's team to full health.
-	 */
-	public void restoreTrainer() {
+    /**
+     * Restores all Pokemon in the trainer's team to full health.
+     */
+    public void restoreTrainer() {
 		for (Pokemon pokemon : pokemons) {
 			pokemon.restore();
 		}
@@ -101,12 +101,12 @@ public class Trainer implements Serializable{
 		return "Trainer [pokemons=" + Arrays.toString(pokemons) + ", currentPokemon=" + currentPokemon + "]";
 	}
 
-	/**
-	 * Checks if the trainer has lost the battle (all Pokemon are fainted).
-	 *
-	 * @return true if the trainer has lost, false otherwise.
-	 */
-	public boolean loose() {
+    /**
+     * Checks if the trainer has lost the battle (all Pokemon are fainted).
+     *
+     * @return true if the trainer has lost, false otherwise.
+     */
+    public boolean loose() {
 		for (Pokemon pokemon : pokemons) {
 			if (pokemon != null && pokemon.isAlive()) {
 				return false;
@@ -115,12 +115,12 @@ public class Trainer implements Serializable{
 		return true;
 	}
 
-	/**
-	 * Checks if the trainer has only one Pokemon alive.
-	 *
-	 * @return true if only one Pokemon is alive, false otherwise.
-	 */
-	public boolean onlyOnePokemonAlive() {
+    /**
+     * Checks if the trainer has only one Pokemon alive.
+     *
+     * @return true if only one Pokemon is alive, false otherwise.
+     */
+    public boolean onlyOnePokemonAlive() {
 		int count = 0;
 		for (Pokemon pokemon : pokemons) {
 			if (pokemon != null && pokemon.isAlive()) {
@@ -130,12 +130,12 @@ public class Trainer implements Serializable{
 		return count == 1;
 	}
 
-	/**
-	 * Gets the name of the trainer.
-	 *
-	 * @return The name of the trainer.
-	 */
-	public String getName() {
+    /**
+     * Gets the name of the trainer.
+     *
+     * @return The name of the trainer.
+     */
+    public String getName() {
 		return name;
 	}
 

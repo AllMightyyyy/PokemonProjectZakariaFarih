@@ -4,6 +4,9 @@ import Componente.pagination.DefaultPaginationItemRender;
 
 import javax.swing.*;
 
+/**
+ * The type Pagination item render style 1.
+ */
 public class PaginationItemRenderStyle1 extends DefaultPaginationItemRender {
 
     @Override
