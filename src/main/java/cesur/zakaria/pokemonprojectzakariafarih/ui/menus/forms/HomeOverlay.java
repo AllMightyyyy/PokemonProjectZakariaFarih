@@ -21,8 +21,15 @@ import java.io.File;
 import java.net.URI;
 import java.util.List;
 
+/**
+ * Represents the overlay window for the home screen.
+ */
 public class HomeOverlay extends JWindow {
 
+    /**
+     * Retrieves the overlay panel.
+     * @return The overlay panel.
+     */
     public PanelOverlay getOverlay() {
         return overlay;
     }
@@ -30,6 +37,11 @@ public class HomeOverlay extends JWindow {
     private PanelOverlay overlay;
     private List<ModelLocation> locations;
 
+    /**
+     * Constructs a new HomeOverlay.
+     * @param frame The parent JFrame.
+     * @param locations The list of locations.
+     */
     public HomeOverlay(JFrame frame, List<ModelLocation> locations) {
         super(frame);
         this.locations = locations;
@@ -37,6 +49,9 @@ public class HomeOverlay extends JWindow {
         GlassPanePopup.install(frame);
     }
 
+    /**
+     * Initializes the overlay window.
+     */
     private void init() {
         setBackground(new Color(35, 96, 135, 80));
         setLayout(new BorderLayout());
@@ -44,8 +59,16 @@ public class HomeOverlay extends JWindow {
         add(overlay);
     }
 
+
+    /**
+     * Represents the panel overlay for the home screen.
+     */
     public class PanelOverlay extends JPanel {
 
+        /**
+         * Sets the event handler for home overlay.
+         * @param eventHomeOverlay The event handler.
+         */
         public void setEventHomeOverlay(EventHomeOverlay eventHomeOverlay) {
             this.eventHomeOverlay = eventHomeOverlay;
         }
@@ -59,6 +82,10 @@ public class HomeOverlay extends JWindow {
         private int index;
         private boolean showLogin;
 
+        /**
+         * Sets the index of the current location.
+         * @param index The index of the location.
+         */
         public void setIndex(int index) {
             this.index = index;
             ModelLocation location = locations.get(index);
@@ -66,10 +93,17 @@ public class HomeOverlay extends JWindow {
             textDescription.setText(location.getDescription());
         }
 
+        /**
+         * Constructs a new PanelOverlay.
+         */
         public PanelOverlay() {
             init();
         }
 
+
+        /**
+         * Initializes the components of the overlay panel.
+         */
         private void init() {
             setOpaque(false);
             migLayout = new MigLayout("fill,insets 10 180 10 180", "fill", "[grow 0][]");
@@ -268,6 +302,11 @@ public class HomeOverlay extends JWindow {
             setSelectedButton(panel, index);
         }
 
+        /**
+         * Sets the selected button in the page navigation.
+         * @param panel The panel containing the buttons.
+         * @param index The index of the selected button.
+         */
         private void setSelectedButton(JPanel panel, int index) {
             int count = panel.getComponentCount();
             for (int i = 0; i < count; i++) {
@@ -280,6 +319,12 @@ public class HomeOverlay extends JWindow {
             }
         }
 
+        /**
+         * Runs the specified animation.
+         * @param index The index of the animation.
+         * @param animationType The type of animation.
+         * @return True if the animation started, false otherwise.
+         */
         private boolean runAnimation(int index, AnimationType animationType) {
             if (!animator.isRunning()) {
                 this.animate = 0;
@@ -292,6 +337,10 @@ public class HomeOverlay extends JWindow {
             }
         }
 
+        /**
+         * Runs the login panel animation.
+         * @param show True to show the login panel, false to hide it.
+         */
         private void runLoginAnimation(boolean show) {
             if (showLogin != show) {
                 if (!loginAnimator.isRunning()) {
@@ -301,6 +350,10 @@ public class HomeOverlay extends JWindow {
             }
         }
 
+        /**
+         * Paints the component.
+         * @param g The Graphics object.
+         */
         @Override
         protected void paintComponent(Graphics g) {
             if (animationType != AnimationType.NONE) {
@@ -323,6 +376,11 @@ public class HomeOverlay extends JWindow {
             super.paintComponent(g);
         }
 
+        /**
+         * Creates a shape for animation.
+         * @param rec The rectangle to create the shape from.
+         * @return The created shape.
+         */
         private Shape createRec(Rectangle rec) {
             int maxSize = Math.max(rec.width, rec.height);
             float size = maxSize * animate;
@@ -340,6 +398,9 @@ public class HomeOverlay extends JWindow {
         private Login panelLogin;
     }
 
+    /**
+     * Enumerates the types of animations for the panel overlay.
+     */
     public enum AnimationType {
         CLOSE_VIDEO, SHOW_VIDEO, NONE
     }

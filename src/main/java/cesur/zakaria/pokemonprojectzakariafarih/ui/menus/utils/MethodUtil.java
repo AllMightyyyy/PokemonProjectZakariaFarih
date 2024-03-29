@@ -1,6 +1,18 @@
 package cesur.zakaria.pokemonprojectzakariafarih.ui.menus.utils;
 
+/**
+ * Utility class for checking password strength.
+ */
 public class MethodUtil {
+
+    /**
+     * Checks the strength of a password.
+     * @param password The password to check.
+     * @return An integer representing the password strength:
+     *         - 1: Weak
+     *         - 2: Moderate
+     *         - 3: Strong
+     */
     public static int checkPasswordStrength(String password) {
         int score = 0;
         if (password.length() >= 8) {
@@ -23,11 +35,11 @@ public class MethodUtil {
             score++;
         }
         if (score < 3) {
-            return 1;
+            return 1; // Weak
         } else if (score < 5) {
-            return 2;
+            return 2; // Moderate
         } else {
-            return 3;
+            return 3; // Strong
         }
     }
 }

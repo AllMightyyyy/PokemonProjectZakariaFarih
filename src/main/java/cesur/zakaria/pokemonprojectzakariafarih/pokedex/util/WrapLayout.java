@@ -8,25 +8,56 @@ import java.awt.Insets;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 
+/**
+ * The WrapLayout class is a layout manager that lays out components in a flow, wrapping to the next row or column
+ * if necessary.
+ */
 public class WrapLayout extends FlowLayout {
 
+    /**
+     * Constructs a new WrapLayout with a default alignment and a default horizontal and vertical gap of 5 pixels.
+     */
     public WrapLayout() {
         super();
     }
 
+    /**
+     * Constructs a new WrapLayout with the specified alignment and a default horizontal and vertical gap of 5 pixels.
+     *
+     * @param align the alignment value
+     */
     public WrapLayout(int align) {
         super(align);
     }
 
+    /**
+     * Constructs a new WrapLayout with the specified alignment and gap between components.
+     *
+     * @param align the alignment value
+     * @param hgap  the horizontal gap between components
+     * @param vgap  the vertical gap between components
+     */
     public WrapLayout(int align, int hgap, int vgap) {
         super(align, hgap, vgap);
     }
 
+    /**
+     * Calculates the preferred size dimensions for the specified target container.
+     *
+     * @param target the target container
+     * @return the preferred size dimensions
+     */
     @Override
     public Dimension preferredLayoutSize(Container target) {
         return layoutSize(target, true);
     }
 
+    /**
+     * Calculates the minimum size dimensions for the specified target container.
+     *
+     * @param target the target container
+     * @return the minimum size dimensions
+     */
     @Override
     public Dimension minimumLayoutSize(Container target) {
         Dimension minimum = layoutSize(target, false);
@@ -34,6 +65,13 @@ public class WrapLayout extends FlowLayout {
         return minimum;
     }
 
+    /**
+     * Calculates the size dimensions for the specified target container.
+     *
+     * @param target    the target container
+     * @param preferred true to calculate preferred size, false to calculate minimum size
+     * @return the size dimensions
+     */
     private Dimension layoutSize(Container target, boolean preferred) {
         synchronized (target.getTreeLock()) {
             int targetWidth = target.getSize().width;
@@ -89,6 +127,13 @@ public class WrapLayout extends FlowLayout {
         }
     }
 
+    /**
+     * Adds a row with the specified dimensions to the layout.
+     *
+     * @param dim       the dimensions of the layout
+     * @param rowWidth  the width of the row
+     * @param rowHeight the height of the row
+     */
     private void addRow(Dimension dim, int rowWidth, int rowHeight) {
         dim.width = Math.max(dim.width, rowWidth);
 

@@ -1,3 +1,6 @@
+/**
+ * Represents a Pokémon entity with its properties.
+ */
 package cesur.zakaria.pokemonprojectzakariafarih.teamCenter.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

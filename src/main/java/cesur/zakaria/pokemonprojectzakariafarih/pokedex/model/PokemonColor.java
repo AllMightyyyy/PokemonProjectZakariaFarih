@@ -2,6 +2,9 @@ package cesur.zakaria.pokemonprojectzakariafarih.pokedex.model;
 
 import java.awt.Color;
 
+/**
+ * The PokemonColor enum represents the color associated with different types of Pokemon.
+ */
 public enum PokemonColor {
 
     NORMAL(new Color(168, 167, 122)),
@@ -25,10 +28,20 @@ public enum PokemonColor {
 
     private final Color rgbColor;
 
+    /**
+     * Constructs a PokemonColor object with the specified RGB color.
+     *
+     * @param rgbColor The RGB color associated with the Pokemon type.
+     */
     PokemonColor(Color rgbColor) {
         this.rgbColor = rgbColor;
     }
 
+    /**
+     * Retrieves the RGB color associated with the Pokemon type.
+     *
+     * @return The RGB color associated with the Pokemon type.
+     */
     public Color getRgbColor() {
         return rgbColor;
     }

@@ -11,22 +11,48 @@ import cesur.zakaria.pokemonprojectzakariafarih.vue.MainView;
 import java.io.IOException;
 import java.nio.file.Paths;
 
+/**
+ * MainController class is the controller class for MainView.fxml.
+ * It controls the main view of the application.
+ */
 public class MainController {
-	
-	private AudioClip music;
-	
+
+    /**
+     * The music variable is used to play the background music.
+     */
+    private AudioClip music;
+
+    /**
+     * The launchFightButton is a button that launches the fight scene.
+     */
     @FXML
     private Button launchFightButton;
 
+    /**
+     * This method is used to initialize the controller class.
+     */
     public void initialize() {
     }
+
+    /**
+     * This method is called when the launchFightButton is clicked.
+     * It changes the scene to the fight scene.
+     * @param event the action event
+     * @throws IOException if there is an error while changing the scene
+     */
     @FXML
     void launchFight(ActionEvent event) throws IOException {
-    	MainView.changeScene((Stage)launchFightButton.getScene().getWindow(), "Fight.fxml");
+        MainView.changeScene((Stage)launchFightButton.getScene().getWindow(), "Fight.fxml");
     }
-    
+
+    /**
+     * This method is called when the launchPokedexButton is clicked.
+     * It changes the scene to the pokedex scene.
+     * @param event the action event
+     * @throws IOException if there is an error while changing the scene
+     */
     @FXML
     void launchPokedex(ActionEvent event) throws IOException {
-    	MainView.changeScene((Stage)launchFightButton.getScene().getWindow(), "Pokedex.fxml");
+        MainView.changeScene((Stage)launchFightButton.getScene().getWindow(), "Pokedex.fxml");
     }
 }

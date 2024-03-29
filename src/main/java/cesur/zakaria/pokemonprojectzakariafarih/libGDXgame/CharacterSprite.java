@@ -11,6 +11,10 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 
+/**
+ * Represents a character sprite in a LibGDX game.
+ * Handles character animation, movement, and rendering.
+ */
 public class CharacterSprite implements Disposable {
     private static final float TILE_WIDTH = 16;
     private static final float TILE_HEIGHT = 16;
@@ -27,19 +31,26 @@ public class CharacterSprite implements Disposable {
     private boolean movingRight = false;
     private TiledMap map;
 
+    /**
+     * Creates a new CharacterSprite with the specified TiledMap.
+     *
+     * @param map The TiledMap to use for collision detection.
+     */
     public CharacterSprite(TiledMap map) {
         this.map = map;
         loadAnimations();
         x = 73.74389f; // Set initial X position
         y = 526.78986f; // Set initial Y position
         stateTime = 0f;
-        // Initially set the currentFrame to the down rest frame
     }
 
+    /**
+     * Loads the character animations from texture files.
+     */
     private void loadAnimations() {
         texturesToDispose = new Array<>();
 
-        // Assuming the rest frame is the third image in the sequence
+        // Load rest frames
         restLeftFrame = new TextureRegion(new Texture(Gdx.files.internal("characterSprites/emerald_left_3.png")));
         restRightFrame = new TextureRegion(new Texture(Gdx.files.internal("characterSprites/emerald_right_3.png")));
         restUpFrame = new TextureRegion(new Texture(Gdx.files.internal("characterSprites/emerald_up_3.png")));
@@ -48,12 +59,20 @@ public class CharacterSprite implements Disposable {
         // Add rest frames to disposal list
         texturesToDispose.addAll(restLeftFrame.getTexture(), restRightFrame.getTexture(), restUpFrame.getTexture(), restDownFrame.getTexture());
 
+        // Load animations
         leftAnimation = loadAnimation("emerald_left", 3);
         rightAnimation = loadAnimation("emerald_right", 3);
         upAnimation = loadAnimation("emerald_up", 3);
         downAnimation = loadAnimation("emerald_down", 3);
     }
 
+    /**
+     * Loads an animation from texture files.
+     *
+     * @param baseName The base name of the animation texture files.
+     * @param count    The number of frames in the animation.
+     * @return The loaded animation.
+     */
     private Animation<TextureRegion> loadAnimation(String baseName, int count) {
         Array<TextureRegion> frames = new Array<>();
         for (int i = 1; i < count; i++) { // Exclude the rest frame for animation
@@ -64,12 +83,16 @@ public class CharacterSprite implements Disposable {
         return new Animation<>(0.1f, frames, Animation.PlayMode.LOOP_PINGPONG);
     }
 
+    /**
+     * Updates the character's state.
+     *
+     * @param deltaTime The time since the last update.
+     */
     public void update(float deltaTime) {
         stateTime += deltaTime;
-
         float moveSpeed = 200 * deltaTime; // Adjust this value as needed
 
-        // Update character position based on pressed movement keys
+        // Update character position based on pressed movement keys and collision detection
         if (movingUp && isWalkable(x, y + moveSpeed)) {
             y += moveSpeed;
             lastDirection = "UP";
@@ -86,7 +109,6 @@ public class CharacterSprite implements Disposable {
             x += moveSpeed;
             lastDirection = "RIGHT";
         }
-
 
         // Update current animation frame based on movement
         if (movingUp || movingDown || movingLeft || movingRight) {
@@ -110,6 +132,9 @@ public class CharacterSprite implements Disposable {
         }
     }
 
+    /**
+     * Updates the current frame to the rest frame based on the last direction.
+     */
     private void updateRestFrame() {
         switch (lastDirection) {
             case "UP":
@@ -127,6 +152,12 @@ public class CharacterSprite implements Disposable {
         }
     }
 
+    /**
+     * Handles key press events for character movement.
+     *
+     * @param keyCode The key code of the pressed key.
+     * @return True if the key press was handled, false otherwise.
+     */
     public boolean handleKeyDown(int keyCode) {
         boolean keyProcessed = false;
         switch (keyCode) {
@@ -148,28 +179,17 @@ public class CharacterSprite implements Disposable {
                 break;
         }
         if (keyProcessed) {
-            // Log only when a movement key is processed
             System.out.println("Starting movement - Character position - X: " + x + ", Y: " + y);
         }
-        return keyProcessed; // Indicate that the key press was handled
-    }
-    private boolean isWalkable(float x, float y) {
-        int tileX = (int) (x / TILE_WIDTH); // Define or replace TILE_WIDTH with appropriate value
-        int tileY = (int) (y / TILE_HEIGHT); // Define or replace TILE_HEIGHT with appropriate value
-        TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get("ground"); // Use the layer named "bottomGroundGrass"
-        if (layer != null) {
-            TiledMapTileLayer.Cell cell = layer.getCell(tileX, tileY);
-            if (cell != null) {
-                Object walkableProperty = cell.getTile().getProperties().get("walkable");
-                if (walkableProperty instanceof Boolean) {
-                    return (boolean) walkableProperty;
-                }
-            }
-        }
-        return false; // Default to non-walkable if tile, cell, or layer is not found or if walkable property is not set
+        return keyProcessed;
     }
 
-
+    /**
+     * Handles key release events for character movement.
+     *
+     * @param keyCode The key code of the released key.
+     * @return True if the key release was handled, false otherwise.
+     */
     public boolean handleKeyUp(int keyCode) {
         boolean keyProcessed = false;
         switch (keyCode) {
@@ -191,42 +211,87 @@ public class CharacterSprite implements Disposable {
                 break;
         }
         if (keyProcessed) {
-            // Log only when a movement key is released
             System.out.println("Stopping movement - Character position - X: " + x + ", Y: " + y);
         }
-        return keyProcessed; // Indicate that the key release was handled
+        return keyProcessed;
     }
 
+    /**
+     * Renders the character sprite.
+     *
+     * @param batch The SpriteBatch used for rendering.
+     */
     public void render(SpriteBatch batch) {
-        float spriteScale = 16 / (float) currentFrame.getRegionWidth(); //16x16 pixels
+        float spriteScale = 16 / (float) currentFrame.getRegionWidth(); // Assuming 16x16 pixels
         batch.draw(currentFrame, x, y, currentFrame.getRegionWidth() * spriteScale, currentFrame.getRegionHeight() * spriteScale);
     }
 
+    /**
+     * Gets the X coordinate of the character.
+     *
+     * @return The X coordinate.
+     */
     public float getX() {
         return x;
     }
 
-    // Method to get the Y coordinate of the character
+    /**
+     * Gets the Y coordinate of the character.
+     *
+     * @return The Y coordinate.
+     */
     public float getY() {
         return y;
     }
 
-    // Method to get the width of the character's current frame
+    /**
+     * Gets the width of the character's current frame.
+     *
+     * @return The width of the frame.
+     */
     public float getWidth() {
-        // Assuming the width is consistent across all frames, or you can adjust if not
         return currentFrame.getRegionWidth();
     }
 
-    // Method to get the height of the character's current frame
+    /**
+     * Gets the height of the character's current frame.
+     *
+     * @return The height of the frame.
+     */
     public float getHeight() {
-        // Assuming the height is consistent across all frames, or you can adjust if not
         return currentFrame.getRegionHeight();
     }
 
+    /**
+     * Disposes of resources used by the character sprite.
+     */
     @Override
     public void dispose() {
         for (Texture texture : texturesToDispose) {
             texture.dispose();
         }
+    }
+
+    /**
+     * Checks if the character can walk to the specified position.
+     *
+     * @param x The X coordinate to check.
+     * @param y The Y coordinate to check.
+     * @return True if the character can walk to the position, false otherwise.
+     */
+    private boolean isWalkable(float x, float y) {
+        int tileX = (int) (x / TILE_WIDTH);
+        int tileY = (int) (y / TILE_HEIGHT);
+        TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get("ground");
+        if (layer != null) {
+            TiledMapTileLayer.Cell cell = layer.getCell(tileX, tileY);
+            if (cell != null) {
+                Object walkableProperty = cell.getTile().getProperties().get("walkable");
+                if (walkableProperty instanceof Boolean) {
+                    return (boolean) walkableProperty;
+                }
+            }
+        }
+        return false;
     }
 }

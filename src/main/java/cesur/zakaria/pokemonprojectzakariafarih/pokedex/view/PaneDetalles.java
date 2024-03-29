@@ -23,12 +23,21 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
+/**
+ * The PaneDetalles class represents a panel containing details about a Pokemon.
+ */
 public class PaneDetalles extends javax.swing.JPanel {
 
     private final Pokemon pokemon;
     private final String descripcion;
     private final Color rgbFondo;
 
+    /**
+     * Creates new form PaneDetalles.
+     * @param pokemon The Pokemon object.
+     * @param descripcion The description of the Pokemon.
+     * @param rgbFondo The background color.
+     */
     public PaneDetalles(Pokemon pokemon, String descripcion, Color rgbFondo) {
         initComponents();
         this.setBackground(new Color(0, 0, 0, 0));
@@ -37,16 +46,21 @@ public class PaneDetalles extends javax.swing.JPanel {
         this.descripcion = descripcion;
         this.rgbFondo = rgbFondo;
         iniciar();
-
     }
 
+    /**
+     * Initializes the components of the panel.
+     */
     private void iniciar() {
         cargarImagen();
         lblNombre.setText(pokemon.getName());
         configurarTexto();
-        mostrarStatss();
+        mostrarStats();
     }
 
+    /**
+     * Loads the image of the Pokemon.
+     */
     private void cargarImagen() {
         try {
             BufferedImage img = ImageIO.read(new URL(pokemon.getSprites().getFrontDefault()));
@@ -57,6 +71,9 @@ public class PaneDetalles extends javax.swing.JPanel {
         }
     }
 
+    /**
+     * Configures the text display.
+     */
     private void configurarTexto() {
         Validaciones.barraEstiloCategoria(txt);
         txt.putClientProperty(FlatClientProperties.STYLE, "font:plain -2;"
@@ -71,6 +88,9 @@ public class PaneDetalles extends javax.swing.JPanel {
         txt.setOpaque(false);
     }
 
+    /**
+     * Paints the panel background with rounded corners.
+     */
     @Override
     protected void paintComponent(Graphics grphcs) {
         Graphics2D g2 = (Graphics2D) grphcs.create();
@@ -81,7 +101,10 @@ public class PaneDetalles extends javax.swing.JPanel {
         super.paintComponent(grphcs);
     }
 
-    private void mostrarStatss() {
+    /**
+     * Displays the Pokemon statistics.
+     */
+    private void mostrarStats() {
         Map<String, Integer> statsMap = obtenerStatsMap(pokemon);
         actualizarBarra(barHp, statsMap.getOrDefault("hp", -1), lblHp);
         actualizarBarra(barAtaque, statsMap.getOrDefault("attack", -1), lblAtaque);
@@ -91,11 +114,22 @@ public class PaneDetalles extends javax.swing.JPanel {
         actualizarBarra(barVelocidad, statsMap.getOrDefault("speed", -1), lblVelocidad);
     }
 
+    /**
+     * Updates the progress bar and label with a new value.
+     * @param barra The progress bar.
+     * @param valor The new value.
+     * @param label The label.
+     */
     private void actualizarBarra(JProgressBar barra, int valor, JLabel label) {
         barra.setValue(valor);
         label.setText(String.valueOf(valor));
     }
 
+    /**
+     * Retrieves a map of Pokemon statistics.
+     * @param pokemon The Pokemon object.
+     * @return A map containing the statistics.
+     */
     private Map<String, Integer> obtenerStatsMap(Pokemon pokemon) {
         Map<String, Integer> statsMap = new HashMap<>();
         List<PokemonStat> stats = pokemon.getStats();

@@ -13,7 +13,14 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 
+/**
+ * Class for displaying a transparent splash screen with a Pokemon image.
+ */
 public class pokemonSplash {
+    /**
+     * Creates the content for the splash screen.
+     * @return The parent node containing the splash screen content.
+     */
     private static Parent createContent() {
         Pane root = new Pane();
         root.setPrefSize(1024,600);
@@ -25,6 +32,10 @@ public class pokemonSplash {
 
         return root;
     }
+    /**
+     * Switches to the Pokemon splash screen.
+     * @param stage The stage to display the splash screen on.
+     */
     public static void switchToPokSplash(Stage stage) {
         Scene scene = new Scene(createContent(), Color.TRANSPARENT);
         stage.initStyle(StageStyle.TRANSPARENT);

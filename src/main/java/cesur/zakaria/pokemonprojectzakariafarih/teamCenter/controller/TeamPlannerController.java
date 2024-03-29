@@ -1,3 +1,10 @@
+/**
+ * Controller class for the Team Planner application in a Pokémon project.
+ * Responsible for managing user interactions with the team planning interface,
+ * loading and displaying Pokémon data, handling filters, adding/removing Pokémon
+ * from the team, analyzing team defense coverage, and providing functionality
+ * to randomize the team.
+ */
 package cesur.zakaria.pokemonprojectzakariafarih.teamCenter.controller;
 
 import cesur.zakaria.pokemonprojectzakariafarih.teamCenter.entity.Pokemon;
@@ -15,9 +22,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -27,42 +34,26 @@ import java.util.stream.Stream;
 
 public class TeamPlannerController {
 
-    @FXML
-    private TilePane pokemonTilePane;
+    // FXML elements
+    @FXML private TilePane pokemonTilePane;
+    @FXML private HBox teamRow1, teamRow2;
+    @FXML private Button randomizeTeamButton;
+    @FXML private Button showTeamAnalysis;
+    @FXML private ChoiceBox<String> typeFilterChoiceBox;
+    @FXML private ChoiceBox<String> generationFilterChoiceBox;
+    @FXML private TextField searchTextField;
+    @FXML private Button reset;
 
-    @FXML
-    private HBox teamRow1, teamRow2;
-
-    @FXML
-    private Button randomizeTeamButton;
-
-    @FXML
-    private Button showTeamAnalysis;
-
-    @FXML
-    private ChoiceBox<String> typeFilterChoiceBox;
-
-    @FXML
-    private ChoiceBox<String> generationFilterChoiceBox;
-
-    @FXML
-    private TextField searchTextField;
-
-    @FXML
-    private Button reset;
-
+    // Other class fields
     private List<AnchorPane> teamSlots = new ArrayList<>();
-
     private static final String TYPES_COVERAGE_PATH = "/cesur/zakaria/pokemonprojectzakariafarih/images/typesCoverage/";
-
-    private GridPane defenseCoverageTable;
-
     private List<Pokemon> selectedPokemons = new ArrayList<>();
-
-    private List<String> pokemonTypes;
-
     private JSONObject typeData;
 
+    /**
+     * Initializes the controller.
+     * Loads Pokémon data, initializes filters, and sets up event handlers.
+     */
     public void initialize() {
         generateTeamPlaceholders(6);
         try {
@@ -77,13 +68,18 @@ public class TeamPlannerController {
     }
 
 
+    /**
+     * Loads Pokémon images and adds them to the TilePane.
+     * @throws IOException if an I/O error occurs while loading images.
+     */
     private void loadPokemonsIntoTilePane() throws IOException {
         Map<String, Pokemon> pokemons = DataLoader.loadPokemonData();
 
         pokemons.values().forEach(pokemon -> {
-            String imageName = pokemon.generateImageName(); // Ensure this method returns a valid resource name
+            String imageName = pokemon.generateImageName();
             URL imageUrl = getClass().getResource("/cesur/zakaria/pokemonprojectzakariafarih/images/pokemon/" + imageName);
             if (imageUrl != null) {
+                // Load image
                 Image pokemonImage = new Image(imageUrl.toExternalForm());
                 ImageView imageView = new ImageView(pokemonImage);
                 imageView.setFitHeight(100);
@@ -92,7 +88,7 @@ public class TeamPlannerController {
 
                 // Wrapping ImageView in a Pane for the context menu
                 Pane imageWrapper = new Pane(imageView);
-                imageWrapper.setPrefSize(100, 100); // Match the ImageView size or adjust as needed
+                imageWrapper.setPrefSize(100, 100);
 
                 // Context Menu setup
                 ContextMenu contextMenu = new ContextMenu();
@@ -113,42 +109,52 @@ public class TeamPlannerController {
         });
     }
 
+
+    /**
+     * Generates placeholders for team slots in the UI.
+     * @param numberOfSlots Number of team slots to generate.
+     */
     private void generateTeamPlaceholders(int numberOfSlots) {
+        // Default image URLs
         URL defaultPokemonImageUrl = getClass().getResource("/cesur/zakaria/pokemonprojectzakariafarih/images/pokemon/0000_000_uk_n.png");
         URL defaultTypeImageUrl = getClass().getResource("/cesur/zakaria/pokemonprojectzakariafarih/images/types/normal.png");
 
         for (int i = 0; i < numberOfSlots; i++) {
+            // Create ImageView for Pokémon image
             ImageView pokemonImageView = new ImageView(new Image(defaultPokemonImageUrl.toExternalForm()));
             pokemonImageView.setFitHeight(150);
             pokemonImageView.setFitWidth(150);
             pokemonImageView.setLayoutX(25);
             pokemonImageView.setLayoutY(20);
 
-            HBox typeImagesBox = new HBox(2); // Spacing between children
-            typeImagesBox.setId("typeImagesBox" + i); // Assign unique ID based on slot index
-            // Position it correctly in relation to the pokemonImageView
+            // Create HBox for type images
+            HBox typeImagesBox = new HBox(2);
+            typeImagesBox.setId("typeImagesBox" + i);
             typeImagesBox.setLayoutX(pokemonImageView.getLayoutX());
-            typeImagesBox.setLayoutY(pokemonImageView.getLayoutY() - 30); // Place above the pokemonImageView
+            typeImagesBox.setLayoutY(pokemonImageView.getLayoutY() - 30);
 
-            // Add the default type image to the typeImagesBox
+            // Add default type image to typeImagesBox
             ImageView defaultTypeImageView = new ImageView(new Image(defaultTypeImageUrl.toExternalForm()));
-            defaultTypeImageView.setFitHeight(15); // Set smaller size for the default type icon
+            defaultTypeImageView.setFitHeight(15);
             defaultTypeImageView.setFitWidth(15);
-            typeImagesBox.getChildren().add(defaultTypeImageView); // Add to the HBox
+            typeImagesBox.getChildren().add(defaultTypeImageView);
 
-
+            // Create label for Pokémon name
             Label pokemonLabel = new Label("EMPTY SLOT");
             pokemonLabel.setLayoutX(25);
             pokemonLabel.setPrefWidth(150);
             pokemonLabel.setAlignment(Pos.CENTER);
             pokemonLabel.setLayoutY(175);
 
+            // Create AnchorPane to hold all elements
             AnchorPane slot = new AnchorPane();
             slot.getChildren().addAll(pokemonImageView, typeImagesBox, pokemonLabel);
             slot.setPrefSize(200, 200);
 
+            // Add slot to teamSlots list
             teamSlots.add(slot);
 
+            // Add slot to appropriate row in UI
             if (i < 3) {
                 teamRow1.getChildren().add(slot);
             } else {
@@ -157,56 +163,65 @@ public class TeamPlannerController {
         }
     }
 
+    /**
+     * Resets the content of team slots to their default state.
+     */
     private void resetTeamSlots() {
         for (AnchorPane slot : teamSlots) {
             ImageView pokemonImage = (ImageView) slot.getChildren().get(0);
             Label pokemonLabel = (Label) slot.getChildren().get(2);
             HBox typeImagesBox = (HBox) slot.getChildren().get(1);
 
-            pokemonImage.setImage(null); // Remove the image
-            pokemonLabel.setText("EMPTY SLOT"); // Reset the label
-            typeImagesBox.getChildren().clear(); // Clear type images
+            // Reset image, label, and type images
+            pokemonImage.setImage(null);
+            pokemonLabel.setText("EMPTY SLOT");
+            typeImagesBox.getChildren().clear();
         }
     }
 
 
+
+    /**
+     * Handles adding a Pokémon to the team slots.
+     * @param selectedPokemon The Pokémon to add to the team.
+     */
     private void handleAddPokemon(Pokemon selectedPokemon) {
         if (selectedPokemons.size() >= 6) {
             showAlert("Team Full", "Your team is full. Cannot add more Pokémon.");
-            return; // Early return to prevent adding
+            return;
         }
 
         boolean slotFound = false;
 
         for (int i = 0; i < teamSlots.size(); i++) {
             AnchorPane slot = teamSlots.get(i);
-            ImageView pokemonImage = (ImageView) slot.getChildren().get(0);
-            Label pokemonLabel = (Label) slot.getChildren().get(2); // Assuming Label is at index 2
-            HBox typeImagesBox = (HBox) slot.getChildren().get(1); // Assuming HBox is at index 1
+            Label pokemonLabel = (Label) slot.getChildren().get(2);
 
-            selectedPokemon.setPokemonTypes(selectedPokemon.getPokemonType());
-
-            // Check if the slot is empty based on the label text
+            // Check if slot is empty
             if ("EMPTY SLOT".equals(pokemonLabel.getText())) {
                 updateSlotWithPokemon(slot, selectedPokemon);
-                selectedPokemons.add(selectedPokemon); // Add the selected Pokemon to the list
+                selectedPokemons.add(selectedPokemon);
                 slotFound = true;
                 break;
             }
         }
 
-        // If no empty slot is found, shift the existing Pokémon to make room
         if (!slotFound) {
-            // Shift all existing Pokémon to the left
+            // If no empty slot found, shift existing Pokémon to make room
             for (int i = 0; i < teamSlots.size() - 1; i++) {
                 copyPokemonData(teamSlots.get(i + 1), teamSlots.get(i));
             }
-            // Add the new Pokémon to the last slot
+            // Add new Pokémon to last slot
             updateSlotWithPokemon(teamSlots.get(teamSlots.size() - 1), selectedPokemon);
-            selectedPokemons.add(selectedPokemon); // Add the selected Pokemon to the list
+            selectedPokemons.add(selectedPokemon);
         }
     }
 
+    /**
+     * Displays an alert dialog with the specified title and message.
+     * @param title The title of the alert dialog.
+     * @param message The message to display in the alert dialog.
+     */
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
@@ -214,6 +229,12 @@ public class TeamPlannerController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+    /**
+     * Copies Pokémon data from one slot to another.
+     * @param sourceSlot The source slot to copy from.
+     * @param targetSlot The target slot to copy to.
+     */
     private void copyPokemonData(AnchorPane sourceSlot, AnchorPane targetSlot) {
         ImageView sourceImage = (ImageView) sourceSlot.getChildren().get(0);
         ImageView targetImage = (ImageView) targetSlot.getChildren().get(0);
@@ -222,16 +243,24 @@ public class TeamPlannerController {
         HBox sourceTypesBox = (HBox) sourceSlot.getChildren().get(1);
         HBox targetTypesBox = (HBox) targetSlot.getChildren().get(1);
 
+        // Copy image, label, and type images
         targetImage.setImage(sourceImage.getImage());
         targetLabel.setText(sourceLabel.getText());
         targetTypesBox.getChildren().setAll(sourceTypesBox.getChildren());
     }
 
+
+    /**
+     * Updates a team slot with the specified Pokémon.
+     * @param slot The team slot to update.
+     * @param pokemon The Pokémon to update the slot with.
+     */
     private void updateSlotWithPokemon(AnchorPane slot, Pokemon pokemon) {
         ImageView pokemonImageView = (ImageView) slot.getChildren().get(0);
         Label pokemonLabel = (Label) slot.getChildren().get(2);
         HBox typeImagesBox = (HBox) slot.getChildren().get(1);
 
+        // Set image, label, and type images
         String imageName = pokemon.generateImageName();
         URL imageUrl = getClass().getResource("/cesur/zakaria/pokemonprojectzakariafarih/images/pokemon/" + imageName);
 
@@ -243,17 +272,14 @@ public class TeamPlannerController {
         }
 
         pokemonLabel.setText(pokemon.getName());
-
-        // Clear the HBox of any previous type images
         typeImagesBox.getChildren().clear();
 
-        // Add new type images for this Pokemon
         for (String type : pokemon.getPokemonType()) {
             String typeImagePath = "/cesur/zakaria/pokemonprojectzakariafarih/images/types/" + type.toLowerCase() + ".png";
             URL typeImageUrl = getClass().getResource(typeImagePath);
             if (typeImageUrl != null) {
                 ImageView typeImageView = new ImageView(new Image(typeImageUrl.toExternalForm()));
-                typeImageView.setFitHeight(20); // Set a smaller size
+                typeImageView.setFitHeight(20);
                 typeImageView.setFitWidth(20);
                 typeImagesBox.getChildren().add(typeImageView);
             } else {
@@ -262,83 +288,101 @@ public class TeamPlannerController {
         }
     }
 
+    /**
+     * Handles deleting a Pokémon from the team slots.
+     * @param pokemonToDelete The Pokémon to delete from the team.
+     */
     private void handleDeletePokemon(Pokemon pokemonToDelete) {
         teamSlots.forEach(slot -> {
-            ImageView imageView = (ImageView) slot.getChildren().get(0);
             Label label = (Label) slot.getChildren().get(2);
             if (pokemonToDelete.getName().equals(label.getText())) {
-                imageView.setImage(null); // Clear the image
-                label.setText("EMPTY SLOT"); // Reset the label
+                ImageView imageView = (ImageView) slot.getChildren().get(0);
+                imageView.setImage(null); // Clear image
+                label.setText("EMPTY SLOT"); // Reset label
 
-                // Find and remove the exact Pokemon object from the selectedPokemons list
+                // Remove the deleted Pokémon from the selectedPokemons list
                 selectedPokemons = selectedPokemons.stream()
                         .filter(pokemon -> !pokemon.getName().equals(pokemonToDelete.getName()))
                         .collect(Collectors.toList());
-
-                return; // Exit after finding and handling the selected Pokémon
             }
         });
     }
 
+    /**
+     * Handles the action of resetting the team slots.
+     */
     @FXML
     private void handleResetAction() {
-        // Clear the selectedPokemons list
-        selectedPokemons.clear();
-
-        // Reset each team slot to its default state
-        resetTeamSlots();
+        selectedPokemons.clear(); // Clear selectedPokemons list
+        resetTeamSlots(); // Reset team slots
     }
+
+    /**
+     * Handles the action of randomizing the team.
+     */
     @FXML
     private void handleRandomizeTeam() {
-        selectedPokemons.clear();
-        resetTeamSlots(); // Reset the UI for team slots
-        try {
-            Map<String, Pokemon> allPokemons = DataLoader.loadPokemonData(); // Assuming this is your method to load all Pokémon
-            List<Pokemon> pokemonList = new ArrayList<>(allPokemons.values());
-            Collections.shuffle(pokemonList); // Randomize the order of Pokémon
+        selectedPokemons.clear(); // Clear selectedPokemons list
+        resetTeamSlots(); // Reset team slots
 
-            // Make sure you have at least 6 Pokémon to choose from
+        try {
+            Map<String, Pokemon> allPokemons = DataLoader.loadPokemonData(); // Load all Pokémon
+            List<Pokemon> pokemonList = new ArrayList<>(allPokemons.values());
+            Collections.shuffle(pokemonList); // Randomize the order
+
             if (pokemonList.size() < 6) {
                 System.err.println("Not enough Pokémon to randomize.");
-                return; // Or handle the case as you see fit
+                return;
             }
 
-            // Select the first 6 Pokémon from the shuffled list
+            // Select first 6 Pokémon from shuffled list
             List<Pokemon> selectedPokemons = pokemonList.subList(0, 6);
 
-            // Clear existing team slots or handle them according to your logic
-            // Assuming you have a method to update a slot with a Pokemon:
+            // Update team slots with selected Pokémon
             for (int i = 0; i < selectedPokemons.size(); i++) {
                 selectedPokemons.get(i).setPokemonTypes(selectedPokemons.get(i).getPokemonType());
                 updateSlotWithPokemon(teamSlots.get(i), selectedPokemons.get(i));
-                this.selectedPokemons.add(selectedPokemons.get(i)); // Add the selected Pokemon to the list
+                this.selectedPokemons.add(selectedPokemons.get(i)); // Add to selectedPokemons list
             }
         } catch (Exception e) {
             e.printStackTrace();
-            // Handle any exceptions appropriately
+            // Handle exceptions appropriately
         }
     }
 
+
+    /**
+     * Handles the action of showing the team analysis.
+     */
     @FXML
-    private void showTeamAnalysis() throws JSONException {
-        // Create a new window (Stage)
-        Stage stage = new Stage();
-        stage.setTitle("Team Defense Analysis");
+    private void showTeamAnalysis() {
+        try {
+            // Create a new window (Stage)
+            Stage stage = new Stage();
+            stage.setTitle("Team Defense Analysis");
 
-        // Create a new GridPane that will hold our table
-        GridPane gridPane = createTable();
+            // Create a new GridPane for the table
+            GridPane gridPane = createTable();
 
-        // Populate the GridPane with images for types and selected Pokemons
-        populateTable(gridPane);
+            // Populate the table with data
+            populateTable(gridPane);
 
-        // Create a scene with the GridPane and set it on the stage
-        Scene scene = new Scene(gridPane);
-        stage.setScene(scene);
+            // Create a scene with the table and set it on the stage
+            Scene scene = new Scene(gridPane);
+            stage.setScene(scene);
 
-        // Show the new window
-        stage.showAndWait();
+            // Show the new window
+            stage.showAndWait();
+        } catch (JSONException e) {
+            e.printStackTrace();
+            // Handle JSON exception appropriately
+        }
     }
 
+    /**
+     * Creates a GridPane table for displaying team defense analysis.
+     * @return The GridPane table.
+     */
     private GridPane createTable() {
         // Create and configure the table-like GridPane here
         GridPane table = new GridPane();
@@ -350,6 +394,11 @@ public class TeamPlannerController {
         return table;
     }
 
+    /**
+     * Populates the given GridPane table with data for team defense analysis.
+     * @param table The GridPane table to populate.
+     * @throws JSONException If there is an error parsing JSON data.
+     */
     private void populateTable(GridPane table) throws JSONException {
         table.getChildren().clear(); // Clear previous content
         // Ensure the typeData has been loaded properly
@@ -479,6 +528,12 @@ public class TeamPlannerController {
         return imageView;
     }
 
+    /**
+     * Calculates the total number of Pokémon weak to a specific type.
+     * @param typeName The name of the type to calculate weakness for.
+     * @return The total number of Pokémon weak to the specified type.
+     * @throws JSONException If there is an error parsing JSON data.
+     */
     private int calculateTotalWeakForType(String typeName) throws JSONException {
         int totalWeak = 0;
 
@@ -501,6 +556,12 @@ public class TeamPlannerController {
         return totalWeak;
     }
 
+    /**
+     * Calculates the total number of Pokémon resistant to a specific type.
+     * @param typeName The name of the type to calculate resistance for.
+     * @return The total number of Pokémon resistant to the specified type.
+     * @throws JSONException If there is an error parsing JSON data.
+     */
     private int calculateTotalResistForType(String typeName) throws JSONException {
         int totalResist = 0;
 
@@ -524,6 +585,11 @@ public class TeamPlannerController {
     }
 
 
+    /**
+     * Loads type data from the JSON file.
+     * @throws IOException If an I/O error occurs.
+     * @throws JSONException If there is an error parsing JSON data.
+     */
     private void loadTypeData() throws IOException, JSONException {
         String jsonData = new String(Files.readAllBytes(Paths.get("src/main/resources/cesur/zakaria/pokemonprojectzakariafarih/teamCenter/utility/jsonData/types.json")));
         typeData = new JSONObject(jsonData);
@@ -533,6 +599,13 @@ public class TeamPlannerController {
         return selectedPokemons;
     }
 
+    /**
+     * Loads type data from the specified file path.
+     * @param filePath The file path from which to load type data.
+     * @return The JSON object containing type data.
+     * @throws IOException If an I/O error occurs.
+     * @throws JSONException If there is an error parsing JSON data.
+     */
     private JSONObject loadTypeDataFromFile(String filePath) throws IOException, JSONException {
         String jsonData = new String(Files.readAllBytes(Paths.get(filePath)));
         return new JSONObject(jsonData);
@@ -560,6 +633,9 @@ public class TeamPlannerController {
         return imageView;
     }
 
+    /**
+     * Initializes the filters for type and generation.
+     */
     private void initializeFilters() {
         // Example: Populate the type filter choice box
         typeFilterChoiceBox.getItems().addAll("All", "Fire", "Water", "Grass", "Bug", "dark", "dragon", "electric", "fairy", "fighting", "flying", "ghost", "ground", "ice", "normal", "poison", "psychic", "rock", "steel"); // Add all types
@@ -595,6 +671,10 @@ public class TeamPlannerController {
         });
     }
 
+    /**
+     * Filters the displayed Pokémon based on type, generation, and search text.
+     * @throws IOException If an error occurs while filtering the Pokémon.
+     */
     private void filterPokemons() throws IOException {
         String selectedType = typeFilterChoiceBox.getValue();
         String selectedGenerationString = generationFilterChoiceBox.getValue();
@@ -634,6 +714,10 @@ public class TeamPlannerController {
     }
 
 
+    /**
+     * Updates the displayed Pokémon in the TilePane based on the filtered list.
+     * @param pokemons The list of Pokémon to display.
+     */
     private void updatePokemonTilePane(List<Pokemon> pokemons) {
         pokemonTilePane.getChildren().clear(); // Clear existing tiles
 

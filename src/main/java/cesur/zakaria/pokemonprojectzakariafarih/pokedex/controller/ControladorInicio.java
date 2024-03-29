@@ -20,15 +20,26 @@ import javax.swing.SwingWorker;
 import Componente.pagination.style.PaginationItemRenderStyle1;
 import Componente.cardSwing.PnCard;
 
+/**
+ * The ControladorInicio class controls the starting pane of the Pokedex.
+ */
 public class ControladorInicio {
 
     private final PaneInicio paneInicio;
 
+    /**
+     * Constructs a ControladorInicio object with the specified PaneInicio.
+     *
+     * @param paneInicio The starting pane of the Pokedex.
+     */
     public ControladorInicio(PaneInicio paneInicio) {
         this.paneInicio = paneInicio;
-        paneInicio.boxItem.addActionListener(new boxCantidadDatos());
+        paneInicio.boxItem.addActionListener(new BoxCantidadDatosListener());
     }
 
+    /**
+     * Initializes the starting pane of the Pokedex.
+     */
     public void iniciar() {
         Validaciones.barraEstiloCategoria(paneInicio.pnContenedor);
         cargarDatosPagina(1);
@@ -42,7 +53,7 @@ public class ControladorInicio {
         });
     }
 
-    private class boxCantidadDatos implements ActionListener {
+    private class BoxCantidadDatosListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -75,7 +86,7 @@ public class ControladorInicio {
                 paneInicio.barDatos.setMaximum(cantidad);
             }
             default ->
-                throw new AssertionError();
+                    throw new AssertionError();
         }
         return cantidad;
     }

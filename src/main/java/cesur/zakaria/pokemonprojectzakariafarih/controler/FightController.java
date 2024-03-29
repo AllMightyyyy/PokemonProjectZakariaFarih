@@ -31,6 +31,10 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The FightController class is responsible for managing the user interface and game logic during a fight.
+ * It initializes the fight and its display, handles user input, and updates the user interface during the fight.
+ */
 public class FightController {
 	
 	private Fight fight;
@@ -129,10 +133,10 @@ public class FightController {
 
     @FXML
     private Label mainDialog;
-    
-    /**
+
+	/**
 	 * Initialize the fight and its display. It is called automatically at the launch of the controller.
-	 * @param 
+	 * @param
 	 * @return void
 	 */
 	public void initialize() throws IOException{
@@ -166,6 +170,11 @@ public class FightController {
 		updatePokeballs(fight.getTrainer2());
     }
 
+	/**
+	 * Updates the pokeballs in the user interface based on the given trainer.
+	 *
+	 * @param trainer the trainer whose pokeballs are to be updated
+	 */
 	private void updatePokeballs(Trainer trainer) {
 		HBox pokeballsBox;
 		if(fight.getFightPlan()==0) {
@@ -195,6 +204,11 @@ public class FightController {
 		}
 	}
 
+	/**
+	 * The bot plays the fight by choosing a random move from its available moves.
+	 *
+	 * @throws IOException if there is an error loading the media files
+	 */
 	private void botPlay() throws IOException {
 		Bot pokemonBot=(Bot)fight.getTrainer2();
 		Capacity used = pokemonBot.fight();
@@ -221,6 +235,12 @@ public class FightController {
 		
 	}
 
+	/**
+	 * Launches an attack using the given capacity.
+	 *
+	 * @param event the action event that triggered the method call
+	 * @throws FileNotFoundException if there is an error loading the media files
+	 */
 	@FXML
     void attack(ActionEvent event) throws FileNotFoundException {
 		if(GameControllerStatic.getGameControllerStatic().isMultiPlayer()==false && fight.getCurrentTrainer() instanceof Bot) {
@@ -309,6 +329,11 @@ public class FightController {
 		
     }
 
+	/**
+	 * Handles the next turn in the fight. If the game is being played in multiplayer mode and the current trainer is a bot, the bot is asked to play the next turn. If the current trainer only has one pokemon alive or if the current pokemon has no more fight moves, the buttons for selecting a different pokemon or for fighting are disabled. Otherwise, the buttons are enabled. The visibility of the capacity and action footer regions is also toggled, and the main dialog and main footer regions are hidden or shown as appropriate.
+	 *
+	 * @throws IOException if there is an error loading the media files
+	 */
 	private void nextTurn() throws IOException {
 		if(GameControllerStatic.getGameControllerStatic().isMultiPlayer()==false) {
 			if(fight.getCurrentTrainer() instanceof Bot) {
@@ -332,58 +357,73 @@ public class FightController {
 		
 	}
 
-    @FXML
-    void changePokemon(ActionEvent event) throws FileNotFoundException {
-    	actionFooterRight.setVisible(false);
-    	capacityFooterRight.setVisible(false);
-    	pokemonFooterRight.setVisible(true);
-    	mainFooter.setVisible(true);
-    	Trainer trainer = fight.getTrainer1();
-    	HashMap<Button, Pokemon> map = new HashMap<Button, Pokemon>()
-    	{{
-    		put(selectPoke1,trainer.getPokemon(0));
-    		put(selectPoke2,trainer.getPokemon(1));
-    		put(selectPoke3,trainer.getPokemon(2));
-    		put(selectPoke4,trainer.getPokemon(3));
-    		put(selectPoke5,trainer.getPokemon(4));
-    		put(selectPoke6,trainer.getPokemon(5));
-    	}};
-    	for(Map.Entry<Button, Pokemon> entry : map.entrySet()) {
-    		if(entry.getValue()!=null) {
-    			entry.getKey().setText(entry.getValue().getNickName().toUpperCase());
-        		if(!entry.getValue().isAlive() || entry.getValue().equals(fight.getCurrentTrainer().getPokemon())) {
-        			entry.getKey().setDisable(true);
-        		}
-        		else {
-        			entry.getKey().setDisable(false);
-        		}
-    		}
-    	}
-    }
+	/**
+	 * This method changes the currently selected pokemon for the trainer.
+	 *
+	 * @param event the action event that triggered the method call
+	 * @throws FileNotFoundException if there is an error loading the media files
+	 */
+	@FXML
+	void changePokemon(ActionEvent event) throws FileNotFoundException {
+		// Hides the action footer and capacity footer, and shows the pokemon footer.
+		actionFooterRight.setVisible(false);
+		capacityFooterRight.setVisible(false);
+		pokemonFooterRight.setVisible(true);
+		mainFooter.setVisible(true);
 
-    @FXML
-    void fight(ActionEvent event) {
-    	//SET DISPLAY
-    	actionFooterRight.setVisible(false);
-    	capacityFooterRight.setVisible(true);
+		// Gets the trainer.
+		Trainer trainer = fight.getTrainer1();
 
-    	HashMap<Button, Capacity> map = new HashMap<Button, Capacity>()
-    	{{
-    		put(cap1Button,fight.getTrainer1().getPokemon().getCapacities()[0]);
-    		put(cap2Button,fight.getTrainer1().getPokemon().getCapacities()[1]);
-    		put(cap3Button,fight.getTrainer1().getPokemon().getCapacities()[2]);
-    		put(cap4Button,fight.getTrainer1().getPokemon().getCapacities()[3]);
-    	}};
-    	for(Map.Entry<Button, Capacity> entry : map.entrySet()) {
-    		entry.getKey().setText(entry.getValue().getName().toUpperCase()+"\n"+entry.getValue().getPowerPoint()+"/"+entry.getValue().getMaxPowerPoint());
-    		if(!entry.getValue().isUsable()) {
-    			entry.getKey().setDisable(true);
-    		}
-    		else {
-    			entry.getKey().setDisable(false);
-    		}
-    	}
-    }
+		// Creates a hash map of buttons and their corresponding pokemon.
+		HashMap<Button, Pokemon> map = new HashMap<>();
+		map.put(selectPoke1, trainer.getPokemon(0));
+		map.put(selectPoke2, trainer.getPokemon(1));
+		map.put(selectPoke3, trainer.getPokemon(2));
+		map.put(selectPoke4, trainer.getPokemon(3));
+		map.put(selectPoke5, trainer.getPokemon(4));
+		map.put(selectPoke6, trainer.getPokemon(5));
+
+		// Loops through the map, setting the text of each button to the pokemon's name and disabling the button if the pokemon is not alive or if it is the same as the current pokemon.
+		for (Map.Entry<Button, Pokemon> entry : map.entrySet()) {
+			if (entry.getValue()!= null) {
+				entry.getKey().setText(entry.getValue().getNickName().toUpperCase());
+				if (!entry.getValue().isAlive() || entry.getValue().equals(fight.getCurrentTrainer().getPokemon())) {
+					entry.getKey().setDisable(true);
+				} else {
+					entry.getKey().setDisable(false);
+				}
+			}
+		}
+	}
+
+	/**
+	 * This method changes the currently selected pokemon for the trainer.
+	 *
+	 * @param event the action event that triggered the method call
+	 */
+	@FXML
+	void fight(ActionEvent event) {
+		// Hides the action footer and capacity footer, and shows the pokemon footer.
+		actionFooterRight.setVisible(false);
+		capacityFooterRight.setVisible(true);
+
+		// Creates a hash map of buttons and their corresponding capacities.
+		HashMap<Button, Capacity> map = new HashMap<>();
+		map.put(cap1Button, fight.getTrainer1().getPokemon().getCapacities()[0]);
+		map.put(cap2Button, fight.getTrainer1().getPokemon().getCapacities()[1]);
+		map.put(cap3Button, fight.getTrainer1().getPokemon().getCapacities()[2]);
+		map.put(cap4Button, fight.getTrainer1().getPokemon().getCapacities()[3]);
+
+		// Loops through the map, setting the text of each button to the capacity's name and disabling the button if the capacity is not usable.
+		for (Map.Entry<Button, Capacity> entry : map.entrySet()) {
+			entry.getKey().setText(entry.getValue().getName().toUpperCase() + "\n" + entry.getValue().getPowerPoint() + "/" + entry.getValue().getMaxPowerPoint());
+			if (!entry.getValue().isUsable()) {
+				entry.getKey().setDisable(true);
+			} else {
+				entry.getKey().setDisable(false);
+			}
+		}
+	}
 
     @FXML
     void run(ActionEvent event) throws IOException {
@@ -395,103 +435,154 @@ public class FightController {
     	quit();
     }
 
-    private void quit() {
-    	String fxml;
-    	if(GameControllerStatic.getGameControllerStatic().isLeagueison()) {
-    		fxml="League.fxml";
-    	}
-    	else {
-    		fxml="interface.fxml";
-    	}
-    	Timeline timeline = new Timeline(new KeyFrame(
-    	        Duration.millis(3000),
-    	        ae1 ->  {
-    	        	try {
-    	        		music.stop();
-						MainView.changeScene((Stage)runButton.getScene().getWindow(), fxml);
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-    	        }));timeline.play();
-    }
+	/**
+	 * This method handles the quitting of the game. It stops the music, changes the scene to the main menu, and plays a transition animation.
+	 */
+	private void quit() {
+		// Stops the music.
+		music.stop();
 
-    @FXML
-    void selectPokemon(ActionEvent event) throws IOException {
-    	if(event.getSource() instanceof Button) {
-    		//IF USER PLAY
-    		Button button = (Button)event.getSource();
-        	Trainer trainer=(Trainer)fight.getTrainer1();
-        	trainer.changePokemon(Integer.parseInt(button.getId().subSequence(button.getId().length()-1, button.getId().length()).toString())-1);
-        	printPokemon(trainer.getPokemon(), 0);
-    	}
-    	else {
-    		fight.getNonCurrentTrainer().changePokemon(0);
-    		printPokemon(fight.getNonCurrentTrainer().getPokemon(), 1);
-    	}
-    	pokemonFooterRight.setVisible(false);
-    	actionFooterRight.setVisible(true);
-    	fight.nextTurn();
-    	try {
+		// Changes the scene to the main menu.
+		String fxml;
+		if (GameControllerStatic.getGameControllerStatic().isLeagueison()) {
+			fxml = "League.fxml";
+		} else {
+			fxml = "interface.fxml";
+		}
+		try {
+			MainView.changeScene((Stage) runButton.getScene().getWindow(), fxml);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		// Plays a transition animation.
+		Timeline timeline = new Timeline(new KeyFrame(
+				Duration.millis(3000),
+				ae1 -> {
+					// Do nothing.
+				}));
+		timeline.play();
+	}
+
+	/**
+	 * This method changes the currently selected pokemon for the trainer.
+	 *
+	 * @param event the action event that triggered the method call
+	 * @throws IOException if there is an error loading the media files
+	 */
+	@FXML
+	void selectPokemon(ActionEvent event) throws IOException {
+		// Checks if the event source is a button. If it is, the method handles the user selecting a pokemon. If it is not, the method handles the bot selecting a pokemon.
+		if (event.getSource() instanceof Button) {
+			// IF USER PLAY
+			Button button = (Button) event.getSource();
+			Trainer trainer = (Trainer) fight.getTrainer1();
+			// Changes the currently selected pokemon for the trainer.
+			trainer.changePokemon(Integer.parseInt(button.getId().subSequence(button.getId().length() - 1, button.getId().length()).toString()) - 1);
+			// Prints the new pokemon to the user interface.
+			printPokemon(trainer.getPokemon(), 0);
+		} else {
+			// IF BOT PLAY
+			fight.getNonCurrentTrainer().changePokemon(0);
+			// Prints the new pokemon to the user interface.
+			printPokemon(fight.getNonCurrentTrainer().getPokemon(), 1);
+		}
+		// Hides the pokemon footer and shows the action footer.
+		pokemonFooterRight.setVisible(false);
+		actionFooterRight.setVisible(true);
+		// Advances to the next turn in the fight.
+		fight.nextTurn();
+		// Calls the next turn method, which handles the visibility of the capacity and action footer regions and displays the main dialog and main footer regions as appropriate.
+		try {
 			nextTurn();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-    }
-    private void playAnimation(ImageView image,double duration, int cycleCout, int x,int y) {
-    	TranslateTransition translateAnimation = new TranslateTransition(Duration.seconds(duration), image); 
-        translateAnimation.setCycleCount(cycleCout); 
-        translateAnimation.setAutoReverse(true); 
-        translateAnimation.setByX(x); 
-        translateAnimation.setByY(y); 
-        translateAnimation.setInterpolator(Interpolator.LINEAR); 
-        translateAnimation.play();
-    }
+	}
+	/**
+	 * This method creates a translate animation for the given image view.
+	 *
+	 * @param image the image view to be animated
+	 * @param duration the duration of the animation in seconds
+	 * @param cycleCount the number of times the animation should repeat
+	 * @param x the x-axis translation value
+	 * @param y the y-axis translation value
+	 */
+	private void playAnimation(ImageView image, double duration, int cycleCount, int x, int y) {
+		TranslateTransition translateAnimation = new TranslateTransition(Duration.seconds(duration), image);
+		translateAnimation.setCycleCount(cycleCount);
+		translateAnimation.setAutoReverse(true);
+		translateAnimation.setByX(x);
+		translateAnimation.setByY(y);
+		translateAnimation.setInterpolator(Interpolator.LINEAR);
+		translateAnimation.play();
+	}
 	private void setAnimations() {
+		// Apply animation to pokemon1Image
 		playAnimation(pokemon1Image, 0.3, TranslateTransition.INDEFINITE, 0, 3);
+
+		// Apply animation to pokemon2Image
 		playAnimation(pokemon2Image, 0.3, TranslateTransition.INDEFINITE, 0, 3);
 	}
 
 
+	/**
+	 * This method displays a message indicating the winner of the fight and quits the game.
+	 *
+	 * @param winner the trainer who won the fight
+	 */
 	private void printEndgame(Trainer winner) {
+		// Displays a message indicating the winner of the fight and quits the game.
 		Timeline timeline1 = new Timeline(new KeyFrame(
-    	        Duration.millis(3000),
-    	        ae1 ->  {
-    	        	//DISPLAY
-    	        	mainDialog.setText(winner.getName().toUpperCase()+" wins the fight!");
-    	        	mainDialog.setVisible(true);
-    	        	mainFooter.setVisible(false);
-    	        	Timeline timeline2 = new Timeline(new KeyFrame(
-        	    	        Duration.millis(3000),
-        	    	        ae2 ->  {
-        	    	        	//QUIT
-        	    	        	quit();
-        	    	        }));
-        			timeline2.play();
-    	        }));
+				Duration.millis(3000),
+				ae1 -> {
+					// Displays the message.
+					mainDialog.setText(winner.getName().toUpperCase() + " wins the fight!");
+					mainDialog.setVisible(true);
+					mainFooter.setVisible(false);
+					// Quits the game.
+					Timeline timeline2 = new Timeline(new KeyFrame(
+							Duration.millis(3000),
+							ae2 -> {
+								quit();
+							}));
+					timeline2.play();
+				}));
 		timeline1.play();
 	}
-	private void printPokemon(Pokemon poke,int i) throws FileNotFoundException {
-		if(i==0) {
+	/**
+	 * This method sets the properties of the given pokemon and updates the user interface.
+	 *
+	 * @param poke the pokemon to be displayed
+	 * @param i the index of the pokemon (0 for the first pokemon, 1 for the second pokemon)
+	 * @throws FileNotFoundException if there is an error loading the media files
+	 */
+	private void printPokemon(Pokemon poke, int i) throws FileNotFoundException {
+		// Sets the properties of the given pokemon and updates the user interface.
+		if (i == 0) {
+			// Sets the properties of the first pokemon.
 			pokemon1Name.setText(poke.getNickName().toUpperCase());
-	    	pokemon1Image.setImage(new Image(new FileInputStream("Pictures/"+poke.getSpecie().getImagePath())));
-	    	pokemon1Life.setText(poke.getStat().pvOnPvMax());
-	    	pokemon1Lifebar.setProgress(poke.getStat().pvRatio());
-	    	pokemon1Lvl.setText("Lvl"+poke.getStat().getXpLevel());
-	    	Capacity cap1=poke.getCapacities()[0];
-	    	Capacity cap2=poke.getCapacities()[1];
-	    	Capacity cap3=poke.getCapacities()[2];
-	    	Capacity cap4=poke.getCapacities()[3];
-	    	cap1Button.setText(cap1.getName().toUpperCase()+"\n"+cap1.getPowerPoint()+"/"+cap1.getMaxPowerPoint());
-	    	cap2Button.setText(cap2.getName().toUpperCase()+"\n"+cap2.getPowerPoint()+"/"+cap2.getMaxPowerPoint());
-	    	cap3Button.setText(cap3.getName().toUpperCase()+"\n"+cap3.getPowerPoint()+"/"+cap3.getMaxPowerPoint());
-	    	cap4Button.setText(cap4.getName().toUpperCase()+"\n"+cap4.getPowerPoint()+"/"+cap4.getMaxPowerPoint());
-		}
-		else {
+			pokemon1Image.setImage(new Image(new FileInputStream("Pictures/" + poke.getSpecie().getImagePath())));
+			pokemon1Life.setText(poke.getStat().pvOnPvMax());
+			pokemon1Lifebar.setProgress(poke.getStat().pvRatio());
+			pokemon1Lvl.setText("Lvl" + poke.getStat().getXpLevel());
+
+			// Sets the properties of the first pokemon's capacities.
+			Capacity cap1 = poke.getCapacities()[0];
+			Capacity cap2 = poke.getCapacities()[1];
+			Capacity cap3 = poke.getCapacities()[2];
+			Capacity cap4 = poke.getCapacities()[3];
+			cap1Button.setText(cap1.getName().toUpperCase() + "\n" + cap1.getPowerPoint() + "/" + cap1.getMaxPowerPoint());
+			cap2Button.setText(cap2.getName().toUpperCase() + "\n" + cap2.getPowerPoint() + "/" + cap2.getMaxPowerPoint());
+			cap3Button.setText(cap3.getName().toUpperCase() + "\n" + cap3.getPowerPoint() + "/" + cap3.getMaxPowerPoint());
+			cap4Button.setText(cap4.getName().toUpperCase() + "\n" + cap4.getPowerPoint() + "/" + cap4.getMaxPowerPoint());
+		} else {
+			// Sets the properties of the second pokemon.
 			pokemon2Name.setText(poke.getNickName().toUpperCase());
-	    	pokemon2Image.setImage(new Image(new FileInputStream("Pictures/"+poke.getSpecie().getImagePath())));
-	    	pokemon2Life.setText(poke.getStat().pvOnPvMax());
-	    	pokemon2Lifebar.setProgress(poke.getStat().pvRatio());
-	    	pokemon2Lvl.setText("Lvl"+poke.getStat().getXpLevel());
+			pokemon2Image.setImage(new Image(new FileInputStream("Pictures/" + poke.getSpecie().getImagePath())));
+			pokemon2Life.setText(poke.getStat().pvOnPvMax());
+			pokemon2Lifebar.setProgress(poke.getStat().pvRatio());
+			pokemon2Lvl.setText("Lvl" + poke.getStat().getXpLevel());
 		}
 	}
 	private void launchDialog(String text) {

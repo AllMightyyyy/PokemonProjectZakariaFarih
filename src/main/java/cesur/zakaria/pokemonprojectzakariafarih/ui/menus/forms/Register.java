@@ -9,13 +9,24 @@ import raven.toast.Notifications;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Represents a registration form for new users.
+ */
 public class Register extends JPanel {
     private Window parentWindow; // Store reference to parent window
 
+    /**
+     * Constructs a new Register panel.
+     */
     public Register() {
         init();
         setPreferredSize(new Dimension(600, 600));
     }
+
+    /**
+     * Sets the parent window.
+     * @param parentWindow The parent window to set.
+     */
     public void setParentWindow(Window parentWindow) {
         this.parentWindow = parentWindow;
     }
@@ -102,13 +113,15 @@ public class Register extends JPanel {
         return panel;
     }
 
+    /**
+     * Checks if the passwords match.
+     * @return True if the passwords match, false otherwise.
+     */
     public boolean isMatchPassword() {
         String password = String.valueOf(txtPassword.getPassword());
         String confirmPassword = String.valueOf(txtConfirmPassword.getPassword());
         return password.equals(confirmPassword);
     }
-
-    // Removed createLoginLabel() method as it's no longer needed
 
     private JTextField txtFirstName;
     private JTextField txtLastName;

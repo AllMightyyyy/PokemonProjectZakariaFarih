@@ -12,12 +12,19 @@ import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Utility class for adding ripple effect to Swing components.
+ */
 public class RippleEffect {
 
     private final Component component;
     private Color rippleColor = new Color(255, 255, 255);
     private List<Effect> effects;
 
+    /**
+     * Constructs a new RippleEffect for the specified component.
+     * @param component The Swing component to which the ripple effect will be added.
+     */
     public RippleEffect(Component component) {
         this.component = component;
         init();
@@ -35,11 +42,20 @@ public class RippleEffect {
         });
     }
 
+    /**
+     * Adds a ripple effect at the specified location.
+     * @param location The location where the ripple effect will be added.
+     */
     public void addEffect(Point location) {
         effects.add(new Effect(component, location));
     }
 
-    public void reder(Graphics g, Shape contain) {
+    /**
+     * Renders the ripple effects.
+     * @param g The Graphics object used for rendering.
+     * @param contain The shape containing the ripple effect.
+     */
+    public void render(Graphics g, Shape contain) {
         Graphics2D g2 = (Graphics2D) g.create();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         for (int i = 0; i < effects.size(); i++) {
@@ -50,6 +66,9 @@ public class RippleEffect {
         }
     }
 
+    /**
+     * Internal class representing a single ripple effect.
+     */
     private class Effect {
 
         private final Component component;
@@ -88,7 +107,7 @@ public class RippleEffect {
                 double t = animate - 0.7f;
                 alpha = (float) (alpha - (alpha * (t / 0.3f)));
             }
-            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha*0.7f));
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha * 0.7f));
             g2.fill(area);
         }
 
@@ -119,10 +138,18 @@ public class RippleEffect {
         }
     }
 
+    /**
+     * Sets the color of the ripple effect.
+     * @param rippleColor The color of the ripple effect.
+     */
     public void setRippleColor(Color rippleColor) {
         this.rippleColor = rippleColor;
     }
 
+    /**
+     * Gets the color of the ripple effect.
+     * @return The color of the ripple effect.
+     */
     public Color getRippleColor() {
         return rippleColor;
     }

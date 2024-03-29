@@ -13,12 +13,19 @@ import javafx.scene.text.Text;
 
 import java.util.Objects;
 
+/**
+ * Represents a menu item in the main menu.
+ */
 public class MenuItem extends Pane {
     private Text text;
 
     private Effect shadow = new DropShadow(5, Color.BLACK);
     private Effect blur = new BoxBlur(1, 1, 3);
 
+    /**
+     * Constructs a MenuItem with the specified name.
+     * @param name The name of the menu item.
+     */
     public MenuItem(String name) {
         Polygon bg = new Polygon(
                 0, 0,
@@ -51,6 +58,10 @@ public class MenuItem extends Pane {
         getChildren().addAll(bg, text);
     }
 
+    /**
+     * Sets the action to be performed when the menu item is clicked.
+     * @param action The action to be performed.
+     */
     public void setOnAction(Runnable action) {
         setOnMouseClicked(e -> action.run());
     }

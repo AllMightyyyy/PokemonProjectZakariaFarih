@@ -4,14 +4,17 @@ import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.ui.FlatUIUtils;
 import com.formdev.flatlaf.util.UIScale;
-import net.miginfocom.swing.MigLayout;
 import cesur.zakaria.pokemonprojectzakariafarih.ui.menus.utils.MethodUtil;
+import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
 
+/**
+ * A custom JPanel implementation for displaying the strength status of a password.
+ */
 public class PasswordStrengthStatus extends JPanel {
 
     private JPasswordField passwordField;
@@ -19,13 +22,18 @@ public class PasswordStrengthStatus extends JPanel {
     private JLabel label;
     private int type;
 
+    /**
+     * Constructs a new PasswordStrengthStatus panel.
+     */
     public PasswordStrengthStatus() {
         init();
     }
 
+    /**
+     * Initializes the panel properties and layout.
+     */
     private void init() {
-        putClientProperty(FlatClientProperties.STYLE, "" +
-                "background:null");
+        putClientProperty(FlatClientProperties.STYLE, "background:null");
         setLayout(new MigLayout("fill,insets 0", "3[100,fill,grow0][]", "[fill,grow 0]"));
         label = new JLabel("none");
         label.setVisible(false);
@@ -33,6 +41,12 @@ public class PasswordStrengthStatus extends JPanel {
         add(label);
     }
 
+    /**
+     * Determines the color representation of the password strength level.
+     *
+     * @param type the strength level of the password.
+     * @return the color representing the password strength.
+     */
     private Color getStrengthColor(int type) {
         if (type == 1) {
             return Color.decode("#FF4D4D");
@@ -43,6 +57,11 @@ public class PasswordStrengthStatus extends JPanel {
         }
     }
 
+    /**
+     * Checks the strength of the provided password and updates the display accordingly.
+     *
+     * @param password the password to be checked.
+     */
     private void checkPassword(String password) {
         this.type = password.isEmpty() ? 0 : MethodUtil.checkPasswordStrength(password);
         if (type == 0) {
@@ -62,6 +81,11 @@ public class PasswordStrengthStatus extends JPanel {
         repaint();
     }
 
+    /**
+     * Initializes the associated JPasswordField and attaches a DocumentListener to it.
+     *
+     * @param txt the JPasswordField to be initialized.
+     */
     public void initPasswordField(JPasswordField txt) {
         if (documentListener == null) {
             documentListener = new DocumentListener() {
@@ -88,6 +112,9 @@ public class PasswordStrengthStatus extends JPanel {
         passwordField = txt;
     }
 
+    /**
+     * A custom JLabel subclass for displaying the password strength status visually.
+     */
     private class LabelStatus extends JLabel {
 
         @Override

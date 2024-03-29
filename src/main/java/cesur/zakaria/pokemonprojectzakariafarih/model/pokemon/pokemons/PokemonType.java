@@ -6,72 +6,93 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 
+/**
+ * The PokemonType class represents the types of a Pokemon.
+ */
 public class PokemonType implements Iterator<EnumPokemonType>, Serializable {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	private EnumSetPokemonType enumPokemonTypes=null;
-	private Map<EnumPokemonType, Double> typeRatio = new EnumMap<EnumPokemonType, Double>(EnumPokemonType.class);
-	private static Map<EnumSetPokemonType, PokemonType> arrayToType = new HashMap<EnumSetPokemonType, PokemonType>();
+	private EnumSetPokemonType enumPokemonTypes = null;
+	private Map<EnumPokemonType, Double> typeRatio = new EnumMap<>(EnumPokemonType.class);
+	private static Map<EnumSetPokemonType, PokemonType> arrayToType = new HashMap<>();
 
+	/**
+	 * Constructs a new PokemonType with the specified EnumSetPokemonType.
+	 *
+	 * @param enumPokemonTypes The EnumSetPokemonType representing the types of the Pokemon.
+	 */
 	private PokemonType(EnumSetPokemonType enumPokemonTypes) {
-		super();
 		this.enumPokemonTypes = enumPokemonTypes;
 	}
 
+	/**
+	 * Retrieves the PokemonType associated with the given EnumSetPokemonType.
+	 *
+	 * @param enumPokemonTypes The EnumSetPokemonType representing the types of the Pokemon.
+	 * @return The PokemonType associated with the given EnumSetPokemonType.
+	 */
 	public static PokemonType getPokemonType(EnumSetPokemonType enumPokemonTypes) {
 		return PokemonType.arrayToType.get(enumPokemonTypes);
 	}
 
+	/**
+	 * Generates the Pokemon types from the data in the "CSV/grid_types.csv" file.
+	 *
+	 * @throws IOException if an I/O error occurs while reading the file.
+	 */
 	public static void generatePokemonType() throws IOException {
-		ArrayList<PokemonSpecie> pokemonSpecies = new ArrayList<PokemonSpecie>();//Create a list of specie
-
+		ArrayList<EnumPokemonType> enumPokemonTypesList = new ArrayList<>();
 		FileReader fReader = new FileReader(new File("CSV/grid_types.csv"));
-
 		int i;
 		String line;
 		StringBuilder lineBuilder = new StringBuilder();
 		int nbline = 0;
-		ArrayList<EnumPokemonType> enumPokemonTypesList = new ArrayList<EnumPokemonType>();
-		while ((i = fReader.read()) != -1) {//Read the file while it have character
+		while ((i = fReader.read()) != -1) {
 			char c = (char) i;
 			if (c == '\n') {
 				line = lineBuilder.toString();
 				nbline++;
 				String[] tab = line.split("[,;]");
-				if (nbline == 1) {//If we are on the first line we can add the differente PokemonType of Ratio we will see
+				if (nbline == 1) {
 					for (int j = 2; j < tab.length; j++) {
 						enumPokemonTypesList.add(EnumPokemonType.fromString(tab[j]));
 					}
 				} else {
 					EnumSetPokemonType enumPokemonTypesSet;
-					if(tab[1].isBlank()) {//If we wtach the ratio of pokemon with 2 or 1 type
-						enumPokemonTypesSet = new EnumSetPokemonType(EnumPokemonType.fromString(tab[0])); 
-						
-					}else
-						enumPokemonTypesSet = new EnumSetPokemonType(EnumPokemonType.fromString(tab[0]),EnumPokemonType.fromString(tab[1])); 
-					PokemonType pokemonType = new PokemonType(enumPokemonTypesSet);
-					for (int j = 2; j < tab.length; j++) {//We add the diff�rente ratio of the pokemonType
-						if(enumPokemonTypesList.get(j - 2)!=null)
-							pokemonType.typeRatio.put(enumPokemonTypesList.get(j - 2), Double.valueOf(tab[j]));
+					if (tab[1].isBlank()) {
+						enumPokemonTypesSet = new EnumSetPokemonType(EnumPokemonType.fromString(tab[0]));
+					} else {
+						enumPokemonTypesSet = new EnumSetPokemonType(EnumPokemonType.fromString(tab[0]), EnumPokemonType.fromString(tab[1]));
 					}
-					PokemonType.arrayToType.put(enumPokemonTypesSet, pokemonType);//We add the pokemonType link to his EnumPokemonTypesSet
+					PokemonType pokemonType = new PokemonType(enumPokemonTypesSet);
+					for (int j = 2; j < tab.length; j++) {
+						if (enumPokemonTypesList.get(j - 2) != null) {
+							pokemonType.typeRatio.put(enumPokemonTypesList.get(j - 2), Double.valueOf(tab[j]));
+						}
+					}
+					PokemonType.arrayToType.put(enumPokemonTypesSet, pokemonType);
 				}
-
 				lineBuilder = new StringBuilder();
-
 			} else {
 				lineBuilder.append(c);
 			}
 		}
 	}
 
+	/**
+	 * Retrieves a string representation of the PokemonType.
+	 *
+	 * @return A string representation of the PokemonType.
+	 */
 	@Override
 	public String toString() {
 		return "PokemonType [enumPokemonTypes=" + enumPokemonTypes + ", typeRatio=" + typeRatio + "]";
 	}
 
+	/**
+	 * Computes the hash code for the PokemonType.
+	 *
+	 * @return The hash code value for the PokemonType.
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -81,6 +102,12 @@ public class PokemonType implements Iterator<EnumPokemonType>, Serializable {
 		return result;
 	}
 
+	/**
+	 * Checks if the PokemonType is equal to another object.
+	 *
+	 * @param obj The object to compare.
+	 * @return True if the PokemonType is equal to the other object, otherwise false.
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -103,34 +130,59 @@ public class PokemonType implements Iterator<EnumPokemonType>, Serializable {
 		return true;
 	}
 
+	/**
+	 * Checks if there is a next EnumPokemonType.
+	 *
+	 * @return True if there is a next EnumPokemonType, otherwise false.
+	 */
 	@Override
 	public boolean hasNext() {
 		return enumPokemonTypes.hasNext();
 	}
 
+	/**
+	 * Retrieves the next EnumPokemonType.
+	 *
+	 * @return The next EnumPokemonType.
+	 */
 	@Override
 	public EnumPokemonType next() {
 		return enumPokemonTypes.next();
 	}
 
+	/**
+	 * Resets the iterator over the EnumPokemonType.
+	 */
 	public void resetIterator() {
 		enumPokemonTypes.resetIterator();
-		
 	}
-	
+
+	/**
+	 * Retrieves the ratio associated with the specified EnumPokemonType.
+	 *
+	 * @param e The EnumPokemonType.
+	 * @return The ratio associated with the specified EnumPokemonType.
+	 */
 	public Double getRatio(EnumPokemonType e) {
 		return typeRatio.get(e);
 	}
 
+	/**
+	 * Retrieves the number of Pokemon types.
+	 *
+	 * @return The number of Pokemon types.
+	 */
 	public int size() {
-		return enumPokemonTypes.Size();
+		return EnumPokemonType.values().length;
 	}
 
+	/**
+	 * Retrieves the EnumPokemonType at the specified index.
+	 *
+	 * @param index The index of the EnumPokemonType.
+	 * @return The EnumPokemonType at the specified index.
+	 */
 	public EnumPokemonType get(int index) {
 		return enumPokemonTypes.get(index);
 	}
-
-	
-	
-
 }

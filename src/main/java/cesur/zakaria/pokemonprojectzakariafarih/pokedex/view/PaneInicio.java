@@ -2,16 +2,25 @@ package cesur.zakaria.pokemonprojectzakariafarih.pokedex.view;
 
 import cesur.zakaria.pokemonprojectzakariafarih.pokedex.controller.ControladorInicio;
 
+/**
+ * The PaneInicio class represents the initial panel of the application.
+ */
 public class PaneInicio extends javax.swing.JPanel {
 
     private final ControladorInicio controladorInicio;
 
+    /**
+     * Creates new form PaneInicio.
+     */
     public PaneInicio() {
         initComponents();
         controladorInicio = new ControladorInicio(this);
         controladorInicio.iniciar();
     }
 
+    /**
+     * Initializes the components of the panel.
+     */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -27,19 +36,19 @@ public class PaneInicio extends javax.swing.JPanel {
         boxItem = new javax.swing.JComboBox<>();
 
         contendorPaginable.setFlatLafStyleComponent(new raven.crazypanel.FlatLafStyleComponent(
-            "",
-            new String[]{
-                "background:lighten(@background,0%)"
-            }
+                "",
+                new String[]{
+                        "background:lighten(@background,0%)"
+                }
         ));
         contendorPaginable.setMigLayoutConstraints(new raven.crazypanel.MigLayoutConstraints(
-            "insets 10 1 10 1",
-            "[grow,center]push[]",
-            "",
-            new String[]{
+                "insets 10 1 10 1",
+                "[grow,center]push[]",
                 "",
-                ""
-            }
+                new String[]{
+                        "",
+                        ""
+                }
         ));
         contendorPaginable.add(pagination1);
 
@@ -51,21 +60,21 @@ public class PaneInicio extends javax.swing.JPanel {
         contendorPaginable.add(lblCheck);
 
         contenedorCartas.setMigLayoutConstraints(new raven.crazypanel.MigLayoutConstraints(
-            "fill,insets 1",
-            "[fill]",
-            "[fill]",
-            null
+                "fill,insets 1",
+                "[fill]",
+                "[fill]",
+                null
         ));
 
         javax.swing.GroupLayout pnContenedorLayout = new javax.swing.GroupLayout(pnContenedor);
         pnContenedor.setLayout(pnContenedorLayout);
         pnContenedorLayout.setHorizontalGroup(
-            pnContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1175, Short.MAX_VALUE)
+                pnContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 1175, Short.MAX_VALUE)
         );
         pnContenedorLayout.setVerticalGroup(
-            pnContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 518, Short.MAX_VALUE)
+                pnContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 518, Short.MAX_VALUE)
         );
 
         jScrollPane1.setViewportView(pnContenedor);
@@ -73,16 +82,16 @@ public class PaneInicio extends javax.swing.JPanel {
         contenedorCartas.add(jScrollPane1);
 
         contenedorControl.setFlatLafStyleComponent(new raven.crazypanel.FlatLafStyleComponent(
-            "",
-            new String[]{
-                "background:lighten(@background,4%);arc:10"
-            }
+                "",
+                new String[]{
+                        "background:lighten(@background,4%);arc:10"
+                }
         ));
         contenedorControl.setMigLayoutConstraints(new raven.crazypanel.MigLayoutConstraints(
-            "insets 2 8 2 8",
-            "",
-            "",
-            null
+                "insets 2 8 2 8",
+                "",
+                "",
+                null
         ));
 
         boxItem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10", "25", "50", "100" }));
@@ -92,23 +101,23 @@ public class PaneInicio extends javax.swing.JPanel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(contendorPaginable, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE)
-                    .addComponent(contenedorCartas, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(contenedorControl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(contendorPaginable, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE)
+                                        .addComponent(contenedorCartas, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                        .addComponent(contenedorControl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addContainerGap())
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(contenedorControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(contenedorCartas, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(contendorPaginable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(contenedorControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(contenedorCartas, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(contendorPaginable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

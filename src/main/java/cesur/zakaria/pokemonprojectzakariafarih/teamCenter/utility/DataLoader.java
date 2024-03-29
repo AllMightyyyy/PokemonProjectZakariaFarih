@@ -8,16 +8,24 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Utility class for loading Pokémon data and type effectiveness data from JSON files.
+ */
 public class DataLoader {
 
     private static final String IMAGE_BASE_PATH = "src/main/resources/cesur/zakaria/pokemonprojectzakariafarih/images/pokemon/";
     private static final String SHAPE_IMAGE_BASE_PATH = "src/main/resources/cesur/zakaria/pokemonprojectzakariafarih/images/shape/";
 
+    /**
+     * Loads Pokémon data from a JSON file.
+     *
+     * @return a map containing Pokémon names as keys and corresponding Pokemon objects as values.
+     * @throws IOException if an error occurs while reading the JSON file.
+     */
     public static Map<String, Pokemon> loadPokemonData() throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         String jsonFilePath = "src/main/resources/cesur/zakaria/pokemonprojectzakariafarih/teamCenter/utility/jsonData/pokemon.json";
@@ -54,18 +62,23 @@ public class DataLoader {
         return pokemonMap;
     }
 
-    private static String generateShapeImageName(int shape) {
-        return shape + ".png"; // Assumes shape images are named as '1.png', '2.png', etc.
-    }
-
+    /**
+     * Loads type effectiveness data from a JSON file.
+     *
+     * @param jsonFilePath the path to the JSON file containing type effectiveness data.
+     * @return the TypeData object containing type effectiveness information.
+     * @throws IOException if an error occurs while reading the JSON file.
+     */
     public static TypeData loadTypeData(String jsonFilePath) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         return mapper.readValue(new File(jsonFilePath), TypeData.class);
     }
 
+    private static String generateShapeImageName(int shape) {
+        return shape + ".png"; // Assumes shape images are named as '1.png', '2.png', etc.
+    }
+
     private static String constructTypeImagePath(String type) {
         return "/cesur/zakaria/pokemonprojectzakariafarih/images/types/" + type.toLowerCase() + ".png";
     }
-
-
 }

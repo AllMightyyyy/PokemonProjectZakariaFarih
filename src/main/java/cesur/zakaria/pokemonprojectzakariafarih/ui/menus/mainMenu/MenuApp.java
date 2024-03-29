@@ -32,15 +32,23 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Represents the main menu of the Pokemon application.
+ */
 public class MenuApp {
     private static final int WIDTH = 1280;
     private static final int HEIGHT = 720;
     private static Stage primaryStage;
 
+    /**
+     * Constructs a new MenuApp with the specified primary stage.
+     * @param primaryStage The primary stage of the application.
+     */
     public MenuApp(Stage primaryStage) {
         this.primaryStage = primaryStage;
     }
 
+    // Menu data
     private static List<Pair<String, Runnable>> menuData = Arrays.asList(
             new Pair<String, Runnable>("Enter World", MenuApp::launchEnterWorld),
             new Pair<String, Runnable>("Fight", MenuApp::launchEnterFight),
@@ -54,6 +62,10 @@ public class MenuApp {
     private static VBox menuBox = new VBox(-5);
     private static Line line;
 
+    /**
+     * Creates the content of the main menu.
+     * @return The parent node containing the main menu content.
+     */
     private static Parent createContent() {
         addBackground();
         addTitle();
@@ -131,6 +143,10 @@ public class MenuApp {
         root.getChildren().add(menuBox);
     }
 
+    /**
+     * Switches to the main menu.
+     * @param stage The primary stage of the application.
+     */
     public static void switchToMainmenu(Stage stage) {
         MenuApp menuApp = new MenuApp(stage); // Create an instance passing the stage
         Scene scene = new Scene(menuApp.createContent(), WIDTH, HEIGHT);
@@ -145,6 +161,7 @@ public class MenuApp {
     private static void launchCreditsScreen() {
         SwingUtilities.invokeLater(cesur.zakaria.pokemonprojectzakariafarih.ui.menus.credits.Screen::new);
     }
+
     private static void launchEnterFight() {
         // Close the current menu window
         primaryStage.hide();

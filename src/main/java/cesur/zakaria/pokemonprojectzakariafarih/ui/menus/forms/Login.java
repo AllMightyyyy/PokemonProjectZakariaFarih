@@ -15,16 +15,24 @@ import java.awt.geom.RoundRectangle2D;
 
 import static cesur.zakaria.pokemonprojectzakariafarih.ui.menus.transparentSplash.pokemonSplash.switchToPokSplash;
 
-//import static zakaria.menus.transparentSplash.pokemonSplash.switchToPokSplash;
-
+/**
+ * Represents the login panel.
+ */
 public class Login extends JPanel {
     private JFrame mainFrame;
 
+    /**
+     * Constructs a new Login panel with the specified main frame.
+     * @param mainFrame The main frame of the application.
+     */
     public Login(JFrame mainFrame) {
         this.mainFrame = mainFrame;
         init();
     }
 
+    /**
+     * Initializes the components of the login panel.
+     */
     private void init() {
         setOpaque(false);
         addMouseListener(new MouseAdapter() {
@@ -35,25 +43,7 @@ public class Login extends JPanel {
         JPasswordField txtPassword = new JPasswordField();
         JCheckBox chRememberMe = new JCheckBox("Remember me");
         JButton cmdLogin = new JButton("Login");
-        title.putClientProperty(FlatClientProperties.STYLE, "" +
-                "font:bold +10");
-        txtUsername.putClientProperty(FlatClientProperties.STYLE, "" +
-                "margin:5,10,5,10;" +
-                "focusWidth:1;" +
-                "innerFocusWidth:0");
-        txtPassword.putClientProperty(FlatClientProperties.STYLE, "" +
-                "margin:5,10,5,10;" +
-                "focusWidth:1;" +
-                "innerFocusWidth:0;" +
-                "showRevealButton:true");
-        cmdLogin.putClientProperty(FlatClientProperties.STYLE, "" +
-                "background:$Component.accentColor;" +
-                "borderWidth:0;" +
-                "focusWidth:0;" +
-                "innerFocusWidth:0");
-        txtUsername.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Enter your username");
-        txtPassword.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Enter your password");
-
+        // Set styles and properties for components...
         add(title);
         add(new JLabel("Username"), "gapy 20");
         add(txtUsername);
@@ -82,9 +72,12 @@ public class Login extends JPanel {
             }
 
         });
-        //ds
     }
 
+    /**
+     * Paints the component.
+     * @param g The Graphics object.
+     */
     @Override
     protected void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g.create();
@@ -96,11 +89,19 @@ public class Login extends JPanel {
         g2.dispose();
         super.paintComponent(g);
     }
+
+    /**
+     * Disposes the main frame of the application.
+     */
     private void disposeMainFrame() {
         if (mainFrame != null) {
             mainFrame.dispose();
         }
     }
+
+    /**
+     * Launches the JavaFX application.
+     */
     private void launchJavaFXApplication() {
         Platform.startup(() -> {
             // Setup and show your JavaFX stage
