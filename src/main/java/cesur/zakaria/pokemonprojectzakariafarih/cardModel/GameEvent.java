@@ -1,0 +1,27 @@
+package cesur.zakaria.pokemonprojectzakariafarih.cardModel;
+
+import java.util.EventObject;
+
+public class GameEvent extends EventObject {
+
+    private static final long serialVersionUID = 1L;
+    public enum Target { DECK, GWIN }
+    public enum Action { INVPLAY, ENDGAME, REMOVESEL, SHOWTABLE, RESTART, SHOWMESSAGE, MUSTENDTURN }
+    private Target target;
+    private Action action;
+    private String arg;
+    public GameEvent(Object source, Target aTarget, Action anAction, String anArg) {
+        super(source);
+        target = aTarget;
+        action = anAction;
+        arg = anArg;
+    }
+
+    public Target getTarget() { return target; }
+
+    public Action getAction() { return action; }
+
+    public String getArg() { return arg; }
+
+    public String toString() { return target + ":" + action + ":" + arg; }
+}
