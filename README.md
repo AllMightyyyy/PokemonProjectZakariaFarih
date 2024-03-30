@@ -26,7 +26,9 @@
 
 <img src="https://i.imgur.com/oGnfDgP.png" alt="project-screenshot" width="400" height="400/">
 
-  
+<img src="https://i.imgur.com/iwC2LwD.png" alt="project-screenshot" width="400" height="400/">
+
+<img src="https://i.imgur.com/Wbly6Hz.png" alt="project-screenshot" width="400" height="400/">
   
 <h2>🧐 Features</h2>
 
