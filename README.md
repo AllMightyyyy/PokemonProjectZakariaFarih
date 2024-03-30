@@ -1,79 +1,77 @@
-<h1 align="center" id="title">Pokemon Game Zakaria Farih</h1>
+<div align='center'>
 
-<p align="center"><img src="https://socialify.git.ci/AllMightyyyy/PokemonProjectZakariaFarih/image?description=1&amp;descriptionEditable=A%20School%20Project%20(%20Pokemon%20Game%20by%20Zakaria%20Farih%20)&amp;font=Source%20Code%20Pro&amp;forks=1&amp;issues=1&amp;language=1&amp;name=1&amp;owner=1&amp;pattern=Floating%20Cogs&amp;pulls=1&amp;stargazers=1&amp;theme=Light" alt="project-image"></p>
+<img src=https://i.imgur.com/aDz70Ty.png alt="logo" width= height= />
 
-<p id="description">This Pokémon-themed JavaFX application offers a rich user interface for managing Pokémon battles training team management capture breeding and healthcare in a Pokémon Center. Integrated with Spring for secure authentication the application supports both traditional login mechanisms and OAuth2 with Google SignIn. Designed for educational purposes this project showcases the implementation of modern Java application development techniques.</p>
+<h1>Pokemon project</h1>
+<p>This is a project to show my knowlege in Java </p>
 
-<p align="center"><img src="https://img.shields.io/badge/Role-Student-blue?style=flat" alt="shields"><img src="https://img.shields.io/github/followers/AllMightyyyy" alt="shields"><img src="https://img.shields.io/github/commit-activity/w/AllMightyyyy/PokemonProjectZakariaFarih" alt="shields"></p>
+<h4> <span> · </span> <a href="https://github.com/AllMightyyyy/PokemonProjectZakariaFarih /blob/master/README.md"> Documentation </a> <span> · </span> <a href="https://github.com/AllMightyyyy/PokemonProjectZakariaFarih /issues"> Report Bug </a> <span> · </span> <a href="https://github.com/AllMightyyyy/PokemonProjectZakariaFarih /issues"> Request Feature </a> </h4>
 
-  
-  
-<h2>🧐 Features</h2>
 
-Here're some of the project's best features:
+</div>
 
-*   Authentication: Secure login with Spring Security supporting both email/password and Google SignIn.
-*   Battle System: Engage in battles against trainers with dynamically generated Pokémon teams.
-*   Training: Train your Pokémon against wild Pokémon to gain experience.
-*   Team Management: Manage your Pokémon team moving Pokémon between your active team and storage
-*   Pokémon Capture: Capture Pokémon during your adventures.
-*   Breeding: Breed Pokémon to discover new Pokémon eggs.
-*   Pokémon Center: Heal your Pokémon back to full health.
+# :notebook_with_decorative_cover: Table of Contents
 
-<h2>🛠️ Installation Steps:</h2>
+- [About the Project](#star2-about-the-project)
+- [Roadmap](#compass-roadmap)
+- [Contact](#handshake-contact)
 
-<p>1. Clone the repository:</p>
 
+## :star2: About the Project
+
+### :dart: Features
+- libGDX 2D game
+- Card game ( javaFX )
+- Fight Engine
+- Pokemon Center
+- Pokedex
+- Cool GUI
+- Loggin Features
+- SignUp features
+- Database Manipulation
+
+
+### :art: Color Reference
+| Color | Hex |
+| --------------- | ---------------------------------------------------------------- |
+| Primary Color | ![#cc154c](https://via.placeholder.com/10/cc154c?text=+) #cc154c |
+| Secondary Color | ![#393E46](https://via.placeholder.com/10/393E46?text=+) #393E46 |
+| Accent Color | ![#00ADB5](https://via.placeholder.com/10/00ADB5?text=+) #00ADB5 |
+| Text Color | ![#EEEEEE](https://via.placeholder.com/10/EEEEEE?text=+) #EEEEEE |
+
+## :toolbox: Getting Started
+
+### :bangbang: Prerequisites
+
+- IntelliJ<a href="https://www.jetbrains.com/idea/download/download-thanks.html?platform=windows&code=IIC"> Here</a>
+```bash
+curl -O https://download.jetbrains.com/idea/ideaIC-2021.3.2.exe
 ```
-git clone https://github.com/AllMightyyyy/PokemonProjectZakariaFarih.git
+- javaFX <a href="https://download2.gluonhq.com/openjfx/21.0.2/openjfx-21.0.2_windows-x64_bin-sdk.zip"> Here</a>
+```bash
+curl -O https://download2.gluonhq.com/openjfx/21.0.2/openjfx-21.0.2_windows-x64_bin-sdk.zip
+```
+- openJDK 21<a href="https://download.java.net/java/GA/jdk21.0.2/f2283984656d49d69e91c558476027ac/13/GPL/openjdk-21.0.2_windows-x64_bin.zip"> Here</a>
+```bash
+curl -O https://github.com/AdoptOpenJDK/openjdk17-binaries/releases/download/jdk-17.0.1%2B12/OpenJDK17U-jdk_x64_windows_hotspot_17.0.1_12.zip
 ```
 
-<p>2. Navigate to the project directory:</p>
 
-```
-cd PokemonProjectZakariaFarih
-```
+### :gear: Installation
 
-<p>3. Configure application properties:</p>
+To Run this project, you need to add the libraries ( included in the project " libs" ) by accessing the project structure . also you have to declare assets as a resource folder in the project structure for the libGDX game to function, the assets contains the tile map and other assets such as layers etc ...
 
-```
-Update src/main/resources/application.properties with your MySQL connection details and OAuth2 credentials.
-```
 
-<p>4. Build the project:</p>
+## :compass: Roadmap
 
-```
-mvn clean install
-```
+* [ ] clean up the code
+* [ ] implement the javaFX card game and fight scene in LibGDX 2D
+* [ ] implement RememberMe feature
+* [ ] add Authentication using Gmail / Github
 
-<p>5. Run the application:</p>
 
-```
-java -jar target/pokemonProjectZakariaFarih-0.1.0.jar
-```
+## :handshake: Contact
 
-<h2>🍰 Contribution Guidelines:</h2>
+zakaria farih - - zakariafarih142@gmail.com
 
-Contributions are welcome! Please feel free to submit pull requests or open issues to discuss proposed changes or report bugs.
-
-  
-  
-<h2>💻 Built with</h2>
-
-Technologies used in the project:
-
-*   Java
-*   JavaFX
-*   Spring
-*   MySql
-*   MySql Workbench
-*   IntelliJ IDE
-*   Maven
-
-<h2>🛡️ License:</h2>
-
-This project is licensed under the MIT License - see the LICENSE.md file for details.
-
-<h2>💖Like my work?</h2>
-
-Special thanks to the educators and mentors who provided guidance and support throughout the development of this project. Pokémon and all related terms images and concepts are trademarks of Nintendo and The Pokémon Company.
+Project Link: [https://github.com/AllMightyyyy/PokemonProjectZakariaFarih](https://github.com/AllMightyyyy/PokemonProjectZakariaFarih)
