@@ -6,6 +6,9 @@ import cesur.zakaria.pokemonprojectzakariafarih.cardGui.ScoreboardView;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Represents the game logic and state in the Pokemon card game.
+ */
 public class Game {
     private static Game game = new Game();
     private CardDeck deckJ1, deckJ2;
@@ -15,8 +18,17 @@ public class Game {
     private int addedCardsMJ1, addedCardsMJ2;
     private boolean mustEndTurn;
 
-    public static Game getInstance() { return game; }
+    /**
+     * Retrieves the singleton instance of the Game class.
+     * @return The singleton instance of the Game class.
+     */
+    public static Game getInstance() {
+        return game;
+    }
 
+    /**
+     * Constructs a new Game object.
+     */
     private Game() {
         deckJ1 = new CardDeck(false);
         deckJ2 = new CardDeck(false);
@@ -28,6 +40,9 @@ public class Game {
         mustEndTurn = false;
     }
 
+    /**
+     * Advances the game to the next phase.
+     */
     private void nextPhase() {
         currentPhase++;
         if (currentPhase == 5) {
@@ -43,24 +58,56 @@ public class Game {
         }
     }
 
+    /**
+     * Retrieves the total number of Pokémon cards held by player 1.
+     * @return The total number of Pokémon cards held by player 1.
+     */
     public int getPokemonsJ1() {
         return deckJ1.getPokemonsNoDeck() + tableJ1.getPokemonsNoDeck();
     }
 
+    /**
+     * Retrieves the total number of Pokémon cards held by player 2.
+     * @return The total number of Pokémon cards held by player 2.
+     */
     public int getPokemonsJ2() {
         return deckJ2.getPokemonsNoDeck() + tableJ2.getPokemonsNoDeck();
     }
 
+    /**
+     * Retrieves the deck of cards belonging to player 1.
+     * @return The deck of cards belonging to player 1.
+     */
     public CardDeck getDeckJ1() { return deckJ1; }
 
+    /**
+     * Retrieves the deck of cards belonging to player 2.
+     * @return The deck of cards belonging to player 2.
+     */
     public CardDeck getDeckJ2() { return deckJ2; }
 
+    /**
+     * Retrieves the table of cards belonging to player 1.
+     * @return The table of cards belonging to player 1.
+     */
     public CardDeck getTableJ1() { return tableJ1; }
 
+    /**
+     * Retrieves the table of cards belonging to player 2.
+     * @return The table of cards belonging to player 2.
+     */
     public CardDeck getTableJ2() { return tableJ2; }
 
+    /**
+     * Retrieves the current phase of the game.
+     * @return The current phase of the game.
+     */
     public int getActualPhase() { return currentPhase; }
 
+    /**
+     * Initiates a player's turn in the game.
+     * Handles various actions based on the current game phase, such as attacks and card downloads.
+     */
     public void play() {
         System.out.println("\n\nENTER TO PLAY");
         if (mustEndTurn) {
@@ -132,6 +179,11 @@ public class Game {
         }
     }
 
+    /**
+     * Downloads cards for a specified player.
+     * Triggered by the "Download cards" button.
+     * @param player The player for whom cards should be downloaded (1 for player 1, 2 for player 2).
+     */
     // Triggered by the 'Download cards' button
     public void downloadPlayingCards(int player) {
         System.out.println("\n\ndownloadLetters() triggered");
@@ -172,6 +224,10 @@ public class Game {
         else addedCardsMJ2++;
     }
 
+    /**
+     * Ends the current player's turn.
+     * Triggered by the "End Turn" button.
+     */
     // Triggered by the "End Turn" button
     public void endTurn() {
         if ( (currentPhase == 1 && addedCardsMJ1 == 0 && deckJ1.getNumberOfCards() > 0) ||
@@ -227,6 +283,9 @@ public class Game {
         }
     }
 
+    /**
+     * Updates the scoreboard view based on the current game phase.
+     */
     public void updateScoreboardView() {
         String text;
 
@@ -238,6 +297,9 @@ public class Game {
         ScoreboardView.getInstance().setFieldActualPhase(text);
     }
 
+    /**
+     * Restarts the game, resetting all decks and stats.
+     */
     public void restart() {
         deckJ1 = new CardDeck(false);
         deckJ2 = new CardDeck(false);
@@ -257,6 +319,10 @@ public class Game {
         }
     }
 
+    /**
+     * Adds energy to a Pokémon card on the table for a specified player.
+     * @param player The player for whom energy should be added (1 for player 1, 2 for player 2).
+     */
     public void addEnergy(int player) {
         if (mustEndTurn) {
             GameEvent gameEvent = new GameEvent(this, GameEvent.Target.GWIN, GameEvent.Action.MUSTENDTURN, "");
@@ -320,5 +386,9 @@ public class Game {
         }
     }
 
+    /**
+     * Adds a GameListener to the list of observers.
+     * @param listener The GameListener to add.
+     */
     public void addGameListener(GameListener listener) { observers.add(listener); }
 }

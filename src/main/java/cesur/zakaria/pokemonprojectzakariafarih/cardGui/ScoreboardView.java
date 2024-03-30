@@ -10,15 +10,18 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
+/**
+ * Represents the scoreboard view in the Pokemon game.
+ * This view displays the number of pokemons for each player and the current phase of the game.
+ */
 public class ScoreboardView extends GridPane implements GameListener {
     private static ScoreboardView scoreboardView = new ScoreboardView();
 
     private TextField ptsJ1, ptsJ2, actualPhase;
 
-    public static ScoreboardView getInstance() {
-        return scoreboardView;
-    }
-
+    /**
+     * Private constructor to enforce singleton pattern.
+     */
     private ScoreboardView() {
         this.setAlignment(Pos.CENTER);
         this.setHgap(10);
@@ -51,8 +54,29 @@ public class ScoreboardView extends GridPane implements GameListener {
         butAttack.setOnAction(e -> Game.getInstance().play());
     }
 
-    public void setFieldActualPhase(String text) { actualPhase.setText(text); }
+    /**
+     * Gets the singleton instance of the ScoreboardView.
+     *
+     * @return The singleton instance of ScoreboardView.
+     */
+    public static ScoreboardView getInstance() {
+        return scoreboardView;
+    }
 
+    /**
+     * Sets the text of the actual phase field.
+     *
+     * @param text The text to be set.
+     */
+    public void setFieldActualPhase(String text) {
+        actualPhase.setText(text);
+    }
+
+    /**
+     * Notifies the scoreboard view of a game event.
+     *
+     * @param event The game event.
+     */
     @Override
     public void notify(GameEvent event) {
         ptsJ1.setText("" + Game.getInstance().getPokemonsJ1());

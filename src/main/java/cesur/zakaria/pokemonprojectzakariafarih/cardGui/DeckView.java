@@ -6,11 +6,19 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 
-public class DeckView extends HBox implements CardViewListener {
+/**
+ * Represents a view for displaying a deck of cards.
+ */
+public class DeckView extends HBox implements CardViewListener, GameListener {
     private int player;
     private CardDeck cDeck;
     private Card selectedCard;
 
+    /**
+     * Constructs a new DeckView for the specified player.
+     *
+     * @param nroJog The player number.
+     */
     public DeckView(int nroJog) {
         super(4);
         this.setAlignment(Pos.CENTER);
@@ -29,7 +37,7 @@ public class DeckView extends HBox implements CardViewListener {
             cDeck = Game.getInstance().getTableJ2();
         }
 
-        cDeck.addGameListener((GameListener) this);
+        cDeck.addGameListener(this);
 
         for (Card card : cDeck.getCards()) {
             CardView cv = new CardView(card);
@@ -37,7 +45,7 @@ public class DeckView extends HBox implements CardViewListener {
             this.getChildren().add(cv);
         }
 
-        Game.getInstance().addGameListener((GameListener) this);
+        Game.getInstance().addGameListener(this);
     }
 
     private void removeSel() {
@@ -91,7 +99,7 @@ public class DeckView extends HBox implements CardViewListener {
                 System.out.println("\n\nTable J2 restarted");
             }
 
-            cDeck.addGameListener((GameListener) this);
+            cDeck.addGameListener(this);
             showDeck();
         }
     }

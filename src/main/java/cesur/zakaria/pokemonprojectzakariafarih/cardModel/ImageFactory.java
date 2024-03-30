@@ -7,16 +7,34 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Factory class for creating images based on image IDs.
+ */
 public class ImageFactory {
     private static ImageFactory imgf = new ImageFactory();
     private Map<String, Image> images;
-    public static ImageFactory getInstance() {
-        return imgf;
-    }
+
+    /**
+     * Private constructor to prevent instantiation from outside the class.
+     */
     private ImageFactory() {
         images = new HashMap<>();
     }
 
+    /**
+     * Returns the singleton instance of ImageFactory.
+     * @return The singleton instance of ImageFactory.
+     */
+    public static ImageFactory getInstance() {
+        return imgf;
+    }
+
+    /**
+     * Maps image IDs to their corresponding file paths.
+     * @param imgId The ID of the image.
+     * @return The file path of the image corresponding to the given ID.
+     * @throws IllegalArgumentException if the provided image ID is invalid.
+     */
     private String id2File(String imgId) {
         switch (imgId) {
             case "img1":   return ("Agua/Blastoise.png");
@@ -60,16 +78,16 @@ public class ImageFactory {
         }
     }
 
+    /**
+     * Creates an ImageView for the specified image ID.
+     * @param imgId The ID of the image.
+     * @return An ImageView object for the specified image.
+     */
     public ImageView createImage(String imgId) {
         Image img = images.get(imgId);
         if (img == null) {
             String resourcePath = id2File(imgId);
             URL resourceUrl = getClass().getResource(resourcePath);
-            if (resourceUrl == null) {
-                System.err.println("Resource not found: " + resourcePath);
-            } else {
-                System.out.println("Resource URL: " + resourceUrl.toExternalForm());
-            }
             img = new Image(resourceUrl.toExternalForm(),400,250,true,true);
             images.put(imgId, img);
         }

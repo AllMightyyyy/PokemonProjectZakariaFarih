@@ -1,5 +1,6 @@
 package cesur.zakaria.pokemonprojectzakariafarih.ui.menus.mainMenu;
 
+import cesur.zakaria.pokemonprojectzakariafarih.cardGui.GameWindow;
 import cesur.zakaria.pokemonprojectzakariafarih.libGDXgame.LibGdxGame;
 import cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons.PokemonType;
 import cesur.zakaria.pokemonprojectzakariafarih.vue.Main;
@@ -53,6 +54,7 @@ public class MenuApp {
     private static final List<Pair<String, Runnable>> menuData = Arrays.asList(
             new Pair<String, Runnable>("Enter World", MenuApp::launchEnterWorld),
             new Pair<String, Runnable>("Fight", MenuApp::launchEnterFight),
+            new Pair<String, Runnable>("Card Game", MenuApp::launchCardGame),
             new Pair<String, Runnable>("Pokemon Center", MenuApp::launchPokemonCenter),
             new Pair<String, Runnable>("Pokédex", MenuApp::launchPokedex),
             new Pair<String, Runnable>("Credits", MenuApp::launchCreditsScreen),
@@ -162,6 +164,17 @@ public class MenuApp {
 
     private static void launchCreditsScreen() {
         SwingUtilities.invokeLater(cesur.zakaria.pokemonprojectzakariafarih.ui.menus.credits.Screen::new);
+    }
+
+    private static void launchCardGame() {
+        // Close the current menu window
+        primaryStage.hide();
+
+        // Launch the card game using the primary stage
+        Platform.runLater(() -> {
+            GameWindow gameWindow = new GameWindow();
+            gameWindow.start(primaryStage);
+        });
     }
 
     private static void launchEnterFight() {
