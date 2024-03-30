@@ -52,5 +52,5 @@ public abstract class PokemonPlayingCard extends PlayingCard {
         return this.attack;
     }
 
-    public abstract boolean attaque(PokemonPlayingCard other);
+    public abstract boolean attack(PokemonPlayingCard other);
 }

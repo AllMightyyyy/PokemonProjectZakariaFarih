@@ -9,7 +9,7 @@ public class PokemonWater extends PokemonPlayingCard {
     }
 
     @Override
-    public boolean attaque(PokemonPlayingCard other) {
+    public boolean attack(PokemonPlayingCard other) {
         Attack attack = super.getAttack();
 
         // check if you have energy to make the attack and, if so, consume and continue

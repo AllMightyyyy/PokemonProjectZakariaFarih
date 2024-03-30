@@ -7,7 +7,7 @@ public class PokemonNeutral extends PokemonPlayingCard {
     }
 
     @Override
-    public boolean attaque(PokemonPlayingCard other) {
+    public boolean attack(PokemonPlayingCard other) {
         Attack attack = super.getAttack();
 
         // Check if you have energy to make the attack and, if so, consume and continue
