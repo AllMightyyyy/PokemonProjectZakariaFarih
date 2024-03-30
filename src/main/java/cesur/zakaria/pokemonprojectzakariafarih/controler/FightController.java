@@ -28,6 +28,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * The FightController class is responsible for managing the user interface and game logic during a fight.
@@ -140,7 +141,10 @@ public class FightController {
 	public void initialize() throws IOException{
 		
     	System.out.println("Launching the combat");
-    	BackgroundImage mainBackground= new BackgroundImage(new Image(new FileInputStream("Pictures/fightBackground.png")),BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,new BackgroundSize(600, 267, false, false, false, false));
+		Random random = new Random();
+		int randomNumber = random.nextInt(12) + 1;
+		String filename = "Pictures/fightbg" + randomNumber + ".jpg";
+    	BackgroundImage mainBackground= new BackgroundImage(new Image(new FileInputStream(filename)),BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,new BackgroundSize(600, 267, false, false, false, false));
     	GridPane root = (GridPane) mainDialog.getParent();
     	root.setBackground(new Background(mainBackground));
     	BackgroundImage fightMenu= new BackgroundImage(new Image(new FileInputStream("Pictures/fightMenu.png")),BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,new BackgroundSize(600, 133, false, false, false, false));
