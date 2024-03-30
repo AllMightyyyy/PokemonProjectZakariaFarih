@@ -1,77 +1,59 @@
-<div align='center'>
+<h1 align="center" id="title">Pokemon</h1>
 
-<img src=https://i.imgur.com/aDz70Ty.png alt="logo" width= height= />
+<p align="center"><img src="https://socialify.git.ci/AllMightyyyy/PokemonProjectZakariaFarih/image?description=1&amp;descriptionEditable=pokemon%20project%20for%20learning%20purposes%20%0A(%20Don%27t%20sue%20me%20Nintendo%20)&amp;font=Source%20Code%20Pro&amp;forks=1&amp;issues=1&amp;language=1&amp;logo=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2F9%2F98%2FInternational_Pok%25C3%25A9mon_logo.svg&amp;name=1&amp;owner=1&amp;pattern=Floating%20Cogs&amp;pulls=1&amp;stargazers=1&amp;theme=Auto" alt="project-image"></p>
 
-<h1>Pokemon project</h1>
-<p>This is a project to show my knowlege in Java </p>
+<p id="description">This is just a game i made to demonstrate my programming knowledge in java -&gt; contains a LibGDX 2D game / Fight Scene / Card game / Pokemon Center / interactive cool UI / etc ...</p>
 
-<h4> <span> · </span> <a href="https://github.com/AllMightyyyy/PokemonProjectZakariaFarih /blob/master/README.md"> Documentation </a> <span> · </span> <a href="https://github.com/AllMightyyyy/PokemonProjectZakariaFarih /issues"> Report Bug </a> <span> · </span> <a href="https://github.com/AllMightyyyy/PokemonProjectZakariaFarih /issues"> Request Feature </a> </h4>
+<p align="center"><img src="https://img.shields.io/github/commit-activity/w/AllMightyyyy/PokemonProjectZakariaFarih" alt="shields"><img src="https://img.shields.io/github/languages/count/AllMightyyyy/PokemonProjectZakariaFarih" alt="shields"><img src="https://img.shields.io/github/downloads/AllMightyyyy/PokemonProjectZakariaFarih/total" alt="shields"></p>
 
+<h2>Project Screenshots:</h2>
 
-</div>
+<img src="https://i.imgur.com/v6vb0Ay.png" alt="project-screenshot" width="400" height="400/">
 
-# :notebook_with_decorative_cover: Table of Contents
+<img src="https://i.imgur.com/gcKElhF.png" alt="project-screenshot" width="400" height="400/">
 
-- [About the Project](#star2-about-the-project)
-- [Roadmap](#compass-roadmap)
-- [Contact](#handshake-contact)
+<img src="https://i.imgur.com/yr8c1Va.png" alt="project-screenshot" width="400" height="400/">
 
+<img src="https://i.imgur.com/IURnVHQ.jpeg" alt="project-screenshot" width="400" height="400/">
 
-## :star2: About the Project
+<img src="https://i.imgur.com/y5z4k6z.png" alt="project-screenshot" width="400" height="400/">
 
-### :dart: Features
-- libGDX 2D game
-- Card game ( javaFX )
-- Fight Engine
-- Pokemon Center
-- Pokedex
-- Cool GUI
-- Loggin Features
-- SignUp features
-- Database Manipulation
+<img src="https://i.imgur.com/jaXlQO3.png" alt="project-screenshot" width="400" height="400/">
 
+<img src="https://i.imgur.com/nEs432p.png" alt="project-screenshot" width="400" height="400/">
 
-### :art: Color Reference
-| Color | Hex |
-| --------------- | ---------------------------------------------------------------- |
-| Primary Color | ![#cc154c](https://via.placeholder.com/10/cc154c?text=+) #cc154c |
-| Secondary Color | ![#393E46](https://via.placeholder.com/10/393E46?text=+) #393E46 |
-| Accent Color | ![#00ADB5](https://via.placeholder.com/10/00ADB5?text=+) #00ADB5 |
-| Text Color | ![#EEEEEE](https://via.placeholder.com/10/EEEEEE?text=+) #EEEEEE |
+<img src="https://i.imgur.com/1TJU5QP.png" alt="project-screenshot" width="400" height="400/">
 
-## :toolbox: Getting Started
+<img src="https://i.imgur.com/oGnfDgP.png" alt="project-screenshot" width="400" height="400/">
 
-### :bangbang: Prerequisites
+  
+  
+<h2>🧐 Features</h2>
 
-- IntelliJ<a href="https://www.jetbrains.com/idea/download/download-thanks.html?platform=windows&code=IIC"> Here</a>
-```bash
-curl -O https://download.jetbrains.com/idea/ideaIC-2021.3.2.exe
+Here're some of the project's best features:
+
+*   Fight
+*   TGC
+*   2D World
+*   Team Planning
+*   Interactive GUI
+
+<h2>🛠️ Installation Steps:</h2>
+
+<p>1. import libs ( included in project )</p>
+
 ```
-- javaFX <a href="https://download2.gluonhq.com/openjfx/21.0.2/openjfx-21.0.2_windows-x64_bin-sdk.zip"> Here</a>
-```bash
+use project Structure to load libs 
+```
+
+<p>2. javaFX 21</p>
+
+```
 curl -O https://download2.gluonhq.com/openjfx/21.0.2/openjfx-21.0.2_windows-x64_bin-sdk.zip
 ```
-- openJDK 21<a href="https://download.java.net/java/GA/jdk21.0.2/f2283984656d49d69e91c558476027ac/13/GPL/openjdk-21.0.2_windows-x64_bin.zip"> Here</a>
-```bash
-curl -O https://github.com/AdoptOpenJDK/openjdk17-binaries/releases/download/jdk-17.0.1%2B12/OpenJDK17U-jdk_x64_windows_hotspot_17.0.1_12.zip
+
+<p>3. javaSDK 21</p>
+
 ```
-
-
-### :gear: Installation
-
-To Run this project, you need to add the libraries ( included in the project " libs" ) by accessing the project structure . also you have to declare assets as a resource folder in the project structure for the libGDX game to function, the assets contains the tile map and other assets such as layers etc ...
-
-
-## :compass: Roadmap
-
-* [ ] clean up the code
-* [ ] implement the javaFX card game and fight scene in LibGDX 2D
-* [ ] implement RememberMe feature
-* [ ] add Authentication using Gmail / Github
-
-
-## :handshake: Contact
-
-zakaria farih - - zakariafarih142@gmail.com
-
-Project Link: [https://github.com/AllMightyyyy/PokemonProjectZakariaFarih](https://github.com/AllMightyyyy/PokemonProjectZakariaFarih)
+curl -L -o openjdk-21_windows-x64_bin.zip https://jdk.java.net/21/openjdk-21_windows-x64_bin.zip
+```
