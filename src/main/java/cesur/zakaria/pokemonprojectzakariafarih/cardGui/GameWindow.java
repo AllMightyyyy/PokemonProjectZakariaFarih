@@ -9,19 +9,31 @@ import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import javax.swing.*;
 
+/**
+ * Represents the main window of the Pokemon game.
+ */
 public class GameWindow extends Application implements GameListener {
     public static String nameJ1, nameJ2;
 
+    /**
+     * The main method of the application.
+     *
+     * @param args Command-line arguments.
+     */
     public static void main(String[] args) {
         launch(args);
     }
 
+    /**
+     * Starts the JavaFX application.
+     *
+     * @param primaryStage The primary stage of the application.
+     */
     @Override
     public void start(Stage primaryStage) {
         Game.getInstance().addGameListener(this);
@@ -129,7 +141,11 @@ public class GameWindow extends Application implements GameListener {
         primaryStage.show();
     }
 
-
+    /**
+     * Notifies the game window of a game event.
+     *
+     * @param eg The game event.
+     */
     @Override
     public void notify(GameEvent eg) {
         Alert alert;
@@ -177,7 +193,17 @@ public class GameWindow extends Application implements GameListener {
         }
     }
 
+    /**
+     * Gets the name of Player 1.
+     *
+     * @return The name of Player 1.
+     */
     public static String getNameJ1() { return nameJ1; }
+
+    /**
+     * Gets the name of Player 2.
+     *
+     * @return The name of Player 2.
+     */
     public static String getNameJ2() { return nameJ2; }
 }
-

@@ -9,12 +9,21 @@ import javafx.scene.control.Tooltip;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+/**
+ * Represents the graphical view of a playing card.
+ */
 public class CardView extends Button implements PropertyChangeListener {
     private Card card;
     private CardView thisCardView;
     private CardViewListener observer;
     private Tooltip tip;
     private boolean facingUp;
+
+    /**
+     * Constructs a CardView with the specified card.
+     *
+     * @param aCard The card to associate with this view.
+     */
     public CardView(Card aCard) {
         super("", ImageFactory.getInstance().createImage(aCard.getImageId()));
         facingUp = true;
@@ -30,33 +39,57 @@ public class CardView extends Button implements PropertyChangeListener {
         this.setTooltip(tip);
         tip.setOnShowing(e -> updateTooltip());
     }
-    public Card getCard() { return card; }
+
+    /**
+     * Gets the associated card.
+     *
+     * @return The associated card.
+     */
+    public Card getCard() {
+        return card;
+    }
+
+    /**
+     * Flips the card.
+     * If the card is facing up, it flips it to face down, and vice versa.
+     */
     public void flip() {
         if (facingUp) {
             this.setGraphic(ImageFactory.getInstance().createImage("imgBck"));
             this.setTooltip(null); // disable tooltip
-        }
-        else {
+        } else {
             this.setGraphic(ImageFactory.getInstance().createImage(card.getImageId()));
             this.setTooltip(tip); // enable tooltip
         }
-
         facingUp = !facingUp;
     }
+
+    /**
+     * Updates the tooltip text based on the card's properties.
+     */
     public void updateTooltip() {
         if (card.getValue() instanceof PokemonPlayingCard) {
             PokemonPlayingCard carta = (PokemonPlayingCard) card.getValue();
-            System.out.println(carta.getActualEnergy());
             tip.setText(String.format("HP: %d\nEnergy: %d\nRarities: %s", carta.getActualHp(), carta.getActualEnergy(), carta.getRarity().toString()));
-        }
-        else {
+        } else {
             tip.setText(String.format("Provides 1 energy\nRarity: %s", card.getValue().getRarity().toString()));
         }
     }
+
+    /**
+     * Sets the observer for this card view.
+     *
+     * @param obs The observer to set.
+     */
     public void setCardViewObserver(CardViewListener obs) {
         observer = obs;
     }
 
+    /**
+     * Handles property change events for the associated card.
+     *
+     * @param evt The property change event.
+     */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         this.flip();

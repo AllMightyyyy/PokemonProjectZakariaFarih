@@ -3,13 +3,32 @@ package cesur.zakaria.pokemonprojectzakariafarih.cardModel;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
+/**
+ * Represents a playing card in the Pokemon game.
+ * Each card has an ID, an image ID, a playing card object, and a face-up status.
+ */
 public class Card {
+    /** The unique identifier of the card. */
     private String id;
+
+    /** The image identifier of the card. */
     private String imageId;
+
+    /** The playing card object associated with this card. */
     private PlayingCard playingCard;
+
+    /** Indicates whether the card is face up or face down. */
     private boolean faceUp;
+
+    /** PropertyChangeSupport instance for handling property change events. */
     private final PropertyChangeSupport pcs;
 
+    /**
+     * Constructs a new Card object with the specified ID and image ID.
+     *
+     * @param anId      The unique identifier of the card.
+     * @param anImageId The image identifier of the card.
+     */
     public Card(String anId, String anImageId) {
         this.id = anId;
         this.imageId = anImageId;
@@ -18,28 +37,57 @@ public class Card {
         pcs = new PropertyChangeSupport(this);
     }
 
+    /**
+     * Returns the ID of the card.
+     *
+     * @return The ID of the card.
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     * Returns the image ID of the card.
+     *
+     * @return The image ID of the card.
+     */
     public String getImageId() {
         return imageId;
     }
 
+    /**
+     * Returns the playing card object associated with this card.
+     *
+     * @return The playing card object.
+     */
     public PlayingCard getValue() {
         return playingCard;
     }
 
+    /**
+     * Checks if the card is facing up.
+     *
+     * @return True if the card is facing up, false otherwise.
+     */
     public boolean isFacingUp() {
         return faceUp;
     }
 
+    /**
+     * Flips the card to change its face-up status.
+     * Notifies property change listeners about the change.
+     */
     public void flipCard() {
         boolean old = faceUp;
-        faceUp =!faceUp;
+        faceUp = !faceUp;
         pcs.firePropertyChange("facedUp", old, faceUp);
     }
 
+    /**
+     * Retrieves a new instance of a playing card based on the image ID.
+     *
+     * @return A new instance of a playing card.
+     */
     private PlayingCard getNewInstance() {
         switch (imageId) {
             case "img1":  return new PokemonWater("Blastoise", "Hydro Pump", PlayingCard.Rarity.RARE, 140, 60, 4);
@@ -82,10 +130,20 @@ public class Card {
         }
     }
 
+    /**
+     * Adds a property change listener to this card.
+     *
+     * @param listener The property change listener to add.
+     */
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         pcs.addPropertyChangeListener(listener);
     }
 
+    /**
+     * Removes a property change listener from this card.
+     *
+     * @param listener The property change listener to remove.
+     */
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         pcs.removePropertyChangeListener(listener);
     }
