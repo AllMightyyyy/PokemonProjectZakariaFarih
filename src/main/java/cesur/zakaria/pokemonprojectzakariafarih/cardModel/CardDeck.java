@@ -91,6 +91,12 @@ public class CardDeck {
             observer.notify(gameEvent);
         }
     }
+    public void addEnergyForEachKill(int kills) {
+        int n = kills * ENERGY_CARDS_WHEN_KILL;
+        for (int i=0; i<n; i++) {
+            playingCards.add(new Card("Energy", "img36"));
+        }
+    }
     public void flipAddedCards(int nCardsAdded) {
         for (int i = playingCards.size(); i > playingCards.size() - nCardsAdded; i--) {
             Card playingCard = playingCards.remove(i-1);

@@ -207,7 +207,7 @@ public class Game {
         if (currentPhase == 1 && deckJ1.getNumberOfCards() == 0) {
             nextPhase();
             this.updateScoreboardView();
-            GameEvent gameEvent = new GameEvent(this, GameEvent.Target.GWIN, GameEvent.Action.SHOWMESSAGE, String.format("Since %s has no cards in his deck, his turn to set cards has ended.", GameWindow.getNemeJ1()));
+            GameEvent gameEvent = new GameEvent(this, GameEvent.Target.GWIN, GameEvent.Action.SHOWMESSAGE, String.format("Since %s has no cards in his deck, his turn to set cards has ended.", GameWindow.getNameJ1()));
             for (var observer : observers) {
                 observer.notify(gameEvent);
             }

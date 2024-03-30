@@ -26,13 +26,12 @@ public class PokemonNeutral extends PokemonPlayingCard {
 
         return true;
     }
-
     @Override
     public String toString() {
         return "NOME: " + super.getName() + " | "
-                + "RARIDADE: " + super.getRarity() + " | "
+                + "RARITY: " + super.getRarity() + " | "
                 + "HP: " + super.getActualHp() + " | "
-                + "ENERGIA CARREGADA: " + super.getActualEnergy() + " | "
+                + "ENERGY CHARGED: " + super.getActualEnergy() + " | "
                 + super.getAttack().toString();
     }
 }
