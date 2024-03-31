@@ -1,5 +1,8 @@
 package cesur.zakaria.pokemonprojectzakariafarih.pokelabGames.puzzle;
 
+import cesur.zakaria.pokemonprojectzakariafarih.session.AppState;
+import cesur.zakaria.pokemonprojectzakariafarih.session.Player;
+import cesur.zakaria.pokemonprojectzakariafarih.vue.minigameLab;
 import javafx.geometry.Point2D;
 import javafx.scene.Parent;
 import javafx.scene.effect.DropShadow;
@@ -8,6 +11,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
+
+import static cesur.zakaria.pokemonprojectzakariafarih.dbUtils.DBUtils.updatePlayerPoints;
 
 
 public class Puzzle extends Parent{
@@ -80,6 +85,24 @@ public class Puzzle extends Parent{
                 if(Main.numberOfPuzzles == count){
                     count = 0;
                     Main.text.setText("You won!");
+
+                    // Retrieve current player
+                    Player currentPlayer = AppState.getCurrentPlayer();
+                    if (currentPlayer != null) {
+                        int winPoints = 10; // Points to add for winning
+                        boolean updateSuccess = updatePlayerPoints(currentPlayer.getId(), winPoints);
+                        if (updateSuccess) {
+                            // Update AppState if needed
+                            currentPlayer.setPoints(currentPlayer.getPoints() + winPoints);
+                            AppState.setCurrentPlayer(currentPlayer);
+                            // Now update the UI to reflect the new points total
+                            minigameLab.updatePoints(currentPlayer.getPoints());
+
+                            System.out.println("Points updated successfully!");
+                        } else {
+                            System.out.println("Failed to update points.");
+                        }
+                    }
                 }
             }
         });

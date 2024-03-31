@@ -1,6 +1,8 @@
 package cesur.zakaria.pokemonprojectzakariafarih.vue;
 
 import cesur.zakaria.pokemonprojectzakariafarih.pokelabGames.puzzle.Main;
+import cesur.zakaria.pokemonprojectzakariafarih.session.AppState;
+import cesur.zakaria.pokemonprojectzakariafarih.session.Player;
 import javafx.animation.FillTransition;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -27,10 +29,11 @@ import javafx.util.Duration;
 
 public class minigameLab extends Application {
 
-    private Text pointsText = new Text("Points: 0");
+    private static Text pointsText = new Text("Points: 0");
     @Override
     public void start(Stage stage) throws Exception {
-        stage.setScene(new Scene(createContent()));
+        Scene scene = new Scene(createContent());
+        stage.setScene(scene);
         stage.show();
     }
 
@@ -144,7 +147,9 @@ public class minigameLab extends Application {
         GaussianBlur blur = new GaussianBlur(10); // Adjust the radius to your liking
         bg.setEffect(blur);
 
-        // Text for the points
+        Player currentPlayer = AppState.getCurrentPlayer();
+        // Use the current player's points to initialize the pointsText, if available
+        pointsText = new Text("Points: " + (currentPlayer != null ? currentPlayer.getPoints() : "0"));
         pointsText.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
         pointsText.setFill(Color.BLACK);
 
@@ -172,8 +177,8 @@ public class minigameLab extends Application {
     }
 
     // Method to update points somewhere in your class
-    public void updatePoints(int newPoints) {
-        pointsText.setText("Points: " + newPoints);
+    public static void updatePoints(int newPoints) {
+        Platform.runLater(() -> pointsText.setText("Points: " + newPoints));
     }
 
 }
