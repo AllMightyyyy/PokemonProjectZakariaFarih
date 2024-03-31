@@ -2,6 +2,7 @@ package cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.*;
 
 /**
  * The CapacitiesHelper class provides methods for managing the capacities of Pokemon.
@@ -24,46 +25,60 @@ public class CapacitiesHelper {
     }
 
 
-    private static CapacityDeck generate() throws IOException{
-        if(capacityDeck!=null) {//If the deck his already set we return him
+    private static CapacityDeck generate() {
+        if (capacityDeck != null) {
+            // If the deck is already set, we return it
             return capacityDeck;
         }
         capacityDeck = new CapacityDeck();
 
-        FileReader fReader = new FileReader("CSV/moves.csv");
-        int i;
-        String line;
-        StringBuilder lineBuilder= new StringBuilder();
-        while ((i=fReader.read())!=-1) {
-            char c = (char)i;
-            if(c == '\n') {
-                line=lineBuilder.toString();
+        // Database connection setup
+        final String DB_URL = "jdbc:mysql://localhost:3306/pokemondb";
+        final String USER = "root";
+        final String PASS = "27122000@ziko";
 
-                String[] tab =line.split("[,;]");
-                Capacity cap;
-                EnumPokemonType type;
-                try {
-                    type= EnumPokemonType.fromString(tab[2]);
+        // SQL query to fetch all moves
+        final String QUERY = "SELECT * FROM moves";
 
-                    cap=Capacity.instance(tab[1], !tab[3].isEmpty() ?Integer.parseInt(tab[3]):0, !tab[4].isEmpty() ?Integer.parseInt(tab[4]):0, !tab[5].isEmpty() ?Integer.parseInt(tab[5]):0, CategoryCapacity.fromString(tab[6]),type);
-                    if(capacityDeck.containsKey(type)) {
-                        capacityDeck.add(type,cap);
-                    }else {
-                        capacityDeck.put(type, cap);
+        try {
+            // Load the JDBC driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            // Establish a connection
+            try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+                 Statement stmt = conn.createStatement();
+                 ResultSet rs = stmt.executeQuery(QUERY)) {
+
+                // Process the result set
+                while (rs.next()) {
+                    try {
+                        EnumPokemonType type = EnumPokemonType.fromString(rs.getString("type"));
+                        // Instantiate a new Capacity object with the retrieved data
+                        Capacity cap = Capacity.instance(
+                                rs.getString("identifier"),
+                                rs.getInt("power"),
+                                rs.getInt("pp"),
+                                rs.getInt("accuracy"),
+                                CategoryCapacity.fromString(rs.getString("damage_class")),
+                                type
+                        );
+                        // Add the new Capacity object to the deck
+                        if (capacityDeck.containsKey(type)) {
+                            capacityDeck.add(type, cap);
+                        } else {
+                            capacityDeck.put(type, cap);
+                        }
+                    } catch (Exception ignored) {
+                        // Handle any exceptions, e.g., parsing errors
                     }
-                } catch (Exception ignored) {
-
                 }
-
-                lineBuilder=new StringBuilder();
-
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
-            else {
-                lineBuilder.append(c);
-            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
-        System.out.println("Cpacity Helpier"+capacityDeck);
+
+        System.out.println("Capacity Helper" + capacityDeck);
         return capacityDeck;
     }
-
 }

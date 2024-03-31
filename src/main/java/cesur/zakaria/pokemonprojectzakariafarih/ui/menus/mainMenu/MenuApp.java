@@ -3,7 +3,7 @@ package cesur.zakaria.pokemonprojectzakariafarih.ui.menus.mainMenu;
 import cesur.zakaria.pokemonprojectzakariafarih.cardGui.GameWindow;
 import cesur.zakaria.pokemonprojectzakariafarih.libGDXgame.LibGdxGame;
 import cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons.PokemonType;
-import cesur.zakaria.pokemonprojectzakariafarih.vue.Main;
+import cesur.zakaria.pokemonprojectzakariafarih.vue.interfaceMenu;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import javafx.animation.ScaleTransition;
@@ -183,14 +183,14 @@ public class MenuApp {
 
         // Launch the JavaFX game
         Platform.runLater(() -> {
+            PokemonType.generatePokemonType();
+            Stage gameStage = new Stage();
+            interfaceMenu mainApp = new interfaceMenu();
             try {
-                PokemonType.generatePokemonType();
-            } catch (IOException e) {
+                mainApp.start(gameStage);
+            } catch (Exception e) {
                 throw new RuntimeException(e);
             }
-            Stage gameStage = new Stage();
-            Main mainApp = new Main();
-            mainApp.start(gameStage);
         });
     }
 

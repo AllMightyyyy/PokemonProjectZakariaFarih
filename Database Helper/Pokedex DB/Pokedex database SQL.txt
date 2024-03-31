@@ -1,0 +1,9 @@
+CREATE TABLE pokedex (
+    id INT,
+    identifier VARCHAR(255),
+    picture VARCHAR(255),
+    height INT,
+    weight INT,
+    type1 VARCHAR(50),
+    type2 VARCHAR(50)
+);

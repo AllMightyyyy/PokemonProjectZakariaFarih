@@ -7,6 +7,7 @@ import cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons.PokemonTy
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.*;
 import java.util.HashMap;
 
 /**
@@ -30,51 +31,57 @@ public class Pokedex {
 		return pokedex;
 	}
 
-	private static Pokedex generate() throws IOException{
-		if(pokedex!=null) {
+	/**
+	 * Generates a new instance of the Pokedex.
+	 *
+	 * @return a new instance of the Pokedex
+	 * @throws IOException if an I/O error occurs while reading the data file
+	 */
+	private static Pokedex generate() {
+		if (pokedex != null) {
 			return pokedex;
 		}
 		pokedex = new Pokedex();
 
-		FileReader fReader = new FileReader("CSV/pokedex.csv");
+		final String DB_URL = "jdbc:mysql://localhost:3306/pokemondb";
+		final String USER = "root";
+		final String PASS = "27122000@ziko";
+		final String QUERY = "SELECT * FROM pokedex";
 
-		int i;
-		int nbLine=0;
-		String line;
-		StringBuilder lineBuilder= new StringBuilder();
-		while ((i=fReader.read())!=-1) {
-			char c = (char)i;
-			if(c == '\n') {
-				line=lineBuilder.toString().trim();
+		try {
+			// Load the JDBC driver
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			// Establish a connection to the database
+			try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+				 Statement stmt = conn.createStatement();
+				 ResultSet rs = stmt.executeQuery(QUERY)) {
 
-				if(nbLine>0) {
-					String[] tab =line.split("[,;]");
-					PokemonSpecie specie;
-					if(tab.length==6) {//If the Pokemon have 2 types
+				// Process the result set
+				while (rs.next()) {
+					int id = rs.getInt("id");
+					String identifier = rs.getString("identifier");
+					String picture = rs.getString("picture");
+					double height = rs.getDouble("height") / 10; // Assuming height is stored in tenths of units
+					double weight = rs.getDouble("weight") / 10; // Assuming weight is stored in tenths of units
+					EnumPokemonType type1 = EnumPokemonType.fromString(rs.getString("type1"));
+					EnumPokemonType type2 = EnumPokemonType.fromString(rs.getString("type2"));
+					EnumSetPokemonType typesSet = type2 == null ?
+							new EnumSetPokemonType(type1) :
+							new EnumSetPokemonType(type1, type2);
+					PokemonType pokemonType = PokemonType.getPokemonType(typesSet);
 
-						specie=new PokemonSpecie(Integer.parseInt(tab[0]), tab[1],PokemonType.getPokemonType(new EnumSetPokemonType(EnumPokemonType.fromString(tab[5]))), Double.parseDouble(tab[3])/10, Double.parseDouble(tab[4])/10,tab[2]);
-					}
-					else {
-						specie=new PokemonSpecie(Integer.parseInt(tab[0]), tab[1], PokemonType.getPokemonType(new EnumSetPokemonType(EnumPokemonType.fromString(tab[5]),EnumPokemonType.fromString(tab[6]))), Double.parseDouble(tab[3])/10, Double.parseDouble(tab[4])/10,tab[2]);
-
-					}
-
-					if(!pokedexMap.containsKey(specie.getNbPokemon())) {
-						pokedexMap.put(specie.getNbPokemon(), specie);
-					}
-
-                }else {
-					nbLine++;
-                }
-                lineBuilder=new StringBuilder();
-
-
+					PokemonSpecie specie = new PokemonSpecie(id, identifier, pokemonType, height, weight, picture);
+					// Populate the pokedex map
+					pokedexMap.put(id, specie);
+				}
+			} catch (SQLException e) {
+                throw new RuntimeException(e);
             }
-			else {
-				lineBuilder.append(c);
-			}
+        } catch (ClassNotFoundException e) {
+			e.printStackTrace();
 		}
-		return (pokedex);
+
+		return pokedex;
 	}
 
 	/**

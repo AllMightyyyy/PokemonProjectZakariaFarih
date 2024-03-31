@@ -1,0 +1,9 @@
+CREATE TABLE moves (
+    id INT,
+    identifier VARCHAR(255),
+    type VARCHAR(50),
+    power INT,
+    pp INT,
+    accuracy INT,
+    damage_class VARCHAR(50)
+);

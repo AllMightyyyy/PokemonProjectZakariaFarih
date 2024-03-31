@@ -1,6 +1,7 @@
 package cesur.zakaria.pokemonprojectzakariafarih.controler;
 
 import cesur.zakaria.pokemonprojectzakariafarih.vue.MainView;
+import cesur.zakaria.pokemonprojectzakariafarih.vue.mainLoading;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -25,6 +26,9 @@ public class MainController {
      */
     @FXML
     private Button launchFightButton;
+
+    @FXML
+    private Button launchPokemonLab;
 
     /**
      * This method is used to initialize the controller class.
@@ -53,7 +57,18 @@ public class MainController {
      */
     @FXML
     void launchPokedex(ActionEvent ignoredEvent) throws IOException {
-        MainView.changeScene((Stage)launchFightButton.getScene().getWindow(), "Pokedex.fxml");
+        MainView.changeScene((Stage) launchFightButton.getScene().getWindow(), "Pokedex.fxml");
+    }
+
+    @FXML
+    void launchPokemonLab(ActionEvent ignoredEvent) throws IOException {
+        mainLoading loadingScreen = new mainLoading();
+        Stage stage = (Stage) launchPokemonLab.getScene().getWindow(); // Reuses the existing window.
+        try {
+            loadingScreen.start(stage);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**

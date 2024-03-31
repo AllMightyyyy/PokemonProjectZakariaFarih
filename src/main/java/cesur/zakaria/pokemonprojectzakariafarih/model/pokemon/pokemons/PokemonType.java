@@ -4,6 +4,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.Serial;
 import java.io.Serializable;
+import java.sql.*;
 import java.util.*;
 
 /**
@@ -15,6 +16,9 @@ public class PokemonType implements Iterator<EnumPokemonType>, Serializable {
 	private final EnumSetPokemonType enumPokemonTypes;
 	private final Map<EnumPokemonType, Double> typeRatio = new EnumMap<>(EnumPokemonType.class);
 	private static final Map<EnumSetPokemonType, PokemonType> arrayToType = new HashMap<>();
+	private static final String DB_URL = "jdbc:mysql://localhost:3306/pokemondb";
+	private static final String USER = "root";
+	private static final String PASS = "27122000@ziko";
 
 	/**
 	 * Constructs a new PokemonType with the specified EnumSetPokemonType.
@@ -37,45 +41,54 @@ public class PokemonType implements Iterator<EnumPokemonType>, Serializable {
 
 	/**
 	 * Generates the Pokemon types from the data in the "CSV/grid_types.csv" file.
+	 * now from Database instead
 	 *
 	 * @throws IOException if an I/O error occurs while reading the file.
 	 */
-	public static void generatePokemonType() throws IOException {
+	public static void generatePokemonType() {
+		// First, load the JDBC driver
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			return;
+		}
+
 		ArrayList<EnumPokemonType> enumPokemonTypesList = new ArrayList<>();
-		FileReader fReader = new FileReader("CSV/grid_types.csv");
-		int i;
-		String line;
-		StringBuilder lineBuilder = new StringBuilder();
-		int nbline = 0;
-		while ((i = fReader.read()) != -1) {
-			char c = (char) i;
-			if (c == '\n') {
-				line = lineBuilder.toString();
-				nbline++;
-				String[] tab = line.split("[,;]");
-				if (nbline == 1) {
-					for (int j = 2; j < tab.length; j++) {
-						enumPokemonTypesList.add(EnumPokemonType.fromString(tab[j]));
+		try (
+				// Establish a connection to the database
+				Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+				// Create a statement to execute SQL queries
+				Statement stmt = conn.createStatement();
+				// Execute a SELECT query to get all the data from your types table
+				ResultSet rs = stmt.executeQuery("SELECT * FROM grid_types");
+		) {
+			int nbline = 0;
+			while (rs.next()) { // Iterate over each row in the result set
+				if (nbline == 0) {
+					// Assume first row contains column names for types
+					for (int j = 2; j <= rs.getMetaData().getColumnCount(); j++) {
+						enumPokemonTypesList.add(EnumPokemonType.fromString(rs.getMetaData().getColumnName(j)));
 					}
 				} else {
 					EnumSetPokemonType enumPokemonTypesSet;
-					if (tab[1].isBlank()) {
-						enumPokemonTypesSet = new EnumSetPokemonType(EnumPokemonType.fromString(tab[0]));
+					if (rs.getString(2).isBlank()) {
+						enumPokemonTypesSet = new EnumSetPokemonType(EnumPokemonType.fromString(rs.getString(1)));
 					} else {
-						enumPokemonTypesSet = new EnumSetPokemonType(EnumPokemonType.fromString(tab[0]), EnumPokemonType.fromString(tab[1]));
+						enumPokemonTypesSet = new EnumSetPokemonType(EnumPokemonType.fromString(rs.getString(1)), EnumPokemonType.fromString(rs.getString(2)));
 					}
 					PokemonType pokemonType = new PokemonType(enumPokemonTypesSet);
-					for (int j = 2; j < tab.length; j++) {
+					for (int j = 2; j <= rs.getMetaData().getColumnCount(); j++) {
 						if (enumPokemonTypesList.get(j - 2) != null) {
-							pokemonType.typeRatio.put(enumPokemonTypesList.get(j - 2), Double.valueOf(tab[j]));
+							pokemonType.typeRatio.put(enumPokemonTypesList.get(j - 2), rs.getDouble(j));
 						}
 					}
 					PokemonType.arrayToType.put(enumPokemonTypesSet, pokemonType);
 				}
-				lineBuilder = new StringBuilder();
-			} else {
-				lineBuilder.append(c);
+				nbline++;
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 

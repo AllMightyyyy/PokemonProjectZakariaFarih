@@ -65,13 +65,13 @@ public class PokedexController {
 	 * @throws FileNotFoundException If a required file is not found.
 	 */
 	public void initialize() throws FileNotFoundException {
-		System.out.println("Lancement du Pok�dex");
+		System.out.println("Launching Pokedex");
 		try {
 			pokedex = Pokedex.getPokedex();
 			deck = CapacitiesHelper.getCapacityDeck();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			System.err.println("Ta mere");
+			System.err.println("err");
 			e.printStackTrace();
 		}
 		int total = pokedex.size();

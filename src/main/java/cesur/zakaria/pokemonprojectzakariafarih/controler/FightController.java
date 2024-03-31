@@ -142,7 +142,7 @@ public class FightController {
 		
     	System.out.println("Launching the combat");
 		Random random = new Random();
-		int randomNumber = random.nextInt(12) + 1;
+		int randomNumber = random.nextInt(12);
 		String filename = "Pictures/fightbg" + randomNumber + ".jpg";
     	BackgroundImage mainBackground= new BackgroundImage(new Image(new FileInputStream(filename)),BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,new BackgroundSize(600, 267, false, false, false, false));
     	GridPane root = (GridPane) mainDialog.getParent();
