@@ -97,7 +97,19 @@ public class mainLoading extends Application {
 
         @Override
         protected void succeeded() {
-            progress.hide();
+            Platform.runLater(() -> {
+                progress.hide();
+                try {
+                    Scene labScene = new Scene(new minigameLab().createContent()); // createContent should be accessible
+
+                    // Get the current stage and set the new scene
+                    Stage currentStage = (Stage) progress.getScene().getWindow();
+                    currentStage.setScene(labScene);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
         }
     }
 
