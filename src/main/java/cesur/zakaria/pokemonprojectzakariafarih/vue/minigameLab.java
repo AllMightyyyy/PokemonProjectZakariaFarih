@@ -1,6 +1,8 @@
 package cesur.zakaria.pokemonprojectzakariafarih.vue;
 
+import cesur.zakaria.pokemonprojectzakariafarih.pokelabGames.NuMemoryPuzzle.NuMemoryApp;
 import cesur.zakaria.pokemonprojectzakariafarih.pokelabGames.puzzle.Main;
+import cesur.zakaria.pokemonprojectzakariafarih.pokelabGames.tictactoe.TicTacToeApp;
 import cesur.zakaria.pokemonprojectzakariafarih.session.AppState;
 import cesur.zakaria.pokemonprojectzakariafarih.session.Player;
 import javafx.animation.FillTransition;
@@ -61,8 +63,8 @@ public class minigameLab extends Application {
                         e.printStackTrace();
                     }
                 }),
-                new MenuItem("PacMan", () -> {}),
-                new MenuItem("SETTINGS", () -> {}),
+                new MenuItem("Number Memory Puzzle", minigameLab::launchNuMemoryPuzzle),
+                new MenuItem("Tictactoe", minigameLab::launchTicTacToeGame),
                 new MenuItem("QUIT", () -> Platform.exit())
         );
         box.setBackground(new Background(
@@ -174,6 +176,33 @@ public class minigameLab extends Application {
         stackPane.setEffect(paneShadow);
 
         return stackPane;
+    }
+
+    private static void launchNuMemoryPuzzle() {
+        Platform.runLater(() -> {
+            try {
+                // Create a new Stage for the Snake game
+                Stage NuMemoryPuzzleStage = new Stage();
+                // Start the memory game in the new Stage
+                NuMemoryApp memoryGame = new NuMemoryApp();
+                memoryGame.start(NuMemoryPuzzleStage);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
+    private static void launchTicTacToeGame() {
+        Platform.runLater(() -> {
+            try {
+                // Create a new Stage for the Snake game
+                Stage TicTacToeStage = new Stage();
+                // Start the memory game in the new Stage
+                TicTacToeApp ticTacToeGame = new TicTacToeApp();
+                ticTacToeGame.start(TicTacToeStage);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     // Method to update points somewhere in your class
