@@ -5,7 +5,9 @@ package cesur.zakaria.pokemonprojectzakariafarih.cardModel;
  * Energy cards provide energy for attacks.
  */
 public class EnergyCard extends PlayingCard {
-    /** The quantity of energy provided by the card. */
+    /**
+     * The quantity of energy provided by the card.
+     */
     public static final int QTY_ENERGY = 1;
 
     /**

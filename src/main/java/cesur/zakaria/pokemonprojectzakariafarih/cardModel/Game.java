@@ -20,6 +20,7 @@ public class Game {
 
     /**
      * Retrieves the singleton instance of the Game class.
+     *
      * @return The singleton instance of the Game class.
      */
     public static Game getInstance() {
@@ -60,6 +61,7 @@ public class Game {
 
     /**
      * Retrieves the total number of Pokémon cards held by player 1.
+     *
      * @return The total number of Pokémon cards held by player 1.
      */
     public int getPokemonsJ1() {
@@ -68,6 +70,7 @@ public class Game {
 
     /**
      * Retrieves the total number of Pokémon cards held by player 2.
+     *
      * @return The total number of Pokémon cards held by player 2.
      */
     public int getPokemonsJ2() {
@@ -76,30 +79,35 @@ public class Game {
 
     /**
      * Retrieves the deck of cards belonging to player 1.
+     *
      * @return The deck of cards belonging to player 1.
      */
     public CardDeck getDeckJ1() { return deckJ1; }
 
     /**
      * Retrieves the deck of cards belonging to player 2.
+     *
      * @return The deck of cards belonging to player 2.
      */
     public CardDeck getDeckJ2() { return deckJ2; }
 
     /**
      * Retrieves the table of cards belonging to player 1.
+     *
      * @return The table of cards belonging to player 1.
      */
     public CardDeck getTableJ1() { return tableJ1; }
 
     /**
      * Retrieves the table of cards belonging to player 2.
+     *
      * @return The table of cards belonging to player 2.
      */
     public CardDeck getTableJ2() { return tableJ2; }
 
     /**
      * Retrieves the current phase of the game.
+     *
      * @return The current phase of the game.
      */
     public int getActualPhase() { return currentPhase; }
@@ -182,9 +190,10 @@ public class Game {
     /**
      * Downloads cards for a specified player.
      * Triggered by the "Download cards" button.
+     *
      * @param player The player for whom cards should be downloaded (1 for player 1, 2 for player 2).
      */
-    // Triggered by the 'Download cards' button
+// Triggered by the 'Download cards' button
     public void downloadPlayingCards(int player) {
         System.out.println("\n\ndownloadLetters() triggered");
         if (currentPhase != 1 && currentPhase != 2) { // Cards can only be downloaded in phases 1 (J1) and 2 (J2)
@@ -228,7 +237,7 @@ public class Game {
      * Ends the current player's turn.
      * Triggered by the "End Turn" button.
      */
-    // Triggered by the "End Turn" button
+// Triggered by the "End Turn" button
     public void endTurn() {
         if ( (currentPhase == 1 && addedCardsMJ1 == 0 && deckJ1.getNumberOfCards() > 0) ||
                 (currentPhase == 2 && addedCardsMJ2 == 0 && deckJ2.getNumberOfCards() > 0)) { // if it's J1's turn to download cards, he doesn't download them and has cards to download
@@ -321,6 +330,7 @@ public class Game {
 
     /**
      * Adds energy to a Pokémon card on the table for a specified player.
+     *
      * @param player The player for whom energy should be added (1 for player 1, 2 for player 2).
      */
     public void addEnergy(int player) {
@@ -388,6 +398,7 @@ public class Game {
 
     /**
      * Adds a GameListener to the list of observers.
+     *
      * @param listener The GameListener to add.
      */
     public void addGameListener(GameListener listener) { observers.add(listener); }

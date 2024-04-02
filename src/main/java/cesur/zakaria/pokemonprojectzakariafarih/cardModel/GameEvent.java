@@ -10,11 +10,53 @@ public class GameEvent extends EventObject {
 
     private static final long serialVersionUID = 1L;
 
-    // Enumeration representing the target of the event
-    public enum Target { DECK, GWIN }
+    /**
+     * The enum Target.
+     */
+// Enumeration representing the target of the event
+    public enum Target {
+        /**
+         * Deck target.
+         */
+        DECK,
+        /**
+         * Gwin target.
+         */
+        GWIN }
 
-    // Enumeration representing the action of the event
-    public enum Action { INVPLAY, ENDGAME, REMOVESEL, SHOWTABLE, RESTART, SHOWMESSAGE, MUSTENDTURN }
+    /**
+     * The enum Action.
+     */
+// Enumeration representing the action of the event
+    public enum Action {
+        /**
+         * Invplay action.
+         */
+        INVPLAY,
+        /**
+         * Endgame action.
+         */
+        ENDGAME,
+        /**
+         * Removesel action.
+         */
+        REMOVESEL,
+        /**
+         * Showtable action.
+         */
+        SHOWTABLE,
+        /**
+         * Restart action.
+         */
+        RESTART,
+        /**
+         * Showmessage action.
+         */
+        SHOWMESSAGE,
+        /**
+         * Mustendturn action.
+         */
+        MUSTENDTURN }
 
     private Target target; // The target of the event
     private Action action; // The action associated with the event
@@ -22,10 +64,11 @@ public class GameEvent extends EventObject {
 
     /**
      * Constructs a GameEvent with the specified source, target, action, and argument.
-     * @param source The object on which the Event initially occurred.
-     * @param aTarget The target of the event.
+     *
+     * @param source   The object on which the Event initially occurred.
+     * @param aTarget  The target of the event.
      * @param anAction The action associated with the event.
-     * @param anArg Additional argument for the event.
+     * @param anArg    Additional argument for the event.
      */
     public GameEvent(Object source, Target aTarget, Action anAction, String anArg) {
         super(source);
@@ -36,6 +79,7 @@ public class GameEvent extends EventObject {
 
     /**
      * Retrieves the target of the event.
+     *
      * @return The target of the event.
      */
     public Target getTarget() {
@@ -44,6 +88,7 @@ public class GameEvent extends EventObject {
 
     /**
      * Retrieves the action associated with the event.
+     *
      * @return The action associated with the event.
      */
     public Action getAction() {
@@ -52,6 +97,7 @@ public class GameEvent extends EventObject {
 
     /**
      * Retrieves the additional argument for the event.
+     *
      * @return The additional argument for the event.
      */
     public String getArg() {

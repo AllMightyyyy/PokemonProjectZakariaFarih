@@ -20,21 +20,21 @@ public class League implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private final ArrayList<Bot> Bots;
 
-    /**
-     * Constructs a League object with the given list of bots.
-     *
-     * @param Bots The list of bots participating in the league.
-     */
-    public League(ArrayList<Bot> Bots) {
+	/**
+	 * Constructs a League object with the given list of bots.
+	 *
+	 * @param Bots The list of bots participating in the league.
+	 */
+	public League(ArrayList<Bot> Bots) {
 		this.Bots = Bots;
 	}
 
-    /**
-     * Gets the index of the current bot in the league that has not been defeated.
-     *
-     * @return The index of the current bot, or -1 if all bots have been defeated.
-     */
-    public int getActualBot() {
+	/**
+	 * Gets the index of the current bot in the league that has not been defeated.
+	 *
+	 * @return The index of the current bot, or -1 if all bots have been defeated.
+	 */
+	public int getActualBot() {
 		for (int i = 0; i < Bots.size(); i++) {
 			if (!Bots.get(i).loose()) {
 				return i;
@@ -43,23 +43,23 @@ public class League implements Serializable{
 		return -1;
 	}
 
-    /**
-     * Gets the bot at the specified index in the league.
-     *
-     * @param index The index of the bot.
-     * @return The bot at the specified index.
-     */
-    public Bot getBot(int index) {
+	/**
+	 * Gets the bot at the specified index in the league.
+	 *
+	 * @param index The index of the bot.
+	 * @return The bot at the specified index.
+	 */
+	public Bot getBot(int index) {
 		return Bots.get(index);
 	}
 
-    /**
-     * Generates a random Pokemon with random capacities.
-     *
-     * @return A randomly generated Pokemon.
-     * @throws IOException if an I/O error occurs while retrieving Pokemon data.
-     */
-    public static Pokemon pokemonRandom() throws IOException {
+	/**
+	 * Generates a random Pokemon with random capacities.
+	 *
+	 * @return A randomly generated Pokemon.
+	 * @throws IOException if an I/O error occurs while retrieving Pokemon data.
+	 */
+	public static Pokemon pokemonRandom() throws IOException {
 		Random rand = new Random();
 		Pokedex pokedex = Pokedex.getPokedex();
 		PokemonSpecie pokemonSpecie = pokedex.get(1 + rand.nextInt(pokedex.size() + 1));
@@ -93,13 +93,13 @@ public class League implements Serializable{
 		return j;
 	}
 
-    /**
-     * Creates a default league with randomly generated bots and their Pokemon teams.
-     *
-     * @return A default League object.
-     * @throws IOException if an I/O error occurs while generating Pokemon data.
-     */
-    public static League createDefaultLeague() throws IOException {
+	/**
+	 * Creates a default league with randomly generated bots and their Pokemon teams.
+	 *
+	 * @return A default League object.
+	 * @throws IOException if an I/O error occurs while generating Pokemon data.
+	 */
+	public static League createDefaultLeague() throws IOException {
 		ArrayList<Bot> Bots = new ArrayList<>();
 		for (int i = 0; i < 4; i++) {
 			Pokemon[] pokemons = new Pokemon[5];
@@ -120,12 +120,12 @@ public class League implements Serializable{
 		return new League(Bots);
 	}
 
-    /**
-     * Gets the list of bots participating in the league.
-     *
-     * @return The list of bots.
-     */
-    public ArrayList<Bot> getBots() {
+	/**
+	 * Gets the list of bots participating in the league.
+	 *
+	 * @return The list of bots.
+	 */
+	public ArrayList<Bot> getBots() {
 		return Bots;
 	}
 

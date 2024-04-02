@@ -18,7 +18,13 @@ import javax.swing.*;
  * Represents the main window of the Pokemon game.
  */
 public class GameWindow extends Application implements GameListener {
-    public static String nameJ1, nameJ2;
+    /**
+     * The constant nameJ1.
+     */
+    public static String nameJ1, /**
+     * The Name j 2.
+     */
+    nameJ2;
 
     /**
      * The main method of the application.

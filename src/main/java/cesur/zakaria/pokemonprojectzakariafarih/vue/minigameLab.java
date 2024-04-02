@@ -109,6 +109,12 @@ public class minigameLab extends Application {
      * Each menu item is associated with an action, typically launching a mini-game or utility.
      */
     private static class MenuItem extends StackPane {
+        /**
+         * Instantiates a new Menu item.
+         *
+         * @param name   the name
+         * @param action the action
+         */
         MenuItem(String name, Runnable action) {
             LinearGradient gradient = new LinearGradient(
                     0, 0.5, 1, 0.5, true, CycleMethod.NO_CYCLE,
@@ -279,6 +285,7 @@ public class minigameLab extends Application {
     }
 
     // Method to update points somewhere in your class
+
     /**
      * Updates the points display with a new total.
      *

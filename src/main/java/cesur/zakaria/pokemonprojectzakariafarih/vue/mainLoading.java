@@ -65,6 +65,9 @@ public class mainLoading extends Application {
 
         private RotateTransition rt;
 
+        /**
+         * Instantiates a new Loading bar.
+         */
         public LoadingBar() {
             Circle outer = new Circle(25);
             outer.setFill(null);

@@ -145,8 +145,8 @@ public class FightController {
 	 * (bot or another player), and prepares the Pokémon for the fight. This method sets up the initial
 	 * state of the UI, including loading Pokémon data and setting background images.
 	 *
-	 * @throws IOException if there is an error reading from the file system.
-	 * @throws SQLException if there is an error retrieving data from the database.
+	 * @throws IOException            if there is an error reading from the file system.
+	 * @throws SQLException           if there is an error retrieving data from the database.
 	 * @throws ClassNotFoundException if the JDBC Driver class is not found.
 	 */
 	public void initialize() throws IOException, SQLException, ClassNotFoundException {

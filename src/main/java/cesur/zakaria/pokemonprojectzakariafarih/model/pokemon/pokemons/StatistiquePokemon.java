@@ -171,54 +171,117 @@ public class StatistiquePokemon implements Serializable {
 		return xpLevel;
 	}
 
-	public int getDmg() {
+    /**
+     * Gets dmg.
+     *
+     * @return the dmg
+     */
+    public int getDmg() {
 		return dmg;
 	}
 
-	public int getDef() {
+    /**
+     * Gets def.
+     *
+     * @return the def
+     */
+    public int getDef() {
 		return def;
 	}
 
-	public int getDmgspe() {
+    /**
+     * Gets dmgspe.
+     *
+     * @return the dmgspe
+     */
+    public int getDmgspe() {
 		return dmgspe;
 	}
 
-	public int getDefspe() {
+    /**
+     * Gets defspe.
+     *
+     * @return the defspe
+     */
+    public int getDefspe() {
 		return defspe;
 	}
 
-	public int getPv() {
+    /**
+     * Gets pv.
+     *
+     * @return the pv
+     */
+    public int getPv() {
 		return pv;
 	}
 
-	public void setPv(int pv) {
+    /**
+     * Sets pv.
+     *
+     * @param pv the pv
+     */
+    public void setPv(int pv) {
 		this.pv = pv;
 	}
 
-	public int getPvMax() {
+    /**
+     * Gets pv max.
+     *
+     * @return the pv max
+     */
+    public int getPvMax() {
 		return pvMax;
 	}
 
-	// Method to adjust HP with validation
+    /**
+     * Adjust hp.
+     *
+     * @param newValue the new value
+     * @param oldValue the old value
+     */
+// Method to adjust HP with validation
 	public void adjustHp(int newValue, int oldValue) {
 		pv = Math.max(0, Math.min(newValue, MAX_HP)); // Ensure hp is within 0 and MAX_HP
 	}
 
-	// Method to adjust Attack with validation
+    /**
+     * Adjust attack.
+     *
+     * @param newValue the new value
+     * @param oldValue the old value
+     */
+// Method to adjust Attack with validation
 	public void adjustAttack(int newValue, int oldValue) {
 		dmg = Math.max(0, Math.min(newValue, MAX_ATTACK)); // Ensure attack is within 0 and MAX_ATTACK
 	}
 
-	// Method to adjust Defense with validation
+    /**
+     * Adjust defense.
+     *
+     * @param newValue the new value
+     * @param oldValue the old value
+     */
+// Method to adjust Defense with validation
 	public void adjustDefense(int newValue, int oldValue) {
 		def = Math.max(0, Math.min(newValue, MAX_DEFENSE)); // Ensure defense is within 0 and MAX_DEFENSE
 	}
 
-	public void setDmg(int dmg) {
+    /**
+     * Sets dmg.
+     *
+     * @param dmg the dmg
+     */
+    public void setDmg(int dmg) {
 		this.dmg = dmg;
 	}
 
-	public void setDef(int def) {
+    /**
+     * Sets def.
+     *
+     * @param def the def
+     */
+    public void setDef(int def) {
 		this.def = def;
 	}
 }

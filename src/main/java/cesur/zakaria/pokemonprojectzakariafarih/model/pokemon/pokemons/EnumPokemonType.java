@@ -7,82 +7,82 @@ import java.util.Map;
  * The EnumPokemonType enum represents the types of Pokemon.
  */
 public enum EnumPokemonType {
-	/**
-	 * None enum pokemon type.
-	 */
-	None,
-	/**
-	 * Acier enum pokemon type.
-	 */
-	ACIER,
-	/**
-	 * Fighthing enum pokemon type.
-	 */
-	FIGHTHING,
-	/**
-	 * Dragon enum pokemon type.
-	 */
-	DRAGON,
-	/**
-	 * Water enum pokemon type.
-	 */
-	WATER,
-	/**
-	 * Electric enum pokemon type.
-	 */
-	ELECTRIC,
-	/**
-	 * Fairy enum pokemon type.
-	 */
-	FAIRY,
-	/**
-	 * Fire enum pokemon type.
-	 */
-	FIRE,
-	/**
-	 * Ice enum pokemon type.
-	 */
-	ICE,
-	/**
-	 * Bug enum pokemon type.
-	 */
-	BUG,
-	/**
-	 * Normal enum pokemon type.
-	 */
-	NORMAL,
-	/**
-	 * Grass enum pokemon type.
-	 */
-	GRASS,
-	/**
-	 * Poison enum pokemon type.
-	 */
-	POISON,
-	/**
-	 * Psychic enum pokemon type.
-	 */
-	PSYCHIC,
-	/**
-	 * Rock enum pokemon type.
-	 */
-	ROCK,
-	/**
-	 * Ground enum pokemon type.
-	 */
-	GROUND,
-	/**
-	 * Ghost enum pokemon type.
-	 */
-	GHOST,
-	/**
-	 * Dark enum pokemon type.
-	 */
-	DARK,
-	/**
-	 * Flying enum pokemon type.
-	 */
-	FLYING;
+    /**
+     * None enum pokemon type.
+     */
+    None,
+    /**
+     * Acier enum pokemon type.
+     */
+    ACIER,
+    /**
+     * Fighthing enum pokemon type.
+     */
+    FIGHTHING,
+    /**
+     * Dragon enum pokemon type.
+     */
+    DRAGON,
+    /**
+     * Water enum pokemon type.
+     */
+    WATER,
+    /**
+     * Electric enum pokemon type.
+     */
+    ELECTRIC,
+    /**
+     * Fairy enum pokemon type.
+     */
+    FAIRY,
+    /**
+     * Fire enum pokemon type.
+     */
+    FIRE,
+    /**
+     * Ice enum pokemon type.
+     */
+    ICE,
+    /**
+     * Bug enum pokemon type.
+     */
+    BUG,
+    /**
+     * Normal enum pokemon type.
+     */
+    NORMAL,
+    /**
+     * Grass enum pokemon type.
+     */
+    GRASS,
+    /**
+     * Poison enum pokemon type.
+     */
+    POISON,
+    /**
+     * Psychic enum pokemon type.
+     */
+    PSYCHIC,
+    /**
+     * Rock enum pokemon type.
+     */
+    ROCK,
+    /**
+     * Ground enum pokemon type.
+     */
+    GROUND,
+    /**
+     * Ghost enum pokemon type.
+     */
+    GHOST,
+    /**
+     * Dark enum pokemon type.
+     */
+    DARK,
+    /**
+     * Flying enum pokemon type.
+     */
+    FLYING;
 
     static {
         new HashMap<EnumPokemonType, String>() {{
@@ -128,13 +128,13 @@ public enum EnumPokemonType {
         put("normal", EnumPokemonType.NORMAL);
     }};
 
-	/**
-	 * Converts a string to the corresponding EnumPokemonType enum value.
-	 *
-	 * @param s The string to convert.
-	 * @return The corresponding EnumPokemonType enum value, or null if no match is found.
-	 */
-	public static EnumPokemonType fromString(String s) {
+    /**
+     * Converts a string to the corresponding EnumPokemonType enum value.
+     *
+     * @param s The string to convert.
+     * @return The corresponding EnumPokemonType enum value, or null if no match is found.
+     */
+    public static EnumPokemonType fromString(String s) {
 		String test = s.replaceAll("\\s", ""); // Remove whitespace
 		return EnumPokemonType.stringToType.get(test);
 	}

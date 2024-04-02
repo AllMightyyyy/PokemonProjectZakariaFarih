@@ -28,6 +28,9 @@ import java.util.concurrent.TimeUnit;
 
 import static cesur.zakaria.pokemonprojectzakariafarih.dbUtils.DBUtils.updatePlayerPoints;
 
+/**
+ * The type Nu memory app.
+ */
 public class NuMemoryApp extends Application {
 
     private static final long DURATION_SECONDS = 6;
@@ -148,6 +151,11 @@ public class NuMemoryApp extends Application {
 
         private Text text;
 
+        /**
+         * Instantiates a new Tile view.
+         *
+         * @param content the content
+         */
         TileView(String content) {
             var border = new Rectangle(80, 80, null);
             border.setStroke(Color.BLACK);
@@ -162,15 +170,26 @@ public class NuMemoryApp extends Application {
             setPickOnBounds(true);
         }
 
+        /**
+         * Hide.
+         */
         void hide() {
             text.setVisible(false);
         }
 
+        /**
+         * Show.
+         */
         void show() {
             text.setVisible(true);
         }
     }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         launch(args);
     }

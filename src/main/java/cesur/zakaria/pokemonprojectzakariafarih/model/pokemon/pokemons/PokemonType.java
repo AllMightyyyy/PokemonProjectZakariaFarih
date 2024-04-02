@@ -29,23 +29,23 @@ public class PokemonType implements Iterator<EnumPokemonType>, Serializable {
 		this.enumPokemonTypes = enumPokemonTypes;
 	}
 
-	/**
-	 * Retrieves the PokemonType associated with the given EnumSetPokemonType.
-	 *
-	 * @param enumPokemonTypes The EnumSetPokemonType representing the types of the Pokemon.
-	 * @return The PokemonType associated with the given EnumSetPokemonType.
-	 */
-	public static PokemonType getPokemonType(EnumSetPokemonType enumPokemonTypes) {
+    /**
+     * Retrieves the PokemonType associated with the given EnumSetPokemonType.
+     *
+     * @param enumPokemonTypes The EnumSetPokemonType representing the types of the Pokemon.
+     * @return The PokemonType associated with the given EnumSetPokemonType.
+     */
+    public static PokemonType getPokemonType(EnumSetPokemonType enumPokemonTypes) {
 		return PokemonType.arrayToType.get(enumPokemonTypes);
 	}
 
-	/**
-	 * Generates the Pokemon types from the data in the "CSV/grid_types.csv" file.
-	 * now from Database instead
-	 *
-	 * @throws IOException if an I/O error occurs while reading the file.
-	 */
-	public static void generatePokemonType() {
+    /**
+     * Generates the Pokemon types from the data in the "CSV/grid_types.csv" file.
+     * now from Database instead
+     *
+     * @throws IOException if an I/O error occurs while reading the file.
+     */
+    public static void generatePokemonType() {
 		// First, load the JDBC driver
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -159,39 +159,39 @@ public class PokemonType implements Iterator<EnumPokemonType>, Serializable {
 		return enumPokemonTypes.next();
 	}
 
-	/**
-	 * Resets the iterator over the EnumPokemonType.
-	 */
-	public void resetIterator() {
+    /**
+     * Resets the iterator over the EnumPokemonType.
+     */
+    public void resetIterator() {
 		enumPokemonTypes.resetIterator();
 	}
 
-	/**
-	 * Retrieves the ratio associated with the specified EnumPokemonType.
-	 *
-	 * @param e The EnumPokemonType.
-	 * @return The ratio associated with the specified EnumPokemonType.
-	 */
-	public Double getRatio(EnumPokemonType e) {
+    /**
+     * Retrieves the ratio associated with the specified EnumPokemonType.
+     *
+     * @param e The EnumPokemonType.
+     * @return The ratio associated with the specified EnumPokemonType.
+     */
+    public Double getRatio(EnumPokemonType e) {
 		return typeRatio.get(e);
 	}
 
-	/**
-	 * Retrieves the number of Pokemon types.
-	 *
-	 * @return The number of Pokemon types.
-	 */
-	public int size() {
+    /**
+     * Retrieves the number of Pokemon types.
+     *
+     * @return The number of Pokemon types.
+     */
+    public int size() {
 		return EnumPokemonType.values().length;
 	}
 
-	/**
-	 * Retrieves the EnumPokemonType at the specified index.
-	 *
-	 * @param index The index of the EnumPokemonType.
-	 * @return The EnumPokemonType at the specified index.
-	 */
-	public EnumPokemonType get(int index) {
+    /**
+     * Retrieves the EnumPokemonType at the specified index.
+     *
+     * @param index The index of the EnumPokemonType.
+     * @return The EnumPokemonType at the specified index.
+     */
+    public EnumPokemonType get(int index) {
 		return enumPokemonTypes.get(index);
 	}
 }

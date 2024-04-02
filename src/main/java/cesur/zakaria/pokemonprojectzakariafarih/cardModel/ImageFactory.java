@@ -23,6 +23,7 @@ public class ImageFactory {
 
     /**
      * Returns the singleton instance of ImageFactory.
+     *
      * @return The singleton instance of ImageFactory.
      */
     public static ImageFactory getInstance() {
@@ -80,6 +81,7 @@ public class ImageFactory {
 
     /**
      * Creates an ImageView for the specified image ID.
+     *
      * @param imgId The ID of the image.
      * @return An ImageView object for the specified image.
      */

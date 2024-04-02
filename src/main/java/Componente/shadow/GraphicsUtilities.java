@@ -80,11 +80,11 @@ public class GraphicsUtilities {
      * @param image the reference image from which the dimension and the transparency of the new image are obtained
      * @return a new compatible <code>BufferedImage</code> with the same dimension and transparency as <code>image</code>
      * @see Transparency
-     * @see #createCompatibleImage(int, int) #createCompatibleImage(int, int)
-     * @see #createCompatibleImage(BufferedImage, int, int) #createCompatibleImage(BufferedImage, int, int)
-     * @see #createCompatibleTranslucentImage(int, int) #createCompatibleTranslucentImage(int, int)
-     * @see #loadCompatibleImage(URL) #loadCompatibleImage(URL)
-     * @see #toCompatibleImage(BufferedImage) #toCompatibleImage(BufferedImage)
+     * @see #createCompatibleImage(int, int) #createCompatibleImage(int, int)#createCompatibleImage(int, int)
+     * @see #createCompatibleImage(BufferedImage, int, int) #createCompatibleImage(BufferedImage, int, int)#createCompatibleImage(BufferedImage, int, int)
+     * @see #createCompatibleTranslucentImage(int, int) #createCompatibleTranslucentImage(int, int)#createCompatibleTranslucentImage(int, int)
+     * @see #loadCompatibleImage(URL) #loadCompatibleImage(URL)#loadCompatibleImage(URL)
+     * @see #toCompatibleImage(BufferedImage) #toCompatibleImage(BufferedImage)#toCompatibleImage(BufferedImage)
      */
     public static BufferedImage createCompatibleImage(BufferedImage image) {
         return createCompatibleImage(image, image.getWidth(), image.getHeight());
@@ -100,11 +100,11 @@ public class GraphicsUtilities {
      * @param height the height of the new image
      * @return a new compatible <code>BufferedImage</code> with the same transparency as <code>image</code> and the specified dimension
      * @see Transparency
-     * @see #createCompatibleImage(BufferedImage) #createCompatibleImage(BufferedImage)
-     * @see #createCompatibleImage(int, int) #createCompatibleImage(int, int)
-     * @see #createCompatibleTranslucentImage(int, int) #createCompatibleTranslucentImage(int, int)
-     * @see #loadCompatibleImage(URL) #loadCompatibleImage(URL)
-     * @see #toCompatibleImage(BufferedImage) #toCompatibleImage(BufferedImage)
+     * @see #createCompatibleImage(BufferedImage) #createCompatibleImage(BufferedImage)#createCompatibleImage(BufferedImage)
+     * @see #createCompatibleImage(int, int) #createCompatibleImage(int, int)#createCompatibleImage(int, int)
+     * @see #createCompatibleTranslucentImage(int, int) #createCompatibleTranslucentImage(int, int)#createCompatibleTranslucentImage(int, int)
+     * @see #loadCompatibleImage(URL) #loadCompatibleImage(URL)#loadCompatibleImage(URL)
+     * @see #toCompatibleImage(BufferedImage) #toCompatibleImage(BufferedImage)#toCompatibleImage(BufferedImage)
      */
     public static BufferedImage createCompatibleImage(BufferedImage image,
             int width, int height) {
@@ -120,11 +120,11 @@ public class GraphicsUtilities {
      * @param width  the width of the new image
      * @param height the height of the new image
      * @return a new opaque compatible <code>BufferedImage</code> of the specified width and height
-     * @see #createCompatibleImage(BufferedImage) #createCompatibleImage(BufferedImage)
-     * @see #createCompatibleImage(BufferedImage, int, int) #createCompatibleImage(BufferedImage, int, int)
-     * @see #createCompatibleTranslucentImage(int, int) #createCompatibleTranslucentImage(int, int)
-     * @see #loadCompatibleImage(URL) #loadCompatibleImage(URL)
-     * @see #toCompatibleImage(BufferedImage) #toCompatibleImage(BufferedImage)
+     * @see #createCompatibleImage(BufferedImage) #createCompatibleImage(BufferedImage)#createCompatibleImage(BufferedImage)
+     * @see #createCompatibleImage(BufferedImage, int, int) #createCompatibleImage(BufferedImage, int, int)#createCompatibleImage(BufferedImage, int, int)
+     * @see #createCompatibleTranslucentImage(int, int) #createCompatibleTranslucentImage(int, int)#createCompatibleTranslucentImage(int, int)
+     * @see #loadCompatibleImage(URL) #loadCompatibleImage(URL)#loadCompatibleImage(URL)
+     * @see #toCompatibleImage(BufferedImage) #toCompatibleImage(BufferedImage)#toCompatibleImage(BufferedImage)
      */
     public static BufferedImage createCompatibleImage(int width, int height) {
         return getGraphicsConfiguration().createCompatibleImage(width, height);
@@ -138,11 +138,11 @@ public class GraphicsUtilities {
      * @param width  the width of the new image
      * @param height the height of the new image
      * @return a new translucent compatible <code>BufferedImage</code> of the specified width and height
-     * @see #createCompatibleImage(BufferedImage) #createCompatibleImage(BufferedImage)
-     * @see #createCompatibleImage(BufferedImage, int, int) #createCompatibleImage(BufferedImage, int, int)
-     * @see #createCompatibleImage(int, int) #createCompatibleImage(int, int)
-     * @see #loadCompatibleImage(URL) #loadCompatibleImage(URL)
-     * @see #toCompatibleImage(BufferedImage) #toCompatibleImage(BufferedImage)
+     * @see #createCompatibleImage(BufferedImage) #createCompatibleImage(BufferedImage)#createCompatibleImage(BufferedImage)
+     * @see #createCompatibleImage(BufferedImage, int, int) #createCompatibleImage(BufferedImage, int, int)#createCompatibleImage(BufferedImage, int, int)
+     * @see #createCompatibleImage(int, int) #createCompatibleImage(int, int)#createCompatibleImage(int, int)
+     * @see #loadCompatibleImage(URL) #loadCompatibleImage(URL)#loadCompatibleImage(URL)
+     * @see #toCompatibleImage(BufferedImage) #toCompatibleImage(BufferedImage)#toCompatibleImage(BufferedImage)
      */
     public static BufferedImage createCompatibleTranslucentImage(int width,
             int height) {
@@ -159,11 +159,11 @@ public class GraphicsUtilities {
      * @param resource the URL of the picture to load as a compatible image
      * @return a new translucent compatible <code>BufferedImage</code> of the specified width and height
      * @throws IOException if the image cannot be read or loaded
-     * @see #createCompatibleImage(BufferedImage) #createCompatibleImage(BufferedImage)
-     * @see #createCompatibleImage(BufferedImage, int, int) #createCompatibleImage(BufferedImage, int, int)
-     * @see #createCompatibleImage(int, int) #createCompatibleImage(int, int)
-     * @see #createCompatibleTranslucentImage(int, int) #createCompatibleTranslucentImage(int, int)
-     * @see #toCompatibleImage(BufferedImage) #toCompatibleImage(BufferedImage)
+     * @see #createCompatibleImage(BufferedImage) #createCompatibleImage(BufferedImage)#createCompatibleImage(BufferedImage)
+     * @see #createCompatibleImage(BufferedImage, int, int) #createCompatibleImage(BufferedImage, int, int)#createCompatibleImage(BufferedImage, int, int)
+     * @see #createCompatibleImage(int, int) #createCompatibleImage(int, int)#createCompatibleImage(int, int)
+     * @see #createCompatibleTranslucentImage(int, int) #createCompatibleTranslucentImage(int, int)#createCompatibleTranslucentImage(int, int)
+     * @see #toCompatibleImage(BufferedImage) #toCompatibleImage(BufferedImage)#toCompatibleImage(BufferedImage)
      */
     public static BufferedImage loadCompatibleImage(URL resource)
             throws IOException {
@@ -179,11 +179,11 @@ public class GraphicsUtilities {
      *
      * @param image the image to copy into a new compatible image
      * @return a new compatible copy, with the same width and height and transparency and content, of <code>image</code>
-     * @see #createCompatibleImage(BufferedImage) #createCompatibleImage(BufferedImage)
-     * @see #createCompatibleImage(BufferedImage, int, int) #createCompatibleImage(BufferedImage, int, int)
-     * @see #createCompatibleImage(int, int) #createCompatibleImage(int, int)
-     * @see #createCompatibleTranslucentImage(int, int) #createCompatibleTranslucentImage(int, int)
-     * @see #loadCompatibleImage(URL) #loadCompatibleImage(URL)
+     * @see #createCompatibleImage(BufferedImage) #createCompatibleImage(BufferedImage)#createCompatibleImage(BufferedImage)
+     * @see #createCompatibleImage(BufferedImage, int, int) #createCompatibleImage(BufferedImage, int, int)#createCompatibleImage(BufferedImage, int, int)
+     * @see #createCompatibleImage(int, int) #createCompatibleImage(int, int)#createCompatibleImage(int, int)
+     * @see #createCompatibleTranslucentImage(int, int) #createCompatibleTranslucentImage(int, int)#createCompatibleTranslucentImage(int, int)
+     * @see #loadCompatibleImage(URL) #loadCompatibleImage(URL)#loadCompatibleImage(URL)
      */
     public static BufferedImage toCompatibleImage(BufferedImage image) {
         if (image.getColorModel().equals(
@@ -220,9 +220,9 @@ public class GraphicsUtilities {
      * @param newSize the length of the largest dimension of the thumbnail
      * @return a new compatible <code>BufferedImage</code> containing a thumbnail of <code>image</code>
      * @throws IllegalArgumentException if <code>newSize</code> is larger than the largest dimension of <code>image</code> or &lt;= 0
-     * @see #createThumbnailFast(BufferedImage, int, int) #createThumbnailFast(BufferedImage, int, int)
-     * @see #createThumbnail(BufferedImage, int) #createThumbnail(BufferedImage, int)
-     * @see #createThumbnail(BufferedImage, int, int) #createThumbnail(BufferedImage, int, int)
+     * @see #createThumbnailFast(BufferedImage, int, int) #createThumbnailFast(BufferedImage, int, int)#createThumbnailFast(BufferedImage, int, int)
+     * @see #createThumbnail(BufferedImage, int) #createThumbnail(BufferedImage, int)#createThumbnail(BufferedImage, int)
+     * @see #createThumbnail(BufferedImage, int, int) #createThumbnail(BufferedImage, int, int)#createThumbnail(BufferedImage, int, int)
      */
     public static BufferedImage createThumbnailFast(BufferedImage image,
             int newSize) {
@@ -282,9 +282,9 @@ public class GraphicsUtilities {
      * @param newHeight the height of the thumbnail
      * @return a new compatible <code>BufferedImage</code> containing a thumbnail of <code>image</code>
      * @throws IllegalArgumentException if <code>newWidth</code> is larger than the width of <code>image</code> or if code>newHeight</code> is larger than the height of <code>image</code> or if one of the dimensions is &lt;= 0
-     * @see #createThumbnailFast(BufferedImage, int) #createThumbnailFast(BufferedImage, int)
-     * @see #createThumbnail(BufferedImage, int) #createThumbnail(BufferedImage, int)
-     * @see #createThumbnail(BufferedImage, int, int) #createThumbnail(BufferedImage, int, int)
+     * @see #createThumbnailFast(BufferedImage, int) #createThumbnailFast(BufferedImage, int)#createThumbnailFast(BufferedImage, int)
+     * @see #createThumbnail(BufferedImage, int) #createThumbnail(BufferedImage, int)#createThumbnail(BufferedImage, int)
+     * @see #createThumbnail(BufferedImage, int, int) #createThumbnail(BufferedImage, int, int)#createThumbnail(BufferedImage, int, int)
      */
     public static BufferedImage createThumbnailFast(BufferedImage image,
             int newWidth, int newHeight) {
@@ -325,9 +325,9 @@ public class GraphicsUtilities {
      * @param newSize the length of the largest dimension of the thumbnail
      * @return a new compatible <code>BufferedImage</code> containing a thumbnail of <code>image</code>
      * @throws IllegalArgumentException if <code>newSize</code> is larger than the largest dimension of <code>image</code> or &lt;= 0
-     * @see #createThumbnailFast(BufferedImage, int, int) #createThumbnailFast(BufferedImage, int, int)
-     * @see #createThumbnailFast(BufferedImage, int) #createThumbnailFast(BufferedImage, int)
-     * @see #createThumbnail(BufferedImage, int, int) #createThumbnail(BufferedImage, int, int)
+     * @see #createThumbnailFast(BufferedImage, int, int) #createThumbnailFast(BufferedImage, int, int)#createThumbnailFast(BufferedImage, int, int)
+     * @see #createThumbnailFast(BufferedImage, int) #createThumbnailFast(BufferedImage, int)#createThumbnailFast(BufferedImage, int)
+     * @see #createThumbnail(BufferedImage, int, int) #createThumbnail(BufferedImage, int, int)#createThumbnail(BufferedImage, int, int)
      */
     public static BufferedImage createThumbnail(BufferedImage image,
             int newSize) {
@@ -399,9 +399,9 @@ public class GraphicsUtilities {
      * @param newHeight the height of the thumbnail
      * @return a new compatible <code>BufferedImage</code> containing a thumbnail of <code>image</code>
      * @throws IllegalArgumentException if <code>newWidth</code> is larger than the width of <code>image</code> or if code>newHeight</code> is larger than the height of <code>image or if one the dimensions is not &gt; 0</code>
-     * @see #createThumbnailFast(BufferedImage, int) #createThumbnailFast(BufferedImage, int)
-     * @see #createThumbnailFast(BufferedImage, int, int) #createThumbnailFast(BufferedImage, int, int)
-     * @see #createThumbnail(BufferedImage, int) #createThumbnail(BufferedImage, int)
+     * @see #createThumbnailFast(BufferedImage, int) #createThumbnailFast(BufferedImage, int)#createThumbnailFast(BufferedImage, int)
+     * @see #createThumbnailFast(BufferedImage, int, int) #createThumbnailFast(BufferedImage, int, int)#createThumbnailFast(BufferedImage, int, int)
+     * @see #createThumbnail(BufferedImage, int) #createThumbnail(BufferedImage, int)#createThumbnail(BufferedImage, int)
      */
     public static BufferedImage createThumbnail(BufferedImage image,
             int newWidth, int newHeight) {

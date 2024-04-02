@@ -15,13 +15,22 @@ import javafx.scene.shape.Shape;
 import static cesur.zakaria.pokemonprojectzakariafarih.dbUtils.DBUtils.updatePlayerPoints;
 
 
+/**
+ * The type Puzzle.
+ */
 public class Puzzle extends Parent{
 
+    /**
+     * The constant SIZE.
+     */
     public static final int SIZE = 100;
 
     private final double x;
     private final double y;
 
+    /**
+     * The Count.
+     */
     static int count = 0;
 
     private double deskWidth;
@@ -36,6 +45,15 @@ public class Puzzle extends Parent{
     private Point2D dragAnchor;
 
 
+    /**
+     * Instantiates a new Puzzle.
+     *
+     * @param image  the image
+     * @param x      the x
+     * @param y      the y
+     * @param width  the width
+     * @param height the height
+     */
     public Puzzle(Image image, double x, double y, double width, double height) {
         this.x = x;
         this.y = y;
@@ -46,18 +64,29 @@ public class Puzzle extends Parent{
         configImage(image);
     }
 
+    /**
+     * Configure clip.
+     */
     public void configureClip() {                   // It inserts the single puzzle into a canvas
         pieceClip = createPiece();
         pieceClip.setFill(Color.WHITE);
         pieceClip.setStroke(null);
     }
 
+    /**
+     * Configure shape.
+     */
     public void configureShape() {                   //It gives stroke to the puzzles
         pieceShape = createPiece();
         pieceShape.setFill(null);
         pieceShape.setStroke(Color.BLACK);
     }
 
+    /**
+     * Config image.
+     *
+     * @param image the image
+     */
     public void configImage(Image image) {
         imageView.setImage(image);                  // Here we connecting all together
         imageView.setClip(pieceClip);
@@ -149,27 +178,48 @@ public class Puzzle extends Parent{
         return rec;
     }
 
+    /**
+     * Sets active.
+     */
     public void setActive() {
         setDisable(false);
         setEffect(new DropShadow());
         toFront();
     }
 
+    /**
+     * Sets inactive.
+     */
     public void setInactive() {         // If you put the right puzzle to right place It disable any actions with puzzle
         setEffect(null);
         setDisable(true);
         toBack();
     }
 
+    /**
+     * Gets x.
+     *
+     * @return the x
+     */
     public double getX() {
         return x;
     }
 
+    /**
+     * Gets y.
+     *
+     * @return the y
+     */
     public double getY() {
         return y;
     }
 
 
+    /**
+     * Get image view image view.
+     *
+     * @return the image view
+     */
     public ImageView getImageView(){
         return imageView;
     }

@@ -26,6 +26,9 @@ import javafx.util.Duration;
 
 import static cesur.zakaria.pokemonprojectzakariafarih.dbUtils.DBUtils.updatePlayerPoints;
 
+/**
+ * The type Tic tac toe app.
+ */
 public class TicTacToeApp extends Application {
 
     private boolean playable = true;
@@ -117,10 +120,21 @@ public class TicTacToeApp extends Application {
 
     private class Combo {
         private Tile[] tiles;
+
+        /**
+         * Instantiates a new Combo.
+         *
+         * @param tiles the tiles
+         */
         public Combo(Tile... tiles) {
             this.tiles = tiles;
         }
 
+        /**
+         * Is complete boolean.
+         *
+         * @return the boolean
+         */
         public boolean isComplete() {
             if (tiles[0].getValue().isEmpty())
                 return false;
@@ -133,6 +147,9 @@ public class TicTacToeApp extends Application {
     private class Tile extends StackPane {
         private Text text = new Text();
 
+        /**
+         * Instantiates a new Tile.
+         */
         public Tile() {
             Rectangle border = new Rectangle(200, 200);
             border.setFill(null);
@@ -166,14 +183,29 @@ public class TicTacToeApp extends Application {
             });
         }
 
+        /**
+         * Gets center x.
+         *
+         * @return the center x
+         */
         public double getCenterX() {
             return getTranslateX() + 100;
         }
 
+        /**
+         * Gets center y.
+         *
+         * @return the center y
+         */
         public double getCenterY() {
             return getTranslateY() + 100;
         }
 
+        /**
+         * Gets value.
+         *
+         * @return the value
+         */
         public String getValue() {
             return text.getText();
         }
@@ -187,6 +219,11 @@ public class TicTacToeApp extends Application {
         }
     }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         launch(args);
     }

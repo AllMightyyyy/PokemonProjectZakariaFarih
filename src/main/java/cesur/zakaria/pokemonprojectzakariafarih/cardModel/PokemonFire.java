@@ -15,11 +15,12 @@ public class PokemonFire extends PokemonPlayingCard {
 
     /**
      * Constructs a fire-type Pokémon playing card with specified attributes.
-     * @param namePokemon The name of the Pokémon.
-     * @param nameAttack The name of the attack.
-     * @param rarity The rarity of the card.
-     * @param hp The hit points of the Pokémon.
-     * @param damage The damage value of the attack.
+     *
+     * @param namePokemon    The name of the Pokémon.
+     * @param nameAttack     The name of the attack.
+     * @param rarity         The rarity of the card.
+     * @param hp             The hit points of the Pokémon.
+     * @param damage         The damage value of the attack.
      * @param energyToAttack The energy required to perform the attack.
      */
     public PokemonFire(String namePokemon, String nameAttack, PlayingCard.Rarity rarity, int hp, int damage, int energyToAttack) {

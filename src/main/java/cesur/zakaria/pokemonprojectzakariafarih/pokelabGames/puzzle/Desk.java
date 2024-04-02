@@ -6,11 +6,26 @@ import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
 
+/**
+ * The type Desk.
+ */
 public class Desk extends Pane {
-    
+
+    /**
+     * The constant deskWith.
+     */
     public static double deskWith;
+    /**
+     * The constant deskHeight.
+     */
     public static double deskHeight;
-    
+
+    /**
+     * Instantiates a new Desk.
+     *
+     * @param numOfColumns the num of columns
+     * @param numOfRows    the num of rows
+     */
     Desk(int numOfColumns, int numOfRows) {
         setStyle("-fx-background-color: #cccccc;");
 

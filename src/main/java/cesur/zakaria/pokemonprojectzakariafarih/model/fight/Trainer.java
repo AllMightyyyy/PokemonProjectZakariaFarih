@@ -54,7 +54,12 @@ public class Trainer implements Serializable{
 		return pokemons[i];
 	}
 
-	public Pokemon[] getPokemons() {
+    /**
+     * Get pokemons pokemon [ ].
+     *
+     * @return the pokemon [ ]
+     */
+    public Pokemon[] getPokemons() {
 		return pokemons;
 	}
 

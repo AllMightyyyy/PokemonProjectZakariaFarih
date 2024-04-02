@@ -4,16 +4,23 @@ package cesur.zakaria.pokemonprojectzakariafarih.cardModel;
  * Represents a Pokémon card with Water type.
  */
 public class PokemonWater extends PokemonPlayingCard {
+    /**
+     * The constant WEAKNESS.
+     */
     public static final PokemonPlayingCard.Elements WEAKNESS = Elements.PLANT;
+    /**
+     * The constant STRENGTH.
+     */
     public static final PokemonPlayingCard.Elements STRENGTH = Elements.FIRE;
 
     /**
      * Constructs a Pokémon Water card with specified attributes.
-     * @param namePokemon The name of the Pokémon.
-     * @param nameAttack The name of the attack.
-     * @param rarity The rarity of the card.
-     * @param hp The hit points of the Pokémon.
-     * @param damage The damage value of the attack.
+     *
+     * @param namePokemon    The name of the Pokémon.
+     * @param nameAttack     The name of the attack.
+     * @param rarity         The rarity of the card.
+     * @param hp             The hit points of the Pokémon.
+     * @param damage         The damage value of the attack.
      * @param energyToAttack The energy required to perform the attack.
      */
     public PokemonWater(String namePokemon, String nameAttack, PlayingCard.Rarity rarity, int hp, int damage, int energyToAttack) {

@@ -7,16 +7,24 @@ import java.util.*;
  * It contains both Pokemon cards and Energy cards.
  */
 public class CardDeck {
-    /** The number of Pokemon cards in the deck. */
+    /**
+     * The number of Pokemon cards in the deck.
+     */
     public static final int N_POKEMON_CARDS = 5;
 
-    /** The number of Energy cards in the deck. */
+    /**
+     * The number of Energy cards in the deck.
+     */
     public static final int N_ENERGY_CARDS = 5;
 
-    /** The number of Energy cards added to the deck when a Pokemon is killed. */
+    /**
+     * The number of Energy cards added to the deck when a Pokemon is killed.
+     */
     public static int ENERGY_CARDS_WHEN_KILL = 3;
 
-    /** The total number of cards in the deck. */
+    /**
+     * The total number of cards in the deck.
+     */
     public static final int NCARDS = N_POKEMON_CARDS + N_ENERGY_CARDS;
 
     /** The list of playing cards in the deck. */

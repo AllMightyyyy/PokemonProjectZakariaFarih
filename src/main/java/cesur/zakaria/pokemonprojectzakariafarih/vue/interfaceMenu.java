@@ -127,6 +127,11 @@ public class interfaceMenu extends Application implements Initializable {
      * Defines the Title component for the menu.
      */
     private static class Title extends StackPane {
+        /**
+         * Instantiates a new Title.
+         *
+         * @param name the name
+         */
         public Title(String name) {
             Rectangle bg = new Rectangle(250, 60);
             bg.setStroke(Color.WHITE);
@@ -146,6 +151,11 @@ public class interfaceMenu extends Application implements Initializable {
      * Defines the MenuBox component that holds MenuItem(s).
      */
     private static class MenuBox extends VBox {
+        /**
+         * Instantiates a new Menu box.
+         *
+         * @param items the items
+         */
         public MenuBox(MenuItem... items) {
             getChildren().add(createSeparator());
 
@@ -166,6 +176,11 @@ public class interfaceMenu extends Application implements Initializable {
      * Defines the MenuItem component for interactive menu options.
      */
     private static class MenuItem extends StackPane {
+        /**
+         * Instantiates a new Menu item.
+         *
+         * @param name the name
+         */
         public MenuItem(String name) {
             LinearGradient gradient = new LinearGradient(0, 0, 1, 0, true, CycleMethod.NO_CYCLE, new Stop[] {
                     new Stop(0, Color.DARKVIOLET),

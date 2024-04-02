@@ -5,10 +5,14 @@ package cesur.zakaria.pokemonprojectzakariafarih.cardModel;
  * Each attack has a name, damage value, and energy cost.
  */
 public class Attack {
-    /** The damage value of the attack. */
+    /**
+     * The damage value of the attack.
+     */
     public final int DAMAGE;
 
-    /** The energy cost required to perform the attack. */
+    /**
+     * The energy cost required to perform the attack.
+     */
     public final int ENERGY_TO_ATTACK;
 
     /** The name of the attack. */

@@ -10,6 +10,7 @@ public interface GameListener extends EventListener {
 
     /**
      * Notifies the listener of a game event.
+     *
      * @param event The game event to be notified.
      */
     void notify(GameEvent event);

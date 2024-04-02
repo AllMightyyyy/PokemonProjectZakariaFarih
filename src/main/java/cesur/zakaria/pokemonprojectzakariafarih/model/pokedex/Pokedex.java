@@ -19,13 +19,13 @@ public class Pokedex {
 	private static Pokedex pokedex;
 	private static final HashMap<Integer, PokemonSpecie> pokedexMap= new HashMap<>();
 
-	/**
-	 * Retrieves the singleton instance of the Pokedex.
-	 *
-	 * @return The singleton instance of the Pokedex.
-	 * @throws IOException if an I/O error occurs while reading the data file.
-	 */
-	public static Pokedex getPokedex() throws IOException {
+    /**
+     * Retrieves the singleton instance of the Pokedex.
+     *
+     * @return The singleton instance of the Pokedex.
+     * @throws IOException if an I/O error occurs while reading the data file.
+     */
+    public static Pokedex getPokedex() throws IOException {
 		if (pokedex == null)
 			pokedex = generate();
 		return pokedex;
@@ -84,13 +84,13 @@ public class Pokedex {
 		return pokedex;
 	}
 
-	/**
-	 * Retrieves the Pokemon species associated with the specified index.
-	 *
-	 * @param index The index of the Pokemon species.
-	 * @return The Pokemon species.
-	 */
-	public PokemonSpecie get(Integer index) {
+    /**
+     * Retrieves the Pokemon species associated with the specified index.
+     *
+     * @param index The index of the Pokemon species.
+     * @return The Pokemon species.
+     */
+    public PokemonSpecie get(Integer index) {
 		return pokedexMap.get(index);
 	}
 
@@ -104,12 +104,12 @@ public class Pokedex {
 		return builder.toString();
 	}
 
-	/**
-	 * Gets the size of the Pokedex.
-	 *
-	 * @return The size of the Pokedex.
-	 */
-	public int size() {
+    /**
+     * Gets the size of the Pokedex.
+     *
+     * @return The size of the Pokedex.
+     */
+    public int size() {
 		return pokedexMap.size();
 	}
 

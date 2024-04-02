@@ -26,9 +26,10 @@ public class Player {
 
     /**
      * Constructs a new Player instance with the specified id, username, and points.
-     * @param id The unique identifier for the player.
+     *
+     * @param id       The unique identifier for the player.
      * @param username The username of the player.
-     * @param points The initial point total for the player.
+     * @param points   The initial point total for the player.
      */
     public Player(int id, String username, int points) {
         this.id = id;
@@ -40,18 +41,21 @@ public class Player {
 
     /**
      * Gets the player's unique identifier.
+     *
      * @return The unique identifier for the player.
      */
     public int getId() { return id; }
 
     /**
      * Gets the player's username.
+     *
      * @return The username of the player.
      */
     public String getUsername() { return username; }
 
     /**
      * Gets the current point total for the player.
+     *
      * @return The player's current points.
      */
     public int getPoints() { return points; }
@@ -59,6 +63,7 @@ public class Player {
     /**
      * Sets the player's point total to the specified value.
      * This method can be used to update the player's points based on game events or transactions.
+     *
      * @param points The new point total for the player.
      */
     public void setPoints(int points) { this.points = points; }

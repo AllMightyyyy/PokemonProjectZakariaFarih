@@ -29,7 +29,13 @@ import java.util.*;
 public class Main extends Application {
 
     private Timeline timeline;
+    /**
+     * The constant text.
+     */
     protected static Text text;
+    /**
+     * The constant numberOfPuzzles.
+     */
     protected static int numberOfPuzzles;
     private Group root;
     private ImageView imageViewAutoSolving;
@@ -333,6 +339,11 @@ public class Main extends Application {
     }
 
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         launch(args);
     }

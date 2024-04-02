@@ -1,0 +1,296 @@
+@startuml
+class cesur.zakaria.pokemonprojectzakariafarih.model.fight.Bot {
++ <<Create>> Bot(String,Pokemon[])
++ Capacity fight()
++ Pokemon changePokemon(int)
+}
+
+class cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons.StatistiquePokemon {
+- {static} long serialVersionUID
+- int dmg
+- int def
+- int dmgspe
+- int defspe
+- int xpLevel
+- int pv
+- int pvMax
+- {static} int MAX_HP
+- {static} int MAX_ATTACK
+- {static} int MAX_DEFENSE
++ <<Create>> StatistiquePokemon(int,int,int,int,int,int)
++ {static} StatistiquePokemon RandomStat()
++ String toString()
++ int hashCode()
++ boolean equals(Object)
++ boolean noPv()
++ String pvOnPvMax()
++ double pvRatio()
++ boolean substractDamage(int)
++ void restorePv()
++ int getXpLevel()
++ int getDmg()
++ int getDef()
++ int getDmgspe()
++ int getDefspe()
++ int getPv()
++ void setPv(int)
++ int getPvMax()
++ void adjustHp(int,int)
++ void adjustAttack(int,int)
++ void adjustDefense(int,int)
++ void setDmg(int)
++ void setDef(int)
+}
+
+
+class cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons.EnumSetPokemonType {
+- {static} long serialVersionUID
+- EnumPokemonType enumPokemonType1
+- EnumPokemonType enumPokemonType2
+- int actualPosition
++ <<Create>> EnumSetPokemonType(EnumPokemonType,EnumPokemonType)
++ <<Create>> EnumSetPokemonType(EnumPokemonType)
++ void add(EnumPokemonType)
++ boolean hasNext()
++ EnumPokemonType next()
++ int size()
++ EnumPokemonType get(int)
++ void resetIterator()
++ int hashCode()
++ boolean equals(Object)
++ String toString()
+}
+
+
+class cesur.zakaria.pokemonprojectzakariafarih.model.fight.Trainer {
+- {static} long serialVersionUID
+- Pokemon[] pokemons
+- int currentPokemon
+- String name
++ <<Create>> Trainer(String,Pokemon[])
++ Pokemon getPokemon()
++ Pokemon getPokemon(int)
++ Pokemon[] getPokemons()
++ int teamSize()
++ boolean isPokemonAlive(int)
++ Pokemon changePokemon(int)
++ void restoreTrainer()
++ String toString()
++ boolean loose()
++ boolean onlyOnePokemonAlive()
++ String getName()
++ int hashCode()
++ boolean equals(Object)
+}
+
+
+class cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons.PokemonType {
+- {static} long serialVersionUID
+- EnumSetPokemonType enumPokemonTypes
+- Map<EnumPokemonType,Double> typeRatio
+- {static} Map<EnumSetPokemonType,PokemonType> arrayToType
+- {static} String DB_URL
+- {static} String USER
+- {static} String PASS
+- <<Create>> PokemonType(EnumSetPokemonType)
++ {static} PokemonType getPokemonType(EnumSetPokemonType)
++ {static} void generatePokemonType()
++ String toString()
++ int hashCode()
++ boolean equals(Object)
++ boolean hasNext()
++ EnumPokemonType next()
++ void resetIterator()
++ Double getRatio(EnumPokemonType)
++ int size()
++ EnumPokemonType get(int)
+}
+
+
+enum cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons.EnumPokemonType {
++  None
++  ACIER
++  FIGHTHING
++  DRAGON
++  WATER
++  ELECTRIC
++  FAIRY
++  FIRE
++  ICE
++  BUG
++  NORMAL
++  GRASS
++  POISON
++  PSYCHIC
++  ROCK
++  GROUND
++  GHOST
++  DARK
++  FLYING
+- {static} HashMap<String,EnumPokemonType> stringToType
++ {static} EnumPokemonType fromString(String)
++ String toString()
+}
+
+
+class cesur.zakaria.pokemonprojectzakariafarih.model.fight.Fight {
+- Trainer trainer1
+- Trainer trainer2
+- Trainer currentTrainer
+- int fightPlan
++ <<Create>> Fight(Trainer,Trainer)
++ Trainer getTrainer1()
++ Trainer getTrainer2()
++ Trainer getCurrentTrainer()
++ Trainer getNonCurrentTrainer()
++ void nextTurn()
++ int getFightPlan()
++ void switchPlan()
+}
+
+
+class cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons.CapacityDeck {
+- {static} long serialVersionUID
+- HashMap<EnumPokemonType,Set<Capacity>> hashMap
++ void add(EnumPokemonType,Capacity)
++ boolean containsKey(EnumPokemonType)
++ void put(EnumPokemonType,Capacity)
++ Set<Capacity> get(PokemonType)
+}
+
+
+class cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons.CapacitiesHelper {
+- {static} CapacityDeck capacityDeck
++ {static} CapacityDeck getCapacityDeck()
+- {static} CapacityDeck generate()
+}
+
+
+class cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons.Capacity {
+- {static} long serialVersionUID
+- {static} HashMap<String,Capacity> nameMap
+- String name
+- int power
+- int powerPoint
+- int maxPowerPoint
+- int accuracy
+- CategoryCapacity categoryCapacity
+- EnumPokemonType type
+- <<Create>> Capacity(String,int,int,int,CategoryCapacity,EnumPokemonType)
++ EnumPokemonType getType()
++ int getPower()
++ String getName()
++ {static} Capacity instance(String,int,int,int,CategoryCapacity,EnumPokemonType)
++ boolean isUsable()
++ int getPowerPoint()
++ int getMaxPowerPoint()
++ void subtractPP()
++ String toString()
++ int hashCode()
++ boolean equals(Object)
+}
+
+
+class cesur.zakaria.pokemonprojectzakariafarih.model.fight.League {
+- {static} long serialVersionUID
+- ArrayList<Bot> Bots
++ <<Create>> League(ArrayList<Bot>)
++ int getActualBot()
++ Bot getBot(int)
++ {static} Pokemon pokemonRandom()
+- {static} int randomValide(int,int[],int)
++ {static} League createDefaultLeague()
++ ArrayList<Bot> getBots()
++ String toString()
+}
+
+
+class cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons.Size {
+- double height
+- double weight
+- {static} long serialVersionUID
++ <<Create>> Size(double,double)
++ double height()
++ double weight()
++ String toString()
++ int hashCode()
++ boolean equals(Object)
+}
+
+
+class cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons.Pokemon {
+- {static} long serialVersionUID
+- PokemonSpecie specie
+- Capacity[] capacities
+- StatistiquePokemon stat
+- String nickName
++ <<Create>> Pokemon(PokemonSpecie,Capacity[],StatistiquePokemon,String)
++ <<Create>> Pokemon(PokemonSpecie,Capacity[],StatistiquePokemon)
++ String getNickName()
++ PokemonSpecie getSpecie()
++ Capacity[] getCapacities()
++ StatistiquePokemon getStat()
++ boolean isAlive()
++ boolean takeDmg(int)
++ void restore()
++ boolean noMoreFight()
++ boolean takeDmgCap(Capacity)
++ String toString()
++ int hashCode()
++ boolean equals(Object)
+}
+
+
+enum cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons.CategoryCapacity {
++  PHYSICAL
++  SPECIAL
++  STATUT
++ {static} CategoryCapacity fromString(String)
+}
+
+
+class cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons.PokemonSpecie {
+- {static} long serialVersionUID
+- int nbPokemon
+- String namePokemon
+- PokemonType types
+- Size size
+- String imagePath
++ <<Create>> PokemonSpecie(int,String,PokemonType,double,double,String)
++ int getNbPokemon()
++ String getNamePokemon()
++ PokemonType getTypes()
++ String getImagePath()
++ Size getSize()
++ String toString()
++ int hashCode()
++ boolean equals(Object)
+}
+
+
+class cesur.zakaria.pokemonprojectzakariafarih.model.pokedex.Pokedex {
+- {static} Pokedex pokedex
+- {static} HashMap<Integer,PokemonSpecie> pokedexMap
++ {static} Pokedex getPokedex()
+- {static} Pokedex generate()
++ PokemonSpecie get(Integer)
++ String toString()
++ int size()
+}
+
+
+
+
+cesur.zakaria.pokemonprojectzakariafarih.model.fight.Trainer <|-- cesur.zakaria.pokemonprojectzakariafarih.model.fight.Bot
+java.io.Serializable <|.. cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons.StatistiquePokemon
+java.util.Iterator <|.. cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons.EnumSetPokemonType
+java.io.Serializable <|.. cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons.EnumSetPokemonType
+java.io.Serializable <|.. cesur.zakaria.pokemonprojectzakariafarih.model.fight.Trainer
+cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons.Iterator <|.. cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons.PokemonType
+java.io.Serializable <|.. cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons.PokemonType
+java.io.Serializable <|.. cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons.CapacityDeck
+java.io.Serializable <|.. cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons.Capacity
+java.io.Serializable <|.. cesur.zakaria.pokemonprojectzakariafarih.model.fight.League
+java.io.Serializable <|.. cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons.Pokemon
+java.io.Serializable <|.. cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons.PokemonSpecie
+@enduml

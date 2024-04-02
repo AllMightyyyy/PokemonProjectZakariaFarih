@@ -17,9 +17,7 @@ public class AppState {
      * application's state to reflect the active player, making it available for other parts of the
      * application to access and interact with the player's data.
      *
-     * @param player The Player object representing the current player. This object contains
-     *               all relevant information about the player's session, such as their identity,
-     *               game progress, and other relevant state information.
+     * @param player The Player object representing the current player. This object contains               all relevant information about the player's session, such as their identity,               game progress, and other relevant state information.
      */
     public static void setCurrentPlayer(Player player) {
         currentPlayer = player;

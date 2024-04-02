@@ -200,6 +200,7 @@ public class DBUtils {
             }
         }
     }
+
     /**
      * Updates the player's points in the database after saving the game state. This method sets the player's
      * points to a specific value, replacing the current value in the database.
@@ -234,6 +235,7 @@ public class DBUtils {
             }
         }
     }
+
     /**
      * Saves a Trainer object to the database associated with a specific player ID. This method serializes
      * the Trainer object for storage in a binary format within the database.
@@ -303,8 +305,8 @@ public class DBUtils {
      *
      * @param playerId The ID of the player whose Trainer object is to be loaded.
      * @return The loaded Trainer object, or null if not found.
-     * @throws SQLException            if a database access error occurs.
-     * @throws IOException             if an error occurs during object deserialization.
+     * @throws SQLException           if a database access error occurs.
+     * @throws IOException            if an error occurs during object deserialization.
      * @throws ClassNotFoundException if the class of a serialized object cannot be found.
      */
     public static Trainer loadTrainer(int playerId) throws SQLException, IOException, ClassNotFoundException {
@@ -347,6 +349,7 @@ public class DBUtils {
         }
         return imagePath;
     }
+
     /**
      * Retrieves the current points of a player from the database.
      *
