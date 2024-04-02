@@ -24,6 +24,11 @@ import javafx.scene.text.*;
 
 import static cesur.zakaria.pokemonprojectzakariafarih.vue.MainView.changeScene;
 
+/**
+ * Manages the main interface menu of the Pokemon Project application, providing navigation options
+ * to various parts of the application such as the Fight scene, Pokedex, and Pokemon Lab. Implements
+ * JavaFX's Application and Initializable for UI setup and initialization.
+ */
 public class interfaceMenu extends Application implements Initializable {
     private boolean pokedexGenerated = false;
     @Override
@@ -118,6 +123,9 @@ public class interfaceMenu extends Application implements Initializable {
         primaryStage.show();
     }
 
+    /**
+     * Defines the Title component for the menu.
+     */
     private static class Title extends StackPane {
         public Title(String name) {
             Rectangle bg = new Rectangle(250, 60);
@@ -134,6 +142,9 @@ public class interfaceMenu extends Application implements Initializable {
         }
     }
 
+    /**
+     * Defines the MenuBox component that holds MenuItem(s).
+     */
     private static class MenuBox extends VBox {
         public MenuBox(MenuItem... items) {
             getChildren().add(createSeparator());
@@ -151,6 +162,9 @@ public class interfaceMenu extends Application implements Initializable {
         }
     }
 
+    /**
+     * Defines the MenuItem component for interactive menu options.
+     */
     private static class MenuItem extends StackPane {
         public MenuItem(String name) {
             LinearGradient gradient = new LinearGradient(0, 0, 1, 0, true, CycleMethod.NO_CYCLE, new Stop[] {

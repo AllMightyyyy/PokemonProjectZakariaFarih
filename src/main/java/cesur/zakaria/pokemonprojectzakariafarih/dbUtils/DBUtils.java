@@ -9,8 +9,9 @@ import java.io.*;
 import java.sql.*;
 
 /**
- * Utility class for interacting with the database.
- * Provides methods for user authentication and registration.
+ * Provides utility methods for database interactions within the Pokemon Project application. This class
+ * handles operations such as user authentication, registration, saving and loading trainer data, and managing
+ * player points. It employs the BCryptPasswordEncoder for secure password handling.
  */
 public class DBUtils {
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -19,11 +20,12 @@ public class DBUtils {
     private static final String PASSWORD = "27122000@ziko";
 
     /**
-     * Attempts to authenticate a user based on the provided username and password.
+     * Attempts to authenticate a user using the provided credentials. It checks the username and password
+     * against the database entries and, upon successful authentication, sets the current player session in AppState.
      *
-     * @param username          The username of the user.
-     * @param plaintextPassword The plaintext password entered by the user.
-     * @return True if the authentication succeeds, false otherwise.
+     * @param username          The username of the user attempting to log in.
+     * @param plaintextPassword The plaintext password provided during login.
+     * @return True if authentication is successful, false otherwise.
      */
     public static boolean login(String username, String plaintextPassword) {
         Connection connection = null;
@@ -79,14 +81,15 @@ public class DBUtils {
     }
 
     /**
-     * Registers a new user with the provided details.
+     * Registers a new user in the database with the specified details. The password is securely hashed
+     * before storage. The method checks for the existence of the username to avoid duplicates.
      *
      * @param username  The username of the new user.
-     * @param password  The password of the new user.
+     * @param password  The plaintext password of the new user, which will be hashed for storage.
      * @param firstName The first name of the new user.
      * @param lastName  The last name of the new user.
      * @param gender    The gender of the new user.
-     * @return True if the registration succeeds, false if the user already exists or an error occurs.
+     * @return True if registration is successful and the user does not already exist, false otherwise.
      */
     public static boolean registerUser(String username, String password, String firstName, String lastName, String gender) {
         Connection connection = null;
@@ -163,6 +166,14 @@ public class DBUtils {
         }
     }
 
+    /**
+     * Updates the points of a player in the database, based on the player's ID and the new points value.
+     * This method is typically called after a player has spent points, for example, to evolve Pokemon.
+     *
+     * @param userId    The ID of the player whose points are being updated.
+     * @param newPoints The new points value to set for the player.
+     * @return True if the update is successful, false otherwise.
+     */
     public static boolean updatePlayerPoints(int userId, int newPoints) {
         Connection connection = null;
         PreparedStatement psUpdatePoints = null;
@@ -189,6 +200,14 @@ public class DBUtils {
             }
         }
     }
+    /**
+     * Updates the player's points in the database after saving the game state. This method sets the player's
+     * points to a specific value, replacing the current value in the database.
+     *
+     * @param userId    The ID of the player whose points are being updated.
+     * @param newPoints The new total points value for the player.
+     * @return True if the update is successful, false otherwise.
+     */
     public static boolean updatePlayerPointsAfterSave(int userId, int newPoints) {
         Connection connection = null;
         PreparedStatement psUpdatePoints = null;
@@ -216,12 +235,13 @@ public class DBUtils {
         }
     }
     /**
-     * Saves the player's Trainer object to a MySQL database.
+     * Saves a Trainer object to the database associated with a specific player ID. This method serializes
+     * the Trainer object for storage in a binary format within the database.
      *
-     * @param playerId the ID of the player associated with the trainer
-     * @param trainer  the Trainer object to save
-     * @throws SQLException if a database access error occurs
-     * @throws IOException  if there is an error while saving the object
+     * @param playerId The ID of the player associated with the Trainer object.
+     * @param trainer  The Trainer object to be saved.
+     * @throws SQLException if a database access error occurs.
+     * @throws IOException  if an error occurs during object serialization.
      */
     public static void saveTrainer(int playerId, Trainer trainer) throws SQLException, IOException {
         Connection conn = null;
@@ -278,13 +298,14 @@ public class DBUtils {
     }
 
     /**
-     * Loads the player's Trainer object from a MySQL database.
+     * Loads a Trainer object from the database for a specific player ID. The Trainer object is deserialized
+     * from its stored binary format in the database.
      *
-     * @param playerId the ID of the player whose Trainer object to load
-     * @return the loaded Trainer object
-     * @throws SQLException if a database access error occurs
-     * @throws IOException  if there is an error while loading the object
-     * @throws ClassNotFoundException if the class of a serialized object cannot be found
+     * @param playerId The ID of the player whose Trainer object is to be loaded.
+     * @return The loaded Trainer object, or null if not found.
+     * @throws SQLException            if a database access error occurs.
+     * @throws IOException             if an error occurs during object deserialization.
+     * @throws ClassNotFoundException if the class of a serialized object cannot be found.
      */
     public static Trainer loadTrainer(int playerId) throws SQLException, IOException, ClassNotFoundException {
         try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
@@ -302,6 +323,14 @@ public class DBUtils {
         return null;
     }
 
+    /**
+     * Retrieves the file path for a Pokemon's image based on a given identifier. This method is used
+     * to fetch the visual representation of Pokemon from the database.
+     *
+     * @param identifier The identifier of the Pokemon whose image path is requested.
+     * @return The file path of the Pokemon's image if found, null otherwise.
+     * @throws SQLException if a database access error occurs.
+     */
     public static String getPokemonImagePath(String identifier) throws SQLException {
         String imagePath = null;
         String query = "SELECT picture FROM pokedex WHERE identifier = ?";
@@ -318,6 +347,13 @@ public class DBUtils {
         }
         return imagePath;
     }
+    /**
+     * Retrieves the current points of a player from the database.
+     *
+     * @param userId The ID of the player whose points are to be retrieved.
+     * @return The current points of the player.
+     * @throws SQLException if a database access error occurs.
+     */
     public static int getUserPoints(int userId) throws SQLException {
         int points = 0;
         Connection connection = null;

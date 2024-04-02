@@ -40,7 +40,10 @@ import java.util.concurrent.TimeUnit;
 
 
 /**
- * The type Pokedex controller.
+ * The PokedexController class serves as the controller for the Pokedex view within the Pokemon Project application.
+ * It handles the initialization and interaction within the Pokedex, allowing users to browse and select Pokemon,
+ * as well as view detailed information about each Pokemon. This class interacts with the Pokedex model to retrieve
+ * Pokemon data and manages the UI components to display that data.
  */
 public class PokedexController {
 
@@ -69,7 +72,8 @@ public class PokedexController {
 
 
 	/**
-	 * Initializes the Pokedex view with existing Pokemon data.
+	 * Initializes the Pokedex view with existing Pokemon data. This method sets up the Pokedex grid
+	 * with Pokemon entries and configures event handlers for user interactions.
 	 *
 	 * @throws FileNotFoundException If a required file is not found.
 	 */
@@ -133,6 +137,10 @@ public class PokedexController {
 
 
 	}
+	/**
+	 * Attempts to retry the initialization of the Pokedex and capacity deck in case of initial failure,
+	 * such as due to IO issues. Schedules the retry task to run after a short delay.
+	 */
 	private void retryPokedexInitialization() {
 		// Implement retry logic here
 		// For example, you can use a Timer or ScheduledExecutorService to retry after a delay
@@ -141,6 +149,10 @@ public class PokedexController {
 		executor.schedule(this::retryInitializationTask, 2, TimeUnit.SECONDS);
 	}
 
+	/**
+	 * The task to be executed by retryPokedexInitialization. Attempts to reload the Pokedex and capacity
+	 * deck and handle success or further failures accordingly.
+	 */
 	private void retryInitializationTask() {
 		try {
 			pokedex = Pokedex.getPokedex();
@@ -158,6 +170,12 @@ public class PokedexController {
 		}
 	}
 
+	/**
+	 * Handles mouse click events on PokemonButtons within the Pokedex grid. This event handler is
+	 * responsible for displaying detailed information about the clicked Pokemon, including its
+	 * name, image, type, size, and available capacities. It enables users to select Pokemon and
+	 * view their details in a dedicated interface area.
+	 */
 	private final EventHandler<MouseEvent> event = new EventHandler<MouseEvent>() {
 		private int capacitychoosen = 0;
 		private final int capacityMax = 4;
@@ -191,10 +209,12 @@ public class PokedexController {
             }
 		}
 		/**
-		 * This method sets the PokemonInterface with the information of the clicked Pokemon. It creates a HBox with the name of the Pokemon and an ImageView of the Pokemon's image. It also adds the types of the Pokemon and its height and weight to the PokemonInterface.
+		 * Sets the interface with detailed information about a clicked Pokemon. This method updates the
+		 * UI to show the Pokemon's name, image, types, size, and allows the user to select capacities for
+		 * the Pokemon. It is triggered when a PokemonButton in the Pokedex grid is clicked.
 		 *
-		 * @param pokemonSpecie the PokemonSpecie of the clicked Pokemon
-		 * @throws FileNotFoundException if the image of the clicked Pokemon is not found
+		 * @param pokemonSpecie The species of the clicked Pokemon.
+		 * @throws FileNotFoundException If the image file for the Pokemon or its capacities is not found.
 		 */
 		public void setPokemonInterface(PokemonSpecie pokemonSpecie) throws FileNotFoundException {
 			HBox hBox1 = new HBox();
@@ -306,12 +326,12 @@ public class PokedexController {
 		}
 
 		/**
-		 * Updates the root layout with capacity buttons corresponding to the provided Pokemon type.
-		 * Clears the existing content in the root GridPane and adds new CapacityButtons for each capacity
-		 * associated with the provided Pokemon type.
+		 * Updates the root layout to display capacity buttons for the selected Pokemon type. This method
+		 * clears existing content and populates the interface with buttons for each capacity available
+		 * to the selected Pokemon type, facilitating capacity selection.
 		 *
-		 * @param type The Pokemon type for which capacity buttons need to be displayed.
-		 * @throws FileNotFoundException If an image file is not found.
+		 * @param type The Pokemon type for which to display capacity buttons.
+		 * @throws FileNotFoundException If an image file for a capacity type is not found.
 		 */
 		public void updateRoot(PokemonType type) throws FileNotFoundException {
 			// Get the capacities associated with the provided Pokemon type
@@ -377,8 +397,9 @@ public class PokedexController {
 		}
 
 		/**
-		 * Event handler for handling mouse clicks on CapacityButtons.
-		 * Responsible for selecting capacities for the currently chosen Pokemon.
+		 * Handles mouse click events on CapacityButtons. This event handler is responsible for selecting
+		 * capacities for the currently chosen Pokemon, allowing users to customize their Pokemon's capacities
+		 * before proceeding further in the application, such as entering a fight or saving to the trainer's roster.
 		 */
 		private final EventHandler<MouseEvent> event2 = new EventHandler<>() {
             /**

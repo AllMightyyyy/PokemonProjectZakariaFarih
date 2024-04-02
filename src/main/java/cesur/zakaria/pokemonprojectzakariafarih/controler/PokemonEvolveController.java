@@ -21,6 +21,11 @@ import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Controls the Pokemon evolution interface within the Pokemon Project application.
+ * This class is responsible for managing the user interactions for evolving Pokemon,
+ * including stat allocation using available points and updating Pokemon stats.
+ */
 public class PokemonEvolveController {
     private static final int MAX_HP = 225;
     private static final int MAX_ATTACK = 190;
@@ -35,11 +40,18 @@ public class PokemonEvolveController {
     private int availablePoints;
     private Pokemon[] pokemons;
 
+    /**
+     * Initializes the controller and schedules the data loading to occur after the UI has been rendered.
+     */
     @FXML
     public void initialize() {
         Platform.runLater(this::loadData);
     }
 
+    /**
+     * Loads the trainer data from the database, including Pokemon information and available points for evolution.
+     * Then updates the UI with this data.
+     */
     private void loadData() {
         try {
             trainer = DBUtils.loadTrainer(AppState.getCurrentPlayer().getId());
@@ -53,6 +65,11 @@ public class PokemonEvolveController {
         }
     }
 
+    /**
+     * Updates the UI components with the loaded Pokemon data and initializes the spinners for stat allocation.
+     * @throws SQLException if an SQL error occurs during data retrieval.
+     * @throws FileNotFoundException if an image file for a Pokemon is not found.
+     */
     private void updateUI() throws SQLException, FileNotFoundException {
         ImageView[] imageViews = {imageView1, imageView2, imageView3, imageView4, imageView5, imageView6};
         Label[] labels = {pokemon1Label, pokemon2Label, pokemon3Label, pokemon4Label, pokemon5Label, pokemon6Label};
@@ -76,6 +93,13 @@ public class PokemonEvolveController {
         updateAvailablePointsDisplay();
     }
 
+    /**
+     * Configures a given spinner for stat allocation, including setting its initial and maximum values.
+     * Adds a listener to handle user interactions with the spinner.
+     * @param spinner The spinner to be configured.
+     * @param initialValue The initial value for the spinner, based on the Pokemon's current stat.
+     * @param maxValue The maximum value the spinner can reach.
+     */
     private void setupSpinner(Spinner<Integer> spinner, int initialValue, int maxValue) {
         spinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(initialValue, maxValue, initialValue));
 
@@ -115,6 +139,10 @@ public class PokemonEvolveController {
             }
         });
     }
+    /**
+     * Disables the increment button of a spinner to prevent users from exceeding the available points limit.
+     * @param spinner The spinner whose increment button should be disabled.
+     */
     private void disableIncrementButton(Spinner<Integer> spinner) {
         // Get the increment button and disable it
         for (Node node : spinner.getChildrenUnmodifiable()) {
@@ -125,6 +153,10 @@ public class PokemonEvolveController {
         }
     }
 
+    /**
+     * Enables the increment button of a spinner, allowing users to allocate more points to a Pokemon's stats.
+     * @param spinner The spinner whose increment button should be enabled.
+     */
     private void enableIncrementButton(Spinner<Integer> spinner) {
         // Get the increment button and enable it
         for (Node node : spinner.getChildrenUnmodifiable()) {
@@ -135,6 +167,11 @@ public class PokemonEvolveController {
         }
     }
     // Method to update the stats based on spinner value change
+    /**
+     * Updates the specified stat for a Pokemon based on the spinner's value change.
+     * @param spinner The spinner corresponding to the stat being updated.
+     * @param pointChange The amount by which the stat is to be updated.
+     */
     private void updateStat(Spinner<Integer> spinner, int pointChange) {
         // Get the index of the spinner in the list of spinners
         int spinnerIndex = getSpinnerIndex(spinner);
@@ -157,6 +194,11 @@ public class PokemonEvolveController {
             pokemon.getStat().setDef(newDefense);
         }
     }
+    /**
+     * Determines the index of a given spinner within the array of spinners, identifying the Pokemon it corresponds to.
+     * @param spinner The spinner for which the index is sought.
+     * @return The index of the spinner, indicating the corresponding Pokemon.
+     */
     private int getSpinnerIndex(Spinner<Integer> spinner) {
         List<Spinner<Integer>> hpSpinners = Arrays.asList(HPSpinner1, HPSpinner2, HPSpinner3, HPSpinner4, HPSpinner5, HPSpinner6);
         List<Spinner<Integer>> attSpinners = Arrays.asList(AttSpinner1, AttSpinner2, AttSpinner3, AttSpinner4, AttSpinner5, AttSpinner6);
@@ -174,10 +216,16 @@ public class PokemonEvolveController {
         // If the spinner is not found, return -1 or throw an exception
         return -1; // Or throw an exception indicating spinner not found
     }
+    /**
+     * Updates the display of available points for stat allocation.
+     */
     private void updateAvailablePointsDisplay() {
         availablePointsLabel.setText("Available Points: " + availablePoints);
     }
 
+    /**
+     * Handles the "Save" button click event, saving the evolved Pokemon stats to the database and updating the available points.
+     */
     @FXML
     private void onSaveButtonClicked() {
         try {
@@ -200,6 +248,9 @@ public class PokemonEvolveController {
         }
     }
 
+    /**
+     * Handles the "Reset" button click event, resetting the Pokemon stats and available points to their original values.
+     */
     @FXML
     private void onResetButtonClicked() {
         try {
@@ -228,6 +279,11 @@ public class PokemonEvolveController {
         }
     }
 
+    /**
+     * Displays an alert dialog to the user.
+     * @param title The title of the alert dialog.
+     * @param content The content message of the alert dialog.
+     */
     private void showAlert(String title, String content) {
         Platform.runLater(() -> {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);

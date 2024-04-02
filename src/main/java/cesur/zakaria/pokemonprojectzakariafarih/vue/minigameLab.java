@@ -34,6 +34,11 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 
+/**
+ * Manages the mini-game laboratory interface of the Pokémon application, providing a hub for accessing
+ * various mini-games such as puzzles, memory games, and Tic Tac Toe. This class extends JavaFX's Application
+ * and leverages FXML for dynamic UI generation and interaction.
+ */
 public class minigameLab extends Application {
 
     private static Text pointsText = new Text("Points: 0");
@@ -44,6 +49,12 @@ public class minigameLab extends Application {
         stage.show();
     }
 
+    /**
+     * Generates the main content for the mini-game laboratory, arranging the mini-games and utilities
+     * in a visually appealing layout against a themed background.
+     *
+     * @return The root Parent node containing the laboratory's UI components.
+     */
     Parent createContent() {
         Pane root = new Pane();
         root.setPrefSize(1366, 768);
@@ -93,6 +104,10 @@ public class minigameLab extends Application {
         return root;
     }
 
+    /**
+     * Represents an interactive menu item for the mini-game laboratory interface.
+     * Each menu item is associated with an action, typically launching a mini-game or utility.
+     */
     private static class MenuItem extends StackPane {
         MenuItem(String name, Runnable action) {
             LinearGradient gradient = new LinearGradient(
@@ -149,6 +164,12 @@ public class minigameLab extends Application {
             getChildren().addAll(bg0, bg1, box);
         }
     }
+    /**
+     * Creates a display for showing the current player's points. This display includes a semi-transparent
+     * background with a frosted glass effect and updates dynamically to reflect the player's points total.
+     *
+     * @return A Node that can be added to the scene graph, representing the points display.
+     */
     private Node createPointsDisplay() {
         // Semi-transparent background with rounded corners
         Rectangle bg = new Rectangle(200, 100);
@@ -189,6 +210,9 @@ public class minigameLab extends Application {
         return stackPane;
     }
 
+    /**
+     * Launches the Number Memory Puzzle game in a new Stage.
+     */
     private static void launchNuMemoryPuzzle() {
         Platform.runLater(() -> {
             try {
@@ -202,6 +226,9 @@ public class minigameLab extends Application {
             }
         });
     }
+    /**
+     * Launches the Tic Tac Toe game in a new Stage.
+     */
     private static void launchTicTacToeGame() {
         Platform.runLater(() -> {
             try {
@@ -216,6 +243,9 @@ public class minigameLab extends Application {
         });
     }
 
+    /**
+     * Closes the current stage and launches the main game interface.
+     */
     private static void launchFightScreen() {
         Stage currentStage = (Stage) pointsText.getScene().getWindow();
         currentStage.hide();
@@ -233,6 +263,11 @@ public class minigameLab extends Application {
         });
     }
 
+    /**
+     * Launches the Pokémon evolution screen.
+     *
+     * @throws IOException If the FXML file for the evolution screen cannot be loaded.
+     */
     public static void launchEvolvePokemons() throws IOException {
         FXMLLoader loader = new FXMLLoader(minigameLab.class.getResource("evolvePokemon.fxml"));
         Parent root = loader.load();
@@ -244,6 +279,11 @@ public class minigameLab extends Application {
     }
 
     // Method to update points somewhere in your class
+    /**
+     * Updates the points display with a new total.
+     *
+     * @param newPoints The new points total to display.
+     */
     public static void updatePoints(int newPoints) {
         Platform.runLater(() -> pointsText.setText("Points: " + newPoints));
     }

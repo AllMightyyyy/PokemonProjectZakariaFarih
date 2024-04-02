@@ -19,11 +19,21 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+/**
+ * Represents the main loading screen of the Pokemon application. This class extends the JavaFX Application class
+ * and is responsible for initiating and displaying a loading animation, followed by the transition to the primary
+ * game interface upon loading completion.
+ */
 public class mainLoading extends Application {
 
     private ResourceLoadingTask resourceLoader = new ResourceLoadingTask();
     private LoadingBar progress = new LoadingBar();
 
+    /**
+     * Creates the content for the main loading screen, including a background image and a loading animation.
+     *
+     * @return A Parent node containing the loading screen's layout.
+     */
     private Parent createContent() {
         Pane root = new Pane();
         root.setPrefSize(1366, 768);
@@ -48,6 +58,9 @@ public class mainLoading extends Application {
         return root;
     }
 
+    /**
+     * Defines the visual component for the loading progress animation.
+     */
     private class LoadingBar extends Parent {
 
         private RotateTransition rt;
@@ -69,17 +82,26 @@ public class mainLoading extends Application {
             setVisible(false);
         }
 
+        /**
+         * Initiates the display of the loading animation.
+         */
         public void show() {
             setVisible(true);
             rt.play();
         }
 
+        /**
+         * Hides the loading animation, typically called upon loading completion.
+         */
         public void hide() {
             rt.stop();
             setVisible(false);
         }
     }
 
+    /**
+     * A Task for simulating resource loading. Upon completion, it triggers the transition to the main game interface.
+     */
     private class ResourceLoadingTask extends Task<Node> {
         @Override
         protected Node call() throws Exception {

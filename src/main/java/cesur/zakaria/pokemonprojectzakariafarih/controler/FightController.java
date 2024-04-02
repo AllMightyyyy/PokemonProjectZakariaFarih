@@ -35,8 +35,11 @@ import java.util.Map;
 import java.util.Random;
 
 /**
- * The FightController class is responsible for managing the user interface and game logic during a fight.
- * It initializes the fight and its display, handles user input, and updates the user interface during the fight.
+ * The FightController class is responsible for managing the user interface (UI) and game logic during a Pokémon fight.
+ * It manages the initialization of fights, updates the UI in response to game events, and handles user inputs
+ * during the fight sequence. This class integrates with the game's model to reflect changes in the game state
+ * within the UI, such as updating Pokémon health bars, displaying Pokémon and their capacities, and handling
+ * the turn-based logic of the game.
  */
 public class FightController {
 	
@@ -138,9 +141,13 @@ public class FightController {
     private Label mainDialog;
 
 	/**
-	 * Initialize the fight and its display. It is called automatically at the launch of the controller.
+	 * Initializes the fight scene with random background, updates UI components, loads trainer and opponent
+	 * (bot or another player), and prepares the Pokémon for the fight. This method sets up the initial
+	 * state of the UI, including loading Pokémon data and setting background images.
 	 *
-	 * @throws IOException the io exception
+	 * @throws IOException if there is an error reading from the file system.
+	 * @throws SQLException if there is an error retrieving data from the database.
+	 * @throws ClassNotFoundException if the JDBC Driver class is not found.
 	 */
 	public void initialize() throws IOException, SQLException, ClassNotFoundException {
 		
@@ -179,9 +186,10 @@ public class FightController {
     }
 
 	/**
-	 * Updates the pokeballs in the user interface based on the given trainer.
+	 * Updates the display of pokeballs in the UI to reflect the current state of a trainer's Pokémon team.
+	 * It visually indicates which Pokémon are still able to fight and which have been defeated.
 	 *
-	 * @param trainer the trainer whose pokeballs are to be updated
+	 * @param trainer The trainer whose Pokémon team is being updated in the UI.
 	 */
 	private void updatePokeballs(Trainer trainer) {
 		HBox pokeballsBox;
@@ -213,9 +221,10 @@ public class FightController {
 	}
 
 	/**
-	 * The bot plays the fight by choosing a random move from its available moves.
+	 * Manages the bot's turn during the fight. The bot selects a random capacity to use against the player.
+	 * This method is responsible for executing the bot's attack and updating the UI accordingly.
 	 *
-	 * @throws IOException if there is an error loading the media files
+	 * @throws IOException if there is an error loading media files for the attack animation or sounds.
 	 */
 	private void botPlay() throws IOException {
 		Bot pokemonBot=(Bot)fight.getTrainer2();
@@ -244,10 +253,12 @@ public class FightController {
 	}
 
 	/**
-	 * Launches an attack using the given capacity.
+	 * Handles the action of attacking during a fight. This method is triggered by user input when selecting
+	 * a capacity to use against the opponent. It manages the attack sequence, updates the UI to reflect
+	 * the attack's outcome, and progresses the fight to the next turn.
 	 *
-	 * @param event the action event that triggered the method call
-	 * @throws FileNotFoundException if there is an error loading the media files
+	 * @param event The action event that triggered the attack.
+	 * @throws FileNotFoundException if there is an error loading media files for the attack animation.
 	 */
 	@FXML
     void attack(ActionEvent event) throws FileNotFoundException {
@@ -335,9 +346,11 @@ public class FightController {
     }
 
 	/**
-	 * Handles the next turn in the fight. If the game is being played in multiplayer mode and the current trainer is a bot, the bot is asked to play the next turn. If the current trainer only has one Pokémon alive or if the current Pokémon has no more fight moves, the buttons for selecting a different pokemon or for fighting are disabled. Otherwise, the buttons are enabled. The visibility of the capacity and action footer regions is also toggled, and the main dialog and main footer regions are hidden or shown as appropriate.
+	 * Prepares and manages the transition to the next turn in the fight. This includes updating the UI
+	 * to reflect the current state of the fight, managing bot actions if applicable, and handling
+	 * the end of the fight if a winner has been determined.
 	 *
-	 * @throws IOException if there is an error loading the media files
+	 * @throws IOException if there is an error loading media files for bot actions or updating the UI.
 	 */
 	private void nextTurn() throws IOException {
 		if(!GameControllerStatic.getGameControllerStatic().isMultiPlayer()) {
@@ -359,10 +372,12 @@ public class FightController {
 	}
 
 	/**
-	 * This method changes the currently selected pokemon for the trainer.
+	 * Allows the player to change their active Pokémon. This method is called when the player chooses
+	 * to switch Pokémon during the fight. It updates the UI to allow the player to select another Pokémon
+	 * from their team.
 	 *
-	 * @param ignoredEvent the action event that triggered the method call
-	 * @throws FileNotFoundException if there is an error loading the media files
+	 * @param ignoredEvent The action event that triggered the method call, not used in the method.
+	 * @throws FileNotFoundException if there is an error loading media files for displaying the selected Pokémon.
 	 */
 	@FXML
 	void changePokemon(ActionEvent ignoredEvent) throws FileNotFoundException {
@@ -394,9 +409,10 @@ public class FightController {
 	}
 
 	/**
-	 * This method changes the currently selected pokemon for the trainer.
+	 * Transitions the UI to display the capacity selection interface. This method is called when the
+	 * player decides to attack, allowing them to choose one of their active Pokémon's capacities to use.
 	 *
-	 * @param ignoredEvent the action event that triggered the method call
+	 * @param ignoredEvent The action event that triggered the method call, not used in the method.
 	 */
 	@FXML
 	void fight(ActionEvent ignoredEvent) {
@@ -419,9 +435,10 @@ public class FightController {
 	}
 
 	/**
-	 * Run.
+	 * Manages the action of running from a fight. This method is called when the player chooses to
+	 * flee the battle. It updates the UI to indicate the player's retreat and ends the fight.
 	 *
-	 * @param ignoredEvent the ignored event
+	 * @param ignoredEvent The action event that triggered the method call, not used in the method.
 	 */
 	@FXML
     void run(ActionEvent ignoredEvent) {
@@ -434,7 +451,8 @@ public class FightController {
     }
 
 	/**
-	 * This method handles the quitting of the game. It stops the music, changes the scene to the main menu, and plays a transition animation.
+	 * Handles the quitting of the fight scene, stopping any ongoing music, and transitioning back to
+	 * the main menu. This method cleans up the fight scene and ensures a smooth transition out of the fight.
 	 */
 	private void quit() {
 		// Stops the music.
@@ -463,10 +481,11 @@ public class FightController {
 	}
 
 	/**
-	 * This method changes the currently selected pokemon for the trainer.
+	 * Allows the player or bot to select a Pokémon from their team. This method updates the UI and
+	 * game state to reflect the new active Pokémon for the trainer making the selection.
 	 *
-	 * @param event the action event that triggered the method call
-	 * @throws IOException if there is an error loading the media files
+	 * @param event The action event that triggered the Pokémon selection.
+	 * @throws IOException if there is an error loading media files for the new active Pokémon.
 	 */
 	@FXML
 	void selectPokemon(ActionEvent event) throws IOException {
@@ -497,13 +516,14 @@ public class FightController {
 		}
 	}
 	/**
-	 * This method creates a translate animation for the given image view.
+	 * Creates and plays a translation animation for the given ImageView. This method is used to animate
+	 * Pokémon sprites during the fight, indicating actions such as attacks or being hit.
 	 *
-	 * @param image the image view to be animated
-	 * @param duration the duration of the animation in seconds
-	 * @param cycleCount the number of times the animation should repeat
-	 * @param x the x-axis translation value
-	 * @param y the y-axis translation value
+	 * @param image The ImageView to animate.
+	 * @param duration The duration of the animation in seconds.
+	 * @param cycleCount The number of times the animation should repeat.
+	 * @param x The amount to translate along the X axis.
+	 * @param y The amount to translate along the Y axis.
 	 */
 	private void playAnimation(ImageView image, double duration, int cycleCount, int x, int y) {
 		TranslateTransition translateAnimation = new TranslateTransition(Duration.seconds(duration), image);
@@ -514,6 +534,10 @@ public class FightController {
 		translateAnimation.setInterpolator(Interpolator.LINEAR);
 		translateAnimation.play();
 	}
+	/**
+	 * Applies idle animations to the Pokémon sprites. This method is called during the initialization
+	 * of the fight scene to give life to the Pokémon images.
+	 */
 	private void setAnimations() {
 		// Apply animation to pokemon1Image
 		playAnimation(pokemon1Image, 0.3, TranslateTransition.INDEFINITE, 0, 3);
@@ -524,9 +548,11 @@ public class FightController {
 
 
 	/**
-	 * This method displays a message indicating the winner of the fight and quits the game.
+	 * Displays a dialog indicating the end of the game and the winner. This method is called when one
+	 * of the trainers wins the fight, handling the display of the winning message and transitioning out
+	 * of the fight scene.
 	 *
-	 * @param winner the trainer who won the fight
+	 * @param winner The trainer who won the fight.
 	 */
 	private void printEndgame(Trainer winner) {
 		// Displays a message indicating the winner of the fight and quits the game.
@@ -546,11 +572,12 @@ public class FightController {
 		timeline1.play();
 	}
 	/**
-	 * This method sets the properties of the given pokemon and updates the user interface.
+	 * Updates the UI to display information about a Pokémon, including its name, level, health, and image.
+	 * This method is used to reflect changes in the active Pokémon during the fight.
 	 *
-	 * @param poke the pokemon to be displayed
-	 * @param i the index of the pokemon (0 for the first pokemon, 1 for the second pokemon)
-	 * @throws FileNotFoundException if there is an error loading the media files
+	 * @param poke The Pokémon to display information for.
+	 * @param i The index of the Pokémon (0 for player's Pokémon, 1 for opponent's Pokémon).
+	 * @throws FileNotFoundException if there is an error loading the Pokémon's image file.
 	 */
 	private void printPokemon(Pokemon poke, int i) throws FileNotFoundException {
 		// Sets the properties of the given pokemon and updates the user interface.
@@ -580,6 +607,12 @@ public class FightController {
 			pokemon2Lvl.setText("Lvl" + poke.getStat().getXpLevel());
 		}
 	}
+	/**
+	 * Displays a dialog with the specified text. This method is used to show messages in the UI,
+	 * such as announcing moves or outcomes during the fight.
+	 *
+	 * @param text The text to display in the dialog.
+	 */
 	private void launchDialog(String text) {
 		mainFooter.setVisible(false);
 		mainDialog.setText(text);
