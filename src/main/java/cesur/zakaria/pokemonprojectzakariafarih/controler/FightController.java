@@ -1,11 +1,14 @@
 package cesur.zakaria.pokemonprojectzakariafarih.controler;
 
+import cesur.zakaria.pokemonprojectzakariafarih.dbUtils.DBUtils;
 import cesur.zakaria.pokemonprojectzakariafarih.model.fight.Bot;
 import cesur.zakaria.pokemonprojectzakariafarih.model.fight.Fight;
 import cesur.zakaria.pokemonprojectzakariafarih.model.fight.League;
 import cesur.zakaria.pokemonprojectzakariafarih.model.fight.Trainer;
 import cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons.Capacity;
 import cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons.Pokemon;
+import cesur.zakaria.pokemonprojectzakariafarih.session.AppState;
+import cesur.zakaria.pokemonprojectzakariafarih.session.Player;
 import cesur.zakaria.pokemonprojectzakariafarih.vue.MainView;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
@@ -26,6 +29,7 @@ import javafx.util.Duration;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -138,7 +142,7 @@ public class FightController {
 	 *
 	 * @throws IOException the io exception
 	 */
-	public void initialize() throws IOException{
+	public void initialize() throws IOException, SQLException, ClassNotFoundException {
 		
     	System.out.println("Launching the combat");
 		Random random = new Random();
@@ -150,7 +154,9 @@ public class FightController {
     	BackgroundImage fightMenu= new BackgroundImage(new Image(new FileInputStream("Pictures/fightMenu.png")),BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,new BackgroundSize(600, 133, false, false, false, false));
     	mainDialog.setBackground(new Background(fightMenu));
     	mainFooter.setBackground(new Background(fightMenu));
-		GameControllerStatic.UnSave();
+		Player currentPlayer = AppState.getCurrentPlayer();
+		int playerId = currentPlayer.getId();
+		DBUtils.loadTrainer(playerId);
 		Pokemon[] pokemons= new Pokemon[6];
 		if(!GameControllerStatic.getGameControllerStatic().isMultiPlayer() && !GameControllerStatic.getGameControllerStatic().isLeagueison()) {
 			for (int i = 0; i < pokemons.length; i++) {

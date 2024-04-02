@@ -1,9 +1,11 @@
 package cesur.zakaria.pokemonprojectzakariafarih.dbUtils;
 
+import cesur.zakaria.pokemonprojectzakariafarih.model.fight.Trainer;
 import cesur.zakaria.pokemonprojectzakariafarih.session.AppState;
 import cesur.zakaria.pokemonprojectzakariafarih.session.Player;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.io.*;
 import java.sql.*;
 
 /**
@@ -12,6 +14,9 @@ import java.sql.*;
  */
 public class DBUtils {
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+    private static final String URL = "jdbc:mysql://localhost:3306/pokemondb";
+    private static final String USERNAME = "root";
+    private static final String PASSWORD = "27122000@ziko";
 
     /**
      * Attempts to authenticate a user based on the provided username and password.
@@ -183,5 +188,51 @@ public class DBUtils {
                 System.err.println("Error closing resources: " + e.getMessage());
             }
         }
+    }
+    /**
+     * Saves the player's Trainer object to a MySQL database.
+     *
+     * @param playerId the ID of the player associated with the trainer
+     * @param trainer  the Trainer object to save
+     * @throws SQLException if a database access error occurs
+     * @throws IOException  if there is an error while saving the object
+     */
+    public static void saveTrainer(int playerId, Trainer trainer) throws SQLException, IOException {
+        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+             PreparedStatement pstmt = conn.prepareStatement("INSERT INTO trainers (user_id, trainer_data) VALUES (?, ?)")) {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ObjectOutputStream oos = new ObjectOutputStream(baos);
+            oos.writeObject(trainer);
+            byte[] trainerBytes = baos.toByteArray();
+            ByteArrayInputStream bais = new ByteArrayInputStream(trainerBytes);
+            pstmt.setInt(1, playerId);
+            pstmt.setBinaryStream(2, bais, trainerBytes.length);
+            pstmt.executeUpdate();
+        }
+    }
+
+    /**
+     * Loads the player's Trainer object from a MySQL database.
+     *
+     * @param playerId the ID of the player whose Trainer object to load
+     * @return the loaded Trainer object
+     * @throws SQLException if a database access error occurs
+     * @throws IOException  if there is an error while loading the object
+     * @throws ClassNotFoundException if the class of a serialized object cannot be found
+     */
+    public static Trainer loadTrainer(int playerId) throws SQLException, IOException, ClassNotFoundException {
+        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+             PreparedStatement pstmt = conn.prepareStatement("SELECT trainer_data FROM trainers WHERE user_id = ? ORDER BY id DESC LIMIT 1")) {
+            pstmt.setInt(1, playerId);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    byte[] trainerBytes = rs.getBytes("trainer_data");
+                    ByteArrayInputStream bais = new ByteArrayInputStream(trainerBytes);
+                    ObjectInputStream ois = new ObjectInputStream(bais);
+                    return (Trainer) ois.readObject();
+                }
+            }
+        }
+        return null;
     }
 }

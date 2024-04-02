@@ -4,11 +4,15 @@
  */
 package cesur.zakaria.pokemonprojectzakariafarih.controler;
 
+import cesur.zakaria.pokemonprojectzakariafarih.dbUtils.DBUtils;
 import cesur.zakaria.pokemonprojectzakariafarih.model.fight.Bot;
 import cesur.zakaria.pokemonprojectzakariafarih.model.fight.Trainer;
 import cesur.zakaria.pokemonprojectzakariafarih.model.pokedex.Pokedex;
 import cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons.*;
+import cesur.zakaria.pokemonprojectzakariafarih.session.AppState;
+import cesur.zakaria.pokemonprojectzakariafarih.session.Player;
 import cesur.zakaria.pokemonprojectzakariafarih.vue.MainView;
+import cesur.zakaria.pokemonprojectzakariafarih.vue.interfaceMenu;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -29,6 +33,8 @@ import javafx.stage.Stage;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.SQLException;
+
 
 /**
  * The type Pokedex controller.
@@ -393,11 +399,21 @@ public class PokedexController {
                                     } else {
                                         // Proceed to main interface screen
                                         GameControllerStatic.getGameControllerStatic().setTrainer(new Trainer(nameFiled.getText(), pokemons));
-                                        MainView.changeScene((Stage) root2.getScene().getWindow(), "interface.fxml");
-                                        GameControllerStatic.Save();
+										interfaceMenu mainApp = new interfaceMenu();
+										try {
+											mainApp.start((Stage) root2.getScene().getWindow());
+										} catch (Exception exc) {
+											throw new RuntimeException(exc);
+										}
+										Player currentPlayer = AppState.getCurrentPlayer();
+										int playerId = currentPlayer.getId();
+										Trainer trainer = GameControllerStatic.getGameControllerStatic().getTrainer();
+										DBUtils.saveTrainer(playerId, trainer);
                                     }
                                 } catch (IOException e1) {
                                     e1.printStackTrace();
+                                } catch (SQLException ex) {
+                                    throw new RuntimeException(ex);
                                 }
                             }
                         }
