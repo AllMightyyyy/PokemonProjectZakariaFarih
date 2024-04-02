@@ -34,6 +34,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -76,10 +79,13 @@ public class PokedexController {
 			pokedex = Pokedex.getPokedex();
 			deck = CapacitiesHelper.getCapacityDeck();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			System.err.println("err");
-			e.printStackTrace();
+			// Handle the initial IOException
+			System.err.println("Error initializing Pokedex: " + e.getMessage());
+
+			// Retry initializing the Pokedex after a short delay
+			retryPokedexInitialization();
 		}
+
 		int total = pokedex.size();
         int row = total / column;
 		int pokemonNumber = 1;
@@ -125,6 +131,31 @@ public class PokedexController {
 			}
 		}
 
+
+	}
+	private void retryPokedexInitialization() {
+		// Implement retry logic here
+		// For example, you can use a Timer or ScheduledExecutorService to retry after a delay
+		// Here's a simple example using a ScheduledExecutorService:
+		ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+		executor.schedule(this::retryInitializationTask, 2, TimeUnit.SECONDS);
+	}
+
+	private void retryInitializationTask() {
+		try {
+			pokedex = Pokedex.getPokedex();
+			deck = CapacitiesHelper.getCapacityDeck();
+
+			// If initialization succeeds after retry, update the UI or proceed with further logic
+			// For example:
+			// Platform.runLater(() -> {
+			//     updateUI();
+			// });
+		} catch (IOException e) {
+			// If retry fails, log the error and retry again
+			System.err.println("Retry failed: " + e.getMessage());
+			retryPokedexInitialization();
+		}
 	}
 
 	private final EventHandler<MouseEvent> event = new EventHandler<MouseEvent>() {

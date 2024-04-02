@@ -183,11 +183,7 @@ public class MenuApp {
 
         // Launch the JavaFX game
         Platform.runLater(() -> {
-            try {
-                PokemonType.generatePokemonType();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            PokemonType.generatePokemonType();
             Stage gameStage = new Stage();
             interfaceMenu mainApp = new interfaceMenu();
             try {

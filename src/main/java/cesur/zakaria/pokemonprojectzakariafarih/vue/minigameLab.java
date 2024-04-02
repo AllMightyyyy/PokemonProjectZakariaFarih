@@ -1,14 +1,17 @@
 package cesur.zakaria.pokemonprojectzakariafarih.vue;
 
+import cesur.zakaria.pokemonprojectzakariafarih.model.pokemon.pokemons.PokemonType;
 import cesur.zakaria.pokemonprojectzakariafarih.pokelabGames.NuMemoryPuzzle.NuMemoryApp;
 import cesur.zakaria.pokemonprojectzakariafarih.pokelabGames.puzzle.Main;
 import cesur.zakaria.pokemonprojectzakariafarih.pokelabGames.tictactoe.TicTacToeApp;
 import cesur.zakaria.pokemonprojectzakariafarih.session.AppState;
 import cesur.zakaria.pokemonprojectzakariafarih.session.Player;
+import cesur.zakaria.pokemonprojectzakariafarih.ui.menus.mainMenu.MenuApp;
 import javafx.animation.FillTransition;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -28,6 +31,8 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
+import java.io.IOException;
 
 public class minigameLab extends Application {
 
@@ -52,7 +57,13 @@ public class minigameLab extends Application {
 
         VBox box = new VBox(
                 5,
-                new MenuItem("Evolve My Pokemons", () -> {}),
+                new MenuItem("Evolve My Pokemons", () -> {
+                    try {
+                        launchEvolvePokemons();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }),
                 new MenuItem("Puzzle", () -> {
                     try {
                         // Create a new Stage for the puzzle game
@@ -65,7 +76,7 @@ public class minigameLab extends Application {
                 }),
                 new MenuItem("Number Memory Puzzle", minigameLab::launchNuMemoryPuzzle),
                 new MenuItem("Tictactoe", minigameLab::launchTicTacToeGame),
-                new MenuItem("QUIT", () -> Platform.exit())
+                new MenuItem("QUIT", minigameLab::launchFightScreen)
         );
         box.setBackground(new Background(
                 new BackgroundFill(Color.web("black", 0.6), null, null)
@@ -203,6 +214,33 @@ public class minigameLab extends Application {
                 e.printStackTrace();
             }
         });
+    }
+
+    private static void launchFightScreen() {
+        Stage currentStage = (Stage) pointsText.getScene().getWindow();
+        currentStage.hide();
+
+        // Launch the JavaFX game
+        Platform.runLater(() -> {
+            PokemonType.generatePokemonType();
+            Stage gameStage = new Stage();
+            interfaceMenu mainApp = new interfaceMenu();
+            try {
+                mainApp.start(gameStage);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+
+    public static void launchEvolvePokemons() throws IOException {
+        FXMLLoader loader = new FXMLLoader(minigameLab.class.getResource("evolvePokemon.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setTitle("Pokémon Center");
+        stage.show();
     }
 
     // Method to update points somewhere in your class

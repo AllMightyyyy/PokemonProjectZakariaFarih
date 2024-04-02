@@ -12,7 +12,7 @@ public class PokemonSpecie implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private final int nbPokemon;
 	private final String namePokemon;
-	private final PokemonType types;
+	private PokemonType types;
 	private final Size size;
 	private final String imagePath;
 
@@ -31,7 +31,9 @@ public class PokemonSpecie implements Serializable {
 		this.nbPokemon = nbPokemon;
 		this.namePokemon = Objects.requireNonNull(namePokemon);
 		this.size = new Size(height, weight);
-		this.types = Objects.requireNonNull(enumPokemonTypes);
+		if (enumPokemonTypes != null) {
+			this.types = enumPokemonTypes;
+		}
 		this.imagePath = Objects.requireNonNull(imagePath);
 	}
 

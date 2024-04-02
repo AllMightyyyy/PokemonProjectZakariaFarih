@@ -11,13 +11,16 @@ import java.util.Random;
 public class StatistiquePokemon implements Serializable {
 	@Serial
 	private static final long serialVersionUID = 1L;
-	private final int dmg;
-	private final int def;
+	private int dmg;
+	private int def;
 	private final int dmgspe;
 	private final int defspe;
 	private final int xpLevel;
 	private int pv;
 	private final int pvMax;
+	private static final int MAX_HP = 200;
+	private static final int MAX_ATTACK = 185;
+	private static final int MAX_DEFENSE = 245;
 
     /**
      * Generates random statistics for a Pokémon.
@@ -166,5 +169,56 @@ public class StatistiquePokemon implements Serializable {
      */
     public int getXpLevel() {
 		return xpLevel;
+	}
+
+	public int getDmg() {
+		return dmg;
+	}
+
+	public int getDef() {
+		return def;
+	}
+
+	public int getDmgspe() {
+		return dmgspe;
+	}
+
+	public int getDefspe() {
+		return defspe;
+	}
+
+	public int getPv() {
+		return pv;
+	}
+
+	public void setPv(int pv) {
+		this.pv = pv;
+	}
+
+	public int getPvMax() {
+		return pvMax;
+	}
+
+	// Method to adjust HP with validation
+	public void adjustHp(int newValue, int oldValue) {
+		pv = Math.max(0, Math.min(newValue, MAX_HP)); // Ensure hp is within 0 and MAX_HP
+	}
+
+	// Method to adjust Attack with validation
+	public void adjustAttack(int newValue, int oldValue) {
+		dmg = Math.max(0, Math.min(newValue, MAX_ATTACK)); // Ensure attack is within 0 and MAX_ATTACK
+	}
+
+	// Method to adjust Defense with validation
+	public void adjustDefense(int newValue, int oldValue) {
+		def = Math.max(0, Math.min(newValue, MAX_DEFENSE)); // Ensure defense is within 0 and MAX_DEFENSE
+	}
+
+	public void setDmg(int dmg) {
+		this.dmg = dmg;
+	}
+
+	public void setDef(int def) {
+		this.def = def;
 	}
 }

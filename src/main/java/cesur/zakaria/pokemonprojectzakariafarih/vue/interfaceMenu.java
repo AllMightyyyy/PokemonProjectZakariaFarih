@@ -2,10 +2,15 @@ package cesur.zakaria.pokemonprojectzakariafarih.vue;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ResourceBundle;
 
+import cesur.zakaria.pokemonprojectzakariafarih.model.pokedex.Pokedex;
 import javafx.application.Application;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -19,7 +24,32 @@ import javafx.scene.text.*;
 
 import static cesur.zakaria.pokemonprojectzakariafarih.vue.MainView.changeScene;
 
-public class interfaceMenu extends Application {
+public class interfaceMenu extends Application implements Initializable {
+    private boolean pokedexGenerated = false;
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        if (!pokedexGenerated) {
+            generatePokedex();
+            pokedexGenerated = true;
+        }
+    }
+    private void generatePokedex() {
+        try {
+            Pokedex.getPokedex(); // Generate the Pokedex
+        } catch (IOException e) {
+            // Handle the exception if necessary
+            e.printStackTrace();
+            showAlert("Error", "Failed to generate Pokedex");
+        }
+    }
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
 
     private Parent createContent() {
         Pane root = new Pane();

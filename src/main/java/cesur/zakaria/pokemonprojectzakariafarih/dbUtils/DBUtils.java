@@ -189,6 +189,32 @@ public class DBUtils {
             }
         }
     }
+    public static boolean updatePlayerPointsAfterSave(int userId, int newPoints) {
+        Connection connection = null;
+        PreparedStatement psUpdatePoints = null;
+
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/pokemondb", "root", "27122000@ziko");
+            String sqlUpdatePoints = "UPDATE pokemonplayeruser_data SET points = ? WHERE user_id = ?";
+            psUpdatePoints = connection.prepareStatement(sqlUpdatePoints);
+            psUpdatePoints.setInt(1, newPoints);
+            psUpdatePoints.setInt(2, userId);
+
+            int rowsAffected = psUpdatePoints.executeUpdate();
+            return rowsAffected == 1;
+        } catch (SQLException e) {
+            System.out.println("Error updating player points: " + e.getMessage());
+            return false;
+        } finally {
+            // Close resources
+            try {
+                if (psUpdatePoints != null) psUpdatePoints.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                System.err.println("Error closing resources: " + e.getMessage());
+            }
+        }
+    }
     /**
      * Saves the player's Trainer object to a MySQL database.
      *
@@ -198,8 +224,37 @@ public class DBUtils {
      * @throws IOException  if there is an error while saving the object
      */
     public static void saveTrainer(int playerId, Trainer trainer) throws SQLException, IOException {
-        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-             PreparedStatement pstmt = conn.prepareStatement("INSERT INTO trainers (user_id, trainer_data) VALUES (?, ?)")) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+
+            // Check if a trainer entry already exists for the given playerId
+            pstmt = conn.prepareStatement("SELECT COUNT(*) AS count FROM trainers WHERE user_id = ?");
+            pstmt.setInt(1, playerId);
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                int count = rs.getInt("count");
+                if (count > 0) {
+                    // Update existing trainer entry
+                    pstmt = conn.prepareStatement("UPDATE trainers SET trainer_data = ? WHERE user_id = ?");
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    ObjectOutputStream oos = new ObjectOutputStream(baos);
+                    oos.writeObject(trainer);
+                    byte[] trainerBytes = baos.toByteArray();
+                    ByteArrayInputStream bais = new ByteArrayInputStream(trainerBytes);
+                    pstmt.setBinaryStream(1, bais, trainerBytes.length);
+                    pstmt.setInt(2, playerId);
+                    pstmt.executeUpdate();
+                    return;
+                }
+            }
+
+            // Insert new trainer entry
+            pstmt = conn.prepareStatement("INSERT INTO trainers (user_id, trainer_data) VALUES (?, ?)");
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ObjectOutputStream oos = new ObjectOutputStream(baos);
             oos.writeObject(trainer);
@@ -208,6 +263,17 @@ public class DBUtils {
             pstmt.setInt(1, playerId);
             pstmt.setBinaryStream(2, bais, trainerBytes.length);
             pstmt.executeUpdate();
+        } finally {
+            // Close resources
+            if (rs != null) {
+                rs.close();
+            }
+            if (pstmt != null) {
+                pstmt.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
     }
 
@@ -234,5 +300,49 @@ public class DBUtils {
             }
         }
         return null;
+    }
+
+    public static String getPokemonImagePath(String identifier) throws SQLException {
+        String imagePath = null;
+        String query = "SELECT picture FROM pokedex WHERE identifier = ?";
+
+        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setString(1, identifier.toLowerCase());
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    imagePath = rs.getString("picture");
+                }
+            }
+        }
+        return imagePath;
+    }
+    public static int getUserPoints(int userId) throws SQLException {
+        int points = 0;
+        Connection connection = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/pokemondb", "root", "27122000@ziko");
+            String sql = "SELECT points FROM pokemonplayeruser_data WHERE user_id = ?";
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, userId);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                points = rs.getInt("points");
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (connection != null) {
+                connection.close();
+            }
+        }
+        return points;
     }
 }
