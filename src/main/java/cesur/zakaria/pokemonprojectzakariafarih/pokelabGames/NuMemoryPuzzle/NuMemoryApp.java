@@ -185,6 +185,22 @@ public class NuMemoryApp extends Application {
         }
     }
 
+    public List<TileView> getTileSequence() {
+        return this.tileSequence;
+    }
+
+    public void setTileSequence(List<TileView> tileSequence) {
+        this.tileSequence = tileSequence;
+    }
+
+    public Pane getTilePane() {
+        return this.tilePane;
+    }
+
+    public void setTilePane(Pane tilePane) {
+        this.tilePane = tilePane;
+    }
+
     /**
      * The entry point of application.
      *

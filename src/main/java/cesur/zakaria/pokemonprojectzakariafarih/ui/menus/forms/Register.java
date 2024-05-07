@@ -30,6 +30,15 @@ public class Register extends JPanel {
      */
     public void setParentWindow(Window parentWindow) {
         this.parentWindow = parentWindow;
+        centerParentWindow();
+    }
+
+    private void centerParentWindow() {
+        if (parentWindow != null) {
+            // This assumes the parent window's size has been set
+            parentWindow.setLocationRelativeTo(null);
+            parentWindow.setVisible(true);
+        }
     }
 
     private void init() {

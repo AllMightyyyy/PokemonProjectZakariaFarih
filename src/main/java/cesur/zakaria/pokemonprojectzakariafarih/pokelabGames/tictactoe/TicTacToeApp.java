@@ -33,7 +33,7 @@ public class TicTacToeApp extends Application {
 
     private boolean playable = true;
     private boolean turnX = true;
-    private Tile[][] board = new Tile[3][3];
+    Tile[][] board = new Tile[3][3];
     private List<Combo> combos = new ArrayList<>();
 
     private Pane root = new Pane();
@@ -118,7 +118,7 @@ public class TicTacToeApp extends Application {
         timeline.play();
     }
 
-    private class Combo {
+    class Combo {
         private Tile[] tiles;
 
         /**
@@ -144,7 +144,7 @@ public class TicTacToeApp extends Application {
         }
     }
 
-    private class Tile extends StackPane {
+    class Tile extends StackPane {
         private Text text = new Text();
 
         /**
@@ -210,11 +210,11 @@ public class TicTacToeApp extends Application {
             return text.getText();
         }
 
-        private void drawX() {
+        void drawX() {
             text.setText("X");
         }
 
-        private void drawO() {
+        void drawO() {
             text.setText("O");
         }
     }
