@@ -1,7 +1,3 @@
-/**
- * This class serves as the controller for the Pokedex view in the Pokemon Project application.
- * It manages the display of Pokemon information and interactions related to the Pokedex.
- */
 package cesur.zakaria.pokemonprojectzakariafarih.controler;
 
 import cesur.zakaria.pokemonprojectzakariafarih.dbUtils.DBUtils;
@@ -37,7 +33,9 @@ import java.sql.SQLException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 /**
  * The PokedexController class serves as the controller for the Pokedex view within the Pokemon Project application.
@@ -53,7 +51,6 @@ public class PokedexController {
 	@FXML
 	private GridPane root2;
 
-
 	private final ObservableList<Node> chidreNodes = FXCollections.observableArrayList();
 
 	private final ObservableList<RowConstraints> rowContraintsList = FXCollections.observableArrayList();
@@ -64,12 +61,23 @@ public class PokedexController {
 
 	private final int column = 6;
 
-    private int choosenPokemon = 0;
+	private int choosenPokemon = 0;
 
 	private final Pokemon[] pokemons = new Pokemon[column];
 
 	private CapacityDeck deck = null;
 
+	private static final Logger logger = Logger.getLogger(PokedexController.class.getName());
+
+	static {
+		try {
+			FileHandler fh = new FileHandler("Pokedex.log", true);
+			fh.setFormatter(new SimpleFormatter());
+			logger.addHandler(fh);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	/**
 	 * Initializes the Pokedex view with existing Pokemon data. This method sets up the Pokedex grid
@@ -78,20 +86,20 @@ public class PokedexController {
 	 * @throws FileNotFoundException If a required file is not found.
 	 */
 	public void initialize() throws FileNotFoundException {
-		System.out.println("Launching Pokedex");
+		logger.info("Launching Pokedex");
 		try {
 			pokedex = Pokedex.getPokedex();
 			deck = CapacitiesHelper.getCapacityDeck();
 		} catch (IOException e) {
 			// Handle the initial IOException
-			System.err.println("Error initializing Pokedex: " + e.getMessage());
+			logger.severe("Error initializing Pokedex: " + e.getMessage());
 
 			// Retry initializing the Pokedex after a short delay
 			retryPokedexInitialization();
 		}
 
 		int total = pokedex.size();
-        int row = total / column;
+		int row = total / column;
 		int pokemonNumber = 1;
 		for (int i = 0; i < row; i++) {//for All the row that we need to create
 			RowConstraints rowConstraints = new RowConstraints();
@@ -165,7 +173,7 @@ public class PokedexController {
 			// });
 		} catch (IOException e) {
 			// If retry fails, log the error and retry again
-			System.err.println("Retry failed: " + e.getMessage());
+			logger.severe("Retry failed: " + e.getMessage());
 			retryPokedexInitialization();
 		}
 	}
@@ -192,7 +200,7 @@ public class PokedexController {
 		public void handle(MouseEvent e) {
 			var x = e.getSource();
 			if (x instanceof PokemonButton pokemonButton) {
-                this.pokemonButton = pokemonButton;
+				this.pokemonButton = pokemonButton;
 				pokemonSpecie = pokemonButton.getPokemonSpecie();
 
 				/*
@@ -201,12 +209,12 @@ public class PokedexController {
 				  @param pokemonSpecie the PokemonSpecie of the clicked Pokemon
 				 * @throws FileNotFoundException if the image of the clicked Pokemon is not found
 				 */
-                try {
-                    setPokemonInterface(pokemonSpecie);
-                } catch (FileNotFoundException ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
+				try {
+					setPokemonInterface(pokemonSpecie);
+				} catch (FileNotFoundException ex) {
+					throw new RuntimeException(ex);
+				}
+			}
 		}
 		/**
 		 * Sets the interface with detailed information about a clicked Pokemon. This method updates the
@@ -217,6 +225,7 @@ public class PokedexController {
 		 * @throws FileNotFoundException If the image file for the Pokemon or its capacities is not found.
 		 */
 		public void setPokemonInterface(PokemonSpecie pokemonSpecie) throws FileNotFoundException {
+			logger.info("Pokemon selected: " + pokemonSpecie.getNamePokemon());
 			HBox hBox1 = new HBox();
 			namePokemonField = new TextField(pokemonSpecie.getNamePokemon());
 			hBox1.getChildren().add(new Label("Pokemon's name"));
@@ -299,7 +308,7 @@ public class PokedexController {
 			selectButton.setOnMouseClicked(e -> {
 				pokemonButton.setBorder(new Border(
 						new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(4))));
-
+				logger.info("Selected Pokemon: " + pokemonSpecie.getNamePokemon() + ", Types: " + pokemonSpecie.getTypes() + ", Height: " + pokemonSpecie.getSize().height() + ", Weight: " + pokemonSpecie.getSize().weight());
 				try {
 					updateRoot(pokemonSpecie.getTypes());
 				} catch (FileNotFoundException e1) {
@@ -402,55 +411,58 @@ public class PokedexController {
 		 * before proceeding further in the application, such as entering a fight or saving to the trainer's roster.
 		 */
 		private final EventHandler<MouseEvent> event2 = new EventHandler<>() {
-            /**
-             * Handles mouse click events.
-             * Checks if the source of the event is a CapacityButton and if so, selects the capacity.
-             *
-             * @param e The MouseEvent triggering the event.
-             */
-            public void handle(MouseEvent e) {
-                var x = e.getSource();
-                if (x instanceof CapacityButton capacityButton) {
-                    boolean newCapacity = true;
+			/**
+			 * Handles mouse click events.
+			 * Checks if the source of the event is a CapacityButton and if so, selects the capacity.
+			 *
+			 * @param e The MouseEvent triggering the event.
+			 */
+			public void handle(MouseEvent e) {
+				var x = e.getSource();
+				if (x instanceof CapacityButton capacityButton) {
+					boolean newCapacity = true;
 
-                    // Check if the selected capacity is new
-                    for (Capacity capacity : capacities) {
-                        if (capacity == capacityButton.getCapacity()) {
-                            newCapacity = false;
-                            break;
-                        }
-                    }
+					// Check if the selected capacity is new
+					for (Capacity capacity : capacities) {
+						if (capacity == capacityButton.getCapacity()) {
+							newCapacity = false;
+							break;
+						}
+					}
 
-                    // If the capacity is new, select it and update the interface
-                    if (newCapacity) {
-                        capacityButton.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID,
-                                CornerRadii.EMPTY, new BorderWidths(4))));
-                        capacities[capacitychoosen] = capacityButton.getCapacity();
-                        capacitychoosen++;
+					// If the capacity is new, select it and update the interface
+					if (newCapacity) {
+						capacityButton.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID,
+								CornerRadii.EMPTY, new BorderWidths(4))));
+						capacities[capacitychoosen] = capacityButton.getCapacity();
+						capacitychoosen++;
 
-                        // If all capacities are selected, proceed to the next step
-                        if (capacitychoosen == capacityMax) {
-                            root2.getChildren().clear();
-                            root2.getChildren().addAll(chidreNodes);
-                            root2.getRowConstraints().clear();
-                            root2.getRowConstraints().addAll(rowContraintsList);
-                            pokemons[choosenPokemon] = new Pokemon(pokemonSpecie, capacities,
-                                    StatistiquePokemon.RandomStat(), namePokemonField.getText());
-                            choosenPokemon++;
-                            capacities = new Capacity[capacityMax];
-                            capacitychoosen = 0;
+						// If all capacities are selected, proceed to the next step
+						if (capacitychoosen == capacityMax) {
+							root2.getChildren().clear();
+							root2.getChildren().addAll(chidreNodes);
+							root2.getRowConstraints().clear();
+							root2.getRowConstraints().addAll(rowContraintsList);
+							pokemons[choosenPokemon] = new Pokemon(pokemonSpecie, capacities,
+									StatistiquePokemon.RandomStat(), namePokemonField.getText());
+							choosenPokemon++;
+							capacities = new Capacity[capacityMax];
+							capacitychoosen = 0;
 
-                            // If all Pokemon are chosen, proceed to the next screen
-                            if (choosenPokemon == column) {
-                                try {
-                                    // Proceed to PersonalLeague screen if league creation is enabled
-                                    if (GameControllerStatic.getGameControllerStatic().isCreateLeagueOn()) {
-                                        GameControllerStatic.getGameControllerStatic().setBot(new Bot(nameFiled.getText(), pokemons));
-                                        MainView.changeScene((Stage) root2.getScene().getWindow(),
-                                                "PersonalLeague.fxml");
-                                    } else {
-                                        // Proceed to main interface screen
-                                        GameControllerStatic.getGameControllerStatic().setTrainer(new Trainer(nameFiled.getText(), pokemons));
+							// Log the chosen Pokemon and its attributes
+							logger.info("Chosen Pokemon: " + pokemons[choosenPokemon - 1].toString());
+
+							// If all Pokemon are chosen, proceed to the next screen
+							if (choosenPokemon == column) {
+								try {
+									// Proceed to PersonalLeague screen if league creation is enabled
+									if (GameControllerStatic.getGameControllerStatic().isCreateLeagueOn()) {
+										GameControllerStatic.getGameControllerStatic().setBot(new Bot(nameFiled.getText(), pokemons));
+										MainView.changeScene((Stage) root2.getScene().getWindow(),
+												"PersonalLeague.fxml");
+									} else {
+										// Proceed to main interface screen
+										GameControllerStatic.getGameControllerStatic().setTrainer(new Trainer(nameFiled.getText(), pokemons));
 										interfaceMenu mainApp = new interfaceMenu();
 										try {
 											mainApp.start((Stage) root2.getScene().getWindow());
@@ -461,17 +473,17 @@ public class PokedexController {
 										int playerId = currentPlayer.getId();
 										Trainer trainer = GameControllerStatic.getGameControllerStatic().getTrainer();
 										DBUtils.saveTrainer(playerId, trainer);
-                                    }
-                                } catch (IOException e1) {
-                                    e1.printStackTrace();
-                                } catch (SQLException ex) {
-                                    throw new RuntimeException(ex);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        };
+									}
+								} catch (IOException e1) {
+									e1.printStackTrace();
+								} catch (SQLException ex) {
+									throw new RuntimeException(ex);
+								}
+							}
+						}
+					}
+				}
+			}
+		};
 	};
 }

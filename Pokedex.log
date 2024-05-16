@@ -1,0 +1,56 @@
+May 16, 2024 1:39:11 PM cesur.zakaria.pokemonprojectzakariafarih.controler.PokedexController initialize
+INFO: Launching Pokedex
+May 16, 2024 1:39:19 PM cesur.zakaria.pokemonprojectzakariafarih.controler.PokedexController$1 setPokemonInterface
+INFO: Pokemon selected: caterpie
+May 16, 2024 1:39:20 PM cesur.zakaria.pokemonprojectzakariafarih.controler.PokedexController$1 lambda$setPokemonInterface$0
+INFO: Selected Pokemon: caterpie, Types: PokemonType [enumPokemonTypes=EnumSetPokemonType [enumPokemonType1=bug, enumPokemonType2=null, actualPosition=0], typeRatio={steel=1.0, fighting=1.0, dragon=1.0, water=1.0, electric=1.0, fairy=1.0, fire=2.0, ice=1.0, bug=1.0, normal=1.0, grass=0.5, poison=1.0, psychic=1.0, rock=2.0, ground=1.0, ghost=1.0, dark=1.0, flying=2.0}], Height: 0.3, Weight: 2.9
+May 16, 2024 1:39:25 PM cesur.zakaria.pokemonprojectzakariafarih.controler.PokedexController$1$1 handle
+INFO: Chosen Pokemon: Pokemon [specie=PokemonSpecie [nbPokemon=10, namePokemon=caterpie, types=PokemonType [enumPokemonTypes=EnumSetPokemonType [enumPokemonType1=bug, enumPokemonType2=null, actualPosition=0], typeRatio={steel=1.0, fighting=1.0, dragon=1.0, water=1.0, electric=1.0, fairy=1.0, fire=2.0, ice=1.0, bug=1.0, normal=1.0, grass=0.5, poison=1.0, psychic=1.0, rock=2.0, ground=1.0, ghost=1.0, dark=1.0, flying=2.0}], size=Size [weight=2.9, height=0.3], imagePath=img/010.png],
+	 capacities=[Capacity [name=dizzy-punch, power=70, accuracy=100, categoryCapacity=PHYSICAL], Capacity [name=egg-bomb, power=100, accuracy=75, categoryCapacity=PHYSICAL], Capacity [name=feint, power=30, accuracy=100, categoryCapacity=PHYSICAL], Capacity [name=snore, power=50, accuracy=100, categoryCapacity=SPECIAL]],
+	 stat=StatistiquePokemon [dmg=152, def=199, dmgspe=158, defspe=241, xpLevel=94, pv=73, pvMax=73],
+	 nickname=caterpie]
+May 16, 2024 1:39:26 PM cesur.zakaria.pokemonprojectzakariafarih.controler.PokedexController$1 setPokemonInterface
+INFO: Pokemon selected: spearow
+May 16, 2024 1:39:29 PM cesur.zakaria.pokemonprojectzakariafarih.controler.PokedexController$1 lambda$setPokemonInterface$0
+INFO: Selected Pokemon: spearow, Types: PokemonType [enumPokemonTypes=EnumSetPokemonType [enumPokemonType1=flying, enumPokemonType2=normal, actualPosition=0], typeRatio={steel=1.0, fighting=1.0, dragon=1.0, water=1.0, electric=2.0, fairy=1.0, fire=1.0, ice=2.0, bug=0.5, normal=1.0, grass=0.5, poison=1.0, psychic=1.0, rock=2.0, ground=0.0, ghost=0.0, dark=1.0, flying=1.0}], Height: 0.3, Weight: 2.0
+May 16, 2024 1:39:33 PM cesur.zakaria.pokemonprojectzakariafarih.controler.PokedexController$1$1 handle
+INFO: Chosen Pokemon: Pokemon [specie=PokemonSpecie [nbPokemon=21, namePokemon=spearow, types=PokemonType [enumPokemonTypes=EnumSetPokemonType [enumPokemonType1=flying, enumPokemonType2=normal, actualPosition=0], typeRatio={steel=1.0, fighting=1.0, dragon=1.0, water=1.0, electric=2.0, fairy=1.0, fire=1.0, ice=2.0, bug=0.5, normal=1.0, grass=0.5, poison=1.0, psychic=1.0, rock=2.0, ground=0.0, ghost=0.0, dark=1.0, flying=1.0}], size=Size [weight=2.0, height=0.3], imagePath=img/021.png],
+	 capacities=[Capacity [name=bounce, power=85, accuracy=85, categoryCapacity=PHYSICAL], Capacity [name=giga-impact, power=150, accuracy=90, categoryCapacity=PHYSICAL], Capacity [name=scratch, power=40, accuracy=100, categoryCapacity=PHYSICAL], Capacity [name=snore, power=50, accuracy=100, categoryCapacity=SPECIAL]],
+	 stat=StatistiquePokemon [dmg=64, def=28, dmgspe=154, defspe=135, xpLevel=77, pv=155, pvMax=155],
+	 nickname=spearow]
+May 16, 2024 1:39:34 PM cesur.zakaria.pokemonprojectzakariafarih.controler.PokedexController$1 setPokemonInterface
+INFO: Pokemon selected: beedrill
+May 16, 2024 1:39:35 PM cesur.zakaria.pokemonprojectzakariafarih.controler.PokedexController$1 lambda$setPokemonInterface$0
+INFO: Selected Pokemon: beedrill, Types: PokemonType [enumPokemonTypes=EnumSetPokemonType [enumPokemonType1=poison, enumPokemonType2=bug, actualPosition=0], typeRatio={steel=1.0, fighting=0.0, dragon=1.0, water=1.0, electric=1.0, fairy=0.5, fire=2.0, ice=1.0, bug=0.5, normal=1.0, grass=0.25, poison=1.0, psychic=2.0, rock=2.0, ground=1.0, ghost=1.0, dark=1.0, flying=2.0}], Height: 1.0, Weight: 29.5
+May 16, 2024 1:39:38 PM cesur.zakaria.pokemonprojectzakariafarih.controler.PokedexController$1$1 handle
+INFO: Chosen Pokemon: Pokemon [specie=PokemonSpecie [nbPokemon=15, namePokemon=beedrill, types=PokemonType [enumPokemonTypes=EnumSetPokemonType [enumPokemonType1=poison, enumPokemonType2=bug, actualPosition=0], typeRatio={steel=1.0, fighting=0.0, dragon=1.0, water=1.0, electric=1.0, fairy=0.5, fire=2.0, ice=1.0, bug=0.5, normal=1.0, grass=0.25, poison=1.0, psychic=2.0, rock=2.0, ground=1.0, ghost=1.0, dark=1.0, flying=2.0}], size=Size [weight=29.5, height=1.0], imagePath=img/015.png],
+	 capacities=[Capacity [name=dizzy-punch, power=70, accuracy=100, categoryCapacity=PHYSICAL], Capacity [name=cross-poison, power=70, accuracy=100, categoryCapacity=PHYSICAL], Capacity [name=double-hit, power=35, accuracy=90, categoryCapacity=PHYSICAL], Capacity [name=round, power=60, accuracy=100, categoryCapacity=SPECIAL]],
+	 stat=StatistiquePokemon [dmg=103, def=50, dmgspe=143, defspe=191, xpLevel=64, pv=135, pvMax=135],
+	 nickname=beedrill]
+May 16, 2024 1:39:39 PM cesur.zakaria.pokemonprojectzakariafarih.controler.PokedexController$1 setPokemonInterface
+INFO: Pokemon selected: nidoking
+May 16, 2024 1:39:40 PM cesur.zakaria.pokemonprojectzakariafarih.controler.PokedexController$1 lambda$setPokemonInterface$0
+INFO: Selected Pokemon: nidoking, Types: PokemonType [enumPokemonTypes=EnumSetPokemonType [enumPokemonType1=ground, enumPokemonType2=poison, actualPosition=0], typeRatio={steel=1.0, fighting=1.0, dragon=1.0, water=2.0, electric=0.0, fairy=0.5, fire=1.0, ice=2.0, bug=0.5, normal=1.0, grass=1.0, poison=0.0, psychic=2.0, rock=0.5, ground=2.0, ghost=1.0, dark=1.0, flying=1.0}], Height: 1.4, Weight: 62.0
+May 16, 2024 1:39:43 PM cesur.zakaria.pokemonprojectzakariafarih.controler.PokedexController$1$1 handle
+INFO: Chosen Pokemon: Pokemon [specie=PokemonSpecie [nbPokemon=34, namePokemon=nidoking, types=PokemonType [enumPokemonTypes=EnumSetPokemonType [enumPokemonType1=ground, enumPokemonType2=poison, actualPosition=0], typeRatio={steel=1.0, fighting=1.0, dragon=1.0, water=2.0, electric=0.0, fairy=0.5, fire=1.0, ice=2.0, bug=0.5, normal=1.0, grass=1.0, poison=0.0, psychic=2.0, rock=0.5, ground=2.0, ghost=1.0, dark=1.0, flying=1.0}], size=Size [weight=62.0, height=1.4], imagePath=img/034.png],
+	 capacities=[Capacity [name=retaliate, power=70, accuracy=100, categoryCapacity=PHYSICAL], Capacity [name=stomp, power=65, accuracy=100, categoryCapacity=PHYSICAL], Capacity [name=mud-bomb, power=65, accuracy=85, categoryCapacity=SPECIAL], Capacity [name=snore, power=50, accuracy=100, categoryCapacity=SPECIAL]],
+	 stat=StatistiquePokemon [dmg=98, def=54, dmgspe=11, defspe=71, xpLevel=111, pv=197, pvMax=197],
+	 nickname=nidoking]
+May 16, 2024 1:39:44 PM cesur.zakaria.pokemonprojectzakariafarih.controler.PokedexController$1 setPokemonInterface
+INFO: Pokemon selected: nidoking
+May 16, 2024 1:39:45 PM cesur.zakaria.pokemonprojectzakariafarih.controler.PokedexController$1 lambda$setPokemonInterface$0
+INFO: Selected Pokemon: nidoking, Types: PokemonType [enumPokemonTypes=EnumSetPokemonType [enumPokemonType1=ground, enumPokemonType2=poison, actualPosition=0], typeRatio={steel=1.0, fighting=1.0, dragon=1.0, water=2.0, electric=0.0, fairy=0.5, fire=1.0, ice=2.0, bug=0.5, normal=1.0, grass=1.0, poison=0.0, psychic=2.0, rock=0.5, ground=2.0, ghost=1.0, dark=1.0, flying=1.0}], Height: 1.4, Weight: 62.0
+May 16, 2024 1:39:48 PM cesur.zakaria.pokemonprojectzakariafarih.controler.PokedexController$1$1 handle
+INFO: Chosen Pokemon: Pokemon [specie=PokemonSpecie [nbPokemon=34, namePokemon=nidoking, types=PokemonType [enumPokemonTypes=EnumSetPokemonType [enumPokemonType1=ground, enumPokemonType2=poison, actualPosition=0], typeRatio={steel=1.0, fighting=1.0, dragon=1.0, water=2.0, electric=0.0, fairy=0.5, fire=1.0, ice=2.0, bug=0.5, normal=1.0, grass=1.0, poison=0.0, psychic=2.0, rock=0.5, ground=2.0, ghost=1.0, dark=1.0, flying=1.0}], size=Size [weight=62.0, height=1.4], imagePath=img/034.png],
+	 capacities=[Capacity [name=thousand-arrows, power=90, accuracy=100, categoryCapacity=PHYSICAL], Capacity [name=venoshock, power=65, accuracy=100, categoryCapacity=SPECIAL], Capacity [name=stomping-tantrum, power=75, accuracy=100, categoryCapacity=PHYSICAL], Capacity [name=stomp, power=65, accuracy=100, categoryCapacity=PHYSICAL]],
+	 stat=StatistiquePokemon [dmg=137, def=185, dmgspe=70, defspe=35, xpLevel=85, pv=88, pvMax=88],
+	 nickname=nidoking]
+May 16, 2024 1:39:50 PM cesur.zakaria.pokemonprojectzakariafarih.controler.PokedexController$1 setPokemonInterface
+INFO: Pokemon selected: growlithe
+May 16, 2024 1:39:51 PM cesur.zakaria.pokemonprojectzakariafarih.controler.PokedexController$1 lambda$setPokemonInterface$0
+INFO: Selected Pokemon: growlithe, Types: PokemonType [enumPokemonTypes=EnumSetPokemonType [enumPokemonType1=fire, enumPokemonType2=null, actualPosition=0], typeRatio={steel=0.25, fighting=1.0, dragon=1.0, water=1.0, electric=2.0, fairy=0.5, fire=0.25, ice=0.25, bug=0.5, normal=1.0, grass=1.0, poison=1.0, psychic=1.0, rock=2.0, ground=2.0, ghost=1.0, dark=1.0, flying=1.0}], Height: 0.7, Weight: 19.0
+May 16, 2024 1:39:53 PM cesur.zakaria.pokemonprojectzakariafarih.controler.PokedexController$1$1 handle
+INFO: Chosen Pokemon: Pokemon [specie=PokemonSpecie [nbPokemon=58, namePokemon=growlithe, types=PokemonType [enumPokemonTypes=EnumSetPokemonType [enumPokemonType1=fire, enumPokemonType2=null, actualPosition=0], typeRatio={steel=0.25, fighting=1.0, dragon=1.0, water=1.0, electric=2.0, fairy=0.5, fire=0.25, ice=0.25, bug=0.5, normal=1.0, grass=1.0, poison=1.0, psychic=1.0, rock=2.0, ground=2.0, ghost=1.0, dark=1.0, flying=1.0}], size=Size [weight=19.0, height=0.7], imagePath=img/058.png],
+	 capacities=[Capacity [name=flame-wheel, power=60, accuracy=100, categoryCapacity=PHYSICAL], Capacity [name=fire-fang, power=65, accuracy=95, categoryCapacity=PHYSICAL], Capacity [name=snore, power=50, accuracy=100, categoryCapacity=SPECIAL], Capacity [name=head-charge, power=120, accuracy=100, categoryCapacity=PHYSICAL]],
+	 stat=StatistiquePokemon [dmg=125, def=245, dmgspe=68, defspe=119, xpLevel=161, pv=33, pvMax=33],
+	 nickname=growlithe]
