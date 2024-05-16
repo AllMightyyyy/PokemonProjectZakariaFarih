@@ -32,13 +32,72 @@ public class PokemonEvolveController {
     private static final int MAX_DEFENSE = 250;
 
     // FXML Bindings
-    @FXML private ImageView imageView1, imageView2, imageView3, imageView4, imageView5, imageView6;
-    @FXML private Spinner<Integer> HPSpinner1, AttSpinner1, DefSpinner1, HPSpinner2, AttSpinner2, DefSpinner2, HPSpinner3, AttSpinner3, DefSpinner3, HPSpinner4, AttSpinner4, DefSpinner4, HPSpinner5, AttSpinner5, DefSpinner5, HPSpinner6, AttSpinner6, DefSpinner6;
-    @FXML private Label availablePointsLabel, pokemon1Label, pokemon2Label, pokemon3Label, pokemon4Label, pokemon5Label, pokemon6Label;
+    @FXML
+    ImageView imageView1;
+    @FXML
+    ImageView imageView2;
+    @FXML
+    ImageView imageView3;
+    @FXML
+    ImageView imageView4;
+    @FXML
+    ImageView imageView5;
+    @FXML
+    ImageView imageView6;
+    @FXML
+    Spinner<Integer> HPSpinner1;
+    @FXML
+    Spinner<Integer> AttSpinner1;
+    @FXML
+    Spinner<Integer> DefSpinner1;
+    @FXML
+    Spinner<Integer> HPSpinner2;
+    @FXML
+    Spinner<Integer> AttSpinner2;
+    @FXML
+    Spinner<Integer> DefSpinner2;
+    @FXML
+    Spinner<Integer> HPSpinner3;
+    @FXML
+    Spinner<Integer> AttSpinner3;
+    @FXML
+    Spinner<Integer> DefSpinner3;
+    @FXML
+    Spinner<Integer> HPSpinner4;
+    @FXML
+    Spinner<Integer> AttSpinner4;
+    @FXML
+    Spinner<Integer> DefSpinner4;
+    @FXML
+    Spinner<Integer> HPSpinner5;
+    @FXML
+    Spinner<Integer> AttSpinner5;
+    @FXML
+    Spinner<Integer> DefSpinner5;
+    @FXML
+    Spinner<Integer> HPSpinner6;
+    @FXML
+    Spinner<Integer> AttSpinner6;
+    @FXML
+    Spinner<Integer> DefSpinner6;
+    @FXML
+    Label availablePointsLabel;
+    @FXML
+    Label pokemon1Label;
+    @FXML
+    Label pokemon2Label;
+    @FXML
+    Label pokemon3Label;
+    @FXML
+    Label pokemon4Label;
+    @FXML
+    Label pokemon5Label;
+    @FXML
+    Label pokemon6Label;
 
-    private Trainer trainer;
-    private int availablePoints;
-    private Pokemon[] pokemons;
+    Trainer trainer;
+    int availablePoints;
+    Pokemon[] pokemons;
 
     /**
      * Initializes the controller and schedules the data loading to occur after the UI has been rendered.
@@ -52,7 +111,7 @@ public class PokemonEvolveController {
      * Loads the trainer data from the database, including Pokemon information and available points for evolution.
      * Then updates the UI with this data.
      */
-    private void loadData() {
+    void loadData() {
         try {
             trainer = DBUtils.loadTrainer(AppState.getCurrentPlayer().getId());
             assert trainer != null;
@@ -172,7 +231,7 @@ public class PokemonEvolveController {
      * @param spinner The spinner corresponding to the stat being updated.
      * @param pointChange The amount by which the stat is to be updated.
      */
-    private void updateStat(Spinner<Integer> spinner, int pointChange) {
+    void updateStat(Spinner<Integer> spinner, int pointChange) {
         // Get the index of the spinner in the list of spinners
         int spinnerIndex = getSpinnerIndex(spinner);
 
@@ -227,7 +286,7 @@ public class PokemonEvolveController {
      * Handles the "Save" button click event, saving the evolved Pokemon stats to the database and updating the available points.
      */
     @FXML
-    private void onSaveButtonClicked() {
+    void onSaveButtonClicked() {
         try {
             GameControllerStatic.getGameControllerStatic().setTrainer(new Trainer("SaveTrainer1", pokemons));
             Trainer trainer = GameControllerStatic.getGameControllerStatic().getTrainer();
@@ -252,7 +311,7 @@ public class PokemonEvolveController {
      * Handles the "Reset" button click event, resetting the Pokemon stats and available points to their original values.
      */
     @FXML
-    private void onResetButtonClicked() {
+    void onResetButtonClicked() {
         try {
             Player currentPlayer = AppState.getCurrentPlayer();
             assert currentPlayer != null;
@@ -292,5 +351,25 @@ public class PokemonEvolveController {
             alert.setContentText(content);
             alert.showAndWait();
         });
+    }
+
+    /**
+     * Updates the specified stat for a Pokemon.
+     * @param pokemon The Pokemon whose stat is to be updated.
+     * @param statType The type of stat to update ("HP", "Attack", "Defense").
+     * @param pointChange The amount by which the stat is to be updated.
+     */
+    void updateStat(Pokemon pokemon, String statType, int pointChange) {
+        switch (statType) {
+            case "HP":
+                pokemon.getStat().setPv(pokemon.getStat().getPv() + pointChange);
+                break;
+            case "Attack":
+                pokemon.getStat().setDmg(pokemon.getStat().getDmg() + pointChange);
+                break;
+            case "Defense":
+                pokemon.getStat().setDef(pokemon.getStat().getDef() + pointChange);
+                break;
+        }
     }
 }

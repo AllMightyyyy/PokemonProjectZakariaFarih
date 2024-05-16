@@ -1,0 +1,26 @@
+
+‡	java:S112Ø"FDefine and throw a dedicated exception instead of using a generic one.(¼ÿ¾¹ÿÿÿÿÿJ$bf70c8bf-d6f4-4eac-8078-b6fd605a27eb
+‡	java:S112×"FDefine and throw a dedicated exception instead of using a generic one.(×¡ûÊÿÿÿÿÿJ$087b467f-7a14-4549-bfde-d1ec8de4da07
+‡	java:S112á"FDefine and throw a dedicated exception instead of using a generic one.(¼ÿ¾¹ÿÿÿÿÿJ$1f0b05d7-2e2c-4e1c-abe6-f9e59bc94c5b
+w
+java:S1141Ô"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿJ$926ef088-c3f7-4088-8cf7-8d5a84778a98
+e
+java:S1604"(Make this anonymous inner class a lambda(ŞŞ·ŒJ$5701d757-a5c8-49d8-a20c-5251fa0fed3b
+
+java:S2629Æ"\Invoke method(s) only conditionally. Use the built-in formatting to construct this argument.(è»ÉÀşÿÿÿÿ8öˆá•ø1
+˜
+java:S2095"VUse try-with-resources or close this "ScheduledExecutorService" in a "finally" clause.(ÇîÔÏûÿÿÿÿJ$ba803762-6b32-454e-9dcb-94df05f85e5d
+\
+java:S1170?"!Make this final field static too.(äñµ7J$1bc9983a-82a9-4d8c-ae23-6af25404018c
+x	java:S125¬"<This block of commented-out lines of code should be removed.(ı±â…J$e7cb099b-a96a-46cf-bdd7-366508cbe979
+^
+java:S1170¾"!Make this final field static too.(‘’÷ÌJ$02a5e80d-5cf2-4055-a098-5149c9a83bcb
+„
+java:S1117Ë"BRename "pokemonButton" which hides the field declared at line 194.(°ı¾ÿıÿÿÿÿJ$62bfb12a-2529-4199-b753-3a4cf1908e5b
+t
+java:S1135¼"2Complete the task associated to this TODO comment.(ÕÌ®şÿÿÿÿJ$de2ec3cf-5b6a-43eb-b975-203753c69469
+|
+java:S1117À":Rename "event" which hides the field declared at line 188.(¥úƒëøÿÿÿÿJ$442f62d8-5872-419d-8e84-612af9edb64b
+x	java:S125Ë"<This block of commented-out lines of code should be removed.(”ú—µJ$95ef814b-7db5-440f-846f-155afb17fc46
+a
+java:S1659é"Declare "j" on a separate line.(Õ£ÍÅúÿÿÿÿJ$6a4fa26c-301f-4013-af40-f14dac3a40a7

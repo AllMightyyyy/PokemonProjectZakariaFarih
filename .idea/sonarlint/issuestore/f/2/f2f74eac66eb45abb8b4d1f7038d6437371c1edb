@@ -1,0 +1,53 @@
+
+„
+java:S1192½"HUse already-defined constant 'PS' instead of duplicating its value here.(’ï±;J$041569ed-9626-410f-9537-82bfa921a204
+…
+java:S1192½"IUse already-defined constant 'URL' instead of duplicating its value here.(’ï±;J$cf1c4a93-53f1-4da4-9304-406dbaa3b5e4
+r
+java:S1066&"/Merge this if statement with the enclosing one.(»ÅÄİ8Ò¨Çö1J$a9c9e4a5-e8f8-4531-9096-83837396fbf9
+š	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(­ÑôˆùÿÿÿÿJ$9cb83294-b1c5-4b22-b714-7a6bc9ed3491
+’
+java:S2095="OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(ôé‹8ÈªÇö1J$ef5dc043-5b88-41de-b6b3-a7a47b65d9b7
+„
+java:S2095½"HUse try-with-resources or close this "Connection" in a "finally" clause.(’ï±;J$be6117ca-0011-4eeb-b73d-2c5c44e6e4a2
+„
+java:S2095à"HUse try-with-resources or close this "Connection" in a "finally" clause.(’ï±;J$6898cf73-e368-48ea-af34-406cb0f5149d
+f
+java:S2095…"HUse try-with-resources or close this "Connection" in a "finally" clause.(„˜Ùè8äïŒ”ø1
+‘
+java:S2095÷"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(´âîæùÿÿÿÿJ$fc942a7f-d7c9-4210-b4b2-ba897272b001
+„
+java:S2095õ"HUse try-with-resources or close this "Connection" in a "finally" clause.(’ï±;J$faba0f1e-5c67-4e70-9678-04094abd705b
+l
+java:S2095ˆ"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(„ßF8æïŒ”ø1
+r
+java:S2095"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(´«æ”ıÿÿÿÿ8åïŒ”ø1
+l
+java:S2095"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(Åö¦*8åïŒ”ø1
+{
+java:S1118":Add a private constructor to hide the implicit public one.(İµï„üÿÿÿÿJ$888a06fd-c055-44ab-8d6a-d09e9ad7a339
+~
+java:S64378"6Revoke and change this password, as it is compromised.(ëàãÿÿÿÿÿ8ùô¦Æö1J$a73a8d9d-e1b0-460a-8146-4dea5e209e5a
+k	java:S106Z"+Replace this use of System.out by a logger.(Æ›’ÛúÿÿÿÿJ$2e5996d4-81fe-469e-8cdc-045bea5a94fa
+k	java:S106a"+Replace this use of System.err by a logger.(â½ğØüÿÿÿÿJ$8da0b06b-3ab2-4371-afb3-30802100cbed
+y
+java:S6437r"6Revoke and change this password, as it is compromised.(‡Šõ»8ğªÇö1J$addeb917-03e8-49e0-ba11-246fff7a89e3
+s	java:S106«"+Replace this use of System.out by a logger.(ÈÙ˜øÿÿÿÿ8Áš˜Çö1J$716ddd64-2a6a-4240-83a2-338faa6a86ef
+r
+java:S6437½"6Revoke and change this password, as it is compromised.(’ï±;J$13cb42e1-4d9f-4ce5-ad39-b9a5468eb28c
+s	java:S106Æ"+Replace this use of System.out by a logger.(—¦§Æşÿÿÿÿ8¸õ˜Çö1J$7972714a-458b-4b1c-ab4c-3ba3671a37ad
+s	java:S106Î"+Replace this use of System.err by a logger.(â½ğØüÿÿÿÿ8¶õ˜Çö1J$45e6501c-03b7-4fb0-a0f8-57f60b4565d5
+r
+java:S6437à"6Revoke and change this password, as it is compromised.(’ï±;J$3868d0bb-d274-4ee0-840b-2140e308a663
+M	java:S106é"+Replace this use of System.out by a logger.(—¦§Æşÿÿÿÿ8†£Çö1
+s	java:S106ñ"+Replace this use of System.err by a logger.(â½ğØüÿÿÿÿ8¸õ˜Çö1J$1b41d897-747b-4b62-b111-6dbd92e93d18
+z
+java:S6437…"6Revoke and change this password, as it is compromised.(„˜Ùè8Êš˜Çö1J$d16d5f90-8a92-462c-bb24-542195324762
+l
+java:S2093„"*Change this "try" to a try-with-resources.(¡»¢üùÿÿÿÿJ$78c0fde1-7f1b-4d6d-9af1-0cff1626f753
+z
+java:S6437À"6Revoke and change this password, as it is compromised.(÷ÔŒù8Âõ˜Çö1J$66e922c4-7694-45d9-8540-4b50685dfa94
+T
+java:S6437Û"6Revoke and change this password, as it is compromised.(÷ÔŒù8•£Çö1
+r
+java:S6437õ"6Revoke and change this password, as it is compromised.(’ï±;J$a27990fe-f82d-4585-b090-f5b71dc05509

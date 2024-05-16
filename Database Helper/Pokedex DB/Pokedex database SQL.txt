@@ -7,3 +7,67 @@ CREATE TABLE pokedex (
     type1 VARCHAR(50),
     type2 VARCHAR(50)
 );
+
+CREATE TABLE `grid_types` (
+  `Type1` text,
+  `Type2` text,
+  `steel` double DEFAULT NULL,
+  `fighting` int DEFAULT NULL,
+  `dragon` double DEFAULT NULL,
+  `water` double DEFAULT NULL,
+  `electric` double DEFAULT NULL,
+  `fairy` double DEFAULT NULL,
+  `fire` double DEFAULT NULL,
+  `ice` double DEFAULT NULL,
+  `bug` double DEFAULT NULL,
+  `normal` double DEFAULT NULL,
+  `grass` double DEFAULT NULL,
+  `poison` int DEFAULT NULL,
+  `psychic` double DEFAULT NULL,
+  `rock` double DEFAULT NULL,
+  `ground` int DEFAULT NULL,
+  `ghost` int DEFAULT NULL,
+  `dark` double DEFAULT NULL,
+  `flying` double DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+CREATE TABLE `moves` (
+  `id` int DEFAULT NULL,
+  `identifier` varchar(255) DEFAULT NULL,
+  `type` varchar(50) DEFAULT NULL,
+  `power` int DEFAULT NULL,
+  `pp` int DEFAULT NULL,
+  `accuracy` int DEFAULT NULL,
+  `damage_class` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+CREATE TABLE `pokemonplayeruser` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(255) NOT NULL,
+  `last_name` varchar(255) NOT NULL,
+  `username` varchar(20) NOT NULL,
+  `hashed_password` varchar(255) NOT NULL,
+  `gender` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`),
+  CONSTRAINT `pokemonplayeruser_chk_1` CHECK ((`gender` in (_utf8mb4'Male',_utf8mb4'Female',_utf8mb4'Other')))
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+CREATE TABLE `pokemonplayeruser_data` (
+  `user_id` int NOT NULL,
+  `points` int NOT NULL DEFAULT '0',
+  PRIMARY KEY (`user_id`),
+  CONSTRAINT `pokemonplayeruser_data_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `pokemonplayeruser` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `trainers` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `trainer_data` longblob,
+  `user_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_user_id` (`user_id`),
+  CONSTRAINT `fk_user_id` FOREIGN KEY (`user_id`) REFERENCES `pokemonplayeruser` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

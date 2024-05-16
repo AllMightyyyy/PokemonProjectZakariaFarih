@@ -1,0 +1,8 @@
+
+r
+java:S1488`"\Immediately return this expression instead of assigning it to the temporary variable "imgv".(ãâ­‚
+n	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(§ÔI
+´
+java:S6548"˜A Singleton implementation was detected. Make sure the use of the Singleton pattern is required and the implementation is the right one for the context.(Ö€¤Íşÿÿÿÿ
+X
+java:S1479("BReduce the number of non-empty switch cases from 38 to at most 30.(ºŞÉò

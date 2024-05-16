@@ -1,0 +1,21 @@
+
+a	java:S112À"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
+`
+java:S2184L"ECast one of the operands of this subtraction operation to a "double".(»„¿Ÿıÿÿÿÿ
+]
+java:S2184M"BCast one of the operands of this addition operation to a "double".(¿ê–•ùÿÿÿÿ
+V
+java:S2184a"@Cast one of the operands of this integer division to a "double".(ıçˆé
+X
+java:S2184b"BCast one of the operands of this division operation to a "double".(¡Ï¿
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(«ï®™øÿÿÿÿ
+3
+java:S11181"Hide this public constructor.(¶ì½­
+>
+java:S30102")Remove this assignment of "primaryStage".(Œ‹d
+R
+java:S1854›";Remove this useless assignment to local variable "menuApp".(·ˆåª
+C
+java:S1481›",Remove this unused "menuApp" local variable.(·ˆåª
+C
+java:S1602ß",Remove useless curly braces around statement(·ŸúĞ

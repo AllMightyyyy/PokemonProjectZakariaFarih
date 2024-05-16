@@ -33,15 +33,12 @@ class DBUtilsTest {
         when(mockResultSet.getString("hashed_password")).thenReturn(hashedPassword);
         when(mockResultSet.getInt("id")).thenReturn(1);
 
-        // Mock static method DriverManager.getConnection
         try (MockedStatic<DriverManager> mocked = mockStatic(DriverManager.class)) {
             mocked.when(() -> DriverManager.getConnection(anyString(), anyString(), anyString()))
                     .thenReturn(mockConnection);
 
-            // Act
             boolean result = DBUtils.login(username, "correctPassword");
 
-            // Assert
             assertTrue(result, "Login should be successful");
 
             if (result) {

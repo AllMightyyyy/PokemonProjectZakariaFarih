@@ -17,7 +17,8 @@ public class DBUtils {
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
     private static final String URL = "jdbc:mysql://localhost:3306/pokemondb";
     private static final String USERNAME = "root";
-    private static final String PASSWORD = "27122000@ziko";
+    private static final String PS = "27122000@ziko";
+    public static final String ERROR_CLOSING_RESOURCES = "Error closing resources: ";
 
     /**
      * Attempts to authenticate a user using the provided credentials. It checks the username and password
@@ -29,56 +30,74 @@ public class DBUtils {
      */
     public static boolean login(String username, String plaintextPassword) {
         Connection connection = null;
-        PreparedStatement psLogin = null;
-        PreparedStatement psGameData = null;
-        ResultSet rsLogin = null;
-        ResultSet rsGameData = null;
         try {
-            // Establish the database connection
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/pokemondb", "root", "27122000@ziko");
-            // Prepare statement to execute SQL query for user authentication
-            String sqlLogin = "SELECT id, hashed_password FROM pokemonplayeruser WHERE username = ?";
-            psLogin = connection.prepareStatement(sqlLogin);
-            psLogin.setString(1, username);
-            // Execute query
-            rsLogin = psLogin.executeQuery();
-            // Check if there are any results for user authentication
+            connection = getConnection();
+            PreparedStatement psLogin = prepareLoginStatement(connection, username);
+            ResultSet rsLogin = executeQuery(psLogin);
             if (rsLogin.next()) {
-                String storedHashedPassword = rsLogin.getString("hashed_password");
-                int userId = rsLogin.getInt("id");
-                // Use BCryptPasswordEncoder to check the password
-                if (encoder.matches(plaintextPassword, storedHashedPassword)) {
-                    // If password matches, retrieve additional player data
-                    String sqlGameData = "SELECT points FROM pokemonplayeruser_data WHERE user_id = ?";
-                    psGameData = connection.prepareStatement(sqlGameData);
-                    psGameData.setInt(1, userId);
-                    rsGameData = psGameData.executeQuery();
-                    if (rsGameData.next()) {
-                        int points = rsGameData.getInt("points");
-                        // Create a Player object and set the current player session in AppState
-                        Player currentPlayer = new Player(userId, username, points);
-                        AppState.setCurrentPlayer(currentPlayer);
-                        return true; // Login successful
-                    }
+                if (checkPassword(rsLogin, plaintextPassword)) {
+                    int userId = rsLogin.getInt("id");
+                    int points = retrievePlayerPoints(connection, userId);
+                    Player currentPlayer = createPlayer(userId, username, points);
+                    AppState.setCurrentPlayer(currentPlayer);
+                    return true; // Login successful
                 }
             }
             return false; // Login failed
         } catch (SQLException e) {
-            System.out.println("Error during login: " + e.getMessage());
+            handleLoginError(e);
             return false;
         } finally {
-            // Close resources
-            try {
-                if (rsGameData != null) rsGameData.close();
-                if (psGameData != null) psGameData.close();
-                if (rsLogin != null) rsLogin.close();
-                if (psLogin != null) psLogin.close();
-                if (connection != null) connection.close();
-            } catch (SQLException e) {
-                System.err.println("Error closing resources: " + e.getMessage());
+            closeConnection(connection);
+        }
+    }
+
+    private static Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(URL, "root", PS);
+    }
+
+    private static PreparedStatement prepareLoginStatement(Connection connection, String username) throws SQLException {
+        String sqlLogin = "SELECT id, hashed_password FROM pokemonplayeruser WHERE username = ?";
+        PreparedStatement psLogin = connection.prepareStatement(sqlLogin);
+        psLogin.setString(1, username);
+        return psLogin;
+    }
+
+    private static ResultSet executeQuery(PreparedStatement preparedStatement) throws SQLException {
+        return preparedStatement.executeQuery();
+    }
+
+    private static boolean checkPassword(ResultSet rsLogin, String plaintextPassword) throws SQLException {
+        String storedHashedPassword = rsLogin.getString("hashed_password");
+        return encoder.matches(plaintextPassword, storedHashedPassword);
+    }
+
+    private static int retrievePlayerPoints(Connection connection, int userId) throws SQLException {
+        String sqlGameData = "SELECT points FROM pokemonplayeruser_data WHERE user_id = ?";
+        try (PreparedStatement psGameData = connection.prepareStatement(sqlGameData)) {
+            psGameData.setInt(1, userId);
+            try (ResultSet rsGameData = psGameData.executeQuery()) {
+                return rsGameData.next() ? rsGameData.getInt("points") : 0;
             }
         }
     }
+
+    private static Player createPlayer(int userId, String username, int points) {
+        return new Player(userId, username, points);
+    }
+
+    private static void handleLoginError(SQLException e) {
+        System.out.println("Error during login: " + e.getMessage());
+    }
+
+    private static void closeConnection(Connection connection) {
+        try {
+            if (connection != null) connection.close();
+        } catch (SQLException e) {
+            System.err.println(ERROR_CLOSING_RESOURCES + e.getMessage());
+        }
+    }
+
 
     /**
      * Registers a new user in the database with the specified details. The password is securely hashed
@@ -92,79 +111,67 @@ public class DBUtils {
      * @return True if registration is successful and the user does not already exist, false otherwise.
      */
     public static boolean registerUser(String username, String password, String firstName, String lastName, String gender) {
-        Connection connection = null;
-        PreparedStatement psInsertUser = null;
-        PreparedStatement psCheckUserExists = null;
-        PreparedStatement psInsertPlayerData = null;
-        ResultSet rs = null;
-
-        try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/pokemondb", "root", "27122000@ziko");
+        try (Connection connection = DriverManager.getConnection(URL, "root", PS)) {
             connection.setAutoCommit(false); // Start transaction
 
-            // Check if the user already exists
-            psCheckUserExists = connection.prepareStatement("SELECT id FROM pokemonplayeruser WHERE username = ?");
-            psCheckUserExists.setString(1, username);
-            rs = psCheckUserExists.executeQuery();
-            if (rs.next()) {
-                // User already exists
-                return false;
+            if (userExists(connection, username)) {
+                return false; // User already exists
             }
 
-            // Insert the new user into 'users' table
-            String sqlInsertUser = "INSERT INTO pokemonplayeruser (username, hashed_password, first_name, last_name, gender) VALUES (?, ?, ?, ?, ?)";
-            psInsertUser = connection.prepareStatement(sqlInsertUser, Statement.RETURN_GENERATED_KEYS);
+            long userId = insertUser(connection, username, password, firstName, lastName, gender);
+            if (userId != -1) {
+                insertPlayerData(connection, userId);
+                connection.commit(); // Commit transaction
+                return true; // Registration successful
+            }
+            return false; // Registration failed
+        } catch (SQLException e) {
+            handleRegistrationError(e);
+            return false;
+        }
+    }
+
+    private static boolean userExists(Connection connection, String username) throws SQLException {
+        String sqlCheckUserExists = "SELECT id FROM pokemonplayeruser WHERE username = ?";
+        try (PreparedStatement psCheckUserExists = connection.prepareStatement(sqlCheckUserExists)) {
+            psCheckUserExists.setString(1, username);
+            try (ResultSet rs = psCheckUserExists.executeQuery()) {
+                return rs.next();
+            }
+        }
+    }
+
+    private static long insertUser(Connection connection, String username, String password, String firstName, String lastName, String gender) throws SQLException {
+        String sqlInsertUser = "INSERT INTO pokemonplayeruser (username, hashed_password, first_name, last_name, gender) VALUES (?, ?, ?, ?, ?)";
+        try (PreparedStatement psInsertUser = connection.prepareStatement(sqlInsertUser, Statement.RETURN_GENERATED_KEYS)) {
             psInsertUser.setString(1, username);
             psInsertUser.setString(2, encoder.encode(password)); // Hash the password
             psInsertUser.setString(3, firstName);
             psInsertUser.setString(4, lastName);
             psInsertUser.setString(5, gender);
-
             int userResult = psInsertUser.executeUpdate();
             if (userResult == 1) {
-                // Get the generated user ID
-                rs = psInsertUser.getGeneratedKeys();
-                if (rs.next()) {
-                    long userId = rs.getLong(1);
-
-                    // Insert default player data into 'player_data' table
-                    String sqlInsertPlayerData = "INSERT INTO pokemonplayeruser_data (user_id, points) VALUES (?, 0)";
-                    psInsertPlayerData = connection.prepareStatement(sqlInsertPlayerData);
-                    psInsertPlayerData.setLong(1, userId);
-                    psInsertPlayerData.executeUpdate();
-
-                    // Commit transaction
-                    connection.commit();
-                    return true; // Registration successful
+                try (ResultSet rs = psInsertUser.getGeneratedKeys()) {
+                    return rs.next() ? rs.getLong(1) : -1;
                 }
             }
-            return false; // Registration failed
-        } catch (SQLException e) {
-            System.out.println("Registration error: " + e.getMessage());
-            if (connection != null) {
-                try {
-                    connection.rollback(); // Rollback transaction on error
-                } catch (SQLException ex) {
-                    System.err.println("Transaction rollback error: " + ex.getMessage());
-                }
-            }
-            return false;
-        } finally {
-            // Close resources
-            try {
-                if (rs != null) rs.close();
-                if (psCheckUserExists != null) psCheckUserExists.close();
-                if (psInsertUser != null) psInsertUser.close();
-                if (psInsertPlayerData != null) psInsertPlayerData.close();
-                if (connection != null) {
-                    connection.setAutoCommit(true); // Restore auto-commit mode
-                    connection.close();
-                }
-            } catch (SQLException e) {
-                System.err.println("Error closing resources: " + e.getMessage());
-            }
+            return -1;
         }
     }
+
+    private static void insertPlayerData(Connection connection, long userId) throws SQLException {
+        String sqlInsertPlayerData = "INSERT INTO pokemonplayeruser_data (user_id, points) VALUES (?, 0)";
+        try (PreparedStatement psInsertPlayerData = connection.prepareStatement(sqlInsertPlayerData)) {
+            psInsertPlayerData.setLong(1, userId);
+            psInsertPlayerData.executeUpdate();
+        }
+    }
+
+    private static void handleRegistrationError(SQLException e) {
+        System.out.println("Registration error: " + e.getMessage());
+    }
+
+
 
     /**
      * Updates the points of a player in the database, based on the player's ID and the new points value.
@@ -196,7 +203,7 @@ public class DBUtils {
                 if (psUpdatePoints != null) psUpdatePoints.close();
                 if (connection != null) connection.close();
             } catch (SQLException e) {
-                System.err.println("Error closing resources: " + e.getMessage());
+                System.err.println(ERROR_CLOSING_RESOURCES + e.getMessage());
             }
         }
     }
@@ -231,7 +238,7 @@ public class DBUtils {
                 if (psUpdatePoints != null) psUpdatePoints.close();
                 if (connection != null) connection.close();
             } catch (SQLException e) {
-                System.err.println("Error closing resources: " + e.getMessage());
+                System.err.println(ERROR_CLOSING_RESOURCES + e.getMessage());
             }
         }
     }
@@ -251,7 +258,7 @@ public class DBUtils {
         ResultSet rs = null;
 
         try {
-            conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            conn = DriverManager.getConnection(URL, USERNAME, PS);
 
             // Check if a trainer entry already exists for the given playerId
             pstmt = conn.prepareStatement("SELECT COUNT(*) AS count FROM trainers WHERE user_id = ?");
@@ -310,7 +317,7 @@ public class DBUtils {
      * @throws ClassNotFoundException if the class of a serialized object cannot be found.
      */
     public static Trainer loadTrainer(int playerId) throws SQLException, IOException, ClassNotFoundException {
-        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PS);
              PreparedStatement pstmt = conn.prepareStatement("SELECT trainer_data FROM trainers WHERE user_id = ? ORDER BY id DESC LIMIT 1")) {
             pstmt.setInt(1, playerId);
             try (ResultSet rs = pstmt.executeQuery()) {
@@ -337,7 +344,7 @@ public class DBUtils {
         String imagePath = null;
         String query = "SELECT picture FROM pokedex WHERE identifier = ?";
 
-        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PS);
              PreparedStatement pstmt = conn.prepareStatement(query)) {
 
             pstmt.setString(1, identifier.toLowerCase());

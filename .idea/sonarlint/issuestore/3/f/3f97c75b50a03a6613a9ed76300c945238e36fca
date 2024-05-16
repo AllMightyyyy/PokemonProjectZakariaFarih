@@ -1,0 +1,15 @@
+
+—
+java:S1450"TRemove the "index" field and declare it as a local variable in the relevant methods.(ÒÂïà8ê¦Ÿ“ø1J$c4b22b45-0570-420e-986f-04e3dabc2ad3
+s
+java:S1948"+Make "locations" transient or serializable.(Ñ‡¢‰ıÿÿÿÿ8ì¦Ÿ“ø1J$bb06dd21-85ef-464e-8c5f-a709180d3c5d
+l
+java:S1948")Make "factory" transient or serializable.(‘Î¶Ò8ì¦Ÿ“ø1J$1350dcca-8747-4dfc-a6ee-3bfa22141abe
+p
+java:S1948"-Make "mediaPlayer" transient or serializable.(ø‰ä¬8ì¦Ÿ“ø1J$819c277f-9083-4e57-a0c4-f7b1eb99e6a4
+t
+java:S1602Q",Remove useless curly braces around statement(­µ—üÿÿÿÿ8÷¦Ÿ“ø1J$e7d6141e-a229-4408-992d-93cedaae38e8
+
+java:S1612Q"7Replace this lambda with method reference 'this::play'.(­µ—üÿÿÿÿ8÷¦Ÿ“ø1J$46b61cb6-56ef-4860-aa92-29b62838e1a1
+l
+java:S1068")Remove this unused "index" private field.(ÒÂïà8û¦Ÿ“ø1J$5b08d3f6-1fc1-4c73-9bb5-07c8727c2d08

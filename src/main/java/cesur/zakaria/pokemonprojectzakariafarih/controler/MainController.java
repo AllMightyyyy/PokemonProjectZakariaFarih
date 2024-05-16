@@ -44,6 +44,7 @@ public class MainController {
      * perform any necessary configuration for the controller.
      */
     public void initialize() {
+        throw new UnsupportedOperationException();
     }
 
     /**

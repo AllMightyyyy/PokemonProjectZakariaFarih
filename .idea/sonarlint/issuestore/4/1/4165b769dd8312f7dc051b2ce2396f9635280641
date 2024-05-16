@@ -1,0 +1,12 @@
+
+:
+java:S1640X"Convert this Map to an EnumMap.(‚¼©÷þÿÿÿÿ
+t	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(ÖÏ¯Èÿÿÿÿÿ
+G
+java:S3599X",Use another way to initialize this instance.(‚¼©÷þÿÿÿÿ
+t
+java:S1171X"YMove the contents of this initializer to a standard constructor or to field initializers.(‚¼©÷þÿÿÿÿ
+G
+java:S3599n",Use another way to initialize this instance.(”÷íÕýÿÿÿÿ
+t
+java:S1171n"YMove the contents of this initializer to a standard constructor or to field initializers.(”÷íÕýÿÿÿÿ
